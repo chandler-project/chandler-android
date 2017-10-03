@@ -12,13 +12,14 @@ apply from: "$project.rootDir/tools/script-lint.gradle"
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.3"
-    flavorDimensions "versionCode"
     defaultConfig {
         applicationId "com.chandlersystem.chandler"
         minSdkVersion 16
         targetSdkVersion 22
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+        versionCode 1
+        versionName '1.0.0'
     }
 
     buildTypes {
@@ -48,24 +49,11 @@ android {
         exclude 'META-INF/rxjava.properties'
     }
 
-    sourceSets { main { assets.srcDirs = ['src/main/assets', 'src/main/assets/'] } }
-
-    // Environment
-    productFlavors {
-        dev {
-            applicationId "com.chandlersystem.chandler.dev"
-            buildConfigField "String", "BASE_URL_V1", "\"http://chandler.com.vn/api/\""
-            versionCode 1
-            versionName '1.0.0'
-        }
-        production {
-            applicationId "com.chandlersystem.chandler"
-            buildConfigField "String", "BASE_URL_V1", "\"http://chandler.com.vn/api/\""
-            versionCode 1
-            versionName '1.0.0'
-        }
+    sourceSets {
+        main { assets.srcDirs = ['src/main/assets', 'src/main/assets/'] }
     }
 }
+
 
 repositories {
     mavenCentral()
@@ -103,7 +91,7 @@ dependencies {
     provided 'org.glassfish:javax.annotation:10.0-b28'
 
 //    Facebook
-    compile 'com.facebook.android:facebook-android-sdk:4.26.0'
+    compile 'com.facebook.android:facebook-android-sdk:4.27.0'
     compile 'com.facebook.android:account-kit-sdk:4.22.1'
 
 //    Image

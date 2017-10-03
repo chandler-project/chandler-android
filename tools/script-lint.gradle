@@ -1,0 +1,7 @@
+android {
+    lintOptions {
+        htmlOutput file("$project.buildDir/outputs/lint/lint.html")
+        warningsAsErrors true
+        xmlReport false
+    }
+}

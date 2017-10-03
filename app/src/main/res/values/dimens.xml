@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--General-->
+    <dimen name="spacing_smallest">@dimen/_4sdp</dimen>
+    <dimen name="spacing_smaller">@dimen/_8sdp</dimen>
+    <dimen name="spacing_small">@dimen/_12sdp</dimen>
+    <dimen name="spacing_normal">@dimen/_16sdp</dimen>
+    <dimen name="spacing_big">@dimen/_20sdp</dimen>
+    <dimen name="spacing_large">@dimen/_24sdp</dimen>
+    <dimen name="spacing_larger">@dimen/_32sdp</dimen>
+    <dimen name="spacing_largest">@dimen/_40sdp</dimen>
+    <dimen name="spacing_giant">@dimen/_60sdp</dimen>
+    <dimen name="spacing_shadow">1dp</dimen>
+
+    <!--Core-->
+    <dimen name="size_profile_padding">@dimen/_minus15sdp</dimen>
+    <dimen name="size_profile_padding_large">@dimen/_minus36sdp</dimen>
+    <dimen name="size_profile_stroke">@dimen/_15sdp</dimen>
+    <dimen name="size_profile_stroke_large">@dimen/_36sdp</dimen>
+    <dimen name="size_profile">@dimen/_30sdp</dimen>
+    <dimen name="size_profile_large">@dimen/_72sdp</dimen>
+
+    <!--Dialog-->
+    <dimen name="size_dialog_padding">@dimen/_minus10sdp</dimen>
+    <dimen name="size_dialog_radius">@dimen/_10sdp</dimen>
+
+    <!--Button-->
+    <dimen name="size_button_height">@dimen/_40sdp</dimen>
+
+    <!--Text-->
+    <dimen name="text_size_smallest">6sp</dimen>
+    <dimen name="text_size_smaller">8sp</dimen>
+    <dimen name="text_size_small">10sp</dimen>
+    <dimen name="text_size_normal">12sp</dimen>
+    <dimen name="text_size_big">14sp</dimen>
+    <dimen name="text_size_large">16sp</dimen>
+    <dimen name="text_size_larger">18sp</dimen>
+    <dimen name="text_size_largest">20sp</dimen>
+    <dimen name="text_size_giant">40sp</dimen>
+
+    <!--Icon-->
+    <dimen name="ico_size_smaller">@dimen/_8sdp</dimen>
+    <dimen name="ico_size_smallest">@dimen/_4sdp</dimen>
+    <dimen name="ico_size_small">@dimen/_12sdp</dimen>
+    <dimen name="ico_size_normal">@dimen/_16sdp</dimen>
+    <dimen name="ico_size_large">@dimen/_20sdp</dimen>
+    <dimen name="ico_size_larger">@dimen/_24sdp</dimen>
+    <dimen name="ico_size_largest">@dimen/_28sdp</dimen>
+    <dimen name="ico_size_giant">@dimen/_52sdp</dimen>
+
+    <!--Bottom Navigation-->
+    <dimen name="bottom_nav_height">@dimen/_46sdp</dimen>
+    <dimen name="size_button_width">@dimen/_100sdp</dimen>
+    <dimen name="size_button_width_1">@dimen/_136sdp</dimen>
+
+    <!--Toolbar-->
+    <dimen name="size_toolbar_height">@dimen/_56sdp</dimen>
+    <dimen name="icon_size_header">@dimen/_70sdp</dimen>
+
+    <!--Progressbar-->
+    <dimen name="size_empty_progress_bar">@dimen/_56sdp</dimen>
+</resources>

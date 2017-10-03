@@ -1,3 +1,144 @@
 <resources>
-    <string name="app_name">Chandler</string>
+    <string name="app_name" translatable="false">"Chandler"</string>
+    <!--Error-->
+    <string name="error_no_data">There\'s no user to show right now</string>
+    <string name="error_unknown_host">Sorry we can\'t connect with the Host</string>
+    <string name="error_socket_timeout">Oops, your session has expired.</string>
+    <string name="error_no_internet">Oops.. No internet connection.</string>
+    <string name="error_common">Something went wrong. Please try again later.</string>
+    <string name="error_special_characters">Your name should not contain special character</string>
+    <string name="error_birthday_invalid">The date you entered is invalid. Please try again</string>
+    <string name="error_email_invalid">Please enter correct email address</string>
+
+    <!--Bottom Navigation-->
+    <string name="nav_profile">Profile</string>
+    <string name="nav_quest">Quest</string>
+    <string name="nav_voucher">Voucher</string>
+    <string name="nav_other">Other</string>
+
+    <!--Facebook-->
+    <string name="facebook_app_id" translatable="false">276217976212159</string>
+    <string name="fb_login_protocol_scheme" translatable="false">fb276217976212159</string>
+    <string name="account_kit_client_token" translatable="false">bc8b855832c258bce55cf9512a1b5f81</string>
+
+    <!--Content-->
+    <string name="large_text" translatable="false">
+        "Material is the metaphor.\n\n"
+
+        "A material metaphor is the unifying theory of a rationalized mSpace and a system of motion."
+        "The material is grounded in tactile reality, inspired by the study of paper and ink, yet "
+        "technologically advanced and open to imagination and magic.\n"
+        "Surfaces and edges of the material provide visual cues that are grounded in reality. The "
+        "use of familiar tactile userDetail helps users quickly understand affordances. Yet the "
+        "flexibility of the material creates new affordances that supersede those in the physical "
+        "world, without breaking the rules of physics.\n"
+        "The fundamentals of light, surface, and movement are key to conveying how objects move, "
+        "interact, and exist in mSpace and in relation to each other. Realistic lighting shows "
+        "seams, divides mSpace, and indicates moving parts."
+    </string>
+    <string name="content_log_out">Log out</string>
+    <string name="content_ok">OK</string>
+    <string name="content_your_vouchers">Your Vouchers</string>
+    <string name="content_active">Active</string>
+    <string name="content_inactive">Inactive</string>
+    <string name="content_expires_soon">Expires soon</string>
+    <string name="content_no_vouchers">Check your quest list and start doing some to gain vouchers!</string>
+    <string name="content_no_internet_vouchers">Hmm… It seems like something went wrong. Stay calm, the quests are coming for you.</string>
+    <string name="content_expires">Expires</string>
+    <string name="content_expire_on">Expires on</string>
+    <string name="content_sign_in_with_fb">Sign in with Facebook</string>
+    <string name="content_welcome">Welcome</string>
+    <string name="content_sign_in_with_phone">Sign in with Phone number</string>
+    <string name="content_set_profile_name">Set your profile name</string>
+    <string name="content_enter_name">Your name</string>
+    <string name="content_type_name">Type your name</string>
+    <string name="content_done">Done!</string>
+    <string name="content_top_bar_no_internet_connection">Oops… No internet connection</string>
+    <string name="content_top_bar_point_are_updated">Point are updated</string>
+    <string name="content_top_bar_you_just_got_points">You\'ve just got</string>
+    <string name="content_center_scan_qr_code">Scan to get your point</string>
+    <string name="content_total_spent">Total Spent (VND)</string>
+    <string name="content_total_point">Total Points</string>
+    <string name="content_connect_with_facebook">Connect with Facebook</string>
+    <string name="content_link_your_phone_number">Link your phone number</string>
+    <string name="content_connect_with_email">Connect with email</string>
+    <string name="content_transactions">Transactions</string>
+    <string name="content_transaction">Transaction</string>
+    <string name="content_points">points</string>
+    <string name="content_point">point</string>
+    <string name="content_transaction_detail">Transaction Detail</string>
+    <string name="content_voucher_applied">Voucher Applied</string>
+    <string name="content_total_spent_payment">Total Spent</string>
+    <string name="content_total_point_payment">Total points earned</string>
+    <string name="content_points_amount">Points</string>
+    <string name="content_point_amount">Point</string>
+    <string name="content_transaction_empty">You haven’t recorded any transactions yet.</string>
+    <string name="content_point_history_empty">You haven’t got any points.</string>
+    <string name="voucher_empty_text_no_content_inactive">You don’t have any inactive vouchers.</string>
+    <string name="content_your_birthday">Your birthday</string>
+    <string name="content_login_waiting">Hold on, we are signing you in.</string>
+    <string name="content_name">Name</string>
+    <string name="content_phone_number">Phone Number</string>
+    <string name="content_email">Email</string>
+    <string name="content_edit_account">Edit account</string>
+    <string name="content_update_your_name">Update your name</string>
+    <string name="content_your_name">Your name</string>
+    <string name="content_edit_your_name">Edit your name</string>
+    <string name="content_connect_email">Connect email</string>
+    <string name="content_update_email">Update email</string>
+    <string name="content_enter_email">Enter your email address</string>
+    <string name="content_your_email_address">Your email address</string>
+    <string name="content_change_email">Change email</string>
+    <string name="content_link_your_email">Link your email</string>
+    <string name="content_expired">Expired</string>
+    <string name="content_used">Used</string>
+    <string name="content_select_a_photo">Select a photo</string>
+    <string name="content_take_a_photo">Take a photo</string>
+    <string name="choose_from_library">Choose from library</string>
+    <string name="content_button_cancel">Cancel</string>
+    <string name="content_loading">Loading…</string>
+    <string name="error_birthday_not_in_range">Your birth year should be between</string>
+    <string name="content_and">and</string>
+    <string name="content_complete_your_profile">Complete your profile</string>
+    <string name="content_enter_your_code_here">Enter your code here</string>
+    <string name="content_promotion_code">Add Promotion Code</string>
+    <string name="content_get">Get</string>
+    <string name="content_term_and_condition">Terms &amp; Conditions</string>
+    <string name="content_are_you_sure_to_logout">Are you sure to logout?</string>
+    <string name="content_button_logout">Log out</string>
+    <string name="content_new_feature_coming">A team of highly trained monkeys is working on this. Please come back later.</string>
+    <string name="content_update_title">Update 7Rewards</string>
+    <string name="content_update_now">Upgrade now</string>
+    <string name="content_version">Version</string>
+    <string name="quest_empty_text_no_content_inactive">You haven’t got any quests.</string>
+    <string name="content_no_internet_quest">Keep calm and carry on for next quest delivery!</string>
+    <string name="content_quest">Your Quests</string>
+    <string name="content_progress">Progress</string>
+    <string name="content_rewards">Rewards</string>
+    <string name="content_description">Description</string>
+    <string name="content_achieved_on">Achieved on</string>
+    <string name="content_voucher_title">Vouchers</string>
+    <string name="content_achieved">Achieved</string>
+    <string name="content_expired_on">Expires on</string>
+    <string name="content_unlimited_time">Unlimited time</string>
+    <string name="content_feedback">Feedback</string>
+    <string name="content_quest_active">Active</string>
+    <string name="error_name_too_long">Please enter a name within 50 characters</string>
+    <string name="content_redeem">You\'ve just received new voucher from your code.</string>
+    <string name="content_redeem_title">You’ve completed quest</string>
+    <string name="content_redeem_content">Here’s your rewards!</string>
+    <string name="content_redeem_dialog_title">New Reward!!!</string>
+    <string name="content_free_seventh_slurpee">Get 7th cup free!</string>
+    <string name="content_edit_your_birthday">Edit your birthday</string>
+    <string name="content_enter_digit_birth_date">Enter 2 digits birth date</string>
+    <string name="content_enter_digit_birth_month">Enter 2 digits birth month</string>
+    <string name="content_enter_digit_birth_year">Enter 4 digits birth year</string>
+    <string name="content_update_birthday">Update birthday</string>
+    <string name="content_pay_with_moca">Pay with Moca</string>
+    <string name="content_hint_date_time">dd/mm/yyyy</string>
+    <string name="content_last_used">Last used</string>
+    <string name="content_unlimited_offers">Unlimited offers</string>
+    <string name="content_share_this_to_cashier">Show this to cashier to record point</string>
+    <string name="content_message">Messages</string>
+    <string name="content_dismiss">Dismiss</string>
 </resources>

@@ -1,18 +1,189 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.chandlersystem.chandler.MainActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-</android.support.constraint.ConstraintLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/vp_bottom_nav"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/bottom_nav_height" />
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:elevation="@dimen/spacing_normal"
+                app:theme="@style/AppTheme.BottomNavigation">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/bottom_nav_height"
+                    android:layout_gravity="bottom"
+                    android:weightSum="5">
+
+                    <LinearLayout
+                        android:id="@+id/nav_profile"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/ripple_button_white"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/iv_nav_profile"
+                            android:layout_width="@dimen/ico_size_normal"
+                            android:layout_height="@dimen/ico_size_normal"
+                            android:clickable="false"
+                            android:focusableInTouchMode="false"
+                            android:src="@drawable/ic_home" />
+
+                        <TextView
+                            android:id="@+id/tv_nav_profile"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_smallest"
+                            android:text="@string/nav_profile"
+                            android:textSize="@dimen/text_size_small" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/nav_quest"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/ripple_button_white"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/iv_nav_quest"
+                            android:layout_width="@dimen/ico_size_normal"
+                            android:layout_height="@dimen/ico_size_normal"
+                            android:clickable="false"
+                            android:focusableInTouchMode="false"
+                            android:src="@drawable/ic_home" />
+
+                        <TextView
+                            android:id="@+id/tv_nav_quest"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_smallest"
+                            android:text="@string/nav_quest"
+                            android:textSize="@dimen/text_size_small" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/nav_center"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal" />
+
+                    <FrameLayout
+                        android:id="@+id/nav_voucher"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/ripple_button_white"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/iv_nav_voucher"
+                                android:layout_width="@dimen/ico_size_normal"
+                                android:layout_height="@dimen/ico_size_normal"
+                                android:layout_gravity="center"
+                                android:clickable="false"
+                                android:focusableInTouchMode="false"
+                                android:src="@drawable/ic_home" />
+
+                            <TextView
+                                android:id="@+id/tv_nav_voucher"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/spacing_smallest"
+                                android:text="@string/nav_voucher"
+                                android:textSize="@dimen/text_size_small" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tv_voucher_badge"
+                            android:layout_width="@dimen/_8sdp"
+                            android:layout_height="@dimen/_8sdp"
+                            android:layout_gravity="top|end"
+                            android:layout_marginEnd="@dimen/_18sdp"
+                            android:layout_marginRight="@dimen/_18sdp"
+                            android:layout_marginTop="@dimen/spacing_small"
+                            android:background="@drawable/item_badge"
+                            android:elevation="@dimen/spacing_shadow"
+                            android:gravity="center"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="@dimen/text_size_smaller"
+                            android:visibility="gone"
+                            tools:targetApi="lollipop"
+                            tools:text="17" />
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:id="@+id/nav_other"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/ripple_button_white"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/iv_nav_other"
+                            android:layout_width="@dimen/ico_size_normal"
+                            android:layout_height="@dimen/ico_size_normal"
+                            android:clickable="false"
+                            android:focusableInTouchMode="false"
+                            android:src="@drawable/ic_home" />
+
+                        <TextView
+                            android:id="@+id/tv_nav_other"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_smallest"
+                            android:text="@string/nav_other"
+                            android:textSize="@dimen/text_size_small" />
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <ImageView
+                android:id="@+id/iv_nav_center"
+                android:layout_width="@dimen/bottom_nav_height"
+                android:layout_height="@dimen/bottom_nav_height"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/spacing_small"
+                android:background="@color/colorWhite"
+                android:elevation="@dimen/spacing_normal"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_home"
+                tools:targetApi="lollipop" />
+        </RelativeLayout>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+</layout>

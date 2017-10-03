@@ -1,11 +1,50 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
     </style>
 
+    <style name="SwipeDownTheme" parent="AppTheme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="ScrollableTheme" parent="AppTheme">
+        <item name="android:windowFullscreen">false</item>
+    </style>
+
+    <style name="FullyTranslucent" parent="android:Theme.Translucent.NoTitleBar">
+        <item name="android:progressBarStyle">@style/InvisibleProgress</item>
+    </style>
+
+    <style name="InvisibleProgress">
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <!--RewardContent Dialog Style-->
+    <style name="CustomDialog" parent="@android:style/Theme.Holo.Light">
+        <item name="android:windowBackground">@null</item>
+        <item name="android:windowIsFloating">true</item>
+    </style>
+
+    <!--Facebook Account Kit Theme-->
+    <style name="AppLoginTheme" parent="Theme.AccountKit" />
+
+    <style name="AppTheme.ProgressBar">
+        <item name="colorAccent">@color/colorInactive</item>
+    </style>
+
+    <style name="AppTheme.BottomNavigation" parent="CardView">
+        <item name="cardPreventCornerOverlap">false</item>
+        <item name="cardCornerRadius">0dp</item>
+    </style>
 </resources>
