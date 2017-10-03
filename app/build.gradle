@@ -1,30 +1,153 @@
+// Lint isn't necessary every time gradle build
+tasks.whenTaskAdded { task ->
+    if (task.name == "lint") {
+        task.enabled = false
+    }
+}
+
 apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
+apply from: "$project.rootDir/tools/script-lint.gradle"
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.3"
+    flavorDimensions "versionCode"
     defaultConfig {
         applicationId "com.chandlersystem.chandler"
         minSdkVersion 16
-        targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        targetSdkVersion 22
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
+
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            // Enable proguard shrinking
+            minifyEnabled true
+            // Enable resources shrinking to delete unused resources, but it never removes anything in /value folder
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), "$project.rootDir/tools/proguard-rules.pro"
+        }
+
+        debug {
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), "$project.rootDir/tools/proguard-rules-debug.pro"
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+
+    sourceSets { main { assets.srcDirs = ['src/main/assets', 'src/main/assets/'] } }
+
+    // Environment
+    productFlavors {
+        dev {
+            applicationId "com.chandlersystem.chandler.dev"
+            buildConfigField "String", "BASE_URL_V1", "\"http://chandler.com.vn/api/\""
+            versionCode 1
+            versionName '1.0.0'
+        }
+        production {
+            applicationId "com.chandlersystem.chandler"
+            buildConfigField "String", "BASE_URL_V1", "\"http://chandler.com.vn/api/\""
+            versionCode 1
+            versionName '1.0.0'
         }
     }
 }
 
+repositories {
+    mavenCentral()
+    maven { url 'https://maven.fabric.io/public' }
+}
+
+def dbflow_version = "4.0.4"
+def support_library_version = "25.4.0"
+def firebase_version = "11.2.2"
+
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.1', {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    compile('com.crashlytics.sdk.android:crashlytics:2.6.7@aar') {
+        transitive = true;
+    }
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+
+//    Android support library
+    compile "com.android.support:appcompat-v7:${support_library_version}"
+    compile "com.android.support:design:${support_library_version}"
+    compile "com.android.support:support-v4:${support_library_version}"
+    compile "com.android.support:recyclerview-v7:${support_library_version}"
+    compile "com.android.support:cardview-v7:${support_library_version}"
+
+//    Networking
+    compile 'com.google.code.gson:gson:2.8.0'
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.8.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+    compile 'org.apache.commons:commons-lang3:3.5'
+    provided 'javax.annotation:jsr250-api:1.0'
+    provided 'org.glassfish:javax.annotation:10.0-b28'
+
+//    Facebook
+    compile 'com.facebook.android:facebook-android-sdk:4.26.0'
+    compile 'com.facebook.android:account-kit-sdk:4.22.1'
+
+//    Image
+    compile 'jp.wasabeef:glide-transformations:2.0.2'
+    compile 'com.github.bumptech.glide:glide:4.0.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0'
+
+//    Dagger: Dependency Injection
+    compile 'com.google.dagger:dagger:2.11'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
+
+//    RxJava
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    compile 'io.reactivex.rxjava2:rxjava:2.1.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    compile 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
+    compile 'com.github.pwittchen:reactivenetwork-rx2:0.9.0'
+
+//    Firebase
+    compile "com.google.firebase:firebase-database:${firebase_version}"
+    compile "com.google.firebase:firebase-core:${firebase_version}"
+    compile "com.google.firebase:firebase-messaging:${firebase_version}"
+    compile "com.google.android.gms:play-services-analytics:${firebase_version}"
+    compile "com.google.firebase:firebase-config:${firebase_version}"
+    compile "com.google.firebase:firebase-crash:${firebase_version}"
+
+//    Utilities
+    compile 'com.intuit.sdp:sdp-android:1.0.4'
+    compile 'com.github.liuguangqiang.swipeback:library:1.0.2@aar'
+
+//    Multidex
+    compile 'com.android.support:multidex:1.0.2'
+
+//    Database
+    annotationProcessor "com.github.Raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
+    compile "com.github.Raizlabs.DBFlow:dbflow-core:${dbflow_version}"
+    compile "com.github.Raizlabs.DBFlow:dbflow:${dbflow_version}"
+    compile "com.github.Raizlabs.DBFlow:dbflow-rx2:${dbflow_version}"
+    compile "com.github.Raizlabs.DBFlow:dbflow-rx2:${dbflow_version}"
+
+//    Test - Debugging
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.mockito:mockito-core:2.8.9'
+    androidTestCompile 'org.mockito:mockito-android:2.7.22'
 }
+
+apply plugin: 'com.google.gms.google-services'
