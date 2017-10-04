@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1038899558551",
+    "firebase_url": "https://chandler-c69a7.firebaseio.com",
+    "project_id": "chandler-c69a7",
+    "storage_bucket": "chandler-c69a7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1038899558551:android:1fcec748dfc387bb",
+        "android_client_info": {
+          "package_name": "com.chandlersystem.chandler"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1038899558551-ahg7an2uqphsuqi0gmftbo3js6m0r7qt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.chandlersystem.chandler",
+            "certificate_hash": "6c9c2bdabb874a6fdc016437b67010fd46541077"
+          }
+        },
+        {
+          "client_id": "1038899558551-j4v7fcuih816pqjg78gfl7ia715el5e9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCc5Zb5NwSoiBWPKgmtxH6zhurL4Jstzy4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1038899558551-j4v7fcuih816pqjg78gfl7ia715el5e9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
