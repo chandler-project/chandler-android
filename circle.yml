@@ -7,13 +7,39 @@ general:
         - /home/ubuntu/your-app-name/app/build/outputs/apk/
 
 machine:
+    java:
+        version: oraclejdk8
     environment:
         ANDROID_HOME: /usr/local/android-sdk-linux
+        ANDROID_BUILD_TOOLS: 25.0.3
+        APPLICATION_ID: com.chandlersystem.chandler
+        FABRIC_API_KEY: 0455fdfc6b19d96f14b2d449b9b29fac64aa822a
 
 dependencies:
+    pre:
+        # Remove any leftover lock from previous builds
+        - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+
+        # Make sure we have the sdkmanager available, and update the Android SDK tools if not
+        - if [ ! -e $ANDROID_HOME/tools/bin/sdkmanager ]; then echo y | android update sdk --no-ui --all --filter tools; fi
+
+        # Install all the required SDK components
+        - $ANDROID_HOME/tools/bin/sdkmanager --verbose "platform-tools" "build-tools;"$ANDROID_BUILD_TOOLS "extras;google;m2repository"
     override:
         - echo y | android update sdk --no-ui --all --filter tools,platform-tools,build-tools-25.0.3,android-25,extra-google-m2repository,extra-google-google_play_services,extra-android-support
         - ANDROID_HOME=/usr/local/android-sdk-linux ./gradlew dependencies
+        - if [ -f ./gradlew ]; then ./gradlew app:dependencies --console=plain --no-daemon;else gradle app:dependencies --console=plain --no-daemon;fi
+    cache_directories:
+         # Android SDK
+         - /usr/local/android-sdk-linux/tools
+         - /usr/local/android-sdk-linux/platform-tools
+         - /usr/local/android-sdk-linux/build-tools
+         - /usr/local/android-sdk-linux/licenses
+         - /usr/local/android-sdk-linux/extras/google/m2repository
+
+         # Gradle caches
+         - /home/ubuntu/.gradle/caches/
+         - /home/ubuntu/.gradle/wrapper/
 
 test:
     override:
