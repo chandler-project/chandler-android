@@ -8,6 +8,9 @@ general:
     branches:
       only:
         - master
+    environment:
+        _JAVA_OPTIONS: "-Xms512m -Xmx1024m"
+        GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"'
 
 machine:
     java:
