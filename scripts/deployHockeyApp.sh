@@ -1,11 +1,3 @@
-# This script uploads an exported .apk file for FeedApp app to Hockeyapp using
- HockeyAppToken : $HOCKEYAPP_TOKEN
-Team Number: $HOCKEYAPP_TEAM_ID
-Notes          : $HOCKEYAPP_VERSION_NOTES
-ipa            : $HOCKEYAPP_EXPORT_APK_PATH
-App            : $HOCKEYAPP_APP_IDENTIFIER
-tags           : $HOCKEYAPP_TAGS
-
 function uploadToHockeyApp {
 
   GIT_COMPARE_KEY=${CIRCLE_COMPARE_URL##*/}
