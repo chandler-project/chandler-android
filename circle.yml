@@ -20,6 +20,7 @@ machine:
         ANDROID_BUILD_TOOLS: 25.0.3
         APPLICATION_ID: com.chandlersystem.chandler
         FABRIC_API_KEY: 0455fdfc6b19d96f14b2d449b9b29fac64aa822a
+        HOCKEYAPP_TOKEN: 6b8086df8eb74988a43816b1435027cc
 
 dependencies:
     pre:
@@ -54,6 +55,12 @@ notify:
   webhooks:
     # A list of hook hashes, containing the URL field
     - url: https://hooks.slack.com/services/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
+
+deployment:
+  hockey:
+    branch: master
+    commands:
+      - ipa distribute:hockeyapp -m "chandler build" --token $HOCKEYAPP_TOKEN
 
 test:
     override:
