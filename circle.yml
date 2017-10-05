@@ -60,7 +60,7 @@ deployment:
   hockey:
     branch: master
     commands:
-      - ipa distribute:hockeyapp -m "chandler build" --token $HOCKEYAPP_TOKEN
+      - source scripts/deployHockeyApp.sh && uploadToHockeyApp
 
 test:
     override:
