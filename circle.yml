@@ -5,6 +5,9 @@
 general:
     artifacts:
         - /home/ubuntu/chandler-android/app/build/outputs/apk/
+    branches:
+      only:
+        - master
 
 machine:
     java:
