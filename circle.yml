@@ -50,12 +50,10 @@ dependencies:
          # Gradle caches
          - /home/ubuntu/.gradle/caches/
          - /home/ubuntu/.gradle/wrapper/
-
-deployment:
-    development:
-      branch: master
-      heroku:
-        appname: chandler-android-build
+notify:
+  webhooks:
+    # A list of hook hashes, containing the URL field
+    - url: https://hooks.slack.com/services/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
 
 test:
     override:
