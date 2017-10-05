@@ -48,6 +48,12 @@ dependencies:
          - /home/ubuntu/.gradle/caches/
          - /home/ubuntu/.gradle/wrapper/
 
+deployment:
+    development:
+      branch: master
+      heroku:
+        appname: chandler-android-build
+
 test:
     override:
         - (./gradlew assemble):
