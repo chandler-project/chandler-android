@@ -141,4 +141,5 @@
     <string name="content_share_this_to_cashier">Show this to cashier to record point</string>
     <string name="content_message">Messages</string>
     <string name="content_dismiss">Dismiss</string>
+    <string name="title_activity_requests">RequestsActivity</string>
 </resources>
