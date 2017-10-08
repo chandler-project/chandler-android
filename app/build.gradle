@@ -64,7 +64,7 @@ repositories {
 }
 
 def dbflow_version = "4.0.4"
-def support_library_version = "26.0.0-beta1"
+def support_library_version = "26.1.0"
 def firebase_version = "11.4.2"
 def architectureComponentsVersion = "1.0.0-beta2"
 
@@ -80,6 +80,8 @@ dependencies {
 
     // Android support library
     implementation "com.android.support:appcompat-v7:${support_library_version}"
+    implementation "com.android.support:customtabs:${support_library_version}"
+    implementation "com.android.support:animated-vector-drawable:${support_library_version}"
     implementation "com.android.support:design:${support_library_version}"
     implementation "com.android.support:support-v4:${support_library_version}"
     implementation "com.android.support:recyclerview-v7:${support_library_version}"
