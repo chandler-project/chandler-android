@@ -1,29 +1,36 @@
 package com.chandlersystem.chandler.ui.splash;
 
-import android.animation.Animator;
-import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.chandlersystem.chandler.R;
 import com.chandlersystem.chandler.databinding.ActivitySplashBinding;
+import com.chandlersystem.chandler.ui.adapters.FragmentAdapter;
 import com.chandlersystem.chandler.ui.login.LoginActivity;
 import com.chandlersystem.chandler.ui.main.MainActivity;
-import com.chandlersystem.chandler.utilities.AnimUti;
+import com.chandlersystem.chandler.ui.splash.onboarding.FirstOnboardingFragment;
+import com.chandlersystem.chandler.ui.splash.onboarding.FourthOnboardingFragment;
+import com.chandlersystem.chandler.ui.splash.onboarding.SecondOnboardingFragment;
+import com.chandlersystem.chandler.ui.splash.onboarding.ThirdOnboardingFragment;
+import com.chandlersystem.chandler.utilities.RxUtil;
+import com.jakewharton.rxbinding2.view.RxView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
 
 public class SplashActivity extends AppCompatActivity {
     private static final String TAG = SplashActivity.class.getSimpleName();
 
-    private static final Integer SPLASH_SCREEN_DURATION = 500;
-    private static final Integer SPLASH_SCREEN_DELAY = 200;
-
     private ActivitySplashBinding mBinding;
+
+    private FragmentAdapter mViewpagerAdapter;
 
     private final CompositeDisposable mCompositeDisposable = new CompositeDisposable();
 
@@ -35,52 +42,22 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Bind view
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_splash);
-        //startSplashAnimation();
-        startMainActivity();
+        setupView();
+        setupViewPager();
+        handleEvents();
     }
 
-    @Override
-    protected void onDestroy() {
-        mCompositeDisposable.clear();
-        mCompositeDisposable.dispose();
-        super.onDestroy();
-    }
-    public ObjectAnimator getFadeInAnimation() {
-        return AnimUti.getFadeAnimation(mBinding.image, SPLASH_SCREEN_DURATION,
-                new AccelerateDecelerateInterpolator(), 1f, 0f);
-    }
+    private void handleEvents() {
+        mCompositeDisposable.add(
+                RxView.clicks(mBinding.layoutButtonLoginAsGuest.btnFacebookLogin)
+                        .compose(RxUtil.withLongThrottleFirst())
+                        .subscribe(o -> startMainActivity()));
 
-    public void startSplashAnimation() {
-        final ObjectAnimator animator = getFadeInAnimation();
-        animator.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                //detectNextActivity();
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-
-            }
-        });
-        animator.setStartDelay(SPLASH_SCREEN_DELAY);
-        animator.start();
-    }
-
-    private void detectNextActivity() {
-        startMainActivity();
+        mCompositeDisposable.add(
+                RxView.clicks(mBinding.tvLogin)
+                        .compose(RxUtil.withLongThrottleFirst())
+                        .subscribe(o -> startLoginActivity()));
     }
 
     private void startMainActivity() {
@@ -93,17 +70,34 @@ public class SplashActivity extends AppCompatActivity {
         finish();
     }
 
-
-    /*private void clearDatabase() {
-        mCompositeDisposable.add(DatabaseManager.clearTable(User.class)
-                .compose(RxUtil.withSchedulers())
-                .doOnTerminate(this::startLoginActivity)
-                .subscribe(transaction -> {
-                }, Throwable::printStackTrace)
-        );
+    private void setupViewPager() {
+        List<Fragment> listOnboardingFragment = new ArrayList<>();
+        FirstOnboardingFragment firstOnboardingFragment = FirstOnboardingFragment.newInstance();
+        SecondOnboardingFragment secondOnboardingFragment = SecondOnboardingFragment.newInstance();
+        ThirdOnboardingFragment thirdOnboardingFragment = ThirdOnboardingFragment.newInstance();
+        FourthOnboardingFragment fourthOnboardingFragment = FourthOnboardingFragment.newInstance();
+        listOnboardingFragment.add(firstOnboardingFragment);
+        listOnboardingFragment.add(secondOnboardingFragment);
+        listOnboardingFragment.add(thirdOnboardingFragment);
+        listOnboardingFragment.add(fourthOnboardingFragment);
+        mViewpagerAdapter = new FragmentAdapter(getSupportFragmentManager(), listOnboardingFragment);
+        mBinding.viewpagerOnBoarding.setAdapter(mViewpagerAdapter);
+        mBinding.indicator.setViewPager(mBinding.viewpagerOnBoarding);
+        mViewpagerAdapter.registerDataSetObserver(mBinding.indicator.getDataSetObserver());
     }
 
-    private boolean isUserLoggedIn(String fullName, String birthday) {
-        return ValidateUtil.checkString(fullName) && ValidateUtil.checkString(birthday);
-    }*/
+    private void setupView() {
+        if (mBinding == null) {
+            return;
+        }
+
+        mBinding.layoutButtonLoginAsGuest.btnFacebookLogin.setText(getString(R.string.content_login_as_guest));
+    }
+
+    @Override
+    protected void onDestroy() {
+        mCompositeDisposable.clear();
+        mCompositeDisposable.dispose();
+        super.onDestroy();
+    }
 }
