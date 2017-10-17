@@ -48,6 +48,7 @@
     <dimen name="ico_size_large">@dimen/_20sdp</dimen>
     <dimen name="ico_size_larger">@dimen/_24sdp</dimen>
     <dimen name="ico_size_largest">@dimen/_28sdp</dimen>
+    <dimen name="ico_size_big">@dimen/_36sdp</dimen>
     <dimen name="ico_size_giant">@dimen/_52sdp</dimen>
 
     <!--Bottom Navigation-->
