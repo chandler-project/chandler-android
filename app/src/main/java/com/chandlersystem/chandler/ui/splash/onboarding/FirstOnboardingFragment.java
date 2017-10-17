@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.chandlersystem.chandler.R;
 import com.chandlersystem.chandler.databinding.FragmentFirstOnboardingBinding;
+import com.chandlersystem.chandler.utilities.ViewUtil;
 
 public class FirstOnboardingFragment extends Fragment {
     FragmentFirstOnboardingBinding mBinding;
@@ -41,5 +42,6 @@ public class FirstOnboardingFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mBinding.layoutBranding.tvTitle.setText(getString(R.string.normal_text));
+        ViewUtil.toggleView(mBinding.layoutBranding.tvTitle, true);
     }
 }

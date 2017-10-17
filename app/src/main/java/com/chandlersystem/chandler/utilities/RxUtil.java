@@ -81,18 +81,13 @@ public class RxUtil {
                 });
     }
 
-    /*public static <R> ObservableTransformer<R, R> handleCode401(Context context) {
+    public static <R> ObservableTransformer<R, R> withProgressBar(View progressView) {
         return upstream -> upstream
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnError(throwable ->
-                {
-                    if (throwable instanceof HttpException) {
-                        HttpException exception = (HttpException) throwable;
-                        if (exception.code() == 401) {
-                            DialogUtil.showUnauthorizationDialog(context, throwable);
-                        }
-                    }
+                .doOnSubscribe(disposable -> {
+                    ViewUtil.toggleView(progressView, true);
+                })
+                .doOnTerminate(() -> {
+                    ViewUtil.toggleView(progressView, false);
                 });
-    }*/
-
+    }
 }

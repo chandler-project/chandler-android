@@ -50,7 +50,7 @@ public class SplashActivity extends AppCompatActivity {
 
     private void handleEvents() {
         mCompositeDisposable.add(
-                RxView.clicks(mBinding.layoutButtonLoginAsGuest.btnFacebookLogin)
+                RxView.clicks(mBinding.layoutButtonLoginAsGuest.btnPrimary)
                         .compose(RxUtil.withLongThrottleFirst())
                         .subscribe(o -> startMainActivity()));
 
@@ -91,7 +91,7 @@ public class SplashActivity extends AppCompatActivity {
             return;
         }
 
-        mBinding.layoutButtonLoginAsGuest.btnFacebookLogin.setText(getString(R.string.content_login_as_guest));
+        mBinding.layoutButtonLoginAsGuest.btnPrimary.setText(getString(R.string.content_login_as_guest));
     }
 
     @Override

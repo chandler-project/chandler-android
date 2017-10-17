@@ -36,7 +36,7 @@ public class AccountKitConnector {
             // When thread A completely created a instance , thread B come and doesn't see result != null
             // Then B will see check null again one more time, then A ! null
             // Then B will return as @result
-            synchronized (RxBus.class) {
+            synchronized (AccountKitConnector.class) {
                 result = sInstance;
                 if (result == null) {
                     sInstance = result = new AccountKitConnector();
