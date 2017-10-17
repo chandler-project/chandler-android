@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <Button
+        android:id="@+id/btn_facebook_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/spacing_largest"
+        android:layout_marginRight="@dimen/spacing_largest"
+        android:background="@drawable/item_button_rounded_cyan"
+        android:fontFamily="@font/cabin_regular"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/text_size_large"
+        tools:text="@string/content_sign_in_with_fb" />
+</layout>
