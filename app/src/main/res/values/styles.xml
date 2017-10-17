@@ -39,10 +39,6 @@
     <!--Facebook Account Kit Theme-->
     <style name="AppLoginTheme" parent="Theme.AccountKit"/>
 
-    <style name="AppTheme.ProgressBar">
-        <item name="colorAccent">@color/colorInactive</item>
-    </style>
-
     <style name="AppTheme.BottomNavigation" parent="CardView">
         <item name="cardPreventCornerOverlap">false</item>
         <item name="cardCornerRadius">0dp</item>

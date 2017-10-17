@@ -1,27 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--Color for themes-->
-    <color name="colorGreen">#4db856</color>
-    <color name="colorGreenJungle">#008458</color>
-    <color name="colorGreen80">#cc4db856</color>
-    <color name="colorOrange">#F37721</color>
-    <color name="colorRed">#ED2525</color>
-    <color name="colorPrimary">@color/colorWhite</color>
+    <color name="colorGreen">#92BC3A</color>
+    <color name="colorPrimary">#00E1A0</color>
     <color name="colorPrimaryDark">#000000</color>
-    <color name="colorAccent">@color/colorGreen</color>
+    <color name="colorAccent">#EA3324</color>
 
     <!--Color for widgets-->
-    <color name="colorBackground">#FFFFFF</color>
-    <color name="colorBackgroundGray">#F4F4F4</color>
-    <color name="colorBackgroundBlur">#CC008458</color>
     <color name="colorWhite">#FFFFFF</color>
-    <color name="colorWhite80">#80ffffff</color>
     <color name="colorBlack">#000000</color>
-    <color name="colorTextPrimary">#333333</color>
-    <color name="colorTextGray">#A6A6A6</color>
-    <color name="colorInactive">#A6A6A6</color>
-    <color name="colorTextHint">#959595</color>
-    <color name="colorProgressInactive">#e5e5e5</color>
-    <color name="colorDarkGray">#757575</color>
-    <color name="colorMessageBackground">#0c000000</color>
+    <color name="colorBackground">#FFFFFF</color>
+    <color name="colorBackgroundGray">#6A6A6A</color>
+    <color name="colorTextPrimary">#000000</color>
+    <color name="colorTextGray">#6A6A6A</color>
+    <color name="colorHint">#BDBDBD</color>
+    <color name="colorInactive">#BDBDBD</color>
 </resources>

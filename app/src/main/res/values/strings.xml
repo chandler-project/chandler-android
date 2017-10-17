@@ -142,4 +142,11 @@
     <string name="content_message">Messages</string>
     <string name="content_dismiss">Dismiss</string>
     <string name="title_activity_requests">RequestsActivity</string>
+    <string name="normal_text">What is the lorem ipsum?</string>
+    <string name="content_branding">Explore the best deals that you will love</string>
+    <string name="content_login">Login</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="content_login_as_guest">Start exploring</string>
 </resources>

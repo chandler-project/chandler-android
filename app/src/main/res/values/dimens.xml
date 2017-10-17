@@ -2,6 +2,7 @@
 <resources>
 
     <!--General-->
+    <dimen name="spacing_tiny">@dimen/_2sdp</dimen>
     <dimen name="spacing_smallest">@dimen/_4sdp</dimen>
     <dimen name="spacing_smaller">@dimen/_8sdp</dimen>
     <dimen name="spacing_small">@dimen/_12sdp</dimen>
@@ -62,4 +63,5 @@
     <dimen name="size_empty_progress_bar">@dimen/_56sdp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="text_margin">16dp</dimen>
+    <dimen name="size_onboarding_image">@dimen/_200sdp</dimen>
 </resources>
