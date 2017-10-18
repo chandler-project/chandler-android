@@ -21,26 +21,16 @@ machine:
         APPLICATION_ID: com.chandlersystem.chandler
 
 dependencies:
-    pre:
-        # Remove any leftover lock from previous builds
-        - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+  pre:
+    - if [ ! -e /usr/local/android-sdk-linux/build-tools/26.0.2 ]; then echo y | android update sdk --all --no-ui --filter "build-tools-26.0.2"; fi;
+    - if [ ! -e /usr/local/android-sdk-linux/platforms/android-26 ]; then echo y | android update sdk --all --no-ui --filter "android-26"; fi;
+    - if ! $(grep -q "Revision=47.0.0" /usr/local/android-sdk-linux/extras/android/m2repository/source.properties); then echo y | android update sdk --all --no-ui --filter "extra-android-m2repository"; fi;
+  cache_directories:
+    - /usr/local/android-sdk-linux/build-tools/26.0.2
+    - /usr/local/android-sdk-linux/platforms/android-26
+    - /usr/local/android-sdk-linux/extras/android/m2repositorynotify
 
-        # Make sure we have the sdkmanager available, and update the Android SDK tools if not
-         - if [ ! -e /usr/local/android-sdk-linux/build-tools/26.0.2 ]; then echo y | android update sdk --all --no-ui --filter "build-tools-25.0.2"; fi;
-         - if [ ! -e /usr/local/android-sdk-linux/platforms/android-26 ]; then echo y | android update sdk --all --no-ui --filter "android-25"; fi;
-         - if ! $(grep -q "Revision=47.0.0" /usr/local/android-sdk-linux/extras/android/m2repository/source.properties); then echo y | android update sdk --all --no-ui --filter "extra-android-m2repository"; fi;
-    cache_directories:
-         # Android SDK
-         - /usr/local/android-sdk-linux/tools
-         - /usr/local/android-sdk-linux/platform-tools
-         - /usr/local/android-sdk-linux/build-tools
-         - /usr/local/android-sdk-linux/licenses
-         - /usr/local/android-sdk-linux/extras/google/m2repository
-         - /usr/local/android-sdk-linux/build-tools/26.0.2
-         - /usr/local/android-sdk-linux/platforms/android-26
-         - /usr/local/android-sdk-linux/extras/android/m2repository
-notify:
-  webhooks:
+webhooks:
     # A list of hook hashes, containing the URL field
     - url: https://hooks.slack.com/services/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
 
