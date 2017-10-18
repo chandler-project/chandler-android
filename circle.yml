@@ -22,6 +22,7 @@ machine:
 
 dependencies:
     pre:
+        - (while sleep 3; do echo "y"; done) | $ANDROID_HOME/tools/android update sdk -u
         # Remove any leftover lock from previous builds
         - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
 
