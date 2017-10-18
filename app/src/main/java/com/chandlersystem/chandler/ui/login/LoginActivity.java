@@ -15,12 +15,14 @@ import com.chandlersystem.chandler.di.modules.ActivityModule;
 import com.chandlersystem.chandler.services.AccountKitConnector;
 import com.chandlersystem.chandler.services.FacebookConnector;
 import com.chandlersystem.chandler.ui.main.MainActivity;
+import com.chandlersystem.chandler.ui.select_category.SelectCategoryActivity;
 import com.chandlersystem.chandler.utilities.LogUtil;
 import com.chandlersystem.chandler.utilities.RxUtil;
 import com.chandlersystem.chandler.utilities.ViewUtil;
 import com.facebook.accountkit.AccessToken;
 import com.facebook.login.LoginResult;
 import com.jakewharton.rxbinding2.view.RxView;
+import com.raizlabs.android.dbflow.sql.language.Select;
 
 import javax.inject.Inject;
 
@@ -66,8 +68,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void startMainActivity() {
-        startActivity(MainActivity.getInstance(this));
-        finish();
+        startActivity(SelectCategoryActivity.getInstance(this));
     }
 
     @Override

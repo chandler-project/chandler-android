@@ -17,8 +17,11 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.chandlersystem.chandler.GlideApp;
+import com.chandlersystem.chandler.R;
 
 public class ViewUtil {
+
+    private static final int PLACE_HOLDER_RESOURCE_ID = R.drawable.ic_placeholder;
 
     private ViewUtil() {
     }
@@ -44,12 +47,11 @@ public class ViewUtil {
      * @param context
      * @param url
      * @param view
-     * @param placeholder
      */
-    public static void showImage(Context context, String url, ImageView view, int placeholder) {
+    public static void showImage(Context context, String url, ImageView view) {
         GlideApp.with(context)
                 .load(url)
-                .placeholder(placeholder)
+                .placeholder(PLACE_HOLDER_RESOURCE_ID)
                 .into(view);
     }
 

@@ -42,7 +42,7 @@ public class FourthOnboardingFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ViewUtil.showImage(getContext(), "https://media.giphy.com/media/ZqlvCTNHpqrio/giphy.gif", mBinding.layoutOnboarding.ivOnboardingImage, R.drawable.ic_placeholder);
+        ViewUtil.showImage(getContext(), "https://media.giphy.com/media/ZqlvCTNHpqrio/giphy.gif", mBinding.layoutOnboarding.ivOnboardingImage);
         mBinding.layoutOnboarding.tvTitle.setText(getString(R.string.normal_text));
     }
 }
