@@ -110,6 +110,10 @@
             android:exported="true"
             android:label="@string/title_activity_requests"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ui.select_category.SelectCategoryActivity"
+            android:label="@string/title_activity_select_category"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
