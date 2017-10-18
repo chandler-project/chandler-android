@@ -153,4 +153,9 @@
     <string name="content_login_with_phone_number">Login with phone number</string>
     <string name="content_we_never_post_anything">We never post anything without your permission</string>
     <string name="content_or">OR</string>
+    <string name="title_activity_select_category">SelectCategoryActivity</string>
+    <string name="content_select_at_least">Select at least 3 categories that you love</string>
+    <string name="content_great">Great. Let\'s begin!!!</string>
+    <string name="content_next">Next</string>
+    <string name="content_we_learn_what_you_like">We learn what you like and leads you to the best products</string>
 </resources>

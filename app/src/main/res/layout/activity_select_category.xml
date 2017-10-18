@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/layout_branding"
+            layout="@layout/layout_branding"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_larger" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_larger"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_unselected"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/content_select_at_least"
+                android:textAlignment="center"
+                android:textColor="@color/colorInactive"
+                android:visibility="visible" />
+
+            <LinearLayout
+                android:id="@+id/layout_selected"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center_horizontal"
+                android:visibility="invisible">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/cabin_bold"
+                    android:text="@string/content_great"
+                    android:textColor="@color/colorTextPrimary" />
+
+                <Button
+                    android:id="@+id/btn_navigate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_smaller"
+                    android:layout_marginRight="@dimen/spacing_smaller"
+                    android:background="@drawable/item_button_rounded_cyan"
+                    android:fontFamily="@font/cabin_regular"
+                    android:minHeight="0dp"
+                    android:paddingBottom="@dimen/spacing_smallest"
+                    android:paddingTop="@dimen/spacing_smallest"
+                    android:text="@string/content_next"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/text_size_large" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView_categories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_normal" />
+    </LinearLayout>
+</layout>

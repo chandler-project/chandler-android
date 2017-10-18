@@ -22,7 +22,6 @@
                 android:id="@+id/btn_facebook_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="start"
                 android:layout_marginLeft="@dimen/spacing_largest"
                 android:layout_marginRight="@dimen/spacing_largest"
                 android:layout_marginTop="@dimen/spacing_largest"
@@ -31,13 +30,15 @@
                 android:drawablePadding="@dimen/spacing_normal"
                 android:drawableStart="@drawable/ic_facebook"
                 android:fontFamily="@font/cabin_regular"
+                android:gravity="center"
                 android:paddingEnd="@dimen/spacing_normal"
                 android:paddingLeft="@dimen/spacing_normal"
+                android:paddingRight="@dimen/spacing_normal"
                 android:paddingStart="@dimen/spacing_normal"
                 android:text="@string/content_login_with_facebook"
                 android:textAllCaps="false"
                 android:textColor="@color/colorWhite"
-                android:textSize="@dimen/text_size_larger" />
+                android:textSize="@dimen/text_size_large" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -103,7 +104,7 @@
                 android:text="@string/content_login_with_phone_number"
                 android:textAllCaps="false"
                 android:textColor="@color/colorBlack"
-                android:textSize="@dimen/text_size_larger" />
+                android:textSize="@dimen/text_size_large" />
 
             <include
                 android:id="@+id/layout_progress_bar"

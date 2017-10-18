@@ -39,9 +39,9 @@
             android:layout_marginRight="@dimen/spacing_largest"
             android:layout_marginTop="@dimen/spacing_smaller"
             android:fontFamily="@font/cabin_regular"
+            android:gravity="center"
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/text_size_larger"
-            android:visibility="gone"
             tools:text="@string/normal_text" />
     </RelativeLayout>
 </layout>

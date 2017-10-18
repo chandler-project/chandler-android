@@ -23,8 +23,9 @@
     <dimen name="size_profile_large">@dimen/_72sdp</dimen>
 
     <!--Dialog-->
-    <dimen name="size_dialog_padding">@dimen/_minus10sdp</dimen>
+    <dimen name="size_dialog_padding">@dimen/_minus5sdp</dimen>
     <dimen name="size_dialog_radius">@dimen/_10sdp</dimen>
+    <dimen name="size_dialog_stroke">@dimen/_5sdp</dimen>
 
     <!--Button-->
     <dimen name="size_button_height">@dimen/_40sdp</dimen>
