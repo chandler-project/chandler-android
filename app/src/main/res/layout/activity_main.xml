@@ -13,7 +13,7 @@
             android:background="@color/colorWhite">
 
             <android.support.v4.view.ViewPager
-                android:id="@+id/vp_bottom_nav"
+                android:id="@+id/viewpager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="@dimen/bottom_nav_height" />
@@ -32,7 +32,7 @@
                     android:weightSum="5">
 
                     <LinearLayout
-                        android:id="@+id/nav_profile"
+                        android:id="@+id/nav_home"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -41,24 +41,27 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:id="@+id/iv_nav_profile"
+                            android:id="@+id/iv_nav_home"
                             android:layout_width="@dimen/ico_size_normal"
                             android:layout_height="@dimen/ico_size_normal"
                             android:clickable="false"
                             android:focusableInTouchMode="false"
-                            android:src="@drawable/ic_home" />
+                            android:src="@drawable/ic_home_active" />
 
                         <TextView
-                            android:id="@+id/tv_nav_profile"
+                            android:id="@+id/tv_nav_home"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/spacing_smallest"
+                            android:fontFamily="@font/cabin_regular"
                             android:text="@string/nav_profile"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorPrimary"
                             android:textSize="@dimen/text_size_small" />
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/nav_quest"
+                        android:id="@+id/nav_request"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -67,31 +70,56 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:id="@+id/iv_nav_quest"
+                            android:id="@+id/iv_nav_request"
                             android:layout_width="@dimen/ico_size_normal"
                             android:layout_height="@dimen/ico_size_normal"
                             android:clickable="false"
                             android:focusableInTouchMode="false"
-                            android:src="@drawable/ic_home" />
+                            android:src="@drawable/ic_request_inactive" />
 
                         <TextView
-                            android:id="@+id/tv_nav_quest"
+                            android:id="@+id/tv_nav_request"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/spacing_smallest"
+                            android:fontFamily="@font/cabin_regular"
                             android:text="@string/nav_quest"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorHint"
                             android:textSize="@dimen/text_size_small" />
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/nav_center"
+                        android:id="@+id/nav_create"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:orientation="horizontal" />
+                        android:background="@drawable/ripple_button_white"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/iv_nav_create"
+                            android:layout_width="@dimen/ico_size_normal"
+                            android:layout_height="@dimen/ico_size_normal"
+                            android:clickable="false"
+                            android:focusableInTouchMode="false"
+                            android:src="@drawable/ic_plus_inactive" />
+
+                        <TextView
+                            android:id="@+id/tv_nav_create"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_smallest"
+                            android:fontFamily="@font/cabin_regular"
+                            android:text="@string/nav_quest"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorHint"
+                            android:textSize="@dimen/text_size_small" />
+                    </LinearLayout>
 
                     <FrameLayout
-                        android:id="@+id/nav_voucher"
+                        android:id="@+id/nav_notification"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -106,25 +134,28 @@
                             android:orientation="vertical">
 
                             <ImageView
-                                android:id="@+id/iv_nav_voucher"
+                                android:id="@+id/iv_nav_notification"
                                 android:layout_width="@dimen/ico_size_normal"
                                 android:layout_height="@dimen/ico_size_normal"
                                 android:layout_gravity="center"
                                 android:clickable="false"
                                 android:focusableInTouchMode="false"
-                                android:src="@drawable/ic_home" />
+                                android:src="@drawable/ic_notification_inactive" />
 
                             <TextView
-                                android:id="@+id/tv_nav_voucher"
+                                android:id="@+id/tv_nav_notification"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/spacing_smallest"
+                                android:fontFamily="@font/cabin_regular"
                                 android:text="@string/nav_voucher"
+                                android:textAllCaps="true"
+                                android:textColor="@color/colorHint"
                                 android:textSize="@dimen/text_size_small" />
                         </LinearLayout>
 
                         <TextView
-                            android:id="@+id/tv_voucher_badge"
+                            android:id="@+id/tv_notification_badge"
                             android:layout_width="@dimen/_8sdp"
                             android:layout_height="@dimen/_8sdp"
                             android:layout_gravity="top|end"
@@ -143,7 +174,7 @@
                     </FrameLayout>
 
                     <LinearLayout
-                        android:id="@+id/nav_other"
+                        android:id="@+id/nav_profile"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -152,36 +183,26 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:id="@+id/iv_nav_other"
+                            android:id="@+id/iv_nav_profile"
                             android:layout_width="@dimen/ico_size_normal"
                             android:layout_height="@dimen/ico_size_normal"
                             android:clickable="false"
                             android:focusableInTouchMode="false"
-                            android:src="@drawable/ic_home" />
+                            android:src="@drawable/ic_profile_inactive" />
 
                         <TextView
-                            android:id="@+id/tv_nav_other"
+                            android:id="@+id/tv_nav_profile"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/spacing_smallest"
+                            android:fontFamily="@font/cabin_regular"
                             android:text="@string/nav_other"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorHint"
                             android:textSize="@dimen/text_size_small" />
                     </LinearLayout>
                 </LinearLayout>
             </android.support.v7.widget.CardView>
-
-            <ImageView
-                android:id="@+id/iv_nav_center"
-                android:layout_width="@dimen/bottom_nav_height"
-                android:layout_height="@dimen/bottom_nav_height"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="@dimen/spacing_small"
-                android:background="@color/colorWhite"
-                android:elevation="@dimen/spacing_normal"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_home"
-                tools:targetApi="lollipop" />
         </RelativeLayout>
 
     </android.support.design.widget.CoordinatorLayout>
