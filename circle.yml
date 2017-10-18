@@ -63,4 +63,4 @@ deployment:
 test:
     override:
         - (./gradlew assembleDebug):
-            timeout: 360
+            timeout: 1200
