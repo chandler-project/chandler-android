@@ -22,21 +22,13 @@ machine:
 
 dependencies:
     pre:
-        - (while sleep 3; do echo "y"; done) | $ANDROID_HOME/tools/android update sdk -u
         # Remove any leftover lock from previous builds
         - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
 
         # Make sure we have the sdkmanager available, and update the Android SDK tools if not
-        - if [ ! -e $ANDROID_HOME/tools/bin/sdkmanager ]; then echo y | android update sdk --no-ui --all --filter tools; fi
-
-         # Pre-accept Android SDK components licenses
-        - mkdir "$ANDROID_HOME/licenses" || true
-        - echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
-
-        # Install all the required SDK components
-        - $ANDROID_HOME/tools/bin/sdkmanager --verbose "platform-tools" "build-tools;"$ANDROID_BUILD_TOOLS "extras;google;m2repository"
-    override:
-        - echo y | android update sdk --no-ui --all --filter tools,platform-tools,build-tools-26.0.2,android-26,extra-google-m2repository,extra-google-google_play_services,extra-android-support
+         - if [ ! -e /usr/local/android-sdk-linux/build-tools/26.0.2 ]; then echo y | android update sdk --all --no-ui --filter "build-tools-25.0.2"; fi;
+         - if [ ! -e /usr/local/android-sdk-linux/platforms/android-26 ]; then echo y | android update sdk --all --no-ui --filter "android-25"; fi;
+         - if ! $(grep -q "Revision=47.0.0" /usr/local/android-sdk-linux/extras/android/m2repository/source.properties); then echo y | android update sdk --all --no-ui --filter "extra-android-m2repository"; fi;
         - ANDROID_HOME=/usr/local/android-sdk-linux ./gradlew dependencies
         - if [ -f ./gradlew ]; then ./gradlew app:dependencies --console=plain --no-daemon;else gradle app:dependencies --console=plain --no-daemon;fi
     cache_directories:
@@ -46,10 +38,9 @@ dependencies:
          - /usr/local/android-sdk-linux/build-tools
          - /usr/local/android-sdk-linux/licenses
          - /usr/local/android-sdk-linux/extras/google/m2repository
-
-         # Gradle caches
-         - /home/ubuntu/.gradle/caches/
-         - /home/ubuntu/.gradle/wrapper/
+         - /usr/local/android-sdk-linux/build-tools/26.0.2
+         - /usr/local/android-sdk-linux/platforms/android-26
+         - /usr/local/android-sdk-linux/extras/android/m2repository
 notify:
   webhooks:
     # A list of hook hashes, containing the URL field
