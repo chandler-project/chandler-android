@@ -22,18 +22,18 @@ public class MainState {
     private final List<TextView> mTextViews;
 
     private final List<Integer> mInActiveResource = Arrays.asList(
-            R.drawable.ic_home,
-            R.drawable.ic_home,
-            R.drawable.ic_home,
-            R.drawable.ic_home,
-            R.drawable.ic_home
+            R.drawable.ic_home_inactive,
+            R.drawable.ic_request_inactive,
+            R.drawable.ic_plus_inactive,
+            R.drawable.ic_notification_inactive,
+            R.drawable.ic_profile_inactive
     );
     private final List<Integer> mActiveResource = Arrays.asList(
-            R.drawable.ic_home,
-            R.drawable.ic_home,
-            R.drawable.ic_home,
-            R.drawable.ic_home,
-            R.drawable.ic_home
+            R.drawable.ic_home_active,
+            R.drawable.ic_request_active,
+            R.drawable.ic_plus_active,
+            R.drawable.ic_notification_active,
+            R.drawable.ic_profile_active
     );
 
     // View holds all image views
@@ -49,20 +49,20 @@ public class MainState {
 
         // Set up image views list
         mImageViews = Arrays.asList(
-                mBinding.ivNavProfile,
-                mBinding.ivNavQuest,
-                mBinding.ivNavCenter,
-                mBinding.ivNavVoucher,
-                mBinding.ivNavOther
+                mBinding.ivNavHome,
+                mBinding.ivNavRequest,
+                mBinding.ivNavCreate,
+                mBinding.ivNavNotification,
+                mBinding.ivNavProfile
         );
 
         // Set up text list
         mTextViews = Arrays.asList(
-                mBinding.tvNavProfile,
-                mBinding.tvNavQuest,
-                null,
-                mBinding.tvNavVoucher,
-                mBinding.tvNavOther
+                mBinding.tvNavHome,
+                mBinding.tvNavRequest,
+                mBinding.tvNavCreate,
+                mBinding.tvNavNotification,
+                mBinding.tvNavProfile
         );
 
         navigate(defaultPosition);
@@ -108,12 +108,12 @@ public class MainState {
      */
     private void changeColor(int inActivePosition, int activePosition) {
         if (mTextViews.get(activePosition) != null) {
-            int activeColor = ContextCompat.getColor(mContext, R.color.colorGreen);
+            int activeColor = ContextCompat.getColor(mContext, R.color.colorPrimary);
             mTextViews.get(activePosition).setTextColor(activeColor);
         }
 
         if (mTextViews.get(inActivePosition) != null) {
-            int inActiveColor = ContextCompat.getColor(mContext, R.color.colorInactive);
+            int inActiveColor = ContextCompat.getColor(mContext, R.color.colorHint);
             mTextViews.get(inActivePosition).setTextColor(inActiveColor);
         }
     }
