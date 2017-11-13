@@ -13,8 +13,8 @@ import android.view.View;
 import com.chandlersystem.chandler.R;
 import com.chandlersystem.chandler.databinding.ActivityMainBinding;
 import com.chandlersystem.chandler.ui.adapters.FragmentAdapter;
+import com.chandlersystem.chandler.ui.deal.DealFragment;
 import com.chandlersystem.chandler.ui.main.state.MainState;
-import com.chandlersystem.chandler.ui.requests.RequestsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,11 +49,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mMainState = new MainState(this, mBinding, 0);
 
         List<Fragment> fragmentList = new ArrayList<>();
-        fragmentList.add(DealFragment.newInstance("", ""));
-        fragmentList.add(DealFragment.newInstance("", ""));
-        fragmentList.add(DealFragment.newInstance("", ""));
-        fragmentList.add(DealFragment.newInstance("", ""));
-        fragmentList.add(DealFragment.newInstance("", ""));
+        fragmentList.add(DealFragment.newInstance());
+        fragmentList.add(DealFragment.newInstance());
+        fragmentList.add(DealFragment.newInstance());
+        fragmentList.add(DealFragment.newInstance());
+        fragmentList.add(DealFragment.newInstance());
         mFragmentAdapter = new FragmentAdapter(getSupportFragmentManager(), fragmentList);
         mBinding.viewpager.setAdapter(mFragmentAdapter);
         mBinding.viewpager.setOffscreenPageLimit(5);
