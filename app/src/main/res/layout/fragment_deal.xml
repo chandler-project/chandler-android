@@ -1,14 +1,51 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.chandlersystem.chandler.ui.main.DealFragment">
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/hello_blank_fragment" />
+    <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/swipe_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBackgroundGray"
+        tools:context="com.chandlersystem.chandler.ui.deal.DealFragment">
 
-</FrameLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:id="@+id/layout_slide_show"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/size_slide_show">
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/viewpager_slide_show"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <me.relex.circleindicator.CircleIndicator
+                    android:id="@+id/indicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_toolbar_height"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:gravity="center_horizontal"
+                    app:ci_drawable="@drawable/item_circle_indicator_seleted"
+                    app:ci_drawable_unselected="@drawable/item_circle_indicator_unselected" />
+            </FrameLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView_catgories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layout_slide_show" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView_deals"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/recyclerView_catgories"
+                android:layout_marginTop="@dimen/spacing_normal" />
+        </RelativeLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</layout>

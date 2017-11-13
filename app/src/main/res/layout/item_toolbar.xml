@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_40sdp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/spacing_normal"
+        android:layout_marginRight="@dimen/spacing_normal"
+        android:fontFamily="@font/cabin_bold"
+        android:text="@string/app_name"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/text_size_big" />
+
+    <ImageView
+        android:id="@+id/iv_cart"
+        android:layout_width="@dimen/size_toolbar_height"
+        android:layout_height="@dimen/size_toolbar_height"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/spacing_smallest"
+        android:padding="@dimen/_14sdp"
+        android:src="@drawable/ic_cart" />
+
+    <ImageView
+        android:layout_width="@dimen/size_toolbar_height"
+        android:layout_height="@dimen/size_toolbar_height"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/spacing_normal"
+        android:layout_toLeftOf="@id/iv_cart"
+        android:layout_toStartOf="@id/iv_cart"
+        android:padding="@dimen/_14sdp"
+        android:src="@drawable/ic_search" />
+</RelativeLayout>
