@@ -58,7 +58,7 @@
     <dimen name="size_button_width_1">@dimen/_136sdp</dimen>
 
     <!--Toolbar-->
-    <dimen name="size_toolbar_height">@dimen/_56sdp</dimen>
+    <dimen name="size_toolbar_height">@dimen/_40sdp</dimen>
     <dimen name="icon_size_header">@dimen/_70sdp</dimen>
 
     <!--Progressbar-->
@@ -66,4 +66,5 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="text_margin">16dp</dimen>
     <dimen name="size_onboarding_image">@dimen/_200sdp</dimen>
+    <dimen name="size_slide_show">@dimen/_160sdp</dimen>
 </resources>
