@@ -1,9 +1,10 @@
-package com.chandlersystem.chandler.ui.requests;
+package com.chandlersystem.chandler.ui.product_search;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,38 +13,34 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chandlersystem.chandler.R;
-import com.chandlersystem.chandler.ui.requests.dummy.DummyContent;
-import com.chandlersystem.chandler.ui.requests.dummy.DummyContent.DummyItem;
-
-import java.util.List;
+import com.chandlersystem.chandler.databinding.FragmentProductListBinding;
+import com.chandlersystem.chandler.ui.product_search.dummy.DummyContent;
+import com.chandlersystem.chandler.ui.product_search.dummy.DummyContent.DummyItem;
 
 /**
  * A fragment representing a list of Items.
  * <p/>
- * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
+ * Activities containing this fragment MUST implement the {@link ProductSearchListener}
  * interface.
  */
-public class RequestsFragment extends Fragment {
+public class ProductSearchFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
-    private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
     private int mColumnCount = 1;
-    private OnListFragmentInteractionListener mListener;
+    private ProductSearchListener mListener;
+    private FragmentProductListBinding mBinding;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public RequestsFragment() {
+    public ProductSearchFragment() {
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static RequestsFragment newInstance(int columnCount) {
-        RequestsFragment fragment = new RequestsFragment();
+    public static ProductSearchFragment newInstance() {
+        ProductSearchFragment fragment = new ProductSearchFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
         return fragment;
     }
@@ -53,37 +50,37 @@ public class RequestsFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_request_list, container, false);
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_product_list, container, false);
 
         // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
-            recyclerView.setAdapter(new RequestAdapter(DummyContent.ITEMS, mListener));
-            RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
-            recyclerView.addItemDecoration(itemDecoration);
+        if (mColumnCount <= 1) {
+            mBinding.listRecommendedProduct.setLayoutManager(new LinearLayoutManager(getContext()));
+        } else {
+            mBinding.listRecommendedProduct.setLayoutManager(new GridLayoutManager(getContext(), mColumnCount));
         }
-        return view;
+        mBinding.listRecommendedProduct.setAdapter(new ProductSearchAdapter(DummyContent.ITEMS, mListener));
+
+        setUpListener();
+        return mBinding.getRoot();
+    }
+
+    private void setUpListener() {
+        mBinding.tvTopPick.setOnClickListener(view -> mListener.onTopPick());
+        mBinding.tvTrending.setOnClickListener(view -> mListener.onTrending());
     }
 
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnListFragmentInteractionListener) {
-            mListener = (OnListFragmentInteractionListener) context;
+        if (context instanceof ProductSearchListener) {
+            mListener = (ProductSearchListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement ProductSearchListener");
@@ -106,8 +103,10 @@ public class RequestsFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+    public interface ProductSearchListener {
+
+        void onTopPick();
+
+        void onTrending();
     }
 }

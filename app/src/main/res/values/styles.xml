@@ -37,16 +37,16 @@
     </style>
 
     <!--Facebook Account Kit Theme-->
-    <style name="AppLoginTheme" parent="Theme.AccountKit" />
+    <style name="AppLoginTheme" parent="Theme.AccountKit"/>
 
     <style name="AppTheme.BottomNavigation" parent="CardView">
         <item name="cardPreventCornerOverlap">false</item>
         <item name="cardCornerRadius">0dp</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
     <style name="CustomProgressBar">
         <item name="colorAccent">@color/colorPrimary</item>

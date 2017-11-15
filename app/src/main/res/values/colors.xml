@@ -8,6 +8,7 @@
     <color name="colorExtra">#FA7F5C</color>
 
     <!--Color for widgets-->
+    <color name="colorTransparent20">#00FFFFFF</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
     <color name="colorRed">#EA3324</color>
