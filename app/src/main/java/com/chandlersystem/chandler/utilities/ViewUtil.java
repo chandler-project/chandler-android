@@ -3,14 +3,24 @@ package com.chandlersystem.chandler.utilities;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.annotation.DimenRes;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
+import android.text.Html;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
@@ -19,11 +29,50 @@ import com.bumptech.glide.request.target.Target;
 import com.chandlersystem.chandler.GlideApp;
 import com.chandlersystem.chandler.R;
 
+import java.io.IOException;
+import java.net.URL;
+import java.util.concurrent.ExecutionException;
+
 public class ViewUtil {
 
-    private static final int PLACE_HOLDER_RESOURCE_ID = R.drawable.ic_placeholder;
-
     private ViewUtil() {
+    }
+
+    public static Bitmap getBitmapFromVectorDrawable(Context context, int drawableId) {
+        Drawable drawable = ContextCompat.getDrawable(context, drawableId);
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            drawable = (DrawableCompat.wrap(drawable)).mutate();
+        }
+
+        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
+                drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+
+        return bitmap;
+    }
+
+    public static void setText(TextView textView, String text) {
+        boolean isStringValidated = ValidateUtil.checkString(text);
+        ViewUtil.toggleView(textView, isStringValidated);
+        if (isStringValidated) {
+            textView.setText(text);
+        }
+    }
+
+    public static void setTextWithHtml(TextView textView, String text) {
+        boolean isStringValidated = ValidateUtil.checkString(text);
+        ViewUtil.toggleView(textView, isStringValidated);
+        if (isStringValidated) {
+            textView.setText(Html.fromHtml(text));
+        }
+    }
+
+    public static Spannable getColoredString(Context context, CharSequence text, int color) {
+        Spannable spannable = new SpannableString(text);
+        spannable.setSpan(new ForegroundColorSpan(color), 0, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return spannable;
     }
 
     /**
@@ -40,6 +89,45 @@ public class ViewUtil {
         }
     }
 
+    /**
+     * Return a bitmap from URL
+     *
+     * @param imageUrl
+     * @return
+     */
+    public static Bitmap getBitmapFromUrl(String imageUrl) {
+        try {
+            URL url = new URL(imageUrl);
+            Bitmap image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            return image;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    /**
+     * Return a bitmap from URL by using Glide
+     *
+     * @param imageUrl
+     * @return
+     */
+    public static Bitmap getBitmapFromUrl(Context context, String imageUrl) {
+        try {
+            return GlideApp.
+                    with(context)
+                    .asBitmap()
+                    .load(imageUrl)
+                    .submit().get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
     /**
      * Show image without callback
@@ -51,7 +139,7 @@ public class ViewUtil {
     public static void showImage(Context context, String url, ImageView view) {
         GlideApp.with(context)
                 .load(url)
-                .placeholder(PLACE_HOLDER_RESOURCE_ID)
+                .placeholder(R.drawable.ic_placeholder)
                 .into(view);
     }
 
@@ -122,5 +210,10 @@ public class ViewUtil {
 
         ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
         targetView.setColorFilter(filter);
+    }
+
+    public static Bitmap resizeBitmapIcon(Context context, int resourceId, int width, int height) {
+        Bitmap icon = BitmapFactory.decodeResource(context.getResources(), resourceId);
+        return Bitmap.createScaledBitmap(icon, width, height, false);
     }
 }
