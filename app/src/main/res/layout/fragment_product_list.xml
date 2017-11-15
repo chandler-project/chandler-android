@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:focusable="true"
+                android:clickable="true"
+                android:background="?attr/selectableItemBackground"
+                android:paddingLeft="@dimen/_16sdp"
+                android:paddingRight="@dimen/_16sdp"
+                android:paddingTop="@dimen/_16sdp"
+                android:paddingBottom="@dimen/_8sdp"
+                android:text="@string/you_might_like"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:nestedScrollingEnabled="false"
+                android:id="@+id/list_recommended_product"
+                android:name="com.chandlersystem.chandler.ui.product_search.ProductSearchFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="LinearLayoutManager"
+                tools:context="com.chandlersystem.chandler.ui.product_search.ProductSearchFragment"
+                tools:listitem="@layout/fragment_product"/>
+
+            <TextView
+                android:focusable="true"
+                android:clickable="true"
+                android:text="@string/suggestion"
+                android:background="?attr/selectableItemBackground"
+                android:padding="@dimen/_16sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tv_topPick"
+                android:text="@string/top_picks"
+                android:paddingLeft="@dimen/_16sdp"
+                android:paddingTop="@dimen/_8sdp"
+                android:paddingBottom="@dimen/_8sdp"
+                android:paddingRight="@dimen/_16sdp"
+                android:drawablePadding="@dimen/_16sdp"
+                android:drawableLeft="@drawable/ic_trending_up_black_24dp"
+                android:drawableStart="@drawable/ic_trending_up_black_24dp"
+                android:background="?attr/selectableItemBackground"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+            <TextView
+                android:id="@+id/tv_trending"
+                android:text="@string/trending"
+                android:paddingLeft="@dimen/_16sdp"
+                android:paddingRight="@dimen/_16sdp"
+                android:paddingTop="@dimen/_8sdp"
+                android:paddingBottom="@dimen/_8sdp"
+                android:background="?attr/selectableItemBackground"
+                android:drawableLeft="@drawable/ic_trending_up_black_24dp"
+                android:drawablePadding="@dimen/_16sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_trending_up_black_24dp"/>
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+</layout>
+
+

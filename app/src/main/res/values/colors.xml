@@ -7,6 +7,7 @@
     <color name="colorAccent">#EA3324</color>
 
     <!--Color for widgets-->
+    <color name="colorTransparent20">#00FFFFFF</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
     <color name="colorBackground">#FFFFFF</color>

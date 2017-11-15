@@ -1,0 +1,76 @@
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:theme="@android:style/ThemeOverlay.Material.Dark"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="com.chandlersystem.chandler.ui.main.state.CreateDealRequestFragment"
+        tools:targetApi="lollipop">
+
+        <FrameLayout
+            android:id="@+id/createDeal"
+            android:foreground="?attr/selectableItemBackground"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <ImageView
+                android:src="@drawable/model"
+                android:scaleType="centerCrop"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <ImageView
+                android:src="@drawable/shape_gradient_create_deal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                android:text="@string/create_new_deal"
+                android:textColor="@color/colorWhite"
+                android:textSize="25sp"
+                android:padding="16dp"
+                android:background="@drawable/create_deal_request_background"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"/>
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/createRequest"
+            android:foreground="?attr/selectableItemBackground"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <ImageView
+                android:src="@drawable/model"
+                android:scaleType="centerCrop"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <ImageView
+                android:src="@drawable/shape_gradient_create_deal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                android:text="@string/create_new_request"
+                android:textColor="@color/colorWhite"
+                android:textSize="25sp"
+                android:padding="16dp"
+                android:background="@drawable/create_deal_request_background"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"/>
+        </FrameLayout>
+
+    </LinearLayout>
+</layout>
+

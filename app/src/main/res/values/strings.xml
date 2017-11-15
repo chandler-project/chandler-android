@@ -158,4 +158,11 @@
     <string name="content_great">Great. Let\'s begin!!!</string>
     <string name="content_next">Next</string>
     <string name="content_we_learn_what_you_like">We learn what you like and leads you to the best products</string>
+    <string name="create_new_deal">Tạo một deal mới</string>
+    <string name="create_new_request">Tao một request mới</string>
+    <string name="title_activity_product_search">ProductSearchActivity</string>
+    <string name="you_might_like">You might like</string>
+    <string name="suggestion">Suggestion</string>
+    <string name="top_picks">Top picks</string>
+    <string name="trending">Trending</string>
 </resources>
