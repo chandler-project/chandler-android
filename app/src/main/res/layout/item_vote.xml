@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingBottom="@dimen/spacing_smallest"
+            android:paddingTop="@dimen/spacing_smallest">
+
+            <ImageView
+                android:id="@+id/iv_upvote"
+                android:layout_width="@dimen/ico_size_small"
+                android:layout_height="@dimen/ico_size_small"
+                android:src="@drawable/ic_upvote_inactive" />
+
+            <TextView
+                android:id="@+id/tv_upvote_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/spacing_smallest"
+                android:layout_marginRight="@dimen/spacing_smallest"
+                android:fontFamily="@font/cabin_regular"
+                android:textColor="@color/colorTextGray"
+                android:textSize="@dimen/text_size_normal"
+                tools:text="12" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="@dimen/spacing_smallest">
+
+            <ImageView
+                android:id="@+id/iv_downvote"
+                android:layout_width="@dimen/ico_size_small"
+                android:layout_height="@dimen/ico_size_small"
+                android:src="@drawable/ic_downvote_inactive" />
+
+            <TextView
+                android:id="@+id/tv_downvote_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/spacing_smallest"
+                android:layout_marginRight="@dimen/spacing_smallest"
+                android:fontFamily="@font/cabin_regular"
+                android:textColor="@color/colorTextGray"
+                android:textSize="@dimen/text_size_normal"
+                tools:text="12" />
+        </LinearLayout>
+    </LinearLayout>
+</layout>

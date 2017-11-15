@@ -15,12 +15,10 @@
     <dimen name="spacing_shadow">1dp</dimen>
 
     <!--Core-->
-    <dimen name="size_profile_padding">@dimen/_minus15sdp</dimen>
-    <dimen name="size_profile_padding_large">@dimen/_minus36sdp</dimen>
-    <dimen name="size_profile_stroke">@dimen/_15sdp</dimen>
-    <dimen name="size_profile_stroke_large">@dimen/_36sdp</dimen>
-    <dimen name="size_profile">@dimen/_30sdp</dimen>
-    <dimen name="size_profile_large">@dimen/_72sdp</dimen>
+    <dimen name="size_profile_radius_normal">@dimen/_13sdp</dimen>
+    <dimen name="size_profile_normal">@dimen/_26sdp</dimen>
+    <dimen name="size_profile_radius_small">@dimen/_10sdp</dimen>
+    <dimen name="size_profile_small">@dimen/_20sdp</dimen>
 
     <!--Dialog-->
     <dimen name="size_dialog_padding">@dimen/_minus5sdp</dimen>
