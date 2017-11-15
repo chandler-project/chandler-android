@@ -5,42 +5,58 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite">
 
         <include
-            android:id="@+id/layout_profile"
-            layout="@layout/item_profile"
+            android:id="@+id/layout_category_name"
+            layout="@layout/item_category_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/spacing_small"
-            android:layout_marginRight="@dimen/spacing_small"
-            android:layout_marginTop="@dimen/spacing_smaller" />
+            android:visibility="gone"
+            tools:visibility="visible" />
 
-        <TextView
-            android:id="@+id/tv_end_date"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id="@+id/layout_header"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="@dimen/spacing_small"
-            android:layout_marginRight="@dimen/spacing_small"
-            android:layout_marginTop="@dimen/spacing_smaller"
-            android:background="@drawable/item_button_rounded_red"
-            android:fontFamily="@font/cabin_regular"
-            android:paddingBottom="@dimen/spacing_smallest"
-            android:paddingLeft="@dimen/spacing_small"
-            android:paddingRight="@dimen/spacing_small"
-            android:paddingTop="@dimen/spacing_smallest"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/text_size_normal"
-            tools:text="End at 27/02/1995" />
+            android:layout_below="@id/layout_category_name">
+
+            <include
+                android:id="@+id/layout_profile"
+                layout="@layout/item_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spacing_small"
+                android:layout_marginRight="@dimen/spacing_small"
+                android:layout_marginTop="@dimen/spacing_smaller" />
+
+            <TextView
+                android:id="@+id/tv_end_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="@dimen/spacing_small"
+                android:layout_marginRight="@dimen/spacing_small"
+                android:layout_marginTop="@dimen/spacing_smaller"
+                android:background="@drawable/item_button_rounded_red"
+                android:fontFamily="@font/cabin_regular"
+                android:paddingBottom="@dimen/spacing_smallest"
+                android:paddingLeft="@dimen/spacing_small"
+                android:paddingRight="@dimen/spacing_small"
+                android:paddingTop="@dimen/spacing_smallest"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/text_size_normal"
+                tools:text="End at 27/02/1995" />
+        </RelativeLayout>
 
         <ImageView
             android:id="@+id/iv_product"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_140sdp"
-            android:layout_below="@id/layout_profile"
+            android:layout_below="@id/layout_header"
             android:layout_marginTop="@dimen/spacing_smallest"
             android:scaleType="centerCrop"
             tools:src="@drawable/avatar" />

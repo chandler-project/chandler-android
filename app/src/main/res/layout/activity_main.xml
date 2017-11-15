@@ -3,201 +3,195 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <android.support.design.widget.CoordinatorLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite">
 
-        <RelativeLayout
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/item_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorWhite">
+            android:layout_below="@id/toolbar"
+            android:layout_marginBottom="@dimen/bottom_nav_height" />
 
-            <include
-                android:id="@+id/toolbar"
-                layout="@layout/item_toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/size_toolbar_height" />
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:elevation="@dimen/spacing_normal"
+            app:theme="@style/AppTheme.BottomNavigation">
 
-            <android.support.v4.view.ViewPager
-                android:id="@+id/viewpager"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@id/toolbar"
-                android:layout_marginBottom="@dimen/bottom_nav_height" />
-
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:elevation="@dimen/spacing_normal"
-                app:theme="@style/AppTheme.BottomNavigation">
+                android:layout_height="@dimen/bottom_nav_height"
+                android:layout_gravity="bottom"
+                android:weightSum="5">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/bottom_nav_height"
-                    android:layout_gravity="bottom"
-                    android:weightSum="5">
+                    android:id="@+id/nav_home"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/ripple_button_white"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-                    <LinearLayout
-                        android:id="@+id/nav_home"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/ripple_button_white"
-                        android:gravity="center"
-                        android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/iv_nav_home"
+                        android:layout_width="@dimen/ico_size_normal"
+                        android:layout_height="@dimen/ico_size_normal"
+                        android:clickable="false"
+                        android:focusableInTouchMode="false"
+                        android:src="@drawable/ic_home_active" />
 
-                        <ImageView
-                            android:id="@+id/iv_nav_home"
-                            android:layout_width="@dimen/ico_size_normal"
-                            android:layout_height="@dimen/ico_size_normal"
-                            android:clickable="false"
-                            android:focusableInTouchMode="false"
-                            android:src="@drawable/ic_home_active" />
-
-                        <TextView
-                            android:id="@+id/tv_nav_home"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/spacing_smallest"
-                            android:fontFamily="@font/cabin_regular"
-                            android:text="@string/nav_profile"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="@dimen/text_size_small" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/nav_request"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/ripple_button_white"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:id="@+id/iv_nav_request"
-                            android:layout_width="@dimen/ico_size_normal"
-                            android:layout_height="@dimen/ico_size_normal"
-                            android:clickable="false"
-                            android:focusableInTouchMode="false"
-                            android:src="@drawable/ic_request_inactive" />
-
-                        <TextView
-                            android:id="@+id/tv_nav_request"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/spacing_smallest"
-                            android:fontFamily="@font/cabin_regular"
-                            android:text="@string/nav_quest"
-                            android:textColor="@color/colorInactive"
-                            android:textSize="@dimen/text_size_small" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/nav_create"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/ripple_button_white"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:id="@+id/iv_nav_create"
-                            android:layout_width="@dimen/ico_size_larger"
-                            android:layout_height="@dimen/ico_size_larger"
-                            android:clickable="false"
-                            android:focusableInTouchMode="false"
-                            android:src="@drawable/ic_plus_inactive" />
-                    </LinearLayout>
-
-                    <FrameLayout
-                        android:id="@+id/nav_notification"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/ripple_button_white"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:id="@+id/iv_nav_notification"
-                                android:layout_width="@dimen/ico_size_normal"
-                                android:layout_height="@dimen/ico_size_normal"
-                                android:layout_gravity="center"
-                                android:clickable="false"
-                                android:focusableInTouchMode="false"
-                                android:src="@drawable/ic_notification_inactive" />
-
-                            <TextView
-                                android:id="@+id/tv_nav_notification"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/spacing_smallest"
-                                android:fontFamily="@font/cabin_regular"
-                                android:text="@string/nav_voucher"
-                                android:textColor="@color/colorInactive"
-                                android:textSize="@dimen/text_size_small" />
-                        </LinearLayout>
-
-                        <TextView
-                            android:id="@+id/tv_notification_badge"
-                            android:layout_width="@dimen/_6sdp"
-                            android:layout_height="@dimen/_6sdp"
-                            android:layout_gravity="top|end"
-                            android:layout_marginEnd="@dimen/_18sdp"
-                            android:layout_marginRight="@dimen/_20sdp"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:background="@drawable/item_badge"
-                            android:elevation="@dimen/spacing_shadow"
-                            android:gravity="center"
-                            android:textAlignment="center"
-                            android:textColor="@color/colorWhite"
-                            android:textSize="@dimen/text_size_smaller"
-                            android:visibility="gone"
-                            tools:targetApi="lollipop"
-                            tools:text="17"
-                            tools:visibility="visible" />
-                    </FrameLayout>
-
-                    <LinearLayout
-                        android:id="@+id/nav_profile"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/ripple_button_white"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:id="@+id/iv_nav_profile"
-                            android:layout_width="@dimen/ico_size_normal"
-                            android:layout_height="@dimen/ico_size_normal"
-                            android:clickable="false"
-                            android:focusableInTouchMode="false"
-                            android:src="@drawable/ic_profile_inactive" />
-
-                        <TextView
-                            android:id="@+id/tv_nav_profile"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/spacing_smallest"
-                            android:fontFamily="@font/cabin_regular"
-                            android:text="@string/nav_other"
-                            android:textColor="@color/colorInactive"
-                            android:textSize="@dimen/text_size_small" />
-                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/tv_nav_home"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_smallest"
+                        android:fontFamily="@font/cabin_regular"
+                        android:text="@string/nav_profile"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/text_size_small" />
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
-        </RelativeLayout>
 
-    </android.support.design.widget.CoordinatorLayout>
+                <LinearLayout
+                    android:id="@+id/nav_request"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/ripple_button_white"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/iv_nav_request"
+                        android:layout_width="@dimen/ico_size_normal"
+                        android:layout_height="@dimen/ico_size_normal"
+                        android:clickable="false"
+                        android:focusableInTouchMode="false"
+                        android:src="@drawable/ic_request_inactive" />
+
+                    <TextView
+                        android:id="@+id/tv_nav_request"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_smallest"
+                        android:fontFamily="@font/cabin_regular"
+                        android:text="@string/nav_quest"
+                        android:textColor="@color/colorInactive"
+                        android:textSize="@dimen/text_size_small" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/nav_create"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/ripple_button_white"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/iv_nav_create"
+                        android:layout_width="@dimen/ico_size_larger"
+                        android:layout_height="@dimen/ico_size_larger"
+                        android:clickable="false"
+                        android:focusableInTouchMode="false"
+                        android:src="@drawable/ic_plus_inactive" />
+                </LinearLayout>
+
+                <FrameLayout
+                    android:id="@+id/nav_notification"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/ripple_button_white"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/iv_nav_notification"
+                            android:layout_width="@dimen/ico_size_normal"
+                            android:layout_height="@dimen/ico_size_normal"
+                            android:layout_gravity="center"
+                            android:clickable="false"
+                            android:focusableInTouchMode="false"
+                            android:src="@drawable/ic_notification_inactive" />
+
+                        <TextView
+                            android:id="@+id/tv_nav_notification"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_smallest"
+                            android:fontFamily="@font/cabin_regular"
+                            android:text="@string/nav_voucher"
+                            android:textColor="@color/colorInactive"
+                            android:textSize="@dimen/text_size_small" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_notification_badge"
+                        android:layout_width="@dimen/_6sdp"
+                        android:layout_height="@dimen/_6sdp"
+                        android:layout_gravity="top|end"
+                        android:layout_marginEnd="@dimen/_18sdp"
+                        android:layout_marginRight="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:background="@drawable/item_badge"
+                        android:elevation="@dimen/spacing_shadow"
+                        android:gravity="center"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="@dimen/text_size_smaller"
+                        android:visibility="gone"
+                        tools:targetApi="lollipop"
+                        tools:text="17"
+                        tools:visibility="visible" />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:id="@+id/nav_profile"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/ripple_button_white"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/iv_nav_profile"
+                        android:layout_width="@dimen/ico_size_normal"
+                        android:layout_height="@dimen/ico_size_normal"
+                        android:clickable="false"
+                        android:focusableInTouchMode="false"
+                        android:src="@drawable/ic_profile_inactive" />
+
+                    <TextView
+                        android:id="@+id/tv_nav_profile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_smallest"
+                        android:fontFamily="@font/cabin_regular"
+                        android:text="@string/nav_other"
+                        android:textColor="@color/colorInactive"
+                        android:textSize="@dimen/text_size_small" />
+                </LinearLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+    </RelativeLayout>
 
 </layout>

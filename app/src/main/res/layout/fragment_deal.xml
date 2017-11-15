@@ -1,51 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/swipe_refresh_layout"
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorBackgroundGray"
-        tools:context="com.chandlersystem.chandler.ui.deal.DealFragment">
+        android:layout_height="match_parent">
 
-        <RelativeLayout
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true">
 
-            <FrameLayout
-                android:id="@+id/layout_slide_show"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/size_slide_show">
-
-                <android.support.v4.view.ViewPager
-                    android:id="@+id/viewpager_slide_show"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-                <me.relex.circleindicator.CircleIndicator
-                    android:id="@+id/indicator"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_toolbar_height"
-                    android:layout_gravity="bottom|center_horizontal"
-                    android:gravity="center_horizontal"
-                    app:ci_drawable="@drawable/item_circle_indicator_seleted"
-                    app:ci_drawable_unselected="@drawable/item_circle_indicator_unselected" />
-            </FrameLayout>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerView_catgories"
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/collapsing_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/layout_slide_show" />
+                android:background="@color/colorBackgroundGray"
+                android:fitsSystemWindows="true"
+                app:contentScrim="@color/colorBackgroundGray"
+                app:layout_collapseMode="parallax"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerView_deals"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@id/recyclerView_catgories"
-                android:layout_marginTop="@dimen/spacing_normal" />
-        </RelativeLayout>
-    </android.support.v4.widget.SwipeRefreshLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <FrameLayout
+                        android:id="@+id/layout_slide_show"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/size_slide_show">
+
+                        <android.support.v4.view.ViewPager
+                            android:id="@+id/viewpager_slide_show"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                        <me.relex.circleindicator.CircleIndicator
+                            android:id="@+id/indicator"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/size_toolbar_height"
+                            android:layout_gravity="bottom|center_horizontal"
+                            android:gravity="center_horizontal"
+                            app:ci_drawable="@drawable/item_circle_indicator_seleted"
+                            app:ci_drawable_unselected="@drawable/item_circle_indicator_unselected" />
+                    </FrameLayout>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recyclerView_catgories"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/layout_slide_show" />
+                </RelativeLayout>
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_toolbar_height"
+                    app:layout_collapseMode="pin">
+
+                    <TextView
+                        android:id="@+id/tv_test"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Extra category will be shown here"
+                        android:visibility="gone">
+
+                    </TextView>
+                </android.support.v7.widget.Toolbar>
+
+            </android.support.design.widget.CollapsingToolbarLayout>
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView_deals"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/recyclerView_catgories"
+            android:layout_marginTop="@dimen/spacing_normal"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    </android.support.design.widget.CoordinatorLayout>
 
 </layout>
