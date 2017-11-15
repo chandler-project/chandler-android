@@ -1,5 +1,7 @@
 package com.chandlersystem.chandler.ui.product_search;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,6 +14,12 @@ import android.widget.Toast;
 import com.chandlersystem.chandler.R;
 
 public class ProductSearchActivity extends AppCompatActivity implements ProductSearchFragment.ProductSearchListener {
+
+
+    public static Intent getIntent(Context c){
+        Intent i = new Intent(c, ProductSearchActivity.class);
+        return i;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

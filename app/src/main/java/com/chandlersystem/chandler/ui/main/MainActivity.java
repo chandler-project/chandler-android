@@ -16,6 +16,8 @@ import com.chandlersystem.chandler.ui.adapters.FragmentAdapter;
 import com.chandlersystem.chandler.ui.main.state.CreateDealRequestFragment;
 import com.chandlersystem.chandler.ui.deal.DealFragment;
 import com.chandlersystem.chandler.ui.main.state.MainState;
+import com.chandlersystem.chandler.ui.product_search.ProductSearchActivity;
+import com.chandlersystem.chandler.ui.product_search.ProductSearchFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,25 +46,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBinding.navNotification.setOnClickListener(this);
         mBinding.navProfile.setOnClickListener(this);
         mBinding.viewpager.addOnPageChangeListener(this);
+        mBinding.toolbar.ivCart.setOnClickListener(this);
+        mBinding.toolbar.ivSearch.setOnClickListener(this);
     }
 
     private void setupViews() {
         mMainState = new MainState(this, mBinding, 0);
 
         List<Fragment> fragmentList = new ArrayList<>();
-<<<<<<< HEAD
-        fragmentList.add(DealFragment.newInstance("", ""));
-        fragmentList.add(DealFragment.newInstance("", ""));
+
+        fragmentList.add(DealFragment.newInstance());
+        fragmentList.add(DealFragment.newInstance());
         fragmentList.add(CreateDealRequestFragment.newInstance());
-        fragmentList.add(DealFragment.newInstance("", ""));
-        fragmentList.add(DealFragment.newInstance("", ""));
-=======
         fragmentList.add(DealFragment.newInstance());
         fragmentList.add(DealFragment.newInstance());
-        fragmentList.add(DealFragment.newInstance());
-        fragmentList.add(DealFragment.newInstance());
-        fragmentList.add(DealFragment.newInstance());
->>>>>>> feae016954c41d4128a10d4db591396b066e687a
         mFragmentAdapter = new FragmentAdapter(getSupportFragmentManager(), fragmentList);
         mBinding.viewpager.setAdapter(mFragmentAdapter);
         mBinding.viewpager.setOffscreenPageLimit(5);
@@ -97,7 +94,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.nav_profile:
                 setFragmentPosition(4);
                 break;
+            case R.id.iv_cart:
+                break;
+            case R.id.iv_search:
+                openProductSearch();
+                break;
         }
+    }
+
+    private void openProductSearch() {
+        Intent i = ProductSearchActivity.getIntent(this);
+        startActivity(i);
     }
 
     @Override
