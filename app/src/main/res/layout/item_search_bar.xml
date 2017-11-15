@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/layout_search_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottom_nav_height"
+        android:background="@drawable/item_button_rounded_stroke"
+        android:elevation="@dimen/spacing_smaller"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        tools:targetApi="lollipop">
+
+        <ImageView
+            android:id="@+id/iv_search_icon"
+            android:layout_width="@dimen/ico_size_normal"
+            android:layout_height="@dimen/ico_size_normal"
+            android:layout_marginLeft="@dimen/spacing_normal"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:src="@drawable/ic_search" />
+
+        <EditText
+            android:id="@+id/et_search_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_normal"
+            android:layout_marginRight="@dimen/spacing_normal"
+            android:background="@null"
+            android:fontFamily="@font/cabin_regular"
+            android:hint="@string/content_which_product_you_want_to_search"
+            android:textColor="@color/colorTextPrimary"
+            android:textColorHint="@color/colorHint"
+            android:textSize="@dimen/text_size_large" />
+    </LinearLayout>
+</layout>

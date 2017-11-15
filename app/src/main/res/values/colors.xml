@@ -2,20 +2,48 @@
 <resources>
     <!--Color for themes-->
     <color name="colorGreen">#92BC3A</color>
-    <color name="colorPrimary">#00E1A0</color>
-    <color name="colorPrimaryDark">#000000</color>
-    <color name="colorAccent">#EA3324</color>
+    <color name="colorPrimary">#0058F5</color>
+    <color name="colorPrimaryDark">#21314E</color>
+    <color name="colorAccent">#FECD2D</color>
+    <color name="colorExtra">#FA7F5C</color>
 
     <!--Color for widgets-->
     <color name="colorTransparent20">#00FFFFFF</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
     <color name="colorBackground">#FFFFFF</color>
-    <color name="colorBackgroundGray">#6A6A6A</color>
-    <color name="colorTextPrimary">#0F0F0F</color>
-    <color name="colorTextGray">#6A6A6A</color>
+    <color name="colorBackgroundGray">#F0F0F0</color>
+    <color name="colorTextPrimary">#333333</color>
+    <color name="colorTextGray">#666666</color>
     <color name="colorHint">#BDBDBD</color>
-    <color name="colorInactive">#BDBDBD</color>
+    <color name="colorInactive">#8897A6</color>
     <color name="colorFacebook">#3F5895</color>
     <color name="colorBlack50">#80000000</color>
+    <color name="colorBlack10">#1A000000</color>
+
+
+
+    <!-- DON'T REMOVE THIS -->
+    <!--Hex in alpha-->
+    <!--100% — FF
+    95% — F2
+    90% — E6
+    85% — D9
+    80% — CC
+    75% — BF
+    70% — B3
+    65% — A6
+    60% — 99
+    55% — 8C
+    50% — 80
+    45% — 73
+    40% — 66
+    35% — 59
+    30% — 4D
+    25% — 40
+    20% — 33
+    15% — 26
+    10% — 1A
+    5% — 0D
+    0% — 00-->
 </resources>

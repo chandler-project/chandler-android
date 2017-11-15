@@ -165,4 +165,5 @@
     <string name="suggestion">Suggestion</string>
     <string name="top_picks">Top picks</string>
     <string name="trending">Trending</string>
+    <string name="content_which_product_you_want_to_search">Which product do you want to buy?</string>
 </resources>

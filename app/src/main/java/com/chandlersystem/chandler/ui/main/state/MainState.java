@@ -60,7 +60,7 @@ public class MainState {
         mTextViews = Arrays.asList(
                 mBinding.tvNavHome,
                 mBinding.tvNavRequest,
-                mBinding.tvNavCreate,
+                null,
                 mBinding.tvNavNotification,
                 mBinding.tvNavProfile
         );
@@ -79,7 +79,7 @@ public class MainState {
             changeImage(mCurrentPos, pos);
 
             // Change text color
-            changeColor(mCurrentPos, pos);
+            changeTextColor(mCurrentPos, pos);
 
             // swap position
             mCurrentPos = pos;
@@ -106,7 +106,10 @@ public class MainState {
      * Change color of active position => GREEN
      * Replace the old one with GRAY
      */
-    private void changeColor(int inActivePosition, int activePosition) {
+    private void changeTextColor(int inActivePosition, int activePosition) {
+        if (mTextViews == null)
+            return;
+
         if (mTextViews.get(activePosition) != null) {
             int activeColor = ContextCompat.getColor(mContext, R.color.colorPrimary);
             mTextViews.get(activePosition).setTextColor(activeColor);
