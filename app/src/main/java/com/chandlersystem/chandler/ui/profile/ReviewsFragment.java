@@ -14,21 +14,17 @@ import com.chandlersystem.chandler.R;
 import com.chandlersystem.chandler.ui.profile.dummy.DummyContent;
 import com.chandlersystem.chandler.ui.profile.dummy.DummyContent.DummyItem;
 
-import java.util.List;
-
 /**
  * A fragment representing a list of Items.
  * <p/>
- * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
+ * Activities containing this fragment MUST implement the {@link OnReviewInteractListener}
  * interface.
  */
 public class ReviewsFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
     private int mColumnCount = 1;
-    private OnListFragmentInteractionListener mListener;
+    private OnReviewInteractListener mListener;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -37,7 +33,6 @@ public class ReviewsFragment extends Fragment {
     public ReviewsFragment() {
     }
 
-    // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
     public static ReviewsFragment newInstance(int columnCount) {
         ReviewsFragment fragment = new ReviewsFragment();
@@ -79,11 +74,11 @@ public class ReviewsFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnListFragmentInteractionListener) {
-            mListener = (OnListFragmentInteractionListener) context;
+        if (context instanceof OnReviewInteractListener) {
+            mListener = (OnReviewInteractListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnListFragmentInteractionListener");
+                    + " must implement OnReviewInteractListener");
         }
     }
 
@@ -103,7 +98,7 @@ public class ReviewsFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnListFragmentInteractionListener {
+    public interface OnReviewInteractListener {
         // TODO: Update argument type and name
         void onListFragmentInteraction(DummyItem item);
     }
