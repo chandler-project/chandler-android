@@ -52,9 +52,9 @@
             android:name=".ui.main.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
@@ -98,7 +98,7 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_app"/>
-            android:resource="@drawable/ic_app_blue" />
+        android:resource="@drawable/ic_app_blue" />
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorPrimary"/>
@@ -112,12 +112,11 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.requests.RequestsActivity"
-            android:screenOrientation="portrait"
             android:exported="true"
             android:label="@string/title_activity_requests"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
         <activity
             android:name=".ui.select_category.SelectCategoryActivity"
@@ -126,13 +125,19 @@
             android:theme="@style/AppTheme"/>
         <activity
             android:name=".ui.product_search.ProductSearchActivity"
+            android:exported="true"
             android:label="@string/title_activity_product_search"
             android:parentActivityName=".ui.main.MainActivity"
-            android:exported="true"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.chandlersystem.chandler.ui.main.MainActivity"/>
+        </activity>
+        <activity
+            android:name=".ui.profile.ProfileActivity"
+            android:label="@string/title_activity_profile"
+            android:exported="true"
+            android:theme="@style/AppTheme">
         </activity>
     </application>
 
