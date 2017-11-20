@@ -73,6 +73,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_trending_up_black_24dp"/>
+
+            <TextView
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:id="@+id/tv_see_more_result"
+                android:text="@string/see_more_result_with"
+                android:textStyle="bold"
+                android:textColor="@color/com_facebook_blue"
+                android:paddingLeft="@dimen/_16sdp"
+                android:paddingRight="@dimen/_16sdp"
+                android:paddingTop="@dimen/_8sdp"
+                android:paddingBottom="@dimen/_8sdp"
+                android:background="?attr/selectableItemBackground"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
