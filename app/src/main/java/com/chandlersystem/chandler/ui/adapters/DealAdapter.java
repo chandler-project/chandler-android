@@ -11,11 +11,15 @@ import com.chandlersystem.chandler.R;
 import com.chandlersystem.chandler.data.models.retrofit.Deal;
 import com.chandlersystem.chandler.databinding.ItemDealBinding;
 import com.chandlersystem.chandler.databinding.ItemSelectCategoryBinding;
+import com.chandlersystem.chandler.utilities.RxUtil;
 import com.chandlersystem.chandler.utilities.ViewUtil;
+import com.jakewharton.rxbinding2.view.RxView;
 
 import java.util.List;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.subjects.PublishSubject;
 
 public class DealAdapter extends RecyclerView.Adapter<DealAdapter.DealHolder> {
@@ -47,6 +51,7 @@ public class DealAdapter extends RecyclerView.Adapter<DealAdapter.DealHolder> {
         Deal deal = mDealList.get(position);
 
         setupViews(holder.mBinding, deal);
+        clickDeal(holder, deal);
 
         // Fake -- will remote these line later
         if (position % 5 == 0) {
@@ -54,6 +59,18 @@ public class DealAdapter extends RecyclerView.Adapter<DealAdapter.DealHolder> {
         } else {
             ViewUtil.toggleView(holder.mBinding.layoutCategoryName.layoutCategoryName, false);
         }
+    }
+
+    private void clickDeal(DealHolder holder, Deal deal) {
+        Disposable disposable = holder.mDisposable;
+        if (disposable != null && !disposable.isDisposed()) {
+            disposable.dispose();
+        }
+
+        disposable = RxView.clicks(holder.itemView)
+                .compose(RxUtil.withLongThrottleFirst())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(o -> mDealClicks.onNext(deal), Throwable::printStackTrace);
     }
 
     private void setupViews(ItemDealBinding binding, Deal deal) {
@@ -71,16 +88,6 @@ public class DealAdapter extends RecyclerView.Adapter<DealAdapter.DealHolder> {
     @Override
     public int getItemCount() {
         return mDealList.size();
-    }
-
-    static class SelectCategoryHolder extends RecyclerView.ViewHolder {
-        private Disposable mDisposable;
-        private ItemSelectCategoryBinding mBinding;
-
-        public SelectCategoryHolder(View itemView) {
-            super(itemView);
-            mBinding = DataBindingUtil.bind(itemView);
-        }
     }
 
     static class DealHolder extends RecyclerView.ViewHolder {

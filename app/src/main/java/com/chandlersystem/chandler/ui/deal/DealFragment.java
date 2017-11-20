@@ -1,6 +1,7 @@
 package com.chandlersystem.chandler.ui.deal;
 
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import com.chandlersystem.chandler.databinding.FragmentDealBinding;
 import com.chandlersystem.chandler.ui.adapters.DealAdapter;
 import com.chandlersystem.chandler.ui.adapters.ImagePagerAdapter;
 import com.chandlersystem.chandler.ui.adapters.CategoryAdapter;
+import com.chandlersystem.chandler.ui.product_detail.DealDetailActivity;
 import com.chandlersystem.chandler.utilities.RxUtil;
 import com.chandlersystem.chandler.utilities.ViewUtil;
 import com.jakewharton.rxbinding2.support.v4.widget.RxSwipeRefreshLayout;
@@ -30,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
 
 public class DealFragment extends Fragment {
     private FragmentDealBinding mBinding;
@@ -162,6 +165,16 @@ public class DealFragment extends Fragment {
     private void handleEvents() {
         swipeToRefreshEvent();
         appbarCollapse();
+        clickDeal();
+    }
+
+    private void clickDeal() {
+        mDealAdapter.getDealClicks().subscribe(new Consumer<Deal>() {
+            @Override
+            public void accept(Deal deal) throws Exception {
+                startDealDetailActivity(deal);
+            }
+        }, Throwable::printStackTrace);
     }
 
     private void appbarCollapse() {
@@ -174,6 +187,12 @@ public class DealFragment extends Fragment {
                 .subscribe(o -> {
                     mBinding.swipeRefreshLayout.setRefreshing(false);
                 }, Throwable::printStackTrace));*/
+    }
+
+
+    private void startDealDetailActivity(Deal deal) {
+        Intent i = DealDetailActivity.getInstance(getContext());
+        startActivity(i);
     }
 
     @Override
