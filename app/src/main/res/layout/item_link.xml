@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorInactive" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_web_icon"
+                android:layout_width="@dimen/ico_size_small"
+                android:layout_height="@dimen/ico_size_small"
+                android:layout_marginLeft="@dimen/spacing_smallest"
+                android:layout_marginStart="@dimen/spacing_smallest"
+                tools:src="@drawable/ic_shopping" />
+
+            <TextView
+                android:id="@+id/tv_link"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spacing_smallest"
+                android:layout_marginRight="@dimen/spacing_smallest"
+                android:layout_toEndOf="@id/iv_web_icon"
+                android:layout_toRightOf="@id/iv_web_icon"
+                android:autoLink="web"
+                android:fontFamily="@font/cabin_regular"
+                android:textColor="@color/colorPrimary"
+                android:textColorLink="@color/colorPrimary"
+                android:textSize="@dimen/text_size_small"
+                tools:text="https://google.com.vn" />
+
+            <TextView
+                android:id="@+id/tv_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_link"
+                android:layout_marginLeft="@dimen/spacing_smallest"
+                android:layout_marginRight="@dimen/spacing_smallest"
+                android:layout_marginTop="@dimen/spacing_smallest"
+                android:layout_toEndOf="@id/layout_profile"
+                android:layout_toRightOf="@id/layout_profile"
+                android:fontFamily="@font/cabin_regular"
+                android:lineSpacingExtra="@dimen/line_spacing"
+                android:maxLines="2"
+                android:textColor="@color/colorTextGray"
+                android:textSize="@dimen/text_size_small"
+                tools:text="@string/lorem" />
+
+            <ImageView
+                android:layout_width="@dimen/size_link_image_width"
+                android:layout_height="@dimen/size_link_image_height"
+                android:layout_below="@id/tv_description"
+                android:layout_marginLeft="@dimen/spacing_smallest"
+                android:layout_marginStart="@dimen/spacing_smallest"
+                tools:src="@drawable/amazon_logo" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</layout>
