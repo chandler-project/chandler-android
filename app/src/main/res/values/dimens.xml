@@ -65,4 +65,10 @@
     <dimen name="text_margin">16dp</dimen>
     <dimen name="size_onboarding_image">@dimen/_200sdp</dimen>
     <dimen name="size_slide_show">@dimen/_160sdp</dimen>
+    <dimen name="size_wide_image">@dimen/_250sdp</dimen>
+    <dimen name="size_profile_big">@dimen/_56sdp</dimen>
+    <dimen name="size_profile_radius_big">@dimen/_28sdp</dimen>
+    <dimen name="line_spacing">@dimen/_2sdp</dimen>
+    <dimen name="size_link_image_height">@dimen/_100sdp</dimen>
+    <dimen name="size_link_image_width">@dimen/_160sdp</dimen>
 </resources>
