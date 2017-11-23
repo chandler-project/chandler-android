@@ -1,13 +1,142 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.chandlersystem.chandler.ui.product_detail.ProductInforFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:fillViewport="true">
 
-</FrameLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="com.chandlersystem.chandler.ui.product_detail.ProductInforFragment">
+
+            <FrameLayout
+                android:id="@+id/layout_slide_show"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/size_wide_image">
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/viewpager_slide_show"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <me.relex.circleindicator.CircleIndicator
+                    android:id="@+id/indicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_toolbar_height"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:gravity="center_horizontal"
+                    app:ci_drawable="@drawable/item_circle_indicator_seleted"
+                    app:ci_drawable_unselected="@drawable/item_circle_indicator_unselected" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tv_product_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/tv_owner"
+                android:layout_alignStart="@+id/tv_owner"
+                android:layout_below="@+id/layout_slide_show"
+                android:layout_marginTop="14dp"
+                android:fontFamily="@font/cabin_medium"
+                android:maxLines="2"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="@dimen/text_size_larger"
+                tools:text="This is the title" />
+
+            <TextView
+                android:id="@+id/tv_owner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_product_title"
+                android:layout_marginLeft="@dimen/spacing_small"
+                android:layout_marginRight="@dimen/spacing_small"
+                android:textSize="@dimen/text_size_small"
+                tools:text="This post by ..." />
+
+            <include
+                layout="@layout/item_extra_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/layout_slide_show"
+                android:layout_marginLeft="@dimen/spacing_small"
+                android:layout_marginRight="@dimen/spacing_small"
+                android:layout_marginTop="@dimen/spacing_small" />
+
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_owner"
+                android:layout_marginLeft="@dimen/spacing_small"
+                android:layout_marginRight="@dimen/spacing_small"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:background="@drawable/item_button_rounded_yellow"
+                android:fontFamily="@font/cabin_bold"
+                android:paddingBottom="@dimen/spacing_smallest"
+                android:paddingLeft="@dimen/spacing_small"
+                android:paddingRight="@dimen/spacing_small"
+                android:paddingTop="@dimen/spacing_smallest"
+                android:textColor="@color/colorTextGray"
+                android:textSize="@dimen/text_size_normal"
+                tools:text="$200" />
+
+            <TextView
+                android:id="@+id/tv_end_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_price"
+                android:layout_marginLeft="@dimen/spacing_small"
+                android:layout_marginRight="@dimen/spacing_small"
+                android:layout_marginTop="@dimen/spacing_smallest"
+                android:background="@drawable/item_button_rounded_red"
+                android:fontFamily="@font/cabin_regular"
+                android:paddingBottom="@dimen/spacing_smallest"
+                android:paddingLeft="@dimen/spacing_small"
+                android:paddingRight="@dimen/spacing_small"
+                android:paddingTop="@dimen/spacing_smallest"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/text_size_normal"
+                tools:text="End at 27/02/1995" />
+
+            <include
+                android:id="@+id/layout_vote"
+                layout="@layout/item_vote"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_end_date"
+                android:layout_marginLeft="@dimen/spacing_small"
+                android:layout_marginRight="@dimen/spacing_small"
+                android:layout_marginTop="@dimen/spacing_small" />
+
+            <include
+                android:id="@+id/layout_link_preview"
+                layout="@layout/item_link"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layout_vote"
+                android:layout_marginLeft="@dimen/spacing_small"
+                android:layout_marginRight="@dimen/spacing_small" />
+
+            <TextView
+                android:id="@+id/tv_product_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layout_link_preview"
+                android:layout_marginLeft="@dimen/spacing_small"
+                android:layout_marginRight="@dimen/spacing_small"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:autoLink="web"
+                android:fontFamily="@font/cabin_medium"
+                android:lineSpacingExtra="@dimen/line_spacing"
+                android:textColor="@color/colorTextPrimary"
+                android:textColorLink="@color/colorPrimary"
+                android:textSize="@dimen/text_size_larger"
+                tools:text="@string/lorem" />
+        </RelativeLayout>
+    </ScrollView>
+</layout>
