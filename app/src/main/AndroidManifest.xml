@@ -140,7 +140,17 @@
             android:name=".ui.profile.ProfileActivity"
             android:exported="true"
             android:label="@string/title_activity_profile"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity
+            android:name=".ui.createdeal.CreateDealActivity"
+            android:label="@string/title_activity_create_deal"
+            android:parentActivityName=".ui.main.MainActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.chandlersystem.chandler.ui.main.MainActivity"/>
+        </activity>
     </application>
 
 </manifest>
