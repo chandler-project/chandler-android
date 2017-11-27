@@ -6,11 +6,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.chandlersystem.chandler.R;
-import com.chandlersystem.chandler.ui.product_detail.ProductActivityFragment;
-import com.chandlersystem.chandler.ui.product_detail.ProductCommentActivity;
-import com.chandlersystem.chandler.ui.product_detail.ProductInforFragment;
-
-import java.util.List;
+import com.chandlersystem.chandler.ui.product_detail.DealActivityFragment;
+import com.chandlersystem.chandler.ui.product_detail.DealCommentFragment;
+import com.chandlersystem.chandler.ui.product_detail.DealInforFragment;
 
 public class TabAdapter extends FragmentPagerAdapter {
     private Context context;
@@ -24,11 +22,11 @@ public class TabAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             default:
-                return ProductInforFragment.newInstance();
+                return DealInforFragment.newInstance();
             case 1:
-                return ProductActivityFragment.newInstance();
+                return DealActivityFragment.newInstance();
             case 2:
-                return ProductCommentActivity.newInstance();
+                return DealCommentFragment.newInstance();
         }
     }
 
