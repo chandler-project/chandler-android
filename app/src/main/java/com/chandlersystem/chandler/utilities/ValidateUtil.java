@@ -1,6 +1,12 @@
 package com.chandlersystem.chandler.utilities;
 
+import android.content.Context;
+import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputLayout;
 import android.util.Patterns;
+import android.widget.EditText;
+
+import com.chandlersystem.chandler.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -116,5 +122,16 @@ public class ValidateUtil {
         void onValidated(String s);
 
         void onInvalid();
+    }
+
+    public static boolean validateEmptyInput(Context c, EditText text, @Nullable TextInputLayout inputLayout) {
+        if (text.getText().toString().isEmpty()) {
+            if (inputLayout != null)
+                inputLayout.setError(c.getString(R.string.empty_input_warning));
+            return false;
+        }
+        if (inputLayout != null)
+            inputLayout.setError(null);
+        return true;
     }
 }

@@ -13,11 +13,9 @@ import android.view.View;
 import com.chandlersystem.chandler.R;
 import com.chandlersystem.chandler.databinding.ActivityMainBinding;
 import com.chandlersystem.chandler.ui.adapters.FragmentAdapter;
-import com.chandlersystem.chandler.ui.main.state.CreateDealRequestFragment;
 import com.chandlersystem.chandler.ui.deal.DealFragment;
 import com.chandlersystem.chandler.ui.main.state.MainState;
 import com.chandlersystem.chandler.ui.product_search.ProductSearchActivity;
-import com.chandlersystem.chandler.ui.product_search.ProductSearchFragment;
 
 import java.util.ArrayList;
 import java.util.List;

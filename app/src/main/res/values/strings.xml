@@ -177,4 +177,13 @@
     <string name="lorem">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</string>
     <string name="content_just_bought">Just bought</string>
     <string name="content_posted_by">Posted by</string>
+    <string name="product_name">Product name</string>
+    <string name="this_field_is_required">This field (*) is required</string>
+    <string name="enter_product_link">Enter product link (*)</string>
+    <string name="share_some_pictures_about_the_product">Share some pictures about the product?</string>
+    <string name="title_activity_create_request">CreateRequestActivity</string>
+    <string name="explain_read_storage_permission">Read external storage is required to upload image</string>
+    <string name="empty_input_warning">This field is required!</string>
+    <string name="upload_picture_image_warning">You have to upload at least one item picture</string>
+    <string name="invalid_item_url_warning">Please enter valid Url</string>
 </resources>

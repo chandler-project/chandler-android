@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context="com.chandlersystem.chandler.ui.main.state.CreateDealRequestFragment"
+        tools:context="com.chandlersystem.chandler.ui.main.CreateDealRequestFragment"
         tools:targetApi="lollipop">
 
         <FrameLayout

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="shipping_time">
+        <item>Urgen (in 1 week)</item>
+        <item>In 2 weeks</item>
+        <item>In 1 month</item>
+        <item>Less than 2 months</item>
+    </string-array>
+
+    <string-array name="budget">
+        <item>Very small($50 - $100)</item>
+        <item>Small ($100 - $150)</item>
+        <item>Good ($150 - $200)</item>
+        <item>Very good ($200 - $250)</item>
+    </string-array>
+
+    <string-array name="cities">
+        <item>Ho Chi Minh City</item>
+        <item>HaNoi</item>
+        <item>Da Nang</item>
+        <item>Bien Hoa</item>
+    </string-array>
+</resources>
