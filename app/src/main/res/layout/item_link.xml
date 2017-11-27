@@ -37,7 +37,7 @@
                 android:fontFamily="@font/cabin_regular"
                 android:textColor="@color/colorPrimary"
                 android:textColorLink="@color/colorPrimary"
-                android:textSize="@dimen/text_size_small"
+                android:textSize="@dimen/text_size_normal"
                 tools:text="https://google.com.vn" />
 
             <TextView
@@ -52,12 +52,13 @@
                 android:layout_toRightOf="@id/layout_profile"
                 android:fontFamily="@font/cabin_regular"
                 android:lineSpacingExtra="@dimen/line_spacing"
-                android:maxLines="2"
+                android:maxLines="3"
                 android:textColor="@color/colorTextGray"
-                android:textSize="@dimen/text_size_small"
+                android:textSize="@dimen/text_size_normal"
                 tools:text="@string/lorem" />
 
             <ImageView
+                android:id="@+id/iv_web_preview"
                 android:layout_width="@dimen/size_link_image_width"
                 android:layout_height="@dimen/size_link_image_height"
                 android:layout_below="@id/tv_description"

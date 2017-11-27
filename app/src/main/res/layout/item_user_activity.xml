@@ -45,5 +45,14 @@
             android:textColor="@color/colorTextGray"
             android:textSize="@dimen/text_size_small"
             tools:text="15 phut truoc" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5px"
+            android:layout_below="@id/tv_product_activity"
+            android:layout_marginLeft="@dimen/spacing_small"
+            android:layout_marginRight="@dimen/spacing_small"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:background="@color/colorBackgroundGray" />
     </RelativeLayout>
 </layout>

@@ -36,6 +36,8 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_link_image_height"
             android:layout_below="@id/layout_profile"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:scaleType="centerCrop"
             android:visibility="gone"
             tools:src="@drawable/amazon_logo"
             tools:visibility="visible" />
