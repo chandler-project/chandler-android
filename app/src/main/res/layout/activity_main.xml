@@ -57,7 +57,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_smallest"
                         android:fontFamily="@font/cabin_regular"
-                        android:text="@string/nav_profile"
+                        android:text="@string/nav_deal"
+                        android:textAllCaps="true"
                         android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/text_size_small" />
                 </LinearLayout>
@@ -85,7 +86,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_smallest"
                         android:fontFamily="@font/cabin_regular"
-                        android:text="@string/nav_quest"
+                        android:text="@string/nav_request"
+                        android:textAllCaps="true"
                         android:textColor="@color/colorInactive"
                         android:textSize="@dimen/text_size_small" />
                 </LinearLayout>
@@ -138,7 +140,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/spacing_smallest"
                             android:fontFamily="@font/cabin_regular"
-                            android:text="@string/nav_voucher"
+                            android:text="@string/nav_notification"
+                            android:textAllCaps="true"
                             android:textColor="@color/colorInactive"
                             android:textSize="@dimen/text_size_small" />
                     </LinearLayout>
@@ -186,7 +189,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_smallest"
                         android:fontFamily="@font/cabin_regular"
-                        android:text="@string/nav_other"
+                        android:text="@string/nav_profile"
+                        android:textAllCaps="true"
                         android:textColor="@color/colorInactive"
                         android:textSize="@dimen/text_size_small" />
                 </LinearLayout>

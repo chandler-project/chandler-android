@@ -186,4 +186,7 @@
     <string name="empty_input_warning">This field is required!</string>
     <string name="upload_picture_image_warning">You have to upload at least one item picture</string>
     <string name="invalid_item_url_warning">Please enter valid Url</string>
+    <string name="nav_deal">Deal</string>
+    <string name="nav_request">request</string>
+    <string name="nav_notification">notification</string>
 </resources>
