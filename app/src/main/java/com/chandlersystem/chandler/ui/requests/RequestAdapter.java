@@ -4,25 +4,24 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.chandlersystem.chandler.R;
-import com.chandlersystem.chandler.ui.requests.RequestsFragment.OnListFragmentInteractionListener;
+import com.chandlersystem.chandler.ui.requests.RequestsFragment.OnListRequestFragmentInteractionListener;
 import com.chandlersystem.chandler.ui.requests.dummy.DummyContent.DummyItem;
 
 import java.util.List;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
+ * specified {@link OnListRequestFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
 public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHolder> {
 
     private final List<DummyItem> mValues;
-    private final OnListFragmentInteractionListener mListener;
+    private final OnListRequestFragmentInteractionListener mListener;
 
-    public RequestAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+    public RequestAdapter(List<DummyItem> items, OnListRequestFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -42,7 +41,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
             if (null != mListener) {
                 // Notify the active callbacks interface (the activity, if the
                 // fragment is attached to one) that an item has been selected.
-                mListener.onListFragmentInteraction(holder.mItem);
+                mListener.onRequestFragmentInteraction(holder.mItem);
             }
         });
     }

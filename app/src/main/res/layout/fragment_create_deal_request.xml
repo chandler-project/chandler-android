@@ -19,7 +19,8 @@
             android:layout_weight="1">
 
             <ImageView
-                android:src="@drawable/model"
+                android:id="@+id/img_deal"
+                tools:src="@drawable/model"
                 android:scaleType="centerCrop"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
@@ -49,7 +50,8 @@
             android:layout_weight="1">
 
             <ImageView
-                android:src="@drawable/model"
+                android:id="@+id/img_request"
+                tools:src="@drawable/model"
                 android:scaleType="centerCrop"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>

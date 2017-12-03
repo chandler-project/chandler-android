@@ -1,19 +1,14 @@
 package com.chandlersystem.chandler.ui.requests;
 
 import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 import com.chandlersystem.chandler.R;
 import com.chandlersystem.chandler.databinding.ActivityRequestsBinding;
 import com.chandlersystem.chandler.ui.requests.dummy.DummyContent;
 
-public class RequestsActivity extends AppCompatActivity implements RequestsFragment.OnListFragmentInteractionListener{
+public class RequestsActivity extends AppCompatActivity implements RequestsFragment.OnListRequestFragmentInteractionListener {
 
     private ActivityRequestsBinding mBinding;
 
@@ -30,7 +25,7 @@ public class RequestsActivity extends AppCompatActivity implements RequestsFragm
     }
 
     @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+    public void onRequestFragmentInteraction(DummyContent.DummyItem item) {
 
     }
 }

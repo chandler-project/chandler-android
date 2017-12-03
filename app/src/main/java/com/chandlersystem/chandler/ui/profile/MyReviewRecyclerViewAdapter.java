@@ -4,7 +4,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.chandlersystem.chandler.R;
 import com.chandlersystem.chandler.ui.profile.dummy.DummyContent.DummyItem;
@@ -40,7 +39,7 @@ public class MyReviewRecyclerViewAdapter extends RecyclerView.Adapter<MyReviewRe
             if (null != mListener) {
                 // Notify the active callbacks interface (the activity, if the
                 // fragment is attached to one) that an item has been selected.
-                mListener.onListFragmentInteraction(holder.mItem);
+                mListener.onReviewInteraction(holder.mItem);
             }
         });
     }

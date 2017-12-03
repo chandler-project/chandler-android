@@ -100,6 +100,6 @@ public class ReviewsFragment extends Fragment {
      */
     public interface OnReviewInteractListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        void onReviewInteraction(DummyItem item);
     }
 }
