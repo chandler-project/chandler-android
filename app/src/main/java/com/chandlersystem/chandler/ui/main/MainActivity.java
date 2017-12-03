@@ -13,9 +13,12 @@ import android.view.View;
 import com.chandlersystem.chandler.R;
 import com.chandlersystem.chandler.databinding.ActivityMainBinding;
 import com.chandlersystem.chandler.ui.adapters.FragmentAdapter;
+import com.chandlersystem.chandler.ui.createdeal.CreateDealActivity;
+import com.chandlersystem.chandler.ui.createrequest.CreateRequestActivity;
 import com.chandlersystem.chandler.ui.deal.DealFragment;
 import com.chandlersystem.chandler.ui.main.state.MainState;
 import com.chandlersystem.chandler.ui.product_search.ProductSearchActivity;
+import com.chandlersystem.chandler.ui.requests.RequestsFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         List<Fragment> fragmentList = new ArrayList<>();
 
         fragmentList.add(DealFragment.newInstance());
-        fragmentList.add(DealFragment.newInstance());
+        fragmentList.add(RequestsFragment.newInstance(1));
         fragmentList.add(CreateDealRequestFragment.newInstance());
         fragmentList.add(DealFragment.newInstance());
         fragmentList.add(DealFragment.newInstance());
@@ -127,11 +130,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onCreateRequest() {
-
+        Intent i = new Intent(this, CreateRequestActivity.class);
+        startActivity(i);
     }
 
     @Override
     public void onCreateDeal() {
-
+        Intent i = new Intent(this, CreateDealActivity.class);
+        startActivity(i);
     }
 }
