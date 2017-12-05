@@ -39,10 +39,8 @@ public class CreateRequestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_create_request);
-        setSupportActionBar(mBinding.toolbar);
 
         setUpLayout(savedInstanceState);
-        mBinding.fab.setOnClickListener(view -> validateForm());
     }
 
     @Override
