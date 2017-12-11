@@ -1,0 +1,157 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/spacing_largest">
+
+            <LinearLayout
+                android:id="@+id/content_shopping"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_small"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:fontFamily="@font/cabin_medium"
+                    android:gravity="top"
+                    android:text="@string/this_field_is_required"
+                    android:textColor="@color/colorRed"
+                    android:textSize="@dimen/text_size_small" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:background="@null"
+                    android:fontFamily="@font/cabin_medium"
+                    android:gravity="top"
+                    android:text="@string/product_name"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/text_size_normal" />
+
+                <EditText
+                    android:id="@+id/et_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_smallest"
+                    android:background="@null"
+                    android:ems="10"
+                    android:fontFamily="@font/cabin_regular"
+                    android:hint="@string/content_what_is_the_product_name"
+                    android:inputType="text"
+                    android:maxLines="3"
+                    android:textColor="@color/colorTextGray"
+                    android:textColorHint="@color/colorTextGray"
+                    android:textSize="@dimen/text_size_big" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5px"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:background="@color/colorBlack50" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:background="@null"
+                    android:fontFamily="@font/cabin_medium"
+                    android:gravity="top"
+                    android:text="@string/content_product_link"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/text_size_normal" />
+
+                <EditText
+                    android:id="@+id/et_link_url"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_smallest"
+                    android:background="@null"
+                    android:ems="10"
+                    android:fontFamily="@font/cabin_regular"
+                    android:hint="@string/enter_product_link"
+                    android:inputType="textUri"
+                    android:maxLines="3"
+                    android:textColorHint="@color/colorTextGray"
+                    android:textSize="@dimen/text_size_big" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5px"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:background="@color/colorBlack50" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:background="@null"
+                    android:fontFamily="@font/cabin_medium"
+                    android:gravity="top"
+                    android:text="@string/content_product_description"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/text_size_normal" />
+
+                <EditText
+                    android:id="@+id/et_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_smallest"
+                    android:background="@drawable/item_button_rounded_stroke"
+                    android:ems="10"
+                    android:fontFamily="@font/cabin_regular"
+                    android:gravity="top|left"
+                    android:hint="@string/content_tell_something_about_the_product"
+                    android:inputType="textMultiLine"
+                    android:lines="6"
+                    android:maxLines="6"
+                    android:minLines="6"
+                    android:padding="@dimen/spacing_small"
+                    android:scrollbars="vertical"
+                    android:textColorHint="@color/colorTextGray"
+                    android:textSize="@dimen/text_size_big" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:ems="10"
+                    android:fontFamily="@font/cabin_bold"
+                    android:text="@string/share_some_pictures_about_the_product"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/text_size_normal" />
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerViewItemImages"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/spacing_small"
+                    android:layout_marginTop="@dimen/spacing_smallest"
+                    android:orientation="horizontal" />
+            </LinearLayout>
+
+        </ScrollView>
+
+        <include
+            android:id="@+id/layout_next"
+            layout="@layout/item_button_primary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom" />
+    </RelativeLayout>
+</layout>

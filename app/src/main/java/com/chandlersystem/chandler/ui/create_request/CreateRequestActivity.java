@@ -1,4 +1,4 @@
-package com.chandlersystem.chandler.ui.createrequest;
+package com.chandlersystem.chandler.ui.create_request;
 
 import android.Manifest;
 import android.content.Intent;
@@ -15,16 +15,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.util.Patterns;
-import android.view.View;
 import android.widget.Toast;
 
 import com.chandlersystem.chandler.R;
 import com.chandlersystem.chandler.databinding.ActivityCreateRequestBinding;
+import com.chandlersystem.chandler.ui.adapters.ItemImageAdapter;
 import com.chandlersystem.chandler.utilities.ValidateUtil;
 
 import java.util.List;
-
-import jp.wasabeef.glide.transformations.internal.Utils;
 
 public class CreateRequestActivity extends AppCompatActivity {
 
@@ -53,10 +51,10 @@ public class CreateRequestActivity extends AppCompatActivity {
         mBinding.content.recyclerViewItemImages.setHasFixedSize(true);
         mBinding.content.recyclerViewItemImages.setLayoutManager(
                 new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        mAdapter = new ItemImageAdapter(this::onUserClickAddImage);
-        if(savedState!=null){
+        mAdapter = new ItemImageAdapter(this);
+        if (savedState != null) {
             List<String> images = savedState.getStringArrayList(SAVED_IMAGE_LIST);
-            if(images!=null){
+            if (images != null) {
                 mAdapter.addImage(images);
             }
         }
@@ -177,9 +175,5 @@ public class CreateRequestActivity extends AppCompatActivity {
             // other 'case' lines to check for other
             // permissions this app might request
         }
-    }
-
-    interface OnAddImageClick{
-        void onAddImageClick();
     }
 }

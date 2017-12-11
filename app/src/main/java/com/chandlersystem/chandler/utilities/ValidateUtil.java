@@ -34,6 +34,10 @@ public class ValidateUtil {
         return s != null && !s.isEmpty();
     }
 
+    public static boolean checkUrl(String url) {
+        return Patterns.WEB_URL.matcher(url).matches();
+    }
+
     public static boolean checkNull(Object object) {
         return object != null;
     }

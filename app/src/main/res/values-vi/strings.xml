@@ -160,4 +160,17 @@ ba gác \"ship\" tới."</string>
     <string name="lorem">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</string>
     <string name="content_just_bought">Just bought</string>
     <string name="content_posted_by">Posted by</string>
+    <string name="content_what_is_the_product_name">What is the product name?</string>
+    <string name="content_describe_your_product">Tell us a little bit about the product</string>
+    <string name="content_share_picture">Share some pictures about the product</string>
+    <string name="content_how_much_it_cost">How much does it cost?</string>
+    <string name="content_please_insert_more_than_six_character">Please insert more than 6 characters</string>
+    <string name="content_create_new_deal">Create new deal</string>
+    <string name="content_it_is_free_to_post_deal">It\'s free to post a new deal</string>
+    <string name="content_estimate_time_for_delivery">Estimate time for delivery</string>
+    <string name="content_estimate_shipping_budget">Estimate shipping budget</string>
+    <string name="content_product_link">Product Link (*)</string>
+    <string name="content_product_description">Product Description</string>
+    <string name="content_tell_something_about_the_product">Tell something about the product</string>
+    <string name="content_add_image">Add image</string>
 </resources>

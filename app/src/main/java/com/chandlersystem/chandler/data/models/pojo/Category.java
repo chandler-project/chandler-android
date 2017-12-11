@@ -3,6 +3,7 @@ package com.chandlersystem.chandler.data.models.pojo;
 public class Category {
     public String imageUrl;
     public String name;
+    public String subCategory;
     public boolean isSelected;
 
     public Category() {
@@ -11,6 +12,20 @@ public class Category {
     public Category(String imageUrl, String name) {
         this.imageUrl = imageUrl;
         this.name = name;
+    }
+
+    public Category(String imageUrl, String name, String subCategory) {
+        this.imageUrl = imageUrl;
+        this.name = name;
+        this.subCategory = subCategory;
+    }
+
+    public String getSubCategory() {
+        return subCategory;
+    }
+
+    public void setSubCategory(String subCategory) {
+        this.subCategory = subCategory;
     }
 
     public String getImageUrl() {

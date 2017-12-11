@@ -11,6 +11,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.DimenRes;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.text.Html;
@@ -18,6 +19,8 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -188,6 +191,10 @@ public class ViewUtil {
      * @param activity
      */
     public static void hideSoftKey(Activity activity) {
+        if (activity == null) {
+            return;
+        }
+
         InputMethodManager imm
                 = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
         View v = activity.getCurrentFocus();
@@ -215,5 +222,12 @@ public class ViewUtil {
     public static Bitmap resizeBitmapIcon(Context context, int resourceId, int width, int height) {
         Bitmap icon = BitmapFactory.decodeResource(context.getResources(), resourceId);
         return Bitmap.createScaledBitmap(icon, width, height, false);
+    }
+
+    public static void showSoftKey(Activity activity) {
+        Window window = activity.getWindow();
+        if (null != window) {
+            window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        }
     }
 }
