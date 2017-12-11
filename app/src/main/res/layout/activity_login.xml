@@ -18,27 +18,42 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal" />
 
-            <Button
-                android:id="@+id/btn_facebook_login"
-                android:layout_width="match_parent"
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/login_button"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/spacing_largest"
-                android:layout_marginRight="@dimen/spacing_largest"
-                android:layout_marginTop="@dimen/spacing_largest"
+                android:layout_gravity="center_horizontal"
                 android:background="@drawable/item_button_rounded_facebook"
-                android:drawableLeft="@drawable/ic_facebook"
-                android:drawablePadding="@dimen/spacing_normal"
-                android:drawableStart="@drawable/ic_facebook"
-                android:fontFamily="@font/cabin_regular"
-                android:gravity="center"
                 android:paddingEnd="@dimen/spacing_normal"
                 android:paddingLeft="@dimen/spacing_normal"
                 android:paddingRight="@dimen/spacing_normal"
                 android:paddingStart="@dimen/spacing_normal"
-                android:text="@string/content_login_with_facebook"
-                android:textAllCaps="false"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/text_size_large" />
+                android:layout_marginLeft="@dimen/spacing_largest"
+                android:layout_marginRight="@dimen/spacing_largest"
+                android:layout_marginTop="@dimen/spacing_largest"
+                android:layout_marginBottom="30dp" />
+
+            <!--<Button-->
+                <!--android:id="@+id/btn_facebook_login"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="@dimen/spacing_largest"-->
+                <!--android:layout_marginRight="@dimen/spacing_largest"-->
+                <!--android:layout_marginTop="@dimen/spacing_largest"-->
+                <!--android:background="@drawable/item_button_rounded_facebook"-->
+                <!--android:drawableLeft="@drawable/ic_facebook"-->
+                <!--android:drawablePadding="@dimen/spacing_normal"-->
+                <!--android:drawableStart="@drawable/ic_facebook"-->
+                <!--android:fontFamily="@font/cabin_regular"-->
+                <!--android:gravity="center"-->
+                <!--android:paddingEnd="@dimen/spacing_normal"-->
+                <!--android:paddingLeft="@dimen/spacing_normal"-->
+                <!--android:paddingRight="@dimen/spacing_normal"-->
+                <!--android:paddingStart="@dimen/spacing_normal"-->
+                <!--android:text="@string/content_login_with_facebook"-->
+                <!--android:textAllCaps="false"-->
+                <!--android:textColor="@color/colorWhite"-->
+                <!--android:textSize="@dimen/text_size_large" />-->
 
             <TextView
                 android:layout_width="wrap_content"

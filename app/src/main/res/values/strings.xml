@@ -1,4 +1,8 @@
 <resources>
+    <!--facebook api-->
+    <string name="facebook_app_id" translatable="false">129748801053739</string>
+    <string name="fb_login_protocol_scheme" translatable="false">fb129748801053739</string>
+
     <string name="app_name" translatable="false">"Chandler"</string>
     <!--Error-->
     <string name="error_no_data">There\'s no user to show right now</string>
@@ -17,8 +21,6 @@
     <string name="nav_other">Other</string>
 
     <!--Facebook-->
-    <string name="facebook_app_id" translatable="false">276217976212159</string>
-    <string name="fb_login_protocol_scheme" translatable="false">fb276217976212159</string>
     <string name="account_kit_client_token" translatable="false">bc8b855832c258bce55cf9512a1b5f81</string>
 
     <!--Content-->
