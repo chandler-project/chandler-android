@@ -87,9 +87,7 @@ public class ApplicationModule {
                 .readTimeout(30, TimeUnit.SECONDS);
 
 //        Only show log in dev environment
-        if (BuildConfig.DEBUG) {
-            builder.addInterceptor(httpLoggingInterceptor);
-        }
+        builder.addInterceptor(httpLoggingInterceptor);
 
         return builder.build();
     }

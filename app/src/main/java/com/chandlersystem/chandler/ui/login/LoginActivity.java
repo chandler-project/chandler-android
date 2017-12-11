@@ -5,31 +5,33 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.chandlersystem.chandler.ChandlerApplication;
 import com.chandlersystem.chandler.R;
+import com.chandlersystem.chandler.configs.ApiConstant;
+import com.chandlersystem.chandler.data.api.ChandlerApi;
+import com.chandlersystem.chandler.data.models.request.LoginRequest;
 import com.chandlersystem.chandler.databinding.ActivityLoginBinding;
 import com.chandlersystem.chandler.di.components.ActivityComponent;
 import com.chandlersystem.chandler.di.components.DaggerActivityComponent;
 import com.chandlersystem.chandler.di.modules.ActivityModule;
-import com.chandlersystem.chandler.services.AccountKitConnector;
-import com.chandlersystem.chandler.services.FacebookConnector;
-import com.chandlersystem.chandler.ui.main.MainActivity;
 import com.chandlersystem.chandler.ui.select_category.SelectCategoryActivity;
-import com.chandlersystem.chandler.utilities.LogUtil;
-import com.chandlersystem.chandler.utilities.RxUtil;
-import com.chandlersystem.chandler.utilities.ViewUtil;
-import com.facebook.accountkit.AccessToken;
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.Profile;
+import com.facebook.ProfileTracker;
 import com.facebook.login.LoginResult;
-import com.jakewharton.rxbinding2.view.RxView;
-import com.raizlabs.android.dbflow.sql.language.Select;
-
-import javax.inject.Inject;
 
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = LoginActivity.class.getSimpleName();
@@ -37,6 +39,8 @@ public class LoginActivity extends AppCompatActivity {
     private ActivityLoginBinding mBinding;
 
     private final CompositeDisposable mCompositeDisposable = new CompositeDisposable();
+    private CallbackManager mCallbackManager;
+    private ProfileTracker mProfileTracker;
 
     public static Intent getInstance(Context context) {
         Intent i = new Intent(context, LoginActivity.class);
@@ -55,16 +59,70 @@ public class LoginActivity extends AppCompatActivity {
                         .getApplicationComponent(this))
                 .build();
         mActivityComponent.inject(this);
+        mCallbackManager = CallbackManager.Factory.create();
+        mBinding.loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                // App code
+                Log.i(TAG, "onSuccess: fb token: "+loginResult.getAccessToken().getToken());
+                if(Profile.getCurrentProfile() == null) {
+                    mProfileTracker = new ProfileTracker() {
+                        @Override
+                        protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
+                            Log.v("facebook - profile", currentProfile.getFirstName());
+                            mProfileTracker.stopTracking();
+                            authentication(currentProfile);
+                        }
+                    };
+                    // no need to call startTracking() on mProfileTracker
+                    // because it is called by its constructor, internally.
+                }
+                else {
+                    Profile profile = Profile.getCurrentProfile();
+                    authentication(profile);
+                    Log.v("facebook - profile", profile.getFirstName());
+                }
 
-        mCompositeDisposable.add(RxView.clicks(mBinding.btnFacebookLogin)
-                .compose(RxUtil.withLongThrottleFirst())
-                .concatMap(o -> FacebookConnector.getInstance().logIn(this))
-                .subscribe(loginResult -> startMainActivity(),
-                        Throwable::printStackTrace));
+            }
 
-        mCompositeDisposable.add(RxView.clicks(mBinding.btnPhoneNumber)
-                .compose(RxUtil.withLongThrottleFirst())
-                .subscribe(o -> AccountKitConnector.getInstance().login(LoginActivity.this)));
+            @Override
+            public void onCancel() {
+                // App code
+            }
+
+            @Override
+            public void onError(FacebookException exception) {
+                // App code
+            }
+        });
+
+    }
+
+    private void authentication(Profile currentProfile) {
+        if(currentProfile != null){
+            LoginRequest loginRequest = new LoginRequest(AccessToken.getCurrentAccessToken().getToken(), currentProfile.getId());
+            ChandlerApi api = ChandlerApplication.getApplicationComponent(LoginActivity.this).getSevenRewardsApiV1();
+//            ChandlerApi api = new Retrofit.Builder().baseUrl(ApiConstant.BASE_URL_VER1)
+//                    .addConverterFactory(GsonConverterFactory.create())
+//                    .build()
+//                    .create(ChandlerApi.class);
+            api.authentication(loginRequest, 1, "user").enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    if(response.isSuccessful()){
+                        Log.i(TAG, "onResponse: login success");
+                        startMainActivity();
+                    }else{
+                        Toast.makeText(LoginActivity.this, "Unknown Error: please try again!!!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                    Log.e(TAG, "onFailure: ", t);
+                }
+            });
+        }
     }
 
     private void startMainActivity() {
@@ -73,24 +131,14 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        mCallbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
-        if (FacebookConnector.getInstance().onActivityResult(requestCode, resultCode, data)) {
-            return;
-        }
 
-        mCompositeDisposable.add(AccountKitConnector.getInstance()
-                .onActivityResult(LoginActivity.this, requestCode, resultCode, data)
-                .subscribe(accessToken -> {
-                    LogUtil.logD(TAG, "Account kit access token: " + accessToken);
-                    startMainActivity();
-                }, Throwable::printStackTrace));
     }
 
     //On Activity Destroy
     @Override
     protected void onDestroy() {
-        mCompositeDisposable.dispose();
-        mCompositeDisposable.clear();
         super.onDestroy();
     }
 }

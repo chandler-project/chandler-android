@@ -17,6 +17,7 @@ import com.chandlersystem.chandler.ui.splash.onboarding.FourthOnboardingFragment
 import com.chandlersystem.chandler.ui.splash.onboarding.SecondOnboardingFragment;
 import com.chandlersystem.chandler.ui.splash.onboarding.ThirdOnboardingFragment;
 import com.chandlersystem.chandler.utilities.RxUtil;
+import com.facebook.Profile;
 import com.jakewharton.rxbinding2.view.RxView;
 
 import java.util.ArrayList;
@@ -43,6 +44,9 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_splash);
+        if(Profile.getCurrentProfile()!=null){
+            startMainActivity();
+        }
         setupView();
         setupViewPager();
         handleEvents();

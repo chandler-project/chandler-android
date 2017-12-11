@@ -2,7 +2,7 @@ package com.chandlersystem.chandler.configs;
 
 public class ApiConstant {
 
-    public static final String BASE_URL_VER1 = "https://google.com.vn/";
+    public static final String BASE_URL_VER1 = "http://etylash.xyz:3001/";
 
     private ApiConstant() {
     }
