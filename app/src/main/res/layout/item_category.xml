@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:id="@+id/layout_category_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite">
+
+        <TextView
+            android:id="@+id/tv_category_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_small"
+            android:layout_marginRight="@dimen/spacing_small"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:fontFamily="@font/cabin_regular"
+            android:textColor="@color/colorTextPrimary"
+            android:textSize="@dimen/text_size_larger"
+            tools:text="Trending" />
+
+        <TextView
+            android:id="@+id/tv_sub_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_category_name"
+            android:layout_marginLeft="@dimen/spacing_small"
+            android:layout_marginRight="@dimen/spacing_small"
+            android:fontFamily="@font/cabin_regular"
+            android:maxLength="50"
+            android:singleLine="true"
+            android:textColor="@color/colorTextGray"
+            android:textSize="@dimen/text_size_normal"
+            android:visibility="gone"
+            tools:text="Tivi, Tu lanh, may giat..." />
+
+        <ImageView
+            android:layout_width="@dimen/ico_size_normal"
+            android:layout_height="@dimen/ico_size_normal"
+            android:layout_alignBottom="@id/tv_category_name"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginLeft="@dimen/spacing_small"
+            android:layout_marginRight="@dimen/spacing_small"
+            android:baselineAlignBottom="true"
+            android:src="@drawable/ic_right"
+            android:textSize="@dimen/text_size_normal" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5px"
+            android:layout_below="@id/tv_sub_category"
+            android:layout_marginLeft="@dimen/spacing_small"
+            android:layout_marginRight="@dimen/spacing_small"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:background="@color/colorBlack50" />
+
+    </RelativeLayout>
+</layout>

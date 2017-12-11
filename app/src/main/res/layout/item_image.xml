@@ -1,22 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <android.support.v7.widget.CardView
-        android:layout_margin="@dimen/line_spacing_8dp"
-        app:cardCornerRadius="16dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+    <LinearLayout
+        android:id="@+id/layout_add_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical">
 
-        <ImageButton
-            android:background="@drawable/border_bg"
-            android:layout_margin="2dp"
-            app:srcCompat="@drawable/ic_add_a_photo_black_80px"
-            android:id="@+id/item_imageButton"
-            android:layout_width="@dimen/item_image_size"
-            android:layout_height="@dimen/item_image_size" />
+        <ImageView
+            android:id="@+id/iv_add"
+            android:layout_width="@dimen/ico_size_largest"
+            android:layout_height="@dimen/ico_size_largest"
+            android:padding="@dimen/spacing_smaller"
+            android:src="@drawable/ic_plus_active" />
 
-    </android.support.v7.widget.CardView>
+        <TextView
+            android:id="@+id/tv_add_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_smaller"
+            android:fontFamily="@font/cabin_regular"
+            android:text="@string/content_add_image"
+            android:textColor="@color/colorTextGray"
+            android:textSize="@dimen/text_size_normal" />
 
-
+    </LinearLayout>
 </layout>

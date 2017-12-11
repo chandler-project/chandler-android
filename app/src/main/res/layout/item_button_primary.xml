@@ -6,11 +6,9 @@
         android:id="@+id/btn_primary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/spacing_largest"
-        android:layout_marginRight="@dimen/spacing_largest"
-        android:background="@drawable/item_button_rounded_cyan"
+        android:background="@color/colorPrimary"
         android:fontFamily="@font/cabin_regular"
         android:textColor="@color/colorWhite"
-        android:textSize="@dimen/text_size_large"
+        android:textSize="@dimen/text_size_big"
         tools:text="@string/content_sign_in_with_fb" />
 </layout>

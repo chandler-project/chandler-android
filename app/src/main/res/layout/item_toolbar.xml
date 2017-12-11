@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
-    <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_40sdp">
 
@@ -15,12 +14,9 @@
             android:fontFamily="@font/cabin_bold"
             android:text="@string/app_name"
             android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/text_size_big"/>
+            android:textSize="@dimen/text_size_big" />
 
         <ImageView
-            android:clickable="true"
-            android:focusable="true"
-            android:background="?attr/selectableItemBackgroundBorderless"
             android:id="@+id/iv_cart"
             android:layout_width="@dimen/size_toolbar_height"
             android:layout_height="@dimen/size_toolbar_height"
@@ -28,13 +24,13 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/spacing_smallest"
-            android:padding="@dimen/_14sdp"
-            android:src="@drawable/ic_cart"/>
-
-        <ImageView
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="true"
             android:focusable="true"
-            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="@dimen/_14sdp"
+            android:src="@drawable/ic_cart" />
+
+        <ImageView
             android:id="@+id/iv_search"
             android:layout_width="@dimen/size_toolbar_height"
             android:layout_height="@dimen/size_toolbar_height"
@@ -42,7 +38,17 @@
             android:layout_marginLeft="@dimen/spacing_normal"
             android:layout_toLeftOf="@id/iv_cart"
             android:layout_toStartOf="@id/iv_cart"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
             android:padding="@dimen/_14sdp"
-            android:src="@drawable/ic_search"/>
+            android:src="@drawable/ic_search" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5px"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:background="@color/colorBlack50" />
     </RelativeLayout>
 </layout>
