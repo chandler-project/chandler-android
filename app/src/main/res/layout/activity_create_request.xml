@@ -8,7 +8,7 @@
         android:layout_height="match_parent"
         android:background="@color/colorBackgroundGray"
         android:orientation="vertical"
-        tools:context="com.chandlersystem.chandler.ui.createrequest.CreateRequestActivity">
+        tools:context="com.chandlersystem.chandler.ui.create_request.CreateRequestActivity">
 
         <include layout="@layout/item_extra_toolbar" />
 

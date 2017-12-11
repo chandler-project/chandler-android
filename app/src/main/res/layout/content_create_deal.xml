@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context="com.chandlersystem.chandler.ui.createdeal.CreateDealActivity"
+        tools:context="com.chandlersystem.chandler.ui.create_deal.CreateDealActivity"
         tools:showIn="@layout/activity_create_deal">
 
     </android.support.constraint.ConstraintLayout>
