@@ -43,12 +43,5 @@
             android:focusable="true"
             android:padding="@dimen/_14sdp"
             android:src="@drawable/ic_search" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5px"
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="@dimen/spacing_small"
-            android:background="@color/colorBlack50" />
     </RelativeLayout>
 </layout>
