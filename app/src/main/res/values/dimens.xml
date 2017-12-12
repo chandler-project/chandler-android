@@ -67,8 +67,8 @@
     <dimen name="size_profile_big">@dimen/_56sdp</dimen>
     <dimen name="size_profile_radius_big">@dimen/_28sdp</dimen>
     <dimen name="line_spacing">@dimen/_2sdp</dimen>
-    <dimen name="size_link_image_height">@dimen/_140sdp</dimen>
-    <dimen name="size_link_image_width">@dimen/_160sdp</dimen>
+    <dimen name="size_link_image_height">@dimen/_80sdp</dimen>
+    <dimen name="size_link_image_width">@dimen/_120sdp</dimen>
 
 
     <!-- Default screen margins, per the Android Design guidelines. -->

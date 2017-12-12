@@ -1,182 +1,180 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingLeft="8dp"
-    android:paddingRight="8dp"
-    android:paddingTop="16dp"
-    android:paddingBottom="16dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/iv_user_profile"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/avatar"/>
-
-    <TextView
-        android:textSize="@dimen/_12sdp"
-        android:id="@+id/tv_user_name"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:textAppearance="?attr/textAppearanceListItem"
-        app:layout_constraintStart_toEndOf="@+id/iv_user_profile"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="Pham Sang. HCM city"/>
+        android:background="@color/colorWhite">
 
-    <ImageView
-        android:id="@+id/iv_nation_flag"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="8dp"
-        android:src="@drawable/vietnam_flag"
-        app:layout_constraintStart_toEndOf="@+id/tv_user_name"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="8dp"/>
+        <include
+            android:id="@+id/layout_category_name"
+            layout="@layout/item_category_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:visibility="visible" />
 
-    <TextView
-        android:id="@+id/tv_points"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="12.1k point"
-        android:textSize="@dimen/_10sdp"
-        app:layout_constraintStart_toEndOf="@+id/iv_user_profile"
-        app:layout_constraintTop_toBottomOf="@+id/tv_user_name"
-        android:layout_marginLeft="8dp"/>
+        <RelativeLayout
+            android:id="@+id/layout_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout_category_name">
 
-    <TextView
-        android:id="@+id/tv_budget"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
-        android:text="$250 - $400"
-        android:textSize="@dimen/_14sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginRight="8dp"/>
+            <include
+                android:id="@+id/layout_profile"
+                layout="@layout/item_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spacing_small"
+                android:layout_marginRight="@dimen/spacing_small"
+                android:layout_marginTop="@dimen/spacing_smaller" />
 
-    <TextView
-        android:id="@+id/tv_content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:maxLines="3"
-        android:textColor="@color/colorBlack"
-        android:textStyle="bold"
-        android:textSize="@dimen/_14sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_points"
-        android:text="Hey, I want to get the headphone from Amazon, this is the link, who can help me to bring this to HCM city."/>
-
-    <TextView
-        android:id="@+id/time_created"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
-        android:text="1 hour ago"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_content"
-        android:layout_marginRight="8dp"/>
-
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/layout_link_preview"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/shape_link_preview_background"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/time_created">
+            <TextView
+                android:id="@+id/tv_end_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="@dimen/spacing_small"
+                android:layout_marginRight="@dimen/spacing_small"
+                android:layout_marginTop="@dimen/spacing_smaller"
+                android:fontFamily="@font/cabin_regular"
+                android:paddingBottom="@dimen/spacing_smallest"
+                android:paddingLeft="@dimen/spacing_small"
+                android:paddingRight="@dimen/spacing_small"
+                android:paddingTop="@dimen/spacing_smallest"
+                android:textColor="@color/colorTextGray"
+                android:textSize="@dimen/text_size_normal"
+                tools:text="5 phut truoc" />
+        </RelativeLayout>
 
         <ImageView
-            android:id="@+id/iv_link_image"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:id="@+id/iv_product"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_140sdp"
+            android:layout_below="@id/layout_header"
+            android:layout_marginTop="@dimen/spacing_smallest"
             android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/amazon_logo"
-            android:layout_marginLeft="8dp"/>
+            tools:src="@drawable/avatar" />
+
+        <LinearLayout
+            android:id="@+id/layout_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_product"
+            android:layout_marginTop="@dimen/spacing_smaller"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spacing_small"
+                android:layout_marginRight="@dimen/spacing_small"
+                android:background="@drawable/item_button_rounded_yellow"
+                android:fontFamily="@font/cabin_bold"
+                android:paddingBottom="@dimen/spacing_smallest"
+                android:paddingLeft="@dimen/spacing_small"
+                android:paddingRight="@dimen/spacing_small"
+                android:paddingTop="@dimen/spacing_smallest"
+                android:textColor="@color/colorTextGray"
+                android:textSize="@dimen/text_size_normal"
+                tools:text="$200" />
+
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/spacing_small"
+                android:background="@drawable/item_button_rounded_red"
+                android:fontFamily="@font/cabin_bold"
+                android:paddingBottom="@dimen/spacing_smallest"
+                android:paddingLeft="@dimen/spacing_small"
+                android:paddingRight="@dimen/spacing_small"
+                android:paddingTop="@dimen/spacing_smallest"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/text_size_normal"
+                tools:text="Need it in 20/07/2017" />
+
+            <TextView
+                android:id="@+id/tv_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/spacing_small"
+                android:background="@drawable/item_button_rounded_cyan"
+                android:fontFamily="@font/cabin_bold"
+                android:paddingBottom="@dimen/spacing_smallest"
+                android:paddingLeft="@dimen/spacing_small"
+                android:paddingRight="@dimen/spacing_small"
+                android:paddingTop="@dimen/spacing_smallest"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/text_size_normal"
+                tools:text="TPHCM" />
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/tv_link_description"
+            android:id="@+id/tv_product_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout_price"
+            android:layout_marginLeft="@dimen/spacing_small"
+            android:layout_marginRight="@dimen/spacing_small"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:fontFamily="@font/cabin_bold"
+            android:textColor="@color/colorTextPrimary"
+            android:textSize="@dimen/text_size_large"
+            tools:text="Samsung Galaxy S8 brand new" />
+
+        <TextView
+            android:id="@+id/tv_product_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_product_title"
+            android:layout_marginLeft="@dimen/spacing_small"
+            android:layout_marginRight="@dimen/spacing_small"
+            android:layout_marginTop="@dimen/spacing_smallest"
+            android:fontFamily="@font/cabin_bold"
             android:maxLines="2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="Dell Ultra HD 4k Monitor P2715Q 27-Inch Screen LED-Lit Monitor"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/iv_link_image"
-            app:layout_constraintTop_toTopOf="parent"/>
+            android:textColor="@color/colorTextGray"
+            android:textSize="@dimen/text_size_normal"
+            tools:text="Samsung Galaxy S8 brand new" />
 
         <TextView
-            android:id="@+id/tv_link_domain"
-            android:layout_width="0dp"
+            android:id="@+id/tv_product_link"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="AMAZON.COM"
-            app:layout_constraintStart_toEndOf="@+id/iv_link_image"
-            app:layout_constraintTop_toBottomOf="@+id/tv_link_description"
-            android:layout_marginLeft="8dp"/>
-    </android.support.constraint.ConstraintLayout>
+            android:layout_below="@id/tv_product_detail"
+            android:layout_marginLeft="@dimen/spacing_small"
+            android:layout_marginRight="@dimen/spacing_small"
+            android:layout_marginTop="@dimen/spacing_smallest"
+            android:fontFamily="@font/cabin_bold"
+            android:maxLines="2"
+            android:textColor="@color/colorPrimary"
+            android:textColorLink="@color/colorPrimary"
+            android:textSize="@dimen/text_size_normal"
+            tools:text="https://google.com.vn" />
 
-    <TextView
-        android:id="@+id/tv_bids"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Bid (20)"
-        android:textColor="@color/colorBlack"
-        android:textSize="@dimen/_14sdp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layout_link_preview"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/tv_product_link"
+            android:layout_marginBottom="@dimen/spacing_smallest"
+            android:layout_marginLeft="@dimen/spacing_small"
+            android:layout_marginRight="@dimen/spacing_small"
+            android:background="@null"
+            android:text="@string/content_bid" />
 
-    <include
-        android:id="@+id/first_bid"
-        layout="@layout/item_bid"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_bids"/>
-
-    <include
-        android:id="@+id/second_bid"
-        layout="@layout/item_bid"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/first_bid"/>
-
-    <include
-        android:id="@+id/third_bid"
-        layout="@layout/item_bid"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/second_bid"/>
-</android.support.constraint.ConstraintLayout>
+        <include
+            layout="@layout/item_many_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_product_link"
+            android:layout_marginLeft="@dimen/spacing_small"
+            android:layout_marginRight="@dimen/spacing_small"
+            android:layout_marginTop="@dimen/spacing_smallest" />
+    </RelativeLayout>
+</layout>
