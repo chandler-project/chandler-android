@@ -56,8 +56,6 @@ public class CreateDealRequestFragment extends Fragment {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_create_deal_request, container, false);
         mBinding.createDeal.setOnClickListener( view -> mListener.onCreateDeal());
         mBinding.createRequest.setOnClickListener( view -> mListener.onCreateRequest());
-        Glide.with(this).load(R.drawable.model).into(mBinding.imgDeal);
-        Glide.with(this).load(R.drawable.model).into(mBinding.imgRequest);
         return mBinding.getRoot();
     }
 
