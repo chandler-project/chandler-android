@@ -58,6 +58,7 @@
                 tools:text="@string/lorem" />
 
             <ImageView
+                android:scaleType="centerCrop"
                 android:id="@+id/iv_web_preview"
                 android:layout_width="@dimen/size_link_image_width"
                 android:layout_height="@dimen/size_link_image_height"

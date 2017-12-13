@@ -32,7 +32,6 @@ public class CreateDealActivity extends AppCompatActivity implements ViewPager.O
         SelectDateFragment.SelectDateListener,
         SelectPriceFragment.SelectPriceListener {
     private static final int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 0;
-    private static final int REQUEST_CODE_PICK_PHOTO = 10;
 
     private ActivityCreateDealBinding mBinding;
 
@@ -200,6 +199,20 @@ public class CreateDealActivity extends AppCompatActivity implements ViewPager.O
 
             // other 'case' lines to check for other
             // permissions this app might request
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        goToPreviousPage();
+    }
+
+    private void goToPreviousPage() {
+        int currentPage = mBinding.viewpager.getCurrentItem();
+        if (currentPage > 0) {
+            setCurrentItem(currentPage - 1);
+        } else {
+            finish();
         }
     }
 }

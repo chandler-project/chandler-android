@@ -17,11 +17,10 @@
     <color name="colorTextPrimary">#333333</color>
     <color name="colorTextGray">#666666</color>
     <color name="colorHint">#BDBDBD</color>
-    <color name="colorInactive">#8897A6</color>
+    <color name="colorInactive">@color/colorBlack50</color>
     <color name="colorFacebook">#3F5895</color>
     <color name="colorBlack50">#80000000</color>
     <color name="colorBlack10">#1A000000</color>
-
 
 
     <!-- DON'T REMOVE THIS -->

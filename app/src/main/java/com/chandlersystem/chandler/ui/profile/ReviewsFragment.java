@@ -60,6 +60,8 @@ public class ReviewsFragment extends Fragment {
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
+            recyclerView.setHasFixedSize(true);
+            recyclerView.setNestedScrollingEnabled(true);
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {

@@ -121,7 +121,7 @@ public class CompleteCreateDealFragment extends Fragment {
 
 
     private Observable<Boolean> formValidated() {
-        return Observable.combineLatest(titleValidated(), linkValidated(), (aBoolean, aBoolean2) -> aBoolean && aBoolean2);
+        return Observable.combineLatest(titleValidated(), linkValidated(), priceValidated(), (aBoolean, aBoolean2, aBoolean3) -> aBoolean && aBoolean2 && aBoolean3);
     }
 
     private Observable<Boolean> titleValidated() {
@@ -138,6 +138,11 @@ public class CompleteCreateDealFragment extends Fragment {
                     int textLength = charSequence.toString().length();
                     return textLength >= 6 && textLength <= 100 && ValidateUtil.checkUrl(charSequence.toString());
                 });
+    }
+
+    private Observable<Boolean> priceValidated() {
+        return RxTextView.textChanges(mBinding.etNetPrice)
+                .map(charSequence -> charSequence.toString().length() > 0);
     }
 
     private void handleEvents() {
