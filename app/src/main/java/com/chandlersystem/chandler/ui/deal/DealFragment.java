@@ -42,6 +42,8 @@ public class DealFragment extends Fragment {
 
     private CategoryAdapter mCategoryAdapter;
 
+    private CategoryAdapter mSmallCategoryAdapter;
+
     private DealAdapter mDealAdapter;
 
     private final CompositeDisposable mCompositeDisposable = new CompositeDisposable();
@@ -121,9 +123,8 @@ public class DealFragment extends Fragment {
     }
 
     private void setupCategoryRecyclerView() {
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 5);
         List<Category> categoryList = new ArrayList<>();
-        String url = "https://cnet1.cbsistatic.com/img/9vw_9Ye3lmgdrRm-sUGUXsi0YxU=/300x250/2017/07/13/17f0d405-2f43-4b1e-9972-18f3910363bd/focal-listen-wireless-07.jpg";
+        String url = "https://cdn4.iconfinder.com/data/icons/48-bubbles/48/29.Mac-512.png";
         categoryList.add(new Category(url, "Lorem ipsum"));
         categoryList.add(new Category(url, "Lorem ipsum"));
         categoryList.add(new Category(url, "Lorem ipsum"));
@@ -135,10 +136,19 @@ public class DealFragment extends Fragment {
         categoryList.add(new Category(url, "Lorem ipsum"));
         categoryList.add(new Category(url, "Lorem ipsum"));
         mCategoryAdapter = new CategoryAdapter(getContext(), categoryList, CategoryAdapter.CategoryType.DEAL_FRAGMENT_CENTER);
+        mSmallCategoryAdapter = new CategoryAdapter(getContext(), categoryList, CategoryAdapter.CategoryType.DEAL_FRAGMENT_TOP);
+
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 5);
         mBinding.recyclerViewCatgories.setLayoutManager(layoutManager);
         mBinding.recyclerViewCatgories.setNestedScrollingEnabled(false);
         mBinding.recyclerViewCatgories.setHasFixedSize(true);
         mBinding.recyclerViewCatgories.setAdapter(mCategoryAdapter);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        mBinding.recyclerViewSmallCategory.setLayoutManager(linearLayoutManager);
+        mBinding.recyclerViewSmallCategory.setNestedScrollingEnabled(false);
+        mBinding.recyclerViewSmallCategory.setHasFixedSize(true);
+        mBinding.recyclerViewSmallCategory.setAdapter(mSmallCategoryAdapter);
     }
 
     private void setupToolbar() {
@@ -169,16 +179,18 @@ public class DealFragment extends Fragment {
     }
 
     private void clickDeal() {
-        mDealAdapter.getDealClicks().subscribe(new Consumer<Deal>() {
-            @Override
-            public void accept(Deal deal) throws Exception {
-                startDealDetailActivity(deal);
-            }
-        }, Throwable::printStackTrace);
+        mDealAdapter.getDealClicks().subscribe(this::startDealDetailActivity, Throwable::printStackTrace);
     }
 
     private void appbarCollapse() {
-        mBinding.appbar.addOnOffsetChangedListener((appBarLayout, offset) -> ViewUtil.toggleView(mBinding.tvTest, offset != 0));
+        mBinding.appbar.addOnOffsetChangedListener((appBarLayout, offset) -> {
+            boolean isCollapsingToolbarCollapsed = Math.abs(offset) == appBarLayout.getTotalScrollRange();
+            if (isCollapsingToolbarCollapsed) {
+                mBinding.toolbar.setVisibility(View.VISIBLE);
+            } else {
+                mBinding.toolbar.setVisibility(View.INVISIBLE);
+            }
+        });
     }
 
     private void swipeToRefreshEvent() {

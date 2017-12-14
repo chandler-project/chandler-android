@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import com.chandlersystem.chandler.R;
 import com.chandlersystem.chandler.data.models.pojo.Category;
 import com.chandlersystem.chandler.databinding.ItemCategoryDealBinding;
+import com.chandlersystem.chandler.databinding.ItemCategorySmallBinding;
 import com.chandlersystem.chandler.databinding.ItemSelectCategoryBinding;
 import com.chandlersystem.chandler.utilities.RxUtil;
 import com.chandlersystem.chandler.utilities.ViewUtil;
@@ -49,7 +50,7 @@ public class CategoryAdapter extends RecyclerView.Adapter {
         return mSelectedCategoryChanged;
     }
 
-    public PublishSubject<Category> getmCategoryClicks() {
+    public PublishSubject<Category> getCategoryClicks() {
         return mCategoryClicks;
     }
 
@@ -67,7 +68,7 @@ public class CategoryAdapter extends RecyclerView.Adapter {
             case DEAL_FRAGMENT_CENTER:
                 return new DealCategoryHolder(LayoutInflater.from(mContext).inflate(R.layout.item_category_deal, parent, false));
             case DEAL_FRAGMENT_TOP:
-                return null;
+                return new SmallDealCategoryHolder(LayoutInflater.from(mContext).inflate(R.layout.item_category_small, parent, false));
             default:
                 return null;
         }
@@ -85,10 +86,23 @@ public class CategoryAdapter extends RecyclerView.Adapter {
                 setupView((DealCategoryHolder) holder, category);
                 break;
             case DEAL_FRAGMENT_TOP:
+                setupView((SmallDealCategoryHolder) holder, category);
                 break;
             default:
                 break;
         }
+    }
+
+    private void setupView(SmallDealCategoryHolder holder, Category category) {
+        ViewUtil.showImage(mContext, category.getImageUrl(), holder.mBinding.ivCategory);
+
+        if (holder.mDisposable != null && !holder.mDisposable.isDisposed()) {
+            holder.mDisposable.dispose();
+        }
+
+        holder.mDisposable = RxView.clicks(holder.itemView)
+                .compose(RxUtil.withShortThrottleFirst())
+                .subscribe(o -> mCategoryClicks.onNext(category));
     }
 
     private void setupView(SelectCategoryHolder holder, Category category) {
@@ -151,6 +165,16 @@ public class CategoryAdapter extends RecyclerView.Adapter {
         private ItemCategoryDealBinding mBinding;
 
         public DealCategoryHolder(View itemView) {
+            super(itemView);
+            mBinding = DataBindingUtil.bind(itemView);
+        }
+    }
+
+    static class SmallDealCategoryHolder extends RecyclerView.ViewHolder {
+        private Disposable mDisposable;
+        private ItemCategorySmallBinding mBinding;
+
+        public SmallDealCategoryHolder(View itemView) {
             super(itemView);
             mBinding = DataBindingUtil.bind(itemView);
         }

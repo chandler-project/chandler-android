@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageView
+        android:id="@+id/iv_category"
+        android:layout_width="@dimen/size_toolbar_height"
+        android:layout_height="@dimen/size_toolbar_height"
+        android:layout_marginEnd="@dimen/spacing_smaller"
+        android:layout_marginLeft="@dimen/spacing_smaller"
+        android:layout_marginRight="@dimen/spacing_smaller"
+        android:layout_marginStart="@dimen/spacing_smaller"
+        android:foreground="?attr/selectableItemBackground"
+        android:padding="@dimen/spacing_smaller"
+        android:textSize="@dimen/text_size_normal"
+        tools:src="@drawable/ic_right" />
+</layout>

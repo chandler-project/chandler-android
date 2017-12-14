@@ -209,4 +209,10 @@
     <string name="content_which_city_do_you_live">Which city do you live?</string>
     <string name="content_create_new_request">Create new request</string>
     <string name="content_bid">Bid</string>
+    <string name="content_sign_out">Sign out</string>
+    <string name="title_activity_edit_profile">EditProfileActivity</string>
+    <string name="content_edit_avatar">Edit your avatar</string>
+    <string name="content_your_bio">Your bio</string>
+    <string name="content_edit_profile">Edit profile</string>
+    <string name="content_save">Save</string>
 </resources>

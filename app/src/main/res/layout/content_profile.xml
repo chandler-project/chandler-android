@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -25,12 +25,25 @@
                     android:id="@+id/imageView"
                     android:layout_width="@dimen/_80sdp"
                     android:layout_height="@dimen/_80sdp"
-                    android:layout_margin="@dimen/spacing_small"
+                    android:layout_marginLeft="@dimen/spacing_small"
+                    android:layout_marginRight="@dimen/spacing_small"
+                    android:layout_marginTop="@dimen/spacing_small"
                     android:scaleType="centerCrop"
                     android:src="@drawable/avatar" />
-            </LinearLayout>
 
-            <LinearLayout
+                <TextView
+                    android:id="@+id/tv_sign_out"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/imageView"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/cabin_regular"
+                    android:padding="@dimen/spacing_smaller"
+                    android:text="@string/content_sign_out" />
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:id="@+id/layout_user_infor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -50,10 +63,21 @@
                     android:textColor="@color/colorBlack"
                     android:textSize="@dimen/text_size_largest" />
 
+                <ImageView
+                    android:id="@+id/iv_edit"
+                    android:layout_width="@dimen/ico_size_largest"
+                    android:layout_height="@dimen/ico_size_largest"
+                    android:layout_marginTop="@dimen/spacing_smallest"
+                    android:layout_toRightOf="@id/name"
+                    android:baselineAlignBottom="true"
+                    android:padding="@dimen/spacing_smallest"
+                    android:src="@drawable/ic_mode_edit_black_24px" />
+
                 <Button
                     android:id="@+id/btn_point"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/_24sdp"
+                    android:layout_below="@id/name"
                     android:layout_marginTop="@dimen/spacing_smallest"
                     android:background="@drawable/item_button_rounded_yellow"
                     android:foreground="?attr/selectableItemBackground"
@@ -64,6 +88,7 @@
                     android:id="@+id/description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/btn_point"
                     android:layout_marginEnd="@dimen/spacing_smaller"
                     android:layout_marginRight="@dimen/spacing_smaller"
                     android:layout_marginTop="@dimen/spacing_smaller"
@@ -75,8 +100,10 @@
                     android:textSize="@dimen/text_size_normal" />
 
                 <LinearLayout
+                    android:id="@+id/layout_achivement"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/description"
                     android:orientation="horizontal">
 
                     <TextView
@@ -119,11 +146,16 @@
                         android:textColor="@color/colorBlack"
                         android:textSize="@dimen/_10sdp" />
                 </LinearLayout>
-            </LinearLayout>
+            </RelativeLayout>
         </LinearLayout>
 
-        <FrameLayout
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5px"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:background="@color/colorBlack50" />
 
+        <FrameLayout
             android:id="@+id/review_list_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

@@ -26,5 +26,12 @@
             android:singleLine="true"
             android:textSize="@dimen/text_size_big"
             tools:text="@string/app_name" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5px"
+            android:layout_below="@id/tv_title"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:background="@color/colorBlack50" />
     </RelativeLayout>
 </layout>

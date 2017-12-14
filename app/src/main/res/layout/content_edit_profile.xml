@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context="com.chandlersystem.chandler.ui.profile.ProfileFragment"
+        tools:showIn="@layout/fragment_profile">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_80sdp"
+                android:layout_marginLeft="@dimen/spacing_small"
+                android:layout_marginRight="@dimen/spacing_small"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:scaleType="centerCrop"
+                android:src="@drawable/avatar" />
+
+            <TextView
+                android:id="@+id/tv_sign_out"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_toRightOf="@id/imageView"
+                android:fontFamily="@font/cabin_regular"
+                android:padding="@dimen/spacing_smaller"
+                android:text="@string/content_edit_avatar" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_user_infor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/spacing_small"
+            android:paddingRight="@dimen/spacing_small">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:background="@null"
+                android:fontFamily="@font/cabin_medium"
+                android:gravity="top"
+                android:text="@string/content_your_name"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/text_size_normal" />
+
+            <EditText
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/spacing_smaller"
+                android:layout_marginRight="@dimen/spacing_smaller"
+                android:layout_marginTop="@dimen/spacing_smaller"
+                android:background="@null"
+                android:fontFamily="@font/cabin_bold"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/text_size_largest"
+                tools:hint="John Snow" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5px"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:background="@color/colorBlack50" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:background="@null"
+                android:fontFamily="@font/cabin_medium"
+                android:gravity="top"
+                android:text="@string/content_your_bio"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/text_size_normal" />
+
+            <EditText
+                android:id="@+id/et_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/name"
+                android:layout_marginTop="@dimen/spacing_smaller"
+                android:background="@drawable/item_button_rounded_stroke"
+                android:ems="10"
+                android:fontFamily="@font/cabin_regular"
+                android:gravity="top|left"
+                android:inputType="textMultiLine"
+                android:lines="6"
+                android:maxLines="6"
+                android:minLines="6"
+                android:padding="@dimen/spacing_small"
+                android:scrollbars="vertical"
+                android:textColorHint="@color/colorTextGray"
+                android:textSize="@dimen/text_size_big"
+                tools:hint="@string/content_tell_something_about_the_product" />
+        </LinearLayout>
+    </LinearLayout>
+</layout>
+

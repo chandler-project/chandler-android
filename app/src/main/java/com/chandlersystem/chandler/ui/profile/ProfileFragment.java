@@ -16,9 +16,15 @@ import com.chandlersystem.chandler.R;
 import com.chandlersystem.chandler.databinding.FragmentProfileBinding;
 import com.chandlersystem.chandler.ui.profile.dummy.DummyContent;
 import com.chandlersystem.chandler.utilities.CircleTransform;
+import com.jakewharton.rxbinding2.view.RxView;
 
-public class ProfileFragment extends Fragment{
+import io.reactivex.Observable;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 
+public class ProfileFragment extends Fragment {
+    private final CompositeDisposable mCompositeDisposable = new CompositeDisposable();
     private FragmentProfileBinding mBinding;
 
     @NonNull
@@ -31,7 +37,6 @@ public class ProfileFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false);
 
-
         GlideApp.with(this).load(R.drawable.avatar)
                 .transform(new CircleTransform(getContext()))
                 .into(mBinding.layoutContent.imageView);
@@ -41,11 +46,34 @@ public class ProfileFragment extends Fragment{
         return mBinding.getRoot();
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        handleEvents();
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mCompositeDisposable.clear();
+    }
+
+    private void handleEvents() {
+        mCompositeDisposable.add(buttonEditClicks()
+                .subscribe(o -> startEditProfileActivity(), Throwable::printStackTrace));
+    }
+
+    private void startEditProfileActivity() {
+        startActivity(EditProfileActivity.getInstance(getContext()));
+    }
+
+    private Observable<Object> buttonEditClicks() {
+        return RxView.clicks(mBinding.layoutContent.ivEdit);
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
     }
-
-
 }
