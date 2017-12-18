@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chandlersystem.chandler.R;
+import com.chandlersystem.chandler.custom_views.LinearItemDecoration;
 import com.chandlersystem.chandler.ui.request_detail.RequestDetailActivity;
 import com.chandlersystem.chandler.ui.requests.dummy.DummyContent;
 import com.chandlersystem.chandler.ui.requests.dummy.DummyContent.DummyItem;
@@ -76,8 +77,7 @@ public class RequestsFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
-            recyclerView.addItemDecoration(itemDecoration);
+            recyclerView.addItemDecoration(new LinearItemDecoration(getResources().getDimensionPixelSize(R.dimen.spacing_normal)));
             mAdapter = new RequestAdapter(DummyContent.ITEMS, mListener, getContext());
             recyclerView.setAdapter(mAdapter);
 

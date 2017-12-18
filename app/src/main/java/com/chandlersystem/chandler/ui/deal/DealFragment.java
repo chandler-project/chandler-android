@@ -113,7 +113,7 @@ public class DealFragment extends Fragment {
         mBinding.recyclerViewDeals.setLayoutManager(layoutManager);
         mBinding.recyclerViewDeals.setNestedScrollingEnabled(true);
         mBinding.recyclerViewDeals.setHasFixedSize(true);
-        mBinding.recyclerViewDeals.addItemDecoration(new LinearItemDecoration(getResources().getDimensionPixelSize(R.dimen.spacing_small)));
+        mBinding.recyclerViewDeals.addItemDecoration(new LinearItemDecoration(getResources().getDimensionPixelSize(R.dimen.spacing_normal)));
         mBinding.recyclerViewDeals.setAdapter(mDealAdapter);
     }
 

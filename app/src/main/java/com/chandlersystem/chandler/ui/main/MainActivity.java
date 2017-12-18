@@ -19,6 +19,7 @@ import com.chandlersystem.chandler.ui.create_deal.CreateDealActivity;
 import com.chandlersystem.chandler.ui.create_request.CreateRequestActivity;
 import com.chandlersystem.chandler.ui.deal.DealFragment;
 import com.chandlersystem.chandler.ui.main.state.MainState;
+import com.chandlersystem.chandler.ui.notification.NotificationFragment;
 import com.chandlersystem.chandler.ui.product_search.ProductSearchActivity;
 import com.chandlersystem.chandler.ui.profile.ProfileFragment;
 import com.chandlersystem.chandler.ui.profile.ReviewsFragment;
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fragmentList.add(DealFragment.newInstance());
         fragmentList.add(RequestsFragment.newInstance(1));
         fragmentList.add(CreateDealRequestFragment.newInstance());
-        fragmentList.add(DealFragment.newInstance());
+        fragmentList.add(NotificationFragment.newInstance());
         fragmentList.add(ProfileFragment.newInstance());
         mFragmentAdapter = new FragmentAdapter(getSupportFragmentManager(), fragmentList);
         mBinding.viewpager.setAdapter(mFragmentAdapter);
