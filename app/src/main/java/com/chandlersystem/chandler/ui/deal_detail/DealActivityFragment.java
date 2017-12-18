@@ -1,4 +1,4 @@
-package com.chandlersystem.chandler.ui.product_detail;
+package com.chandlersystem.chandler.ui.deal_detail;
 
 
 import android.databinding.DataBindingUtil;
@@ -13,22 +13,22 @@ import android.view.ViewGroup;
 import com.chandlersystem.chandler.R;
 import com.chandlersystem.chandler.custom_views.LinearItemDecoration;
 import com.chandlersystem.chandler.data.models.retrofit.Deal;
-import com.chandlersystem.chandler.databinding.FragmentDealCommentBinding;
-import com.chandlersystem.chandler.ui.adapters.CommentAdapter;
+import com.chandlersystem.chandler.databinding.FragmentDealActivityBinding;
+import com.chandlersystem.chandler.ui.adapters.UserActivityAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DealCommentFragment extends Fragment {
-    private FragmentDealCommentBinding mBinding;
-    private CommentAdapter mUserCommentAdapter;
+public class DealActivityFragment extends Fragment {
+    private FragmentDealActivityBinding mBinding;
+    private UserActivityAdapter mUserActivityAdapter;
 
-    public DealCommentFragment() {
+    public DealActivityFragment() {
         // Required empty public constructor
     }
 
-    public static DealCommentFragment newInstance() {
-        return new DealCommentFragment();
+    public static DealActivityFragment newInstance() {
+        return new DealActivityFragment();
     }
 
     @Override
@@ -40,7 +40,7 @@ public class DealCommentFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_deal_comment, container, false);
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_deal_activity, container, false);
         return mBinding.getRoot();
     }
 
@@ -82,12 +82,11 @@ public class DealCommentFragment extends Fragment {
         dealList.add(new Deal());
         dealList.add(new Deal());
         dealList.add(new Deal());
-        mUserCommentAdapter = new CommentAdapter(getContext(), dealList);
-        mBinding.recyclerViewComments.setLayoutManager(layoutManager);
-        mBinding.recyclerViewComments.setNestedScrollingEnabled(true);
-        mBinding.recyclerViewComments.setHasFixedSize(true);
-        mBinding.recyclerViewComments.addItemDecoration(new LinearItemDecoration(getResources().getDimensionPixelSize(R.dimen.spacing_small)));
-        mBinding.recyclerViewComments.setAdapter(mUserCommentAdapter);
+        mUserActivityAdapter = new UserActivityAdapter(getContext(), dealList);
+        mBinding.recyclerViewActivities.setLayoutManager(layoutManager);
+        mBinding.recyclerViewActivities.setNestedScrollingEnabled(true);
+        mBinding.recyclerViewActivities.setHasFixedSize(true);
+        mBinding.recyclerViewActivities.addItemDecoration(new LinearItemDecoration(getResources().getDimensionPixelSize(R.dimen.spacing_small)));
+        mBinding.recyclerViewActivities.setAdapter(mUserActivityAdapter);
     }
-
 }

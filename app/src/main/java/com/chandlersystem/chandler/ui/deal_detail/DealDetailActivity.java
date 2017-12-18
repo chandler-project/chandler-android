@@ -1,4 +1,4 @@
-package com.chandlersystem.chandler.ui.product_detail;
+package com.chandlersystem.chandler.ui.deal_detail;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,12 +9,11 @@ import android.widget.Toast;
 
 import com.chandlersystem.chandler.R;
 import com.chandlersystem.chandler.databinding.ActivityDealDetailBinding;
-import com.chandlersystem.chandler.ui.adapters.TabAdapter;
+import com.chandlersystem.chandler.ui.adapters.DealTabAdapter;
 import com.jakewharton.rxbinding2.view.RxView;
 
 import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Consumer;
 
 public class DealDetailActivity extends AppCompatActivity {
     private ActivityDealDetailBinding mBinding;
@@ -57,11 +56,10 @@ public class DealDetailActivity extends AppCompatActivity {
     }
 
     private void setupViewPagerAndTabLayout() {
-        TabAdapter adapter = new TabAdapter(getSupportFragmentManager(), this);
+        DealTabAdapter adapter = new DealTabAdapter(getSupportFragmentManager(), this);
         mBinding.viewpagerProduct.setAdapter(adapter);
         mBinding.viewpagerProduct.setOffscreenPageLimit(3);
 
         mBinding.tabProduct.setupWithViewPager(mBinding.viewpagerProduct);
     }
-
 }

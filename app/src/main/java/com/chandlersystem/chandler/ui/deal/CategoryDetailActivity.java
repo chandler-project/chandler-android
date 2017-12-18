@@ -12,7 +12,7 @@ import com.chandlersystem.chandler.custom_views.CategoryDecoration;
 import com.chandlersystem.chandler.data.models.retrofit.Deal;
 import com.chandlersystem.chandler.databinding.ActivityCategoryDetailBinding;
 import com.chandlersystem.chandler.ui.adapters.DealAdapter;
-import com.chandlersystem.chandler.ui.product_detail.DealDetailActivity;
+import com.chandlersystem.chandler.ui.deal_detail.DealDetailActivity;
 import com.jakewharton.rxbinding2.view.RxView;
 
 import java.util.ArrayList;
@@ -20,7 +20,6 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Consumer;
 
 public class CategoryDetailActivity extends AppCompatActivity {
     private ActivityCategoryDetailBinding mBinding;

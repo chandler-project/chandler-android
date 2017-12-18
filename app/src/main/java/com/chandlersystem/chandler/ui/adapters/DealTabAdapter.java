@@ -6,14 +6,14 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.chandlersystem.chandler.R;
-import com.chandlersystem.chandler.ui.product_detail.DealActivityFragment;
-import com.chandlersystem.chandler.ui.product_detail.DealCommentFragment;
-import com.chandlersystem.chandler.ui.product_detail.DealInforFragment;
+import com.chandlersystem.chandler.ui.deal_detail.DealActivityFragment;
+import com.chandlersystem.chandler.ui.deal_detail.DealCommentFragment;
+import com.chandlersystem.chandler.ui.deal_detail.DealInforFragment;
 
-public class TabAdapter extends FragmentPagerAdapter {
+public class DealTabAdapter extends FragmentPagerAdapter {
     private Context context;
 
-    public TabAdapter(FragmentManager fm, Context context) {
+    public DealTabAdapter(FragmentManager fm, Context context) {
         super(fm);
         this.context = context;
     }

@@ -22,7 +22,7 @@ import com.chandlersystem.chandler.databinding.FragmentDealBinding;
 import com.chandlersystem.chandler.ui.adapters.DealAdapter;
 import com.chandlersystem.chandler.ui.adapters.ImagePagerAdapter;
 import com.chandlersystem.chandler.ui.adapters.CategoryAdapter;
-import com.chandlersystem.chandler.ui.product_detail.DealDetailActivity;
+import com.chandlersystem.chandler.ui.deal_detail.DealDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
