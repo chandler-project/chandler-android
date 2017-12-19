@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite">
+
+        <RelativeLayout
+            android:id="@+id/layout_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_product"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_100sdp"
+                android:scaleType="centerCrop"
+                tools:src="@drawable/avatar" />
+
+            <TextView
+                android:id="@+id/tv_end_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="@dimen/spacing_smaller"
+                android:layout_marginRight="@dimen/spacing_smaller"
+                android:layout_marginTop="@dimen/spacing_smaller"
+                android:background="@drawable/item_button_rounded_red"
+                android:fontFamily="@font/cabin_regular"
+                android:paddingBottom="@dimen/spacing_smallest"
+                android:paddingLeft="@dimen/spacing_small"
+                android:paddingRight="@dimen/spacing_small"
+                android:paddingTop="@dimen/spacing_smallest"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/text_size_normal"
+                tools:text="End at 27/02/1995" />
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_product_detail"
+            android:layout_marginLeft="@dimen/spacing_smaller"
+            android:layout_marginRight="@dimen/spacing_smaller"
+            android:layout_marginTop="@dimen/spacing_smaller"
+            android:fontFamily="@font/cabin_bold"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/text_size_big"
+            tools:text="$200" />
+
+        <TextView
+            android:id="@+id/tv_product_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout_header"
+            android:layout_marginLeft="@dimen/spacing_smaller"
+            android:layout_marginRight="@dimen/spacing_smaller"
+            android:layout_marginTop="@dimen/spacing_smaller"
+            android:fontFamily="@font/cabin_bold"
+            android:textColor="@color/colorTextPrimary"
+            android:textSize="@dimen/text_size_large"
+            tools:text="Samsung Galaxy S8 brand new" />
+
+        <TextView
+            android:id="@+id/tv_product_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_product_title"
+            android:layout_marginLeft="@dimen/spacing_smaller"
+            android:layout_marginRight="@dimen/spacing_smaller"
+            android:layout_marginTop="@dimen/spacing_smallest"
+            android:fontFamily="@font/cabin_bold"
+            android:maxLines="2"
+            android:textColor="@color/colorTextGray"
+            android:textSize="@dimen/text_size_normal"
+            tools:text="Samsung Galaxy S8 brand new" />
+
+        <include
+            layout="@layout/item_vote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/tv_product_detail"
+            android:layout_marginBottom="@dimen/spacing_smallest"
+            android:layout_marginLeft="@dimen/spacing_smaller"
+            android:layout_marginRight="@dimen/spacing_smaller"
+            android:layout_marginTop="@dimen/spacing_smaller" />
+
+        <View
+            android:id="@+id/breaking_line"
+            android:layout_width="match_parent"
+            android:layout_height="0.5px"
+            android:layout_below="@id/tv_price"
+            android:layout_marginTop="@dimen/spacing_smaller"
+            android:background="@color/colorBlack50" />
+
+
+        <include
+            android:id="@+id/layout_profile"
+            layout="@layout/item_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/breaking_line"
+            android:layout_marginBottom="@dimen/spacing_smaller"
+            android:layout_marginLeft="@dimen/spacing_smaller"
+            android:layout_marginRight="@dimen/spacing_smaller"
+            android:layout_marginTop="@dimen/spacing_smaller" />
+
+        <ImageView
+            android:layout_width="@dimen/ico_size_largest"
+            android:layout_height="@dimen/ico_size_largest"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/breaking_line"
+            android:layout_marginBottom="@dimen/spacing_smaller"
+            android:layout_marginLeft="@dimen/spacing_smaller"
+            android:layout_marginRight="@dimen/spacing_smaller"
+            android:layout_marginTop="@dimen/spacing_smaller"
+            android:src="@drawable/ic_shopping" />
+    </RelativeLayout>
+</layout>

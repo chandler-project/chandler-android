@@ -1,6 +1,7 @@
 package com.chandlersystem.chandler.ui.requests;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
@@ -12,8 +13,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chandlersystem.chandler.R;
+import com.chandlersystem.chandler.custom_views.LinearItemDecoration;
+import com.chandlersystem.chandler.ui.request_detail.RequestDetailActivity;
 import com.chandlersystem.chandler.ui.requests.dummy.DummyContent;
 import com.chandlersystem.chandler.ui.requests.dummy.DummyContent.DummyItem;
+
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
 
 /**
  * A fragment representing a list of Items.
@@ -22,12 +28,14 @@ import com.chandlersystem.chandler.ui.requests.dummy.DummyContent.DummyItem;
  * interface.
  */
 public class RequestsFragment extends Fragment {
+    private final CompositeDisposable mCompositeDisposable = new CompositeDisposable();
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListRequestFragmentInteractionListener mListener;
+    private RequestAdapter mAdapter;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -69,13 +77,25 @@ public class RequestsFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new RequestAdapter(DummyContent.ITEMS, mListener, getContext()));
-            RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
-            recyclerView.addItemDecoration(itemDecoration);
+            recyclerView.addItemDecoration(new LinearItemDecoration(getResources().getDimensionPixelSize(R.dimen.spacing_normal)));
+            mAdapter = new RequestAdapter(DummyContent.ITEMS, mListener, getContext());
+            recyclerView.setAdapter(mAdapter);
+
+            requestClicks();
+
         }
         return view;
     }
 
+    private void requestClicks() {
+        mCompositeDisposable.add(mAdapter.getRequestClicks()
+                .subscribe(o -> startRequestDetailActivity(), Throwable::printStackTrace));
+    }
+
+    private void startRequestDetailActivity() {
+        Intent intent = RequestDetailActivity.getInstance(getContext());
+        startActivity(intent);
+    }
 
     @Override
     public void onAttach(Context context) {

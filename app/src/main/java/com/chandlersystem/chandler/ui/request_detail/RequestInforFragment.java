@@ -1,4 +1,4 @@
-package com.chandlersystem.chandler.ui.product_detail;
+package com.chandlersystem.chandler.ui.request_detail;
 
 
 import android.databinding.DataBindingUtil;
@@ -12,25 +12,25 @@ import android.view.ViewGroup;
 
 import com.chandlersystem.chandler.R;
 import com.chandlersystem.chandler.databinding.FragmentDealInforBinding;
+import com.chandlersystem.chandler.databinding.FragmentRequestInforBinding;
 import com.chandlersystem.chandler.ui.adapters.ImagePagerAdapter;
-import com.chandlersystem.chandler.utilities.TextUtil;
 import com.chandlersystem.chandler.utilities.ViewUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DealInforFragment extends Fragment {
-    private FragmentDealInforBinding mBinding;
+public class RequestInforFragment extends Fragment {
+    private FragmentRequestInforBinding mBinding;
 
     private List<String> mProductImageList;
     private ImagePagerAdapter mImagePagerAdapter;
 
-    public DealInforFragment() {
+    public RequestInforFragment() {
         // Required empty public constructor
     }
 
-    public static DealInforFragment newInstance() {
-        return new DealInforFragment();
+    public static RequestInforFragment newInstance() {
+        return new RequestInforFragment();
     }
 
     @Override
@@ -42,7 +42,7 @@ public class DealInforFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_deal_infor, container, false);
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_request_infor, container, false);
         return mBinding.getRoot();
     }
 
@@ -84,9 +84,7 @@ public class DealInforFragment extends Fragment {
     }
 
     private void setReactionAmount() {
-        mBinding.layoutVote.tvUpvoteAmount.setText(String.valueOf(12));
-        mBinding.layoutVote.tvDownvoteAmount.setText(String.valueOf(12));
-        mBinding.tvShareAmount.setText(String.valueOf(24));
+
     }
 
     private void setEndDealDate() {

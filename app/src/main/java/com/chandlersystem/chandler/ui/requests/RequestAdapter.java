@@ -14,8 +14,13 @@ import com.chandlersystem.chandler.databinding.ItemDealBinding;
 import com.chandlersystem.chandler.ui.requests.RequestsFragment.OnListRequestFragmentInteractionListener;
 import com.chandlersystem.chandler.ui.requests.dummy.DummyContent.DummyItem;
 import com.chandlersystem.chandler.utilities.ViewUtil;
+import com.jakewharton.rxbinding2.view.RxView;
 
 import java.util.List;
+
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.subjects.PublishSubject;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
@@ -27,6 +32,12 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
     private final List<DummyItem> mValues;
     private final OnListRequestFragmentInteractionListener mListener;
     private Context mContext;
+
+    private final PublishSubject<DummyItem> mRequestClicks = PublishSubject.create();
+
+    public PublishSubject<DummyItem> getRequestClicks() {
+        return mRequestClicks;
+    }
 
     public RequestAdapter(List<DummyItem> mValues, OnListRequestFragmentInteractionListener mListener, Context mContext) {
         this.mValues = mValues;
@@ -53,6 +64,16 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
             }
         });
         setupViews(holder.mBinding);
+        requestClicks(holder, holder.mItem);
+    }
+
+    private void requestClicks(ViewHolder holder, DummyItem mItem) {
+        if (holder.mDisposable != null && !holder.mDisposable.isDisposed()) {
+            holder.mDisposable.dispose();
+        }
+
+        holder.mDisposable = RxView.clicks(holder.itemView)
+                .subscribe(o -> mRequestClicks.onNext(mItem), Throwable::printStackTrace);
     }
 
     private void setupViews(FragmentRequestItemBinding binding) {
@@ -78,6 +99,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder {
         private FragmentRequestItemBinding mBinding;
         public DummyItem mItem;
+        private Disposable mDisposable;
 
         public ViewHolder(View view) {
             super(view);

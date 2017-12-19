@@ -10,7 +10,7 @@
         <include
             android:id="@+id/layout_category_name"
             layout="@layout/item_category_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"
             tools:visibility="visible" />
@@ -173,6 +173,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_product_link"
+            android:layout_marginBottom="@dimen/spacing_smaller"
             android:layout_marginLeft="@dimen/spacing_small"
             android:layout_marginRight="@dimen/spacing_small"
             android:layout_marginTop="@dimen/spacing_smallest" />

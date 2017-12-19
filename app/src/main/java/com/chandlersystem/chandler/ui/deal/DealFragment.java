@@ -6,7 +6,6 @@ import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,16 +22,12 @@ import com.chandlersystem.chandler.databinding.FragmentDealBinding;
 import com.chandlersystem.chandler.ui.adapters.DealAdapter;
 import com.chandlersystem.chandler.ui.adapters.ImagePagerAdapter;
 import com.chandlersystem.chandler.ui.adapters.CategoryAdapter;
-import com.chandlersystem.chandler.ui.product_detail.DealDetailActivity;
-import com.chandlersystem.chandler.utilities.RxUtil;
-import com.chandlersystem.chandler.utilities.ViewUtil;
-import com.jakewharton.rxbinding2.support.v4.widget.RxSwipeRefreshLayout;
+import com.chandlersystem.chandler.ui.deal_detail.DealDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Consumer;
 
 public class DealFragment extends Fragment {
     private FragmentDealBinding mBinding;
@@ -114,11 +109,11 @@ public class DealFragment extends Fragment {
         dealList.add(new Deal());
         dealList.add(new Deal());
         dealList.add(new Deal());
-        mDealAdapter = new DealAdapter(getContext(), dealList);
+        mDealAdapter = new DealAdapter(getContext(), dealList, DealAdapter.DealType.DEAL_MAIN);
         mBinding.recyclerViewDeals.setLayoutManager(layoutManager);
         mBinding.recyclerViewDeals.setNestedScrollingEnabled(true);
         mBinding.recyclerViewDeals.setHasFixedSize(true);
-        mBinding.recyclerViewDeals.addItemDecoration(new LinearItemDecoration(getResources().getDimensionPixelSize(R.dimen.spacing_small)));
+        mBinding.recyclerViewDeals.addItemDecoration(new LinearItemDecoration(getResources().getDimensionPixelSize(R.dimen.spacing_normal)));
         mBinding.recyclerViewDeals.setAdapter(mDealAdapter);
     }
 
@@ -149,6 +144,23 @@ public class DealFragment extends Fragment {
         mBinding.recyclerViewSmallCategory.setNestedScrollingEnabled(false);
         mBinding.recyclerViewSmallCategory.setHasFixedSize(true);
         mBinding.recyclerViewSmallCategory.setAdapter(mSmallCategoryAdapter);
+
+        bigCategoryItemClicks();
+        smallCategoryItemClicks();
+    }
+
+    private void smallCategoryItemClicks() {
+        mCompositeDisposable.add(mSmallCategoryAdapter.getCategoryClicks()
+                .subscribe(category -> startCategoryDetailActivity(), Throwable::printStackTrace));
+    }
+
+    private void startCategoryDetailActivity() {
+        startActivity(CategoryDetailActivity.getInstance(getContext()));
+    }
+
+    private void bigCategoryItemClicks() {
+        mCompositeDisposable.add(mCategoryAdapter.getCategoryClicks()
+                .subscribe(category -> startCategoryDetailActivity(), Throwable::printStackTrace));
     }
 
     private void setupToolbar() {
