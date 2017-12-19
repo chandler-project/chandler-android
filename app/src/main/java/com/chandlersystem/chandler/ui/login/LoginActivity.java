@@ -10,9 +10,9 @@ import android.widget.Toast;
 
 import com.chandlersystem.chandler.ChandlerApplication;
 import com.chandlersystem.chandler.R;
-import com.chandlersystem.chandler.configs.ApiConstant;
 import com.chandlersystem.chandler.data.api.ChandlerApi;
 import com.chandlersystem.chandler.data.models.request.LoginRequest;
+import com.chandlersystem.chandler.data.models.response.AuthenticationRespone;
 import com.chandlersystem.chandler.databinding.ActivityLoginBinding;
 import com.chandlersystem.chandler.di.components.ActivityComponent;
 import com.chandlersystem.chandler.di.components.DaggerActivityComponent;
@@ -30,8 +30,6 @@ import io.reactivex.disposables.CompositeDisposable;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = LoginActivity.class.getSimpleName();
@@ -101,14 +99,10 @@ public class LoginActivity extends AppCompatActivity {
     private void authentication(Profile currentProfile) {
         if(currentProfile != null){
             LoginRequest loginRequest = new LoginRequest(AccessToken.getCurrentAccessToken().getToken(), currentProfile.getId());
-            ChandlerApi api = ChandlerApplication.getApplicationComponent(LoginActivity.this).getSevenRewardsApiV1();
-//            ChandlerApi api = new Retrofit.Builder().baseUrl(ApiConstant.BASE_URL_VER1)
-//                    .addConverterFactory(GsonConverterFactory.create())
-//                    .build()
-//                    .create(ChandlerApi.class);
-            api.authentication(loginRequest, 1, "user").enqueue(new Callback<Void>() {
+            ChandlerApi api = ChandlerApplication.getApplicationComponent(LoginActivity.this).getChandlerApiV1();
+            api.authentication(loginRequest, 1, "user").enqueue(new Callback<AuthenticationRespone>() {
                 @Override
-                public void onResponse(Call<Void> call, Response<Void> response) {
+                public void onResponse(Call<AuthenticationRespone> call, Response<AuthenticationRespone> response) {
                     if(response.isSuccessful()){
                         Log.i(TAG, "onResponse: login success");
                         startMainActivity();
@@ -118,7 +112,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onFailure(Call<Void> call, Throwable t) {
+                public void onFailure(Call<AuthenticationRespone> call, Throwable t) {
                     Log.e(TAG, "onFailure: ", t);
                 }
             });

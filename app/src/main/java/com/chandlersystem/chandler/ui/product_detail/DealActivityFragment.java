@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.chandlersystem.chandler.ChandlerApplication;
 import com.chandlersystem.chandler.R;
 import com.chandlersystem.chandler.custom_views.LinearItemDecoration;
 import com.chandlersystem.chandler.data.models.retrofit.Deal;
@@ -49,6 +50,7 @@ public class DealActivityFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setupRecyclerView();
+        ChandlerApplication.getApplicationComponent(getContext()).getChandlerApiV1();
     }
 
     private void setupRecyclerView() {

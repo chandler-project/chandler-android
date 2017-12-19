@@ -20,7 +20,7 @@ public interface ApplicationComponent {
     @ApplicationContext
     Context getApplicationContext();
 
-    ChandlerApi getSevenRewardsApiV1();
+    ChandlerApi getChandlerApiV1();
 
     FirebaseDatabase getFirebaseDatabase();
 }
