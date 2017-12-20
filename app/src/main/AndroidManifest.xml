@@ -157,7 +157,8 @@
             android:name=".ui.deal.CategoryDetailActivity"
             android:label="@string/title_activity_list_deal_by_category"
             android:theme="@style/AppTheme" />
-        <activity android:name=".ui.request_detail.RequestDetailActivity"></activity>
+        <activity android:name=".ui.request_detail.RequestDetailActivity" />
+        <activity android:name=".ui.cart.CartActivity"></activity>
     </application>
 
 </manifest>

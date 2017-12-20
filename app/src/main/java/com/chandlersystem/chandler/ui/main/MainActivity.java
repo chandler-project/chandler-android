@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.chandlersystem.chandler.R;
 import com.chandlersystem.chandler.databinding.ActivityMainBinding;
 import com.chandlersystem.chandler.ui.adapters.FragmentAdapter;
+import com.chandlersystem.chandler.ui.cart.CartActivity;
 import com.chandlersystem.chandler.ui.create_deal.CreateDealActivity;
 import com.chandlersystem.chandler.ui.create_request.CreateRequestActivity;
 import com.chandlersystem.chandler.ui.deal.DealFragment;
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ViewPager.OnPageChangeListener, DealFragment.OnFragmentInteractionListener,
         CreateDealRequestFragment.OnCreateDealRequestInteraction,
         RequestsFragment.OnListRequestFragmentInteractionListener,
-        ReviewsFragment.OnReviewInteractListener{
+        ReviewsFragment.OnReviewInteractListener {
     private static final String TAG = MainActivity.class.getCanonicalName();
 
     private ActivityMainBinding mBinding;
@@ -106,11 +107,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 setFragmentPosition(4);
                 break;
             case R.id.iv_cart:
+                startCartActivity();
                 break;
             case R.id.iv_search:
                 openProductSearch();
                 break;
         }
+    }
+
+    private void startCartActivity() {
+        startActivity(CartActivity.getInstance(this));
     }
 
     private void openProductSearch() {
@@ -152,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onRequestFragmentInteraction(DummyContent.DummyItem request) {
-        Toast.makeText(this, "item clicked: "+request.content, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "item clicked: " + request.content, Toast.LENGTH_SHORT).show();
     }
 
     @Override

@@ -2,6 +2,8 @@
 <layout>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_40sdp">
 
@@ -16,19 +18,46 @@
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/text_size_big" />
 
-        <ImageView
-            android:id="@+id/iv_cart"
-            android:layout_width="@dimen/size_toolbar_height"
-            android:layout_height="@dimen/size_toolbar_height"
+        <FrameLayout
+            android:id="@+id/layout_cart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/spacing_smallest"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:clickable="true"
-            android:focusable="true"
-            android:padding="@dimen/_14sdp"
-            android:src="@drawable/ic_cart" />
+            android:layout_marginEnd="@dimen/spacing_smallest"
+            android:layout_marginRight="@dimen/spacing_smallest">
+
+            <ImageView
+                android:id="@+id/iv_cart"
+                android:layout_width="@dimen/size_toolbar_height"
+                android:layout_height="@dimen/size_toolbar_height"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="@dimen/_14sdp"
+                android:src="@drawable/ic_cart" />
+
+            <android.support.v7.widget.CardView
+                android:layout_width="@dimen/ico_size_normal"
+                android:layout_height="@dimen/ico_size_normal"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginBottom="@dimen/spacing_smaller"
+                android:visibility="visible"
+                app:cardBackgroundColor="@color/colorRed"
+                app:cardCornerRadius="@dimen/spacing_smaller"
+                app:cardElevation="0dp">
+
+                <TextView
+                    android:id="@+id/tv_cart_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="10"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/text_size_small" />
+            </android.support.v7.widget.CardView>
+        </FrameLayout>
 
         <ImageView
             android:id="@+id/iv_search"
@@ -36,8 +65,9 @@
             android:layout_height="@dimen/size_toolbar_height"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/spacing_normal"
-            android:layout_toLeftOf="@id/iv_cart"
-            android:layout_toStartOf="@id/iv_cart"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:layout_toLeftOf="@id/layout_cart"
+            android:layout_toStartOf="@id/layout_cart"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="true"
             android:focusable="true"
