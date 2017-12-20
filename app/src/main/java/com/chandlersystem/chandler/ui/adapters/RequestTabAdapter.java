@@ -6,10 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.chandlersystem.chandler.R;
-import com.chandlersystem.chandler.ui.deal_detail.DealActivityFragment;
-import com.chandlersystem.chandler.ui.deal_detail.DealCommentFragment;
-import com.chandlersystem.chandler.ui.deal_detail.DealInforFragment;
-import com.chandlersystem.chandler.ui.request_detail.RequestActivityFragment;
+import com.chandlersystem.chandler.ui.request_detail.BidFragment;
 import com.chandlersystem.chandler.ui.request_detail.RequestInforFragment;
 
 public class RequestTabAdapter extends FragmentPagerAdapter {
@@ -26,7 +23,7 @@ public class RequestTabAdapter extends FragmentPagerAdapter {
             default:
                 return RequestInforFragment.newInstance();
             case 1:
-                return RequestActivityFragment.newInstance();
+                return BidFragment.newInstance();
         }
     }
 
@@ -41,7 +38,7 @@ public class RequestTabAdapter extends FragmentPagerAdapter {
             default:
                 return context.getString(R.string.content_detail);
             case 1:
-                return context.getString(R.string.content_activity);
+                return context.getString(R.string.content_bid);
         }
     }
 }

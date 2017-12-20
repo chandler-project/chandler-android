@@ -1,82 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite">
 
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:id="@+id/layout_price"
-            android:layout_width="70dp"
+        <RelativeLayout
+            android:id="@+id/layout_header"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/shape_link_preview_background"
-            android:orientation="vertical"
-            android:padding="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent">
+            android:layout_below="@id/layout_category_name">
 
-            <TextView
-                android:id="@+id/tv_price"
+            <include
+                android:id="@+id/layout_profile"
+                layout="@layout/item_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textColor="@color/colorBlack"
-                android:textSize="@dimen/_12sdp"
-                android:textStyle="bold"
-                tools:text="$250"/>
-
-            <TextView
-                android:id="@+id/tv_shipping_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="in 7 days"
-                android:textColor="@color/colorBlack"
-                android:textSize="@dimen/_10sdp"
-                android:textStyle="bold"/>
-
-        </LinearLayout>
+                android:layout_marginLeft="@dimen/spacing_small"
+                android:layout_marginRight="@dimen/spacing_small"
+                android:layout_marginTop="@dimen/spacing_smaller" />
+        </RelativeLayout>
 
         <TextView
-            android:id="@+id/tv_bid_description"
-            android:layout_width="0dp"
+            android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:text="$600 cộng với $100 ship tổng cộng là $250 nhé bạn :)"
-            android:textColor="@color/black_p50"
-            android:textSize="@dimen/_12sdp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/layout_price"
-            app:layout_constraintTop_toTopOf="parent"/>
+            android:layout_below="@id/layout_header"
+            android:layout_marginLeft="@dimen/spacing_small"
+            android:layout_marginRight="@dimen/spacing_small"
+            android:fontFamily="@font/cabin_regular"
+            android:paddingTop="@dimen/spacing_smaller"
+            android:textColor="@color/colorTextPrimary"
+            android:textSize="@dimen/text_size_normal"
+            tools:text="This is the content. What is lorem ipsum?? " />
 
         <TextView
-            android:id="@+id/tv_bid_user_name"
-            android:layout_width="0dp"
+            android:id="@+id/tv_bid_price"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:text="SeriousBee - 11.5k points"
-            android:textColor="@color/black_p50"
-            android:textSize="@dimen/_10sdp"
-            android:textStyle="bold"
-            android:maxLines="1"
-            android:singleLine="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/layout_price"
-            app:layout_constraintTop_toBottomOf="@+id/tv_bid_description"/>
+            android:layout_below="@id/tv_content"
+            android:layout_marginLeft="@dimen/spacing_small"
+            android:layout_marginRight="@dimen/spacing_small"
+            android:layout_marginTop="@dimen/spacing_smaller"
+            android:background="@drawable/item_button_rounded_yellow"
+            android:fontFamily="@font/cabin_regular"
+            android:padding="@dimen/spacing_smaller"
+            android:textColor="@color/colorTextPrimary"
+            android:textSize="@dimen/text_size_normal"
+            tools:text="Dat gia 20$" />
 
-    </android.support.constraint.ConstraintLayout>
+        <Button
+            android:id="@+id/btn_accept"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_28sdp"
+            android:layout_alignBottom="@id/tv_bid_price"
+            android:layout_toEndOf="@id/tv_bid_price"
+            android:layout_toRightOf="@id/tv_bid_price"
+            android:background="@color/colorBackgroundGray"
+            android:paddingLeft="@dimen/spacing_small"
+            android:paddingRight="@dimen/spacing_small"
+            android:text="@string/content_accept"
+            android:textColor="@color/colorTextPrimary" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5px"
+            android:layout_below="@id/btn_accept"
+            android:layout_margin="@dimen/spacing_small"
+            android:background="@color/colorBackgroundGray" />
+    </RelativeLayout>
 </layout>

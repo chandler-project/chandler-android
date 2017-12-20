@@ -29,9 +29,18 @@ public class RequestDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_request_detail);
+        setupViews();
+        handleEvents();
+    }
+
+    private void setupViews() {
         setupToolbar();
         setupViewPagerAndTabLayout();
-        handleEvents();
+        setupButtonBid();
+    }
+
+    private void setupButtonBid() {
+        mBinding.btnBet.setText(getString(R.string.content_bid_now));
     }
 
     private void handleEvents() {

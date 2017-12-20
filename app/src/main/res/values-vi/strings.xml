@@ -190,4 +190,6 @@ ba gác \"ship\" tới."</string>
     <string name="content_yes">Yes</string>
     <string name="content_no">No</string>
     <string name="make_a_payment">Make a payment</string>
+    <string name="content_accept">Đặt ship ngay</string>
+    <string name="content_bid_now">Bid</string>
 </resources>

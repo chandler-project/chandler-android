@@ -116,11 +116,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
                 .setPositiveButton(buttonYes, (dialogInterface, i) -> {
                     dialogInterface.dismiss();
                     removeAt(holder.getAdapterPosition());
-                    /*holder.mBinding.layoutWrapper.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorRed));
-                    Handler handler = new Handler();
-                    handler.postDelayed(() -> {
-
-                    }, 500);*/
                 })
                 .setNegativeButton(buttonNo, (dialogInterface, i) -> dialogInterface.dismiss());
         builder.show();
