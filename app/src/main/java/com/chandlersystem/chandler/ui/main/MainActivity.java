@@ -12,8 +12,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
+import com.chandlersystem.chandler.ChandlerApplication;
 import com.chandlersystem.chandler.R;
 import com.chandlersystem.chandler.databinding.ActivityMainBinding;
+import com.chandlersystem.chandler.di.components.ActivityComponent;
+import com.chandlersystem.chandler.di.components.DaggerActivityComponent;
+import com.chandlersystem.chandler.di.modules.ActivityModule;
 import com.chandlersystem.chandler.ui.adapters.FragmentAdapter;
 import com.chandlersystem.chandler.ui.cart.CartActivity;
 import com.chandlersystem.chandler.ui.create_deal.CreateDealActivity;
@@ -42,6 +46,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private MainState mMainState;
 
     private FragmentAdapter mFragmentAdapter;
+
+    private ActivityComponent mActivityComponent;
+
+    public ActivityComponent getActivityComponent() {
+        if (mActivityComponent == null) {
+            mActivityComponent = DaggerActivityComponent
+                    .builder()
+                    .activityModule(new ActivityModule(this))
+                    .applicationComponent(ChandlerApplication
+                            .getApplicationComponent(this))
+                    .build();
+        }
+
+        return mActivityComponent;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

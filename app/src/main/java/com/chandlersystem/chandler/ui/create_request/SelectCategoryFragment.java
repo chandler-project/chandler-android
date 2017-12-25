@@ -12,14 +12,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.chandlersystem.chandler.ChandlerApplication;
 import com.chandlersystem.chandler.R;
+import com.chandlersystem.chandler.data.api.ChandlerApi;
 import com.chandlersystem.chandler.data.models.pojo.Category;
 import com.chandlersystem.chandler.databinding.FragmentSelectItemBinding;
+import com.chandlersystem.chandler.di.components.ActivityComponent;
+import com.chandlersystem.chandler.di.components.DaggerActivityComponent;
+import com.chandlersystem.chandler.di.modules.ActivityModule;
 import com.chandlersystem.chandler.ui.adapters.SelectCategoryAdapter;
+import com.chandlersystem.chandler.utilities.RxUtil;
 import com.chandlersystem.chandler.utilities.ViewUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import io.reactivex.disposables.CompositeDisposable;
 
@@ -34,6 +42,9 @@ public class SelectCategoryFragment extends Fragment {
     private SelectCategoryListener mListener;
 
     private final CompositeDisposable mCompositeDisposable = new CompositeDisposable();
+
+    @Inject
+    ChandlerApi mAPi;
 
     public interface SelectCategoryListener {
         void onCategorySelected(Category category);
@@ -62,6 +73,15 @@ public class SelectCategoryFragment extends Fragment {
         } else {
             throw new RuntimeException("Please make the context implement SelectCategoryListener");
         }
+
+        ActivityComponent mActivityComponent = DaggerActivityComponent
+                .builder()
+                .activityModule(new ActivityModule(getActivity()))
+                .applicationComponent(ChandlerApplication
+                        .getApplicationComponent(getContext()))
+                .build();
+        mActivityComponent.inject(this);
+
     }
 
     @Override
@@ -77,13 +97,22 @@ public class SelectCategoryFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         setupViews();
         handleEvents();
+        callApi();
+    }
+
+    private void callApi() {
+        mCompositeDisposable.add(mAPi.getCategoryList()
+                .compose(RxUtil.withSchedulers())
+                .map(categoryRetrofitResponseListItem -> categoryRetrofitResponseListItem.items)
+                .subscribe(this::setAdapter, Throwable::printStackTrace));
     }
 
     private void handleEvents() {
-        setAdapter();
+
     }
 
-    private void setAdapter() {
+    private void setAdapter(List<Category> categoryList) {
+        mCategoryAdapter = new SelectCategoryAdapter(getContext(), categoryList);
         mBinding.rvItems.setAdapter(mCategoryAdapter);
         categoryClicks();
     }
@@ -105,26 +134,6 @@ public class SelectCategoryFragment extends Fragment {
 
     private void setupRecyclerView() {
         RecyclerView.LayoutManager mLayoutManger = new LinearLayoutManager(getContext());
-        List<Category> categoryList = new ArrayList<>();
-        String url = "https://cnet1.cbsistatic.com/img/9vw_9Ye3lmgdrRm-sUGUXsi0YxU=/300x250/2017/07/13/17f0d405-2f43-4b1e-9972-18f3910363bd/focal-listen-wireless-07.jpg";
-        String subCategory = "Ti vi, tu lanh, may giat, laptop";
-        categoryList.add(new Category(url, "Lorem ipsum", subCategory));
-        categoryList.add(new Category(url, "Lorem ipsum", subCategory));
-        categoryList.add(new Category(url, "Lorem ipsum", subCategory));
-        categoryList.add(new Category(url, "Lorem ipsum", subCategory));
-        categoryList.add(new Category(url, "Lorem ipsum", subCategory));
-        categoryList.add(new Category(url, "Lorem ipsum", subCategory));
-        categoryList.add(new Category(url, "Lorem ipsum", subCategory));
-        categoryList.add(new Category(url, "Lorem ipsum", subCategory));
-        categoryList.add(new Category(url, "Lorem ipsum", subCategory));
-        categoryList.add(new Category(url, "Lorem ipsum", subCategory));
-        categoryList.add(new Category(url, "Lorem ipsum", subCategory));
-        categoryList.add(new Category(url, "Lorem ipsum", subCategory));
-        categoryList.add(new Category(url, "Lorem ipsum", subCategory));
-        categoryList.add(new Category(url, "Lorem ipsum", subCategory));
-        categoryList.add(new Category(url, "Lorem ipsum", subCategory));
-
-        mCategoryAdapter = new SelectCategoryAdapter(getContext(), categoryList);
         mBinding.rvItems.setLayoutManager(mLayoutManger);
         mBinding.rvItems.setNestedScrollingEnabled(false);
         mBinding.rvItems.setHasFixedSize(true);

@@ -94,7 +94,7 @@ public class CategoryAdapter extends RecyclerView.Adapter {
     }
 
     private void setupView(SmallDealCategoryHolder holder, Category category) {
-        ViewUtil.showImage(mContext, category.getImageUrl(), holder.mBinding.ivCategory);
+        ViewUtil.showImage(mContext, category.getPicture(), holder.mBinding.ivCategory);
 
         if (holder.mDisposable != null && !holder.mDisposable.isDisposed()) {
             holder.mDisposable.dispose();
@@ -106,7 +106,7 @@ public class CategoryAdapter extends RecyclerView.Adapter {
     }
 
     private void setupView(SelectCategoryHolder holder, Category category) {
-        ViewUtil.showImage(mContext, category.getImageUrl(), holder.mBinding.ivCategory);
+        ViewUtil.showImage(mContext, category.getPicture(), holder.mBinding.ivCategory);
         holder.mBinding.tvCategory.setText(category.getName());
 
         if (holder.mDisposable != null && !holder.mDisposable.isDisposed()) {
@@ -129,7 +129,7 @@ public class CategoryAdapter extends RecyclerView.Adapter {
     }
 
     private void setupView(DealCategoryHolder holder, Category category) {
-        ViewUtil.showImage(mContext, category.getImageUrl(), holder.mBinding.ivCategory);
+        ViewUtil.showImage(mContext, category.getPicture(), holder.mBinding.ivCategory);
         holder.mBinding.tvCategory.setText(category.getName());
 
         if (holder.mDisposable != null && !holder.mDisposable.isDisposed()) {

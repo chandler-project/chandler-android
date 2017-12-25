@@ -52,7 +52,7 @@ public class SelectCategoryAdapter extends RecyclerView.Adapter<SelectCategoryAd
 
     private void setupView(InsertCategoryHolder holder, Category category) {
         ViewUtil.setText(holder.mBinding.tvCategoryName, category.getName());
-        ViewUtil.setText(holder.mBinding.tvSubCategory, category.getSubCategory());
+        ViewUtil.setText(holder.mBinding.tvSubCategory, category.getSlug());
 
         if (holder.mDisposable != null && !holder.mDisposable.isDisposed()) {
             holder.mDisposable.dispose();

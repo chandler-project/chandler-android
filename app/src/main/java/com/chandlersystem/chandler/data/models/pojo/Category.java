@@ -1,39 +1,32 @@
 package com.chandlersystem.chandler.data.models.pojo;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class Category {
-    public String imageUrl;
-    public String name;
-    public String subCategory;
+    @SerializedName("name")
+    @Expose
+    private String name;
+
+    @SerializedName("slug")
+    @Expose
+    private String slug;
+
+    @SerializedName("description")
+    @Expose
+    private String description;
+
+    @SerializedName("picture")
+    @Expose
+    private String picture;
+
+    @SerializedName("id")
+    @Expose
+    private String id;
+
     public boolean isSelected;
 
     public Category() {
-    }
-
-    public Category(String imageUrl, String name) {
-        this.imageUrl = imageUrl;
-        this.name = name;
-    }
-
-    public Category(String imageUrl, String name, String subCategory) {
-        this.imageUrl = imageUrl;
-        this.name = name;
-        this.subCategory = subCategory;
-    }
-
-    public String getSubCategory() {
-        return subCategory;
-    }
-
-    public void setSubCategory(String subCategory) {
-        this.subCategory = subCategory;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
     }
 
     public String getName() {
@@ -42,6 +35,38 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getSlug() {
+        return slug;
+    }
+
+    public void setSlug(String slug) {
+        this.slug = slug;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public boolean isSelected() {
