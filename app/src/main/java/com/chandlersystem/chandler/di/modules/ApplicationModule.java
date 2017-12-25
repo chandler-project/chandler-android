@@ -65,23 +65,10 @@ public class ApplicationModule {
     @Provides
     @Singleton
     OkHttpClient provideClients() {
-        Locale currentLocale = context.getResources().getConfiguration().locale;
-
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
-                .addInterceptor(
-                        chain -> {
-                            Request original = chain.request();
-                            // Request customization: add request headers
-                            Request.Builder requestBuilder = original.newBuilder()
-                                    .header("locale", currentLocale.getLanguage())
-                                    .method(original.method(), original.body());
-
-                            Request request = requestBuilder.build();
-                            return chain.proceed(request);
-                        })
                 .connectTimeout(30, TimeUnit.SECONDS)
                 .writeTimeout(60, TimeUnit.SECONDS)
                 .readTimeout(30, TimeUnit.SECONDS);

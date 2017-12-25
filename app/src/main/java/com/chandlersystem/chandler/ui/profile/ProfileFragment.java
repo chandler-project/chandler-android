@@ -1,11 +1,12 @@
 package com.chandlersystem.chandler.ui.profile;
 
+import android.content.DialogInterface;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,15 +14,14 @@ import android.view.ViewGroup;
 
 import com.chandlersystem.chandler.GlideApp;
 import com.chandlersystem.chandler.R;
+import com.chandlersystem.chandler.database.DatabaseHelper;
 import com.chandlersystem.chandler.databinding.FragmentProfileBinding;
-import com.chandlersystem.chandler.ui.profile.dummy.DummyContent;
+import com.chandlersystem.chandler.ui.login.LoginActivity;
 import com.chandlersystem.chandler.utilities.CircleTransform;
 import com.jakewharton.rxbinding2.view.RxView;
 
 import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 
 public class ProfileFragment extends Fragment {
     private final CompositeDisposable mCompositeDisposable = new CompositeDisposable();
@@ -61,6 +61,30 @@ public class ProfileFragment extends Fragment {
     private void handleEvents() {
         mCompositeDisposable.add(buttonEditClicks()
                 .subscribe(o -> startEditProfileActivity(), Throwable::printStackTrace));
+
+        mCompositeDisposable.add(signOut().subscribe(o -> {
+            DatabaseHelper.clearDatabase(getContext());
+            showLogoutDialog();
+        }, Throwable::printStackTrace));
+    }
+
+    private void showLogoutDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext())
+                .setTitle(getString(R.string.content_logout_title))
+                .setMessage(getString(R.string.content_logout_content))
+                .setPositiveButton(getString(R.string.content_yes), (dialogInterface, i) -> startLoginActivity())
+                .setNegativeButton(getString(R.string.content_no), (dialogInterface, i) -> dialogInterface.dismiss());
+        builder.create();
+        builder.show();
+    }
+
+    private void startLoginActivity() {
+        getActivity().finish();
+        startActivity(LoginActivity.getInstance(getContext()));
+    }
+
+    private Observable<Object> signOut() {
+        return RxView.clicks(mBinding.layoutContent.tvSignOut);
     }
 
     private void startEditProfileActivity() {

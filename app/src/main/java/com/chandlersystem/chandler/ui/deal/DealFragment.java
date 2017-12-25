@@ -33,6 +33,7 @@ public class DealFragment extends Fragment {
     private FragmentDealBinding mBinding;
 
     private final List<String> mFeaturedDealImgUrl = new ArrayList<>();
+
     private ImagePagerAdapter mImagePagerAdapter;
 
     private CategoryAdapter mCategoryAdapter;

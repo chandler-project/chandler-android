@@ -3,67 +3,98 @@ package com.chandlersystem.chandler.data.models.pojo;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.chandlersystem.chandler.database.ChandlerDatabase;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.rx2.structure.BaseRXModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class User implements Parcelable {
 
+@Table(database = ChandlerDatabase.class)
+public class User extends BaseRXModel implements Parcelable {
+
+    @Column
+    @PrimaryKey
     @SerializedName("gender")
     @Expose
-    private Integer gender;
+    private int gender;
+
+    @Column
     @SerializedName("invalidAttempts")
     @Expose
-    private Integer invalidAttempts;
+    private int invalidAttempts;
+
     @SerializedName("lang")
     @Expose
+    @Column
     private String lang;
+
     @SerializedName("fbAccessToken")
     @Expose
+    @Column
     private String fbAccessToken;
+
     @SerializedName("email")
     @Expose
+    @Column
     private String email;
+
     @SerializedName("emailVerified")
     @Expose
-    private Boolean emailVerified;
+    @Column
+    private boolean emailVerified;
+
     @SerializedName("id")
     @Expose
+    @Column
     private String id;
+
     @SerializedName("created")
     @Expose
+    @Column
     private String created;
+
     @SerializedName("modified")
     @Expose
+    @Column
     private String modified;
-    @SerializedName("type")
-    @Expose
-    private List<Integer> type = null;
+
     @SerializedName("fullName")
     @Expose
+    @Column
     private String fullName;
+
     @SerializedName("isNewAccount")
     @Expose
-    private Boolean isNewAccount;
+    @Column
+    private boolean isNewAccount;
+
     @SerializedName("lastLogin")
     @Expose
+    @Column
     private String lastLogin;
 
-    public Integer getGender() {
+    public User() {
+    }
+
+    public int getGender() {
         return gender;
     }
 
-    public void setGender(Integer gender) {
+    public void setGender(int gender) {
         this.gender = gender;
     }
 
-    public Integer getInvalidAttempts() {
+    public int getInvalidAttempts() {
         return invalidAttempts;
     }
 
-    public void setInvalidAttempts(Integer invalidAttempts) {
+    public void setInvalidAttempts(int invalidAttempts) {
         this.invalidAttempts = invalidAttempts;
     }
 
@@ -91,11 +122,11 @@ public class User implements Parcelable {
         this.email = email;
     }
 
-    public Boolean getEmailVerified() {
+    public boolean isEmailVerified() {
         return emailVerified;
     }
 
-    public void setEmailVerified(Boolean emailVerified) {
+    public void setEmailVerified(boolean emailVerified) {
         this.emailVerified = emailVerified;
     }
 
@@ -123,14 +154,6 @@ public class User implements Parcelable {
         this.modified = modified;
     }
 
-    public List<Integer> getType() {
-        return type;
-    }
-
-    public void setType(List<Integer> type) {
-        this.type = type;
-    }
-
     public String getFullName() {
         return fullName;
     }
@@ -139,12 +162,12 @@ public class User implements Parcelable {
         this.fullName = fullName;
     }
 
-    public Boolean getIsNewAccount() {
+    public boolean isNewAccount() {
         return isNewAccount;
     }
 
-    public void setIsNewAccount(Boolean isNewAccount) {
-        this.isNewAccount = isNewAccount;
+    public void setNewAccount(boolean newAccount) {
+        isNewAccount = newAccount;
     }
 
     public String getLastLogin() {
@@ -155,52 +178,25 @@ public class User implements Parcelable {
         this.lastLogin = lastLogin;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(this.gender);
-        dest.writeValue(this.invalidAttempts);
-        dest.writeString(this.lang);
-        dest.writeString(this.fbAccessToken);
-        dest.writeString(this.email);
-        dest.writeValue(this.emailVerified);
-        dest.writeString(this.id);
-        dest.writeString(this.created);
-        dest.writeString(this.modified);
-        dest.writeList(this.type);
-        dest.writeString(this.fullName);
-        dest.writeValue(this.isNewAccount);
-        dest.writeString(this.lastLogin);
-    }
-
-    public User() {
-    }
-
     protected User(Parcel in) {
-        this.gender = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.invalidAttempts = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.lang = in.readString();
-        this.fbAccessToken = in.readString();
-        this.email = in.readString();
-        this.emailVerified = (Boolean) in.readValue(Boolean.class.getClassLoader());
-        this.id = in.readString();
-        this.created = in.readString();
-        this.modified = in.readString();
-        this.type = new ArrayList<Integer>();
-        in.readList(this.type, Integer.class.getClassLoader());
-        this.fullName = in.readString();
-        this.isNewAccount = (Boolean) in.readValue(Boolean.class.getClassLoader());
-        this.lastLogin = in.readString();
+        gender = in.readInt();
+        invalidAttempts = in.readInt();
+        lang = in.readString();
+        fbAccessToken = in.readString();
+        email = in.readString();
+        emailVerified = in.readByte() != 0;
+        id = in.readString();
+        created = in.readString();
+        modified = in.readString();
+        fullName = in.readString();
+        isNewAccount = in.readByte() != 0;
+        lastLogin = in.readString();
     }
 
-    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
+    public static final Creator<User> CREATOR = new Creator<User>() {
         @Override
-        public User createFromParcel(Parcel source) {
-            return new User(source);
+        public User createFromParcel(Parcel in) {
+            return new User(in);
         }
 
         @Override
@@ -208,4 +204,25 @@ public class User implements Parcelable {
             return new User[size];
         }
     };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(gender);
+        parcel.writeInt(invalidAttempts);
+        parcel.writeString(lang);
+        parcel.writeString(fbAccessToken);
+        parcel.writeString(email);
+        parcel.writeByte((byte) (emailVerified ? 1 : 0));
+        parcel.writeString(id);
+        parcel.writeString(created);
+        parcel.writeString(modified);
+        parcel.writeString(fullName);
+        parcel.writeByte((byte) (isNewAccount ? 1 : 0));
+        parcel.writeString(lastLogin);
+    }
 }

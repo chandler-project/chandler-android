@@ -8,7 +8,7 @@ public class RetrofitResponseItem<T> {
     @Expose
     public T item;
 
-    @SerializedName("first_login")
+    @SerializedName("error")
     @Expose
-    public boolean firstLogin;
+    public String error;
 }

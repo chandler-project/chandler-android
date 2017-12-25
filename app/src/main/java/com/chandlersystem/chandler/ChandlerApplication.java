@@ -7,6 +7,8 @@ import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 
 import com.chandlersystem.chandler.configs.FirebaseConstant;
+import com.chandlersystem.chandler.database.ChandlerDatabase;
+import com.chandlersystem.chandler.database.DatabaseHelper;
 import com.chandlersystem.chandler.di.components.ApplicationComponent;
 import com.chandlersystem.chandler.di.components.DaggerApplicationComponent;
 import com.chandlersystem.chandler.di.modules.ApplicationModule;
@@ -36,7 +38,13 @@ public class ChandlerApplication extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        LogUtil.logD(TAG, "Application created");
+        mApplicationComponent = DaggerApplicationComponent
+                .builder()
+                .applicationModule(new ApplicationModule(this))
+                .build();
+
+        DatabaseHelper.initDatabase(this);
+
         if (BuildConfig.DEBUG) {
             StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
                     .detectAll()
@@ -51,11 +59,6 @@ public class ChandlerApplication extends MultiDexApplication {
 
         // Integrate with Fabric
         Fabric.with(this, new Crashlytics());
-
-        mApplicationComponent = DaggerApplicationComponent
-                .builder()
-                .applicationModule(new ApplicationModule(this))
-                .build();
 
         // Subscribe Firebase to topic "everyone"
         FirebaseMessaging.getInstance().subscribeToTopic(FirebaseConstant.TOPIC_EVERYONE);

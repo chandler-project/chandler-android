@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 
 import com.chandlersystem.chandler.di.scopes.ActivityContext;
+import com.chandlersystem.chandler.di.scopes.PerActivity;
+import com.chandlersystem.chandler.ui.login.LoginActivity;
 
 import dagger.Module;
 import dagger.Provides;

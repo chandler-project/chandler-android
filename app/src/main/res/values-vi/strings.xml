@@ -192,4 +192,6 @@ ba gác \"ship\" tới."</string>
     <string name="make_a_payment">Make a payment</string>
     <string name="content_accept">Đặt ship ngay</string>
     <string name="content_bid_now">Bid</string>
+    <string name="content_logout_content">Do you really want to logout?</string>
+    <string name="content_logout_title">Log out</string>
 </resources>

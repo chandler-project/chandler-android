@@ -8,6 +8,8 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
 import com.chandlersystem.chandler.R;
+import com.chandlersystem.chandler.database.DatabaseHelper;
+import com.chandlersystem.chandler.database.UserManager;
 import com.chandlersystem.chandler.databinding.ActivitySplashBinding;
 import com.chandlersystem.chandler.ui.adapters.FragmentAdapter;
 import com.chandlersystem.chandler.ui.login.LoginActivity;
@@ -44,12 +46,14 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_splash);
-        if(Profile.getCurrentProfile()!=null){
+        DatabaseHelper.initDatabase(this);
+        if (UserManager.isUserLoggedIn()) {
             startMainActivity();
+        } else {
+            setupView();
+            setupViewPager();
+            handleEvents();
         }
-        setupView();
-        setupViewPager();
-        handleEvents();
     }
 
     private void handleEvents() {

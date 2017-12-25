@@ -1,6 +1,23 @@
 package com.chandlersystem.chandler.utilities;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
+
 public class DialogUtil {
+    private DialogUtil() {
+        // Private constructor for class which full of constants
+    }
+
+    public static void showErrorDialog(Context context, Throwable throwable) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage(ErrorUtil.getErrorMessage(context, throwable))
+                .setCancelable(false)
+                .setPositiveButton("OK", (dialog, id) -> dialog.dismiss());
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
     /*private static final String TAG_MESSAGE_DIALOG = "message-dialog";
     private static final String TAG_FORCE_UPDATE_DIALOG = "force-update-dialog";
     private static final String TAG_UPLOAD_IMAGE_DIALOG = "upload-image-dialog";
