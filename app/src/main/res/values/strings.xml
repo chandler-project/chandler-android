@@ -21,7 +21,8 @@
     <string name="nav_other">Other</string>
 
     <!--Facebook-->
-    <string name="account_kit_client_token" translatable="false">bc8b855832c258bce55cf9512a1b5f81</string>
+    <string name="FACEBOOK_APP_ID">276217976212159</string>
+    <string name="ACCOUNT_KIT_CLIENT_TOKEN">bc8b855832c258bce55cf9512a1b5f81</string>
 
     <!--Content-->
     <string name="large_text" translatable="false">

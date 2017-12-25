@@ -3,6 +3,7 @@ package com.chandlersystem.chandler.data.api;
 import com.chandlersystem.chandler.data.models.pojo.Category;
 import com.chandlersystem.chandler.data.models.request.DealRequest;
 import com.chandlersystem.chandler.data.models.request.LoginRequest;
+import com.chandlersystem.chandler.data.models.request.SelectCategoryRequest;
 import com.chandlersystem.chandler.data.models.response.AuthenticationRespone;
 import com.chandlersystem.chandler.data.models.response.RetrofitResponseItem;
 import com.chandlersystem.chandler.data.models.response.RetrofitResponseListItem;
@@ -11,6 +12,7 @@ import com.chandlersystem.chandler.data.models.retrofit.Deal;
 import java.util.List;
 
 import io.reactivex.Observable;
+import io.reactivex.disposables.Disposable;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -25,4 +27,10 @@ public interface ChandlerApi {
     Observable<RetrofitResponseListItem<Category>> getCategoryList();
 
     Call<List<Deal>> getDeals(@Body DealRequest request);
+
+    @POST("/api/Members/logout")
+    Observable<RetrofitResponseItem> logout(@Query("access_token") String accessToken);
+
+    @POST("api/Members/categories/choose")
+    Observable<RetrofitResponseItem> selectCategory(@Body SelectCategoryRequest request, @Query("access_token") String accessToken);
 }

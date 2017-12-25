@@ -220,6 +220,7 @@ public class DealFragment extends Fragment {
 
     private void appbarCollapse() {
         mBinding.appbar.addOnOffsetChangedListener((appBarLayout, offset) -> {
+            mBinding.layoutSwipe.setEnabled(offset == 0);
             boolean isCollapsingToolbarCollapsed = Math.abs(offset) == appBarLayout.getTotalScrollRange();
             if (isCollapsingToolbarCollapsed) {
                 mBinding.toolbar.setVisibility(View.VISIBLE);
@@ -233,8 +234,10 @@ public class DealFragment extends Fragment {
         mCompositeDisposable.add(RxSwipeRefreshLayout.refreshes(mBinding.layoutSwipe)
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnTerminate(() -> mBinding.layoutSwipe.setRefreshing(false))
-                .subscribe(o -> callApi(), Throwable::printStackTrace));
+                .subscribe(o -> {
+                    mBinding.layoutSwipe.setRefreshing(false);
+                    callApi();
+                }, Throwable::printStackTrace));
     }
 
 

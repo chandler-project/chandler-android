@@ -9,6 +9,7 @@ import com.raizlabs.android.dbflow.config.DatabaseDefinition;
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowLog;
 import com.raizlabs.android.dbflow.config.FlowManager;
+import com.raizlabs.android.dbflow.runtime.DirectModelNotifier;
 import com.raizlabs.android.dbflow.sql.language.Delete;
 import com.raizlabs.android.dbflow.structure.database.transaction.Transaction;
 
@@ -21,7 +22,13 @@ public class DatabaseHelper {
     }
 
     public static void initDatabase(Context context) {
-        FlowManager.init(new FlowConfig.Builder(context).build());
+        DatabaseConfig userChanged = new DatabaseConfig.Builder(ChandlerDatabase.class)
+                .modelNotifier(DirectModelNotifier.get())
+                .build();
+
+        FlowManager.init(new FlowConfig.Builder(context)
+                .addDatabaseConfig(userChanged)
+                .build());
 
         if (BuildConfig.DEBUG) {
             FlowLog.setMinimumLoggingLevel(FlowLog.Level.V);

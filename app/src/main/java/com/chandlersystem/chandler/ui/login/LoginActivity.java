@@ -59,8 +59,14 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_login);
+        logoutFacebook();
         injectComponent();
         handleEvents();
+    }
+
+    private void logoutFacebook() {
+        FacebookConnector.getInstance().logOut();
+        AccountKitConnector.getInstance().logout();
     }
 
     private void handleEvents() {
@@ -102,7 +108,6 @@ public class LoginActivity extends AppCompatActivity {
         String userToken = accessToken.getToken();
         String userId = accessToken.getAccountId();
 
-
         LoginRequest loginRequest = new LoginRequest(userToken, userId);
         return mApi.authentication(loginRequest, 1, "user");
     }
@@ -111,6 +116,8 @@ public class LoginActivity extends AppCompatActivity {
         // Assign flag IsFirstLogin to check if this user is login already or not
         mIsFirstLogin = userResponse.item.getIsFirstLogin();
         User newUser = userResponse.item.getUser();
+        newUser.setAuthorization(userResponse.item.getId());
+        newUser.setFirstLogin(mIsFirstLogin);
 
         /*// Subscribe this user in order to get new notification from firebase
         // Don't care the result, just call API

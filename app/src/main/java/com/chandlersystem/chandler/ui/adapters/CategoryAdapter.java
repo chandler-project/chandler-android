@@ -54,6 +54,10 @@ public class CategoryAdapter extends RecyclerView.Adapter {
         return mCategoryClicks;
     }
 
+    public List<Category> getCategories() {
+        return mCategories;
+    }
+
     public CategoryAdapter(Context context, List<Category> categories, CategoryType type) {
         this.mContext = context;
         this.mCategories = categories;

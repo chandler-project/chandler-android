@@ -5,6 +5,7 @@ import com.chandlersystem.chandler.di.scopes.PerActivity;
 import com.chandlersystem.chandler.ui.create_request.SelectCategoryFragment;
 import com.chandlersystem.chandler.ui.deal.DealFragment;
 import com.chandlersystem.chandler.ui.login.LoginActivity;
+import com.chandlersystem.chandler.ui.profile.ProfileFragment;
 import com.chandlersystem.chandler.ui.select_category.SelectCategoryActivity;
 
 import dagger.Component;
@@ -22,4 +23,6 @@ public interface ActivityComponent {
     void inject(SelectCategoryFragment selectCategoryFragment);
 
     void inject(SelectCategoryActivity selectCategoryActivity);
+
+    void inject(ProfileFragment profileFragment);
 }

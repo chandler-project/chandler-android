@@ -40,6 +40,7 @@ public final class UserManager {
     }
 
     public static boolean isUserLoggedIn() {
-        return getUserSync() != null;
+        User user = getUserSync();
+        return user != null && !user.isFirstLogin();
     }
 }

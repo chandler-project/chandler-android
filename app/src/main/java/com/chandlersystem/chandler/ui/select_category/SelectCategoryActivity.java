@@ -1,5 +1,6 @@
 package com.chandlersystem.chandler.ui.select_category;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
@@ -13,12 +14,16 @@ import com.chandlersystem.chandler.R;
 import com.chandlersystem.chandler.custom_views.CategoryDecoration;
 import com.chandlersystem.chandler.data.api.ChandlerApi;
 import com.chandlersystem.chandler.data.models.pojo.Category;
+import com.chandlersystem.chandler.data.models.pojo.User;
+import com.chandlersystem.chandler.data.models.request.SelectCategoryRequest;
+import com.chandlersystem.chandler.database.UserManager;
 import com.chandlersystem.chandler.databinding.ActivitySelectCategoryBinding;
 import com.chandlersystem.chandler.di.components.ActivityComponent;
 import com.chandlersystem.chandler.di.components.DaggerActivityComponent;
 import com.chandlersystem.chandler.di.modules.ActivityModule;
 import com.chandlersystem.chandler.ui.adapters.CategoryAdapter;
 import com.chandlersystem.chandler.ui.main.MainActivity;
+import com.chandlersystem.chandler.utilities.DialogUtil;
 import com.chandlersystem.chandler.utilities.LogUtil;
 import com.chandlersystem.chandler.utilities.RxUtil;
 import com.chandlersystem.chandler.utilities.ViewUtil;
@@ -83,7 +88,35 @@ public class SelectCategoryActivity extends AppCompatActivity {
     private void handleEvents() {
         mCompositeDisposable.add(RxView.clicks(mBinding.btnNavigate)
                 .compose(RxUtil.withLongThrottleFirst())
-                .subscribe(o -> startMainActivity()));
+                .subscribe(o -> selectCategoryApi(), Throwable::printStackTrace));
+    }
+
+    private void selectCategoryApi() {
+        List<String> categoryIds = new ArrayList<>();
+        for (Category category : mCategoryAdapter.getCategories()) {
+            if (category.isSelected) {
+                categoryIds.add(category.getId());
+            }
+        }
+
+        mCompositeDisposable.add(mAPi.selectCategory(new SelectCategoryRequest(categoryIds), UserManager.getUserSync().getAuthorization())
+                .compose(RxUtil.withSchedulers())
+                .subscribe(retrofitResponseItem ->
+                {
+                    updateUser();
+                    startMainActivity();
+                }, this::showErrorDialog));
+    }
+
+    private void updateUser() {
+        User user = UserManager.getUserSync();
+        user.setFirstLogin(false);
+        mCompositeDisposable.add(user.update().subscribe(aBoolean -> {
+        }, Throwable::printStackTrace));
+    }
+
+    private void showErrorDialog(Throwable throwable) {
+        DialogUtil.showErrorDialog(this, throwable);
     }
 
     private void categoryClicks() {

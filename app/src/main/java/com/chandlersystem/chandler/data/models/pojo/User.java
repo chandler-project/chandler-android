@@ -1,8 +1,5 @@
 package com.chandlersystem.chandler.data.models.pojo;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import com.chandlersystem.chandler.database.ChandlerDatabase;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -11,43 +8,34 @@ import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.rx2.structure.BaseRXModel;
 
-import java.util.ArrayList;
-import java.util.List;
-
 
 @Table(database = ChandlerDatabase.class)
-public class User extends BaseRXModel implements Parcelable {
-
+public class User extends BaseRXModel {
     @Column
     @PrimaryKey
     @SerializedName("gender")
     @Expose
     private int gender;
 
-    @Column
-    @SerializedName("invalidAttempts")
+    @SerializedName("bio")
     @Expose
-    private int invalidAttempts;
+    @Column
+    private String bio;
 
-    @SerializedName("lang")
+    @SerializedName("avatar")
     @Expose
     @Column
-    private String lang;
+    private String avatar;
 
-    @SerializedName("fbAccessToken")
+    @SerializedName("points")
     @Expose
     @Column
-    private String fbAccessToken;
+    private int points;
 
     @SerializedName("email")
     @Expose
     @Column
     private String email;
-
-    @SerializedName("emailVerified")
-    @Expose
-    @Column
-    private boolean emailVerified;
 
     @SerializedName("id")
     @Expose
@@ -79,6 +67,12 @@ public class User extends BaseRXModel implements Parcelable {
     @Column
     private String lastLogin;
 
+    @Column
+    private String authorization;
+
+    @Column
+    private boolean isFirstLogin;
+
     public User() {
     }
 
@@ -90,28 +84,28 @@ public class User extends BaseRXModel implements Parcelable {
         this.gender = gender;
     }
 
-    public int getInvalidAttempts() {
-        return invalidAttempts;
+    public String getBio() {
+        return bio;
     }
 
-    public void setInvalidAttempts(int invalidAttempts) {
-        this.invalidAttempts = invalidAttempts;
+    public void setBio(String bio) {
+        this.bio = bio;
     }
 
-    public String getLang() {
-        return lang;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setLang(String lang) {
-        this.lang = lang;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
-    public String getFbAccessToken() {
-        return fbAccessToken;
+    public int getPoints() {
+        return points;
     }
 
-    public void setFbAccessToken(String fbAccessToken) {
-        this.fbAccessToken = fbAccessToken;
+    public void setPoints(int points) {
+        this.points = points;
     }
 
     public String getEmail() {
@@ -120,14 +114,6 @@ public class User extends BaseRXModel implements Parcelable {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public boolean isEmailVerified() {
-        return emailVerified;
-    }
-
-    public void setEmailVerified(boolean emailVerified) {
-        this.emailVerified = emailVerified;
     }
 
     public String getId() {
@@ -178,51 +164,19 @@ public class User extends BaseRXModel implements Parcelable {
         this.lastLogin = lastLogin;
     }
 
-    protected User(Parcel in) {
-        gender = in.readInt();
-        invalidAttempts = in.readInt();
-        lang = in.readString();
-        fbAccessToken = in.readString();
-        email = in.readString();
-        emailVerified = in.readByte() != 0;
-        id = in.readString();
-        created = in.readString();
-        modified = in.readString();
-        fullName = in.readString();
-        isNewAccount = in.readByte() != 0;
-        lastLogin = in.readString();
+    public String getAuthorization() {
+        return authorization;
     }
 
-    public static final Creator<User> CREATOR = new Creator<User>() {
-        @Override
-        public User createFromParcel(Parcel in) {
-            return new User(in);
-        }
-
-        @Override
-        public User[] newArray(int size) {
-            return new User[size];
-        }
-    };
-
-    @Override
-    public int describeContents() {
-        return 0;
+    public void setAuthorization(String authorization) {
+        this.authorization = authorization;
     }
 
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeInt(gender);
-        parcel.writeInt(invalidAttempts);
-        parcel.writeString(lang);
-        parcel.writeString(fbAccessToken);
-        parcel.writeString(email);
-        parcel.writeByte((byte) (emailVerified ? 1 : 0));
-        parcel.writeString(id);
-        parcel.writeString(created);
-        parcel.writeString(modified);
-        parcel.writeString(fullName);
-        parcel.writeByte((byte) (isNewAccount ? 1 : 0));
-        parcel.writeString(lastLogin);
+    public boolean isFirstLogin() {
+        return isFirstLogin;
+    }
+
+    public void setFirstLogin(boolean firstLogin) {
+        isFirstLogin = firstLogin;
     }
 }
