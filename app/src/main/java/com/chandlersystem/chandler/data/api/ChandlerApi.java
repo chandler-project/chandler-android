@@ -2,8 +2,11 @@ package com.chandlersystem.chandler.data.api;
 
 import com.chandlersystem.chandler.data.models.pojo.Category;
 import com.chandlersystem.chandler.data.models.pojo.UploadImage;
-import com.chandlersystem.chandler.data.models.request.CreateDealRequest;
+import com.chandlersystem.chandler.data.models.pojo.User;
+import com.chandlersystem.chandler.data.models.request.CreateDealBody;
+import com.chandlersystem.chandler.data.models.request.CreateRequestBody;
 import com.chandlersystem.chandler.data.models.request.DealRequest;
+import com.chandlersystem.chandler.data.models.request.EditProfileBody;
 import com.chandlersystem.chandler.data.models.request.LoginRequest;
 import com.chandlersystem.chandler.data.models.request.SelectCategoryRequest;
 import com.chandlersystem.chandler.data.models.response.AuthenticationRespone;
@@ -19,6 +22,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
@@ -36,13 +40,23 @@ public interface ChandlerApi {
     @POST("/api/Members/logout")
     Observable<RetrofitResponseItem> logout(@Query("access_token") String accessToken);
 
+    @PATCH("/api/Members/{user_id}")
+    Observable<RetrofitResponseItem<User>> editProfile(@Body EditProfileBody editProfileBody, @Path("user_id") String userId, @Query("access_token") String accessToken);
+
     @POST("api/Members/categories/choose")
     Observable<RetrofitResponseItem> selectCategory(@Body SelectCategoryRequest request, @Query("access_token") String accessToken);
 
     @POST("api/Categories/{category_id}/Deals")
-    Observable<RetrofitResponseItem> createDeal(@Body CreateDealRequest request, @Path("category_id") String categoryId, @Query("access_token") String accessToken);
+    Observable<RetrofitResponseItem> createDeal(@Body CreateDealBody request, @Path("category_id") String categoryId, @Query("access_token") String accessToken);
+
+    @POST("api/Categories/{category_id}/Requests")
+    Observable<RetrofitResponseItem> createRequest(@Body CreateRequestBody request, @Path("category_id") String categoryId, @Query("access_token") String accessToken);
 
     @Multipart
     @POST("api/Uploads/chandler/upload")
-    Observable<RetrofitResponseItem<UploadImage>> uploadImage(@Query("access_token") String accessToken, @Part List<MultipartBody.Part> files);
+    Observable<RetrofitResponseItem<UploadImage>> uploadImages(@Query("access_token") String accessToken, @Part List<MultipartBody.Part> files);
+
+    @Multipart
+    @POST("api/Uploads/chandler/upload")
+    Observable<RetrofitResponseItem<UploadImage>> uploadImage(@Query("access_token") String accessToken, @Part MultipartBody.Part file);
 }

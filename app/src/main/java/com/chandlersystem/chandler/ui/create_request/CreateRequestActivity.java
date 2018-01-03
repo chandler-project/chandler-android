@@ -2,24 +2,48 @@ package com.chandlersystem.chandler.ui.create_request;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
+import com.chandlersystem.chandler.ChandlerApplication;
 import com.chandlersystem.chandler.R;
+import com.chandlersystem.chandler.data.api.ChandlerApi;
 import com.chandlersystem.chandler.data.models.pojo.Category;
-import com.chandlersystem.chandler.data.models.request.CreateDealRequest;
+import com.chandlersystem.chandler.data.models.pojo.FileUpload;
+import com.chandlersystem.chandler.data.models.pojo.UploadImage;
+import com.chandlersystem.chandler.data.models.request.CreateDealBody;
+import com.chandlersystem.chandler.data.models.response.RetrofitResponseItem;
+import com.chandlersystem.chandler.database.UserManager;
 import com.chandlersystem.chandler.databinding.ActivityCreateRequestBinding;
-import com.chandlersystem.chandler.ui.adapters.DealPagerAdapter;
+import com.chandlersystem.chandler.di.components.ActivityComponent;
+import com.chandlersystem.chandler.di.components.DaggerActivityComponent;
+import com.chandlersystem.chandler.di.modules.ActivityModule;
 import com.chandlersystem.chandler.ui.adapters.RequestPagerAdapter;
+import com.chandlersystem.chandler.utilities.DialogUtil;
+import com.chandlersystem.chandler.utilities.RxUtil;
+import com.chandlersystem.chandler.utilities.ViewUtil;
 import com.jakewharton.rxbinding2.view.RxView;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 public class CreateRequestActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener,
         CompleteCreateDealFragment.CompleteCreateDealListener,
@@ -34,17 +58,29 @@ public class CreateRequestActivity extends AppCompatActivity implements ViewPage
 
     private RequestPagerAdapter mDealPagerAdapter;
 
-    private String mProductName;
-    private String mProductDetail;
     private Category mCategory;
     private String mDate;
-    private String mPrice;
+    private String mMinPrice;
+    private String mMaxPrice;
     private String mCity;
+
+    @Inject
+    ChandlerApi mApi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_create_request);
+
+        ActivityComponent mActivityComponent = DaggerActivityComponent
+                .builder()
+                .activityModule(new ActivityModule(this))
+                .applicationComponent(ChandlerApplication
+                        .getApplicationComponent(this))
+                .build();
+
+        mActivityComponent.inject(this);
+
         setupViews();
         setupViewPager();
         handleEvents();
@@ -123,10 +159,9 @@ public class CreateRequestActivity extends AppCompatActivity implements ViewPage
 
     @Override
     public void onPriceInserted(String price) {
-        mPrice = price;
+        mMinPrice = price;
         goToNextPage();
     }
-
 
     @Override
     public void onResume() {
@@ -213,7 +248,60 @@ public class CreateRequestActivity extends AppCompatActivity implements ViewPage
     }
 
     @Override
-    public void onProductCreated(CreateDealRequest request) {
+    public void onProductCreated(CreateDealBody request) {
+        List<String> imagePathList = request.getProductPics();
+        List<MultipartBody.Part> filePartList = new ArrayList<>();
+        for (String imagePath : imagePathList) {
+            MultipartBody.Part part = getRequestBody(new File(getRealPathFromURI(imagePath)));
+            filePartList.add(part);
+        }
 
+        mCompositeDisposable.add(mApi.uploadImages(UserManager.getUserSync().getAuthorization(), filePartList)
+                .compose(RxUtil.withSchedulers())
+                .doOnSubscribe(disposable -> ViewUtil.toggleView(mBinding.layoutProgressBar.progressBar, true))
+                .subscribe(responseItem -> createDealApi(responseItem, request), throwable -> {
+                    ViewUtil.toggleView(mBinding.layoutProgressBar.progressBar, false);
+                    DialogUtil.showErrorDialog(this, throwable);
+                }));
+    }
+
+    private void createDealApi(RetrofitResponseItem<UploadImage> result, CreateDealBody request) {
+        List<String> urlList = new ArrayList<>();
+        for (FileUpload fileUpload : result.item.getResult().getFiles().getFileUpload()) {
+            urlList.add("http://etylash.xyz:3001/" + fileUpload.getName());
+        }
+
+        request.setProductPics(urlList);
+        //request.setShippingPrice(Float.valueOf(mShippingPrice));
+        request.setRemainTime("2017-12-22T07:09:33.752Z");
+
+        mCompositeDisposable.add(mApi.createDeal(request, mCategory.getId(), UserManager.getUserSync().getAuthorization())
+                .compose(RxUtil.withSchedulers())
+                .doOnTerminate(() -> ViewUtil.toggleView(mBinding.layoutProgressBar.progressBar, false))
+                .subscribe(response -> onCreateDealSuccessfully(),
+                        throwable -> DialogUtil.showErrorDialog(this, throwable)));
+    }
+
+    private void onCreateDealSuccessfully() {
+        Toast.makeText(CreateRequestActivity.this, getString(R.string.content_create_new_request_successfully), Toast.LENGTH_SHORT).show();
+        finish();
+    }
+
+    private MultipartBody.Part getRequestBody(File imageFile) {
+        RequestBody request = RequestBody.create(MediaType.parse("image/*"), imageFile);
+
+        return MultipartBody.Part.createFormData("fileUpload", imageFile.getName(), request);
+    }
+
+    private String getRealPathFromURI(String contentURI) {
+        Uri contentUri = Uri.parse(contentURI);
+        Cursor cursor = getContentResolver().query(contentUri, null, null, null, null);
+        if (cursor == null) {
+            return contentUri.getPath();
+        } else {
+            cursor.moveToFirst();
+            int index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+            return cursor.getString(index);
+        }
     }
 }

@@ -4,25 +4,48 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
+import android.widget.Toast;
 
+import com.chandlersystem.chandler.ChandlerApplication;
 import com.chandlersystem.chandler.GlideApp;
 import com.chandlersystem.chandler.R;
+import com.chandlersystem.chandler.configs.ApiConstant;
+import com.chandlersystem.chandler.data.api.ChandlerApi;
+import com.chandlersystem.chandler.data.models.pojo.UploadImage;
+import com.chandlersystem.chandler.data.models.pojo.User;
+import com.chandlersystem.chandler.data.models.request.EditProfileBody;
+import com.chandlersystem.chandler.database.UserManager;
 import com.chandlersystem.chandler.databinding.ActivityEditProfileBinding;
+import com.chandlersystem.chandler.di.components.ActivityComponent;
+import com.chandlersystem.chandler.di.components.DaggerActivityComponent;
+import com.chandlersystem.chandler.di.modules.ActivityModule;
+import com.chandlersystem.chandler.utilities.DialogUtil;
+import com.chandlersystem.chandler.utilities.RxUtil;
+import com.chandlersystem.chandler.utilities.ValidateUtil;
+import com.chandlersystem.chandler.utilities.ViewUtil;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 
+import java.io.File;
+
+import javax.inject.Inject;
+
 import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
+import io.reactivex.disposables.Disposable;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 public class EditProfileActivity extends AppCompatActivity {
     private ActivityEditProfileBinding mBinding;
@@ -36,6 +59,9 @@ public class EditProfileActivity extends AppCompatActivity {
         return new Intent(context, EditProfileActivity.class);
     }
 
+    @Inject
+    ChandlerApi mApi;
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -46,6 +72,16 @@ public class EditProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_edit_profile);
+
+        ActivityComponent mActivityComponent = DaggerActivityComponent
+                .builder()
+                .activityModule(new ActivityModule(this))
+                .applicationComponent(ChandlerApplication
+                        .getApplicationComponent(this))
+                .build();
+
+        mActivityComponent.inject(this);
+
         hideSoftkey();
         setupViews();
         handleEvents();
@@ -69,9 +105,28 @@ public class EditProfileActivity extends AppCompatActivity {
                 if (resultCode == RESULT_OK) {
                     String imagePath = data.getData().toString();
                     setupNewAvatar(imagePath);
+                    updateUserAvatar(new File(getRealPathFromURI(imagePath)));
                 }
                 break;
             }
+        }
+    }
+
+    private MultipartBody.Part getRequestBody(File imageFile) {
+        RequestBody request = RequestBody.create(MediaType.parse("image/*"), imageFile);
+
+        return MultipartBody.Part.createFormData("fileUpload", imageFile.getName(), request);
+    }
+
+    private String getRealPathFromURI(String contentURI) {
+        Uri contentUri = Uri.parse(contentURI);
+        Cursor cursor = getContentResolver().query(contentUri, null, null, null, null);
+        if (cursor == null) {
+            return contentUri.getPath();
+        } else {
+            cursor.moveToFirst();
+            int index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+            return cursor.getString(index);
         }
     }
 
@@ -112,6 +167,9 @@ public class EditProfileActivity extends AppCompatActivity {
         mCompositeDisposable.add(buttonSaveClicks()
                 .subscribe(o -> userClickSave(), Throwable::printStackTrace));
 
+        mCompositeDisposable.add(avatarClicks()
+                .subscribe(o -> startImagePicker(), Throwable::printStackTrace));
+
         mCompositeDisposable.add(
                 Observable.combineLatest(nameChanged(), bioChanged(), (t1, t2) -> t1 || t2).subscribe(aBoolean -> {
                     if (aBoolean) {
@@ -120,6 +178,10 @@ public class EditProfileActivity extends AppCompatActivity {
                         disableButtonSave();
                     }
                 }, Throwable::printStackTrace));
+    }
+
+    private Observable<Object> avatarClicks() {
+        return RxView.clicks(mBinding.ivProfile);
     }
 
     private void disableButtonSave() {
@@ -133,7 +195,71 @@ public class EditProfileActivity extends AppCompatActivity {
     }
 
     private void userClickSave() {
+        User currentUser = UserManager.getUserSync();
 
+        String newName = mBinding.etName.getText().toString();
+        String newBio = mBinding.etDescription.getText().toString();
+
+        EditProfileBody body = new EditProfileBody();
+        if (ValidateUtil.checkString(newName)) {
+            body.setName(newName);
+        }
+
+        if (ValidateUtil.checkString(newBio)) {
+            body.setBio(newBio);
+        }
+
+        mCompositeDisposable.add(mApi.editProfile(body, currentUser.getId(), currentUser.getAuthorization())
+                .compose(RxUtil.withSchedulers())
+                .doOnSubscribe(disposable -> showProgressBar())
+                .doOnTerminate(this::hideProgressBar)
+                .subscribe(retrofitResponseItem -> updateProfileSuccessfully(retrofitResponseItem.item),
+                        throwable -> DialogUtil.showErrorDialog(EditProfileActivity.this, throwable)));
+    }
+
+    private void updateUserAvatar(File file) {
+        User currentUser = UserManager.getUserSync();
+        MultipartBody.Part newAvatarFile = getRequestBody(file);
+
+        mCompositeDisposable.add(mApi.uploadImage(currentUser.getAuthorization(), newAvatarFile)
+                .compose(RxUtil.withSchedulers())
+                .doOnSubscribe(disposable -> showProgressBar())
+                .doOnTerminate(this::hideProgressBar)
+                .subscribe(retrofitResponseItem -> updateAvatarSuccessfully(retrofitResponseItem.item),
+                        throwable -> DialogUtil.showErrorDialog(EditProfileActivity.this, throwable)));
+    }
+
+    private void updateAvatarSuccessfully(UploadImage uploadImage) {
+        User currentUser = UserManager.getUserSync();
+        currentUser.setAvatar(uploadImage.getResult().getFiles().getFileUpload().get(0).getName());
+
+        mCompositeDisposable.add(currentUser.save()
+                .subscribe(aBoolean -> {
+                }, Throwable::printStackTrace));
+
+        Toast.makeText(this, getString(R.string.content_update_profile_successfully), Toast.LENGTH_SHORT).show();
+        finish();
+    }
+
+    private void updateProfileSuccessfully(User user) {
+        User currentUser = UserManager.getUserSync();
+        currentUser.setFullName(user.getFullName());
+        currentUser.setBio(user.getBio());
+
+        mCompositeDisposable.add(
+                currentUser.save().subscribe(aBoolean -> {
+                }, Throwable::printStackTrace));
+
+        Toast.makeText(this, getString(R.string.content_update_profile_successfully), Toast.LENGTH_SHORT).show();
+        finish();
+    }
+
+    private void hideProgressBar() {
+        ViewUtil.toggleView(mBinding.layoutProgressBar.progressBar, false);
+    }
+
+    private void showProgressBar() {
+        ViewUtil.toggleView(mBinding.layoutProgressBar.progressBar, true);
     }
 
     private Observable<Object> editAvatarClicks() {
@@ -179,7 +305,18 @@ public class EditProfileActivity extends AppCompatActivity {
     }
 
     private void showUserInformation() {
+        User user = UserManager.getUserSync();
+        if (ValidateUtil.checkString(user.getFullName())) {
+            mBinding.etName.setText(user.getFullName());
+        }
 
+        if (ValidateUtil.checkString(user.getBio())) {
+            mBinding.etDescription.setText(user.getBio());
+        }
+
+        if (ValidateUtil.checkString(user.getAvatar())) {
+            ViewUtil.showImage(this, ApiConstant.BASE_URL_VER1 + user.getAvatar(), mBinding.ivProfile);
+        }
     }
 
     private void setupToolbar() {
@@ -196,7 +333,7 @@ public class EditProfileActivity extends AppCompatActivity {
         Uri imagePathUri = Uri.parse(imagePath);
         GlideApp.with(this)
                 .load(imagePathUri)
-                .into(mBinding.imageView);
+                .into(mBinding.ivProfile);
     }
 
     private void checkMediaPermission() {

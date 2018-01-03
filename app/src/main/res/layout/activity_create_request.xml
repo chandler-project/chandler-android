@@ -3,31 +3,41 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorBackgroundGray"
-        android:orientation="vertical"
-        tools:context="com.chandlersystem.chandler.ui.create_request.CreateRequestActivity">
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorBackgroundGray"
+            android:orientation="vertical"
+            tools:context="com.chandlersystem.chandler.ui.create_request.CreateRequestActivity">
+
+            <include
+                android:id="@+id/layout_toolbar"
+                layout="@layout/item_extra_toolbar" />
+
+            <ProgressBar
+                android:id="@+id/progress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:indeterminate="false"
+                android:maxHeight="@dimen/spacing_small"
+                android:minHeight="@dimen/spacing_smallest"
+                tools:progress="50" />
+
+            <com.chandlersystem.chandler.CustomViewpager
+                android:id="@+id/viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
 
         <include
-            android:id="@+id/layout_toolbar"
-            layout="@layout/item_extra_toolbar" />
-
-        <ProgressBar
-            android:id="@+id/progress"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:indeterminate="false"
-            android:maxHeight="@dimen/spacing_small"
-            android:minHeight="@dimen/spacing_smallest"
-            tools:progress="50" />
-
-        <com.chandlersystem.chandler.CustomViewpager
-            android:id="@+id/viewpager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </LinearLayout>
+            android:id="@+id/layout_progress_bar"
+            layout="@layout/item_progress_bar"
+            android:visibility="gone" />
+    </FrameLayout>
 
 </layout>

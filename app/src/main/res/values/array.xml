@@ -24,6 +24,8 @@
     </string-array>
 
     <string-array name="cities">
+        <item>Hồ Chí Minh</item>
+        <item>Hà Nội</item>
         <item>An Giang</item>
         <item>Bà Rịa-Vũng Tàu</item>
         <item>Bạc Liêu</item>
@@ -47,13 +49,11 @@
         <item>Gia Lai</item>
         <item>Hà Giang</item>
         <item>Hà Nam</item>
-        <item>Hà Nội</item>
         <item>Hà Tây</item>
         <item>Hà Tĩnh</item>
         <item>Hải Dương</item>
         <item>Hải Phòng</item>
         <item>Hòa Bình</item>
-        <item>Hồ Chí Minh</item>
         <item>Hậu Giang</item>
         <item>Hưng Yên</item>
         <item>Khánh Hòa</item>

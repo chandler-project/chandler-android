@@ -208,4 +208,6 @@ ba gác \"ship\" tới."</string>
     <string name="content_estimate_shipping_fee">Estimate shipping fee</string>
     <string name="content_please_input_a_bigger_value">Xin vui lòng nhập giá trị lớn hơn 1000</string>
     <string name="content_create_new_deal_successfully">Create new deal successfully</string>
+    <string name="content_create_new_request_successfully">Create new request successfully</string>
+    <string name="content_update_profile_successfully">Update profile successfully</string>
 </resources>

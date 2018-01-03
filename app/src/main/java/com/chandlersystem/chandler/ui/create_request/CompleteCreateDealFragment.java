@@ -15,11 +15,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chandlersystem.chandler.R;
-import com.chandlersystem.chandler.data.models.request.CreateDealRequest;
+import com.chandlersystem.chandler.data.models.request.CreateDealBody;
 import com.chandlersystem.chandler.databinding.FragmentCompleteCreateDealBinding;
 import com.chandlersystem.chandler.ui.adapters.ItemImageAdapter;
 import com.chandlersystem.chandler.utilities.ValidateUtil;
-import com.chandlersystem.chandler.utilities.ViewUtil;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 
@@ -27,10 +26,6 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.BiFunction;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
-import io.reactivex.functions.Predicate;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -48,10 +43,10 @@ public class CompleteCreateDealFragment extends Fragment {
 
     private ItemImageAdapter mAdapter;
 
-    private CreateDealRequest mCreateDealRequest;
+    private CreateDealBody mCreateDealBody;
 
     public interface CompleteCreateDealListener {
-        void onProductCreated(CreateDealRequest request);
+        void onProductCreated(CreateDealBody request);
     }
 
     public CompleteCreateDealFragment() {
@@ -179,7 +174,7 @@ public class CompleteCreateDealFragment extends Fragment {
         final String productDescription = mBinding.etDescription.getText().toString();
         final List<String> productImageUri = mAdapter.getData();
 
-        CreateDealRequest request = new CreateDealRequest();
+        CreateDealBody request = new CreateDealBody();
         request.setProductName(name);
         request.setReference(reference);
         request.setPrice(productPrice);

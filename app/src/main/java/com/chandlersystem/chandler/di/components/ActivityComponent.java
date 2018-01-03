@@ -3,9 +3,11 @@ package com.chandlersystem.chandler.di.components;
 import com.chandlersystem.chandler.di.modules.ActivityModule;
 import com.chandlersystem.chandler.di.scopes.PerActivity;
 import com.chandlersystem.chandler.ui.create_deal.CreateDealActivity;
+import com.chandlersystem.chandler.ui.create_request.CreateRequestActivity;
 import com.chandlersystem.chandler.ui.create_request.SelectCategoryFragment;
 import com.chandlersystem.chandler.ui.deal.DealFragment;
 import com.chandlersystem.chandler.ui.login.LoginActivity;
+import com.chandlersystem.chandler.ui.profile.EditProfileActivity;
 import com.chandlersystem.chandler.ui.profile.ProfileFragment;
 import com.chandlersystem.chandler.ui.select_category.SelectCategoryActivity;
 
@@ -28,4 +30,8 @@ public interface ActivityComponent {
     void inject(ProfileFragment profileFragment);
 
     void inject(CreateDealActivity createDealActivity);
+
+    void inject(CreateRequestActivity createRequestActivity);
+
+    void inject(EditProfileActivity editProfileActivity);
 }

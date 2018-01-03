@@ -2,7 +2,7 @@ package com.chandlersystem.chandler.data.models.request;
 
 import java.util.List;
 
-public class CreateDealRequest {
+public class CreateDealBody {
     private String productName;
     private String reference;
     private float price;
@@ -12,10 +12,10 @@ public class CreateDealRequest {
     private String productDesc;
     private List<String> productPics;
 
-    public CreateDealRequest() {
+    public CreateDealBody() {
     }
 
-    public CreateDealRequest(String productName, String reference, float price, float shippingPrice, String currency, String remainTime, String productDesc, List<String> productPics) {
+    public CreateDealBody(String productName, String reference, float price, float shippingPrice, String currency, String remainTime, String productDesc, List<String> productPics) {
         this.productName = productName;
         this.reference = reference;
         this.price = price;

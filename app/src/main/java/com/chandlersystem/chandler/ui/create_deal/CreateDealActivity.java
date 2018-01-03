@@ -20,7 +20,7 @@ import com.chandlersystem.chandler.data.api.ChandlerApi;
 import com.chandlersystem.chandler.data.models.pojo.Category;
 import com.chandlersystem.chandler.data.models.pojo.FileUpload;
 import com.chandlersystem.chandler.data.models.pojo.UploadImage;
-import com.chandlersystem.chandler.data.models.request.CreateDealRequest;
+import com.chandlersystem.chandler.data.models.request.CreateDealBody;
 import com.chandlersystem.chandler.data.models.response.RetrofitResponseItem;
 import com.chandlersystem.chandler.database.UserManager;
 import com.chandlersystem.chandler.databinding.ActivityCreateDealBinding;
@@ -244,7 +244,7 @@ public class CreateDealActivity extends AppCompatActivity implements ViewPager.O
     }
 
     @Override
-    public void onProductCreated(CreateDealRequest request) {
+    public void onProductCreated(CreateDealBody request) {
         List<String> imagePathList = request.getProductPics();
         List<MultipartBody.Part> filePartList = new ArrayList<>();
         for (String imagePath : imagePathList) {
@@ -252,7 +252,7 @@ public class CreateDealActivity extends AppCompatActivity implements ViewPager.O
             filePartList.add(part);
         }
 
-        mCompositeDisposable.add(mApi.uploadImage(UserManager.getUserSync().getAuthorization(), filePartList)
+        mCompositeDisposable.add(mApi.uploadImages(UserManager.getUserSync().getAuthorization(), filePartList)
                 .compose(RxUtil.withSchedulers())
                 .doOnSubscribe(disposable -> ViewUtil.toggleView(mBinding.layoutProgressBar.progressBar, true))
                 .subscribe(responseItem -> {
@@ -263,7 +263,7 @@ public class CreateDealActivity extends AppCompatActivity implements ViewPager.O
                 }));
     }
 
-    private void createDealApi(RetrofitResponseItem<UploadImage> result, CreateDealRequest request) {
+    private void createDealApi(RetrofitResponseItem<UploadImage> result, CreateDealBody request) {
         List<String> urlList = new ArrayList<>();
         for (FileUpload fileUpload : result.item.getResult().getFiles().getFileUpload()) {
             urlList.add("http://etylash.xyz:3001/" + fileUpload.getName());
@@ -302,5 +302,4 @@ public class CreateDealActivity extends AppCompatActivity implements ViewPager.O
             return cursor.getString(index);
         }
     }
-
 }
