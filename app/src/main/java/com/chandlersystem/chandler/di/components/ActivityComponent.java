@@ -2,6 +2,7 @@ package com.chandlersystem.chandler.di.components;
 
 import com.chandlersystem.chandler.di.modules.ActivityModule;
 import com.chandlersystem.chandler.di.scopes.PerActivity;
+import com.chandlersystem.chandler.ui.create_deal.CreateDealActivity;
 import com.chandlersystem.chandler.ui.create_request.SelectCategoryFragment;
 import com.chandlersystem.chandler.ui.deal.DealFragment;
 import com.chandlersystem.chandler.ui.login.LoginActivity;
@@ -25,4 +26,6 @@ public interface ActivityComponent {
     void inject(SelectCategoryActivity selectCategoryActivity);
 
     void inject(ProfileFragment profileFragment);
+
+    void inject(CreateDealActivity createDealActivity);
 }

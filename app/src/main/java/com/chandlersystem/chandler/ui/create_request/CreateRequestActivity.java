@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.chandlersystem.chandler.R;
 import com.chandlersystem.chandler.data.models.pojo.Category;
+import com.chandlersystem.chandler.data.models.request.CreateDealRequest;
 import com.chandlersystem.chandler.databinding.ActivityCreateRequestBinding;
 import com.chandlersystem.chandler.ui.adapters.DealPagerAdapter;
 import com.chandlersystem.chandler.ui.adapters.RequestPagerAdapter;
@@ -70,7 +71,7 @@ public class CreateRequestActivity extends AppCompatActivity implements ViewPage
     }
 
     private void setupViewPager() {
-        mDealPagerAdapter = new RequestPagerAdapter(getSupportFragmentManager());
+        mDealPagerAdapter = new RequestPagerAdapter(getSupportFragmentManager(), this);
         mBinding.viewpager.setOffscreenPageLimit(RequestPagerAdapter.TOTAL_PAGE);
         mBinding.viewpager.setAdapter(mDealPagerAdapter);
         mBinding.viewpager.addOnPageChangeListener(this);
@@ -101,12 +102,6 @@ public class CreateRequestActivity extends AppCompatActivity implements ViewPage
     @Override
     public void onPageScrollStateChanged(int state) {
 
-    }
-
-    @Override
-    public void onProductNameAdded(String name) {
-        mProductName = name;
-        goToNextPage();
     }
 
     private void goToNextPage() {
@@ -215,5 +210,10 @@ public class CreateRequestActivity extends AppCompatActivity implements ViewPage
     public void onCitySelected(String city) {
         mCity = city;
         goToNextPage();
+    }
+
+    @Override
+    public void onProductCreated(CreateDealRequest request) {
+
     }
 }

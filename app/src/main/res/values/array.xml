@@ -1,17 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="shipping_time">
-        <item>Urgen (in 1 week)</item>
-        <item>In 2 weeks</item>
-        <item>In 1 month</item>
-        <item>Less than 2 months</item>
+        <item>@string/content_deal_shipping_time_urgent</item>
+        <item>@string/content_deal_shipping_time_standard</item>
+        <item>@string/content_deal_shipping_time_normal</item>
+        <item>@string/content_deal_shipping_time_flexible</item>
+    </string-array>
+
+    <string-array name="shipping_price">
+        <item>150.000</item>
+        <item>300.000</item>
+        <item>500.000</item>
+        <item>700.000</item>
+        <item>1.000.000</item>
     </string-array>
 
     <string-array name="budget">
-        <item>Very small($50 - $100)</item>
-        <item>Small ($100 - $150)</item>
-        <item>Good ($150 - $200)</item>
-        <item>Very good ($200 - $250)</item>
+        <item>@string/content_budget_very_small</item>
+        <item>@string/content_budget_small</item>
+        <item>@string/content_budget_normal</item>
+        <item>@string/content_budget_big</item>
+        <item>@string/content_budget_huge</item>
     </string-array>
 
     <string-array name="cities">

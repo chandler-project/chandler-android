@@ -15,12 +15,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chandlersystem.chandler.R;
+import com.chandlersystem.chandler.data.models.request.CreateDealRequest;
 import com.chandlersystem.chandler.databinding.FragmentCompleteCreateDealBinding;
 import com.chandlersystem.chandler.ui.adapters.ItemImageAdapter;
 import com.chandlersystem.chandler.utilities.ValidateUtil;
 import com.chandlersystem.chandler.utilities.ViewUtil;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
@@ -45,8 +48,10 @@ public class CompleteCreateDealFragment extends Fragment {
 
     private ItemImageAdapter mAdapter;
 
+    private CreateDealRequest mCreateDealRequest;
+
     public interface CompleteCreateDealListener {
-        void onProductNameAdded(String name);
+        void onProductCreated(CreateDealRequest request);
     }
 
     public CompleteCreateDealFragment() {
@@ -142,15 +147,23 @@ public class CompleteCreateDealFragment extends Fragment {
 
     private Observable<Boolean> priceValidated() {
         return RxTextView.textChanges(mBinding.etNetPrice)
-                .map(charSequence -> charSequence.toString().length() > 0);
+                .map(charSequence -> {
+                    int currentLength = charSequence.toString().length();
+                    int currentPrice = 0;
+
+                    if (currentLength > 0) {
+                        currentPrice = Integer.valueOf(charSequence.toString());
+                    }
+
+                    return (currentLength > 0 && currentPrice > 1000 && currentPrice < 999999999);
+                });
     }
 
     private void handleEvents() {
         mCompositeDisposable.add(buttonNextClicks()
                 .subscribe(o -> storeNameAndGoToNextPage(), Throwable::printStackTrace));
 
-        mCompositeDisposable.add(formValidated().subscribe(aBoolean ->
-        {
+        mCompositeDisposable.add(formValidated().subscribe(aBoolean -> {
             if (aBoolean) {
                 enableButtonNext();
             } else {
@@ -160,8 +173,20 @@ public class CompleteCreateDealFragment extends Fragment {
     }
 
     private void storeNameAndGoToNextPage() {
-        String name = mBinding.etName.getText().toString();
-        mListener.onProductNameAdded(name);
+        final String name = mBinding.etName.getText().toString();
+        final String reference = mBinding.etLinkUrl.getText().toString();
+        final float productPrice = Float.valueOf(mBinding.etNetPrice.getText().toString());
+        final String productDescription = mBinding.etDescription.getText().toString();
+        final List<String> productImageUri = mAdapter.getData();
+
+        CreateDealRequest request = new CreateDealRequest();
+        request.setProductName(name);
+        request.setReference(reference);
+        request.setPrice(productPrice);
+        request.setProductDesc(productDescription);
+        request.setProductPics(productImageUri);
+
+        mListener.onProductCreated(request);
     }
 
     private Observable<Object> buttonNextClicks() {

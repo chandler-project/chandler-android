@@ -16,6 +16,7 @@ import com.chandlersystem.chandler.ChandlerApplication;
 import com.chandlersystem.chandler.R;
 import com.chandlersystem.chandler.data.api.ChandlerApi;
 import com.chandlersystem.chandler.data.models.pojo.Category;
+import com.chandlersystem.chandler.databinding.FragmentSelectCategoryBinding;
 import com.chandlersystem.chandler.databinding.FragmentSelectItemBinding;
 import com.chandlersystem.chandler.di.components.ActivityComponent;
 import com.chandlersystem.chandler.di.components.DaggerActivityComponent;
@@ -35,7 +36,7 @@ import io.reactivex.disposables.CompositeDisposable;
  * A simple {@link Fragment} subclass.
  */
 public class SelectCategoryFragment extends Fragment {
-    private FragmentSelectItemBinding mBinding;
+    private FragmentSelectCategoryBinding mBinding;
 
     private SelectCategoryAdapter mCategoryAdapter;
 
@@ -88,7 +89,7 @@ public class SelectCategoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_select_item, container, false);
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_select_category, container, false);
         return mBinding.getRoot();
     }
 

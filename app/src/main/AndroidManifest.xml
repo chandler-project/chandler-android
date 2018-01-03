@@ -59,8 +59,7 @@
             tools:replace="android:theme" />
         <activity
             android:name=".ui.main.MainActivity"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".ui.login.LoginActivity"
             android:screenOrientation="portrait" />
@@ -132,7 +131,6 @@
             android:name=".ui.create_deal.CreateDealActivity"
             android:parentActivityName=".ui.main.MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.create_request.CreateRequestActivity"

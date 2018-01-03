@@ -33,9 +33,9 @@ public class SelectPriceAdapter extends RecyclerView.Adapter<SelectPriceAdapter.
         return getPriceClicks;
     }
 
-    public SelectPriceAdapter(Context context) {
-        this.mContext = context;
-        mPriceList = new ArrayList<>(Arrays.asList(context.getResources().getStringArray(R.array.budget)));
+    public SelectPriceAdapter(Context mContext, List<String> mPriceList) {
+        this.mContext = mContext;
+        this.mPriceList = mPriceList;
     }
 
     @Override

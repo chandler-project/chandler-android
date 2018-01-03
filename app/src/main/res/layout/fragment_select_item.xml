@@ -1,29 +1,101 @@
 <layout>
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:autoLink="web"
-            android:fontFamily="@font/cabin_bold"
-            android:maxLines="2"
-            android:padding="@dimen/spacing_small"
-            android:textColor="@color/colorTextPrimary"
-            android:textColorLink="@color/colorPrimary"
-            android:textSize="@dimen/text_size_larger"
-            tools:text="Please choose...." />
-
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_items"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/tv_title"
-            android:orientation="horizontal" />
-    </RelativeLayout>
+            android:background="@color/colorWhite">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autoLink="web"
+                android:fontFamily="@font/cabin_bold"
+                android:maxLines="2"
+                android:padding="@dimen/spacing_small"
+                android:textColor="@color/colorTextPrimary"
+                android:textColorLink="@color/colorPrimary"
+                android:textSize="@dimen/text_size_larger"
+                tools:text="Please choose...." />
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_items"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_title"
+                android:orientation="horizontal" />
+
+            <RelativeLayout
+                android:id="@+id/layout_category_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rv_items"
+                android:background="@color/colorWhite">
+
+                <TextView
+                    android:id="@+id/et_currency"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_small"
+                    android:layout_marginStart="@dimen/spacing_small"
+                    android:layout_marginTop="@dimen/spacing_normal"
+                    android:background="@null"
+                    android:fontFamily="@font/cabin_regular"
+                    android:text="@string/content_vnd"
+                    android:textColor="@color/colorTextPrimary"
+                    android:textSize="@dimen/text_size_large" />
+
+                <EditText
+                    android:id="@+id/et_accurate_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_small"
+                    android:layout_marginTop="@dimen/spacing_normal"
+                    android:layout_toEndOf="@id/et_currency"
+                    android:layout_toRightOf="@id/et_currency"
+                    android:background="@null"
+                    android:fontFamily="@font/cabin_regular"
+                    android:hint="@string/content_other_price"
+                    android:inputType="number"
+                    android:textColor="@color/colorTextPrimary"
+                    android:textSize="@dimen/text_size_large" />
+
+                <ImageView
+                    android:id="@+id/btn_next"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/tv_error"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="end|center_vertical"
+                    android:layout_marginRight="@dimen/spacing_small"
+                    android:background="@color/colorBackgroundGray"
+                    android:baselineAlignBottom="true"
+                    android:paddingLeft="@dimen/spacing_smaller"
+                    android:paddingRight="@dimen/spacing_smaller"
+                    android:src="@drawable/ic_right_white"
+                    android:textSize="@dimen/text_size_normal" />
+
+                <TextView
+                    android:id="@+id/tv_error"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/et_accurate_price"
+                    android:layout_marginLeft="@dimen/spacing_small"
+                    android:layout_marginRight="@dimen/spacing_small"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:fontFamily="@font/cabin_regular"
+                    android:textColor="@color/colorRed"
+                    tools:text="This is the error" />
+
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
 </layout>

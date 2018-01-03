@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chandlersystem.chandler.R;
+import com.chandlersystem.chandler.databinding.FragmentSelectDateBinding;
 import com.chandlersystem.chandler.databinding.FragmentSelectItemBinding;
 import com.chandlersystem.chandler.ui.adapters.SelectDateAdapter;
 import com.chandlersystem.chandler.utilities.ViewUtil;
@@ -23,13 +24,17 @@ import io.reactivex.disposables.CompositeDisposable;
  * A simple {@link Fragment} subclass.
  */
 public class SelectDateFragment extends Fragment {
-    private FragmentSelectItemBinding mBinding;
+    private static final String ARGUMENT_TITLE = "argument-title";
+
+    private FragmentSelectDateBinding mBinding;
 
     private SelectDateAdapter mCategoryAdapter;
 
     private SelectDateListener mListener;
 
     private final CompositeDisposable mCompositeDisposable = new CompositeDisposable();
+
+    private String mTitle;
 
     public interface SelectDateListener {
         void onDateSelected(String date);
@@ -39,7 +44,11 @@ public class SelectDateFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static SelectDateFragment getInstance() {
+    public static SelectDateFragment getInstance(String title) {
+        SelectDateFragment fragment = new SelectDateFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(ARGUMENT_TITLE, title);
+        fragment.setArguments(bundle);
         return new SelectDateFragment();
     }
 
@@ -64,13 +73,18 @@ public class SelectDateFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_select_item, container, false);
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_select_date, container, false);
         return mBinding.getRoot();
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        if (getArguments() != null) {
+            mTitle = getArguments().getString(ARGUMENT_TITLE);
+        }
+
         setupViews();
         handleEvents();
     }
@@ -95,8 +109,7 @@ public class SelectDateFragment extends Fragment {
     }
 
     private void setupTitle() {
-        mBinding.tvTitle.setText(getString(R.string.content_estimate_time_for_delivery));
-        ViewUtil.toggleView(mBinding.tvTitle, true);
+        ViewUtil.setText(mBinding.tvTitle, mTitle);
     }
 
     private void setupRecyclerView() {

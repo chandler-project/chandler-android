@@ -194,4 +194,18 @@ ba gác \"ship\" tới."</string>
     <string name="content_bid_now">Bid</string>
     <string name="content_logout_content">Do you really want to logout?</string>
     <string name="content_logout_title">Log out</string>
+    <string name="content_deal_shipping_time_urgent">Urgent (7 - 15 ngày)</string>
+    <string name="content_deal_shipping_time_standard">Standart (15 - 20 ngày)</string>
+    <string name="content_deal_shipping_time_normal">Bình thuường (20 - 30 ngày)</string>
+    <string name="content_deal_shipping_time_flexible">Linh hoạt (Giao khi có hàng)</string>
+    <string name="content_budget_very_small">Rất Nhỏ (100k - 200k)</string>
+    <string name="content_budget_small">Nhỏ (200k - 400k)</string>
+    <string name="content_budget_normal">Trung bình (400k - 600k)</string>
+    <string name="content_budget_big">Lớn (600k - 1000k)</string>
+    <string name="content_budget_huge"><![CDATA[Rất lớn (>2000k)]]></string>
+    <string name="content_other_price">Giá khác</string>
+    <string name="content_when_do_you_need_the_product">When do you need the product?</string>
+    <string name="content_estimate_shipping_fee">Estimate shipping fee</string>
+    <string name="content_please_input_a_bigger_value">Xin vui lòng nhập giá trị lớn hơn 1000</string>
+    <string name="content_create_new_deal_successfully">Create new deal successfully</string>
 </resources>
