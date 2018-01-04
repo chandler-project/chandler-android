@@ -19,13 +19,15 @@ import com.chandlersystem.chandler.R;
 import com.chandlersystem.chandler.custom_views.LinearItemDecoration;
 import com.chandlersystem.chandler.data.api.ChandlerApi;
 import com.chandlersystem.chandler.data.models.pojo.Category;
-import com.chandlersystem.chandler.data.models.retrofit.Deal;
+import com.chandlersystem.chandler.data.models.pojo.Deal;
+import com.chandlersystem.chandler.database.UserManager;
 import com.chandlersystem.chandler.databinding.FragmentDealBinding;
 import com.chandlersystem.chandler.ui.adapters.DealAdapter;
 import com.chandlersystem.chandler.ui.adapters.ImagePagerAdapter;
 import com.chandlersystem.chandler.ui.adapters.CategoryAdapter;
 import com.chandlersystem.chandler.ui.deal_detail.DealDetailActivity;
 import com.chandlersystem.chandler.ui.main.MainActivity;
+import com.chandlersystem.chandler.utilities.DialogUtil;
 import com.chandlersystem.chandler.utilities.RxUtil;
 import com.jakewharton.rxbinding2.support.v4.widget.RxSwipeRefreshLayout;
 
@@ -101,42 +103,10 @@ public class DealFragment extends Fragment {
 
     private void setupDealRecyclerView() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        List<Deal> dealList = new ArrayList<>();
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        mDealAdapter = new DealAdapter(getContext(), dealList, DealAdapter.DealType.DEAL_MAIN);
         mBinding.recyclerViewDeals.setLayoutManager(layoutManager);
         mBinding.recyclerViewDeals.setNestedScrollingEnabled(true);
         mBinding.recyclerViewDeals.setHasFixedSize(true);
         mBinding.recyclerViewDeals.addItemDecoration(new LinearItemDecoration(getResources().getDimensionPixelSize(R.dimen.spacing_normal)));
-        mBinding.recyclerViewDeals.setAdapter(mDealAdapter);
     }
 
     private void setupCategoryRecyclerView() {
@@ -207,11 +177,26 @@ public class DealFragment extends Fragment {
     private void handleEvents() {
         swipeToRefreshEvent();
         appbarCollapse();
-        clickDeal();
     }
 
     private void callApi() {
         callApiGetCategory();
+        callApiGetAllDeal();
+    }
+
+    private void callApiGetAllDeal() {
+        mCompositeDisposable.add(
+                mApi.getDealList(UserManager.getUserSync().getAuthorization())
+                        .compose(RxUtil.withSchedulers())
+                        .compose(RxUtil.withProgressBar(mBinding.layoutProgressBar.progressBar))
+                        .map(dealRetrofitResponseListItem -> dealRetrofitResponseListItem.items)
+                        .subscribe(this::setDealAdapter, throwable -> DialogUtil.showErrorDialog(getContext(), throwable)));
+    }
+
+    private void setDealAdapter(List<Deal> dealList) {
+        mDealAdapter = new DealAdapter(getContext(), dealList, DealAdapter.DealType.DEAL_MAIN);
+        mBinding.recyclerViewDeals.setAdapter(mDealAdapter);
+        clickDeal();
     }
 
     private void clickDeal() {

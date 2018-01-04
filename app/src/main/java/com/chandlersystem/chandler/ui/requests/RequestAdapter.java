@@ -8,9 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chandlersystem.chandler.R;
-import com.chandlersystem.chandler.data.models.retrofit.Deal;
 import com.chandlersystem.chandler.databinding.FragmentRequestItemBinding;
-import com.chandlersystem.chandler.databinding.ItemDealBinding;
 import com.chandlersystem.chandler.ui.requests.RequestsFragment.OnListRequestFragmentInteractionListener;
 import com.chandlersystem.chandler.ui.requests.dummy.DummyContent.DummyItem;
 import com.chandlersystem.chandler.utilities.ViewUtil;
@@ -19,7 +17,6 @@ import com.jakewharton.rxbinding2.view.RxView;
 import java.util.List;
 
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.subjects.PublishSubject;
 
 /**

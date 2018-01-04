@@ -1,0 +1,59 @@
+<layout xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_onboarding_image"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_240sdp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_50sdp"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_onboarding_image"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/spacing_largest"
+            android:layout_marginRight="@dimen/spacing_largest"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:fontFamily="@font/cabin_regular"
+            android:textAlignment="center"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/text_size_larger"
+            tools:text="Hello world" />
+
+        <TextView
+            android:id="@+id/tv_sub_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_title"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/spacing_smaller"
+            android:fontFamily="@font/cabin_regular"
+            tools:text="@string/content_please_read_our_term_and_condition"
+            android:textAlignment="center"
+            android:textColor="@color/colorHint" />
+
+        <Button
+            android:id="@+id/btn_become_shipper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_sub_title"
+            android:layout_marginLeft="@dimen/spacing_largest"
+            android:layout_marginRight="@dimen/spacing_largest"
+            android:layout_marginTop="@dimen/spacing_largest"
+            android:background="@color/colorPrimary"
+            android:fontFamily="@font/cabin_regular"
+            android:gravity="center"
+            android:text="@string/content_become_a_shipper"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/text_size_large" />
+    </RelativeLayout>
+</layout>

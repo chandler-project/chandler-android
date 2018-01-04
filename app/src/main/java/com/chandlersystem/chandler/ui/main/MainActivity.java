@@ -32,6 +32,7 @@ import com.chandlersystem.chandler.ui.requests.RequestsFragment;
 import com.chandlersystem.chandler.ui.requests.dummy.DummyContent;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener,

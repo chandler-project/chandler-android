@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chandlersystem.chandler.R;
-import com.chandlersystem.chandler.data.models.retrofit.Deal;
+import com.chandlersystem.chandler.data.models.pojo.Deal;
 import com.chandlersystem.chandler.databinding.ItemUserActivityBinding;
 import com.chandlersystem.chandler.utilities.ViewUtil;
 

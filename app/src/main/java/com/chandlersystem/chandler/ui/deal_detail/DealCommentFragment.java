@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 
 import com.chandlersystem.chandler.R;
 import com.chandlersystem.chandler.custom_views.LinearItemDecoration;
-import com.chandlersystem.chandler.data.models.retrofit.Deal;
+import com.chandlersystem.chandler.data.models.pojo.Deal;
 import com.chandlersystem.chandler.databinding.FragmentDealCommentBinding;
 import com.chandlersystem.chandler.ui.adapters.CommentAdapter;
 

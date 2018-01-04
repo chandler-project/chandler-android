@@ -1,6 +1,7 @@
 package com.chandlersystem.chandler.data.api;
 
 import com.chandlersystem.chandler.data.models.pojo.Category;
+import com.chandlersystem.chandler.data.models.pojo.Deal;
 import com.chandlersystem.chandler.data.models.pojo.UploadImage;
 import com.chandlersystem.chandler.data.models.pojo.User;
 import com.chandlersystem.chandler.data.models.request.CreateDealBody;
@@ -12,7 +13,6 @@ import com.chandlersystem.chandler.data.models.request.SelectCategoryRequest;
 import com.chandlersystem.chandler.data.models.response.AuthenticationRespone;
 import com.chandlersystem.chandler.data.models.response.RetrofitResponseItem;
 import com.chandlersystem.chandler.data.models.response.RetrofitResponseListItem;
-import com.chandlersystem.chandler.data.models.retrofit.Deal;
 
 import java.util.List;
 
@@ -35,7 +35,8 @@ public interface ChandlerApi {
     @GET("/api/Categories")
     Observable<RetrofitResponseListItem<Category>> getCategoryList();
 
-    Call<List<Deal>> getDeals(@Body DealRequest request);
+    @GET("/api/Deals")
+    Observable<RetrofitResponseListItem<Deal>> getDealList(@Query("access_token") String accessToken);
 
     @POST("/api/Members/logout")
     Observable<RetrofitResponseItem> logout(@Query("access_token") String accessToken);

@@ -22,6 +22,7 @@ import com.chandlersystem.chandler.database.DatabaseHelper;
 import com.chandlersystem.chandler.database.UserManager;
 import com.chandlersystem.chandler.database.UserObservation;
 import com.chandlersystem.chandler.databinding.FragmentProfileBinding;
+import com.chandlersystem.chandler.ui.become_shipper.BecomeShipperActivity;
 import com.chandlersystem.chandler.ui.login.LoginActivity;
 import com.chandlersystem.chandler.ui.main.MainActivity;
 import com.chandlersystem.chandler.utilities.CircleTransform;
@@ -37,6 +38,7 @@ import javax.inject.Inject;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 
 public class ProfileFragment extends Fragment {
     private static final String TAG = ProfileFragment.class.getCanonicalName();
@@ -69,8 +71,8 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false);
 
-        Fragment reviewsFragment = ReviewsFragment.newInstance(1);
-        getChildFragmentManager().beginTransaction().add(R.id.review_list_container, reviewsFragment).commit();
+        /*Fragment reviewsFragment = ReviewsFragment.newInstance(1);
+        getChildFragmentManager().beginTransaction().add(R.id.review_list_container, reviewsFragment).commit();*/
         return mBinding.getRoot();
     }
 
@@ -105,9 +107,16 @@ public class ProfileFragment extends Fragment {
         mCompositeDisposable.add(buttonEditClicks()
                 .subscribe(o -> startEditProfileActivity(), Throwable::printStackTrace));
 
-        mCompositeDisposable.add(signOut().subscribe(o -> {
-            showLogoutDialog();
-        }, Throwable::printStackTrace));
+        mCompositeDisposable.add(signOut().subscribe(o -> showLogoutDialog(), Throwable::printStackTrace));
+        mCompositeDisposable.add(becomeShipper().subscribe(o -> startBecomeShipperActivity(), Throwable::printStackTrace));
+    }
+
+    private void startBecomeShipperActivity() {
+        startActivity(BecomeShipperActivity.getIntent(getContext()));
+    }
+
+    private Observable<Object> becomeShipper() {
+        return RxView.clicks(mBinding.layoutContent.layoutBecomeShipper);
     }
 
     private void showLogoutDialog() {
@@ -162,7 +171,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private Observable<Object> buttonEditClicks() {
-        return RxView.clicks(mBinding.layoutContent.ivEdit);
+        return RxView.clicks(mBinding.layoutContent.layoutEditProfile);
     }
 
 

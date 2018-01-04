@@ -9,7 +9,7 @@ import android.support.v7.widget.GridLayoutManager;
 
 import com.chandlersystem.chandler.R;
 import com.chandlersystem.chandler.custom_views.CategoryDecoration;
-import com.chandlersystem.chandler.data.models.retrofit.Deal;
+import com.chandlersystem.chandler.data.models.pojo.Deal;
 import com.chandlersystem.chandler.databinding.ActivityCategoryDetailBinding;
 import com.chandlersystem.chandler.ui.adapters.DealAdapter;
 import com.chandlersystem.chandler.ui.deal_detail.DealDetailActivity;

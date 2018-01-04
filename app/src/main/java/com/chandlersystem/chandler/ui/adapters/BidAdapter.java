@@ -2,7 +2,6 @@ package com.chandlersystem.chandler.ui.adapters;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,10 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.chandlersystem.chandler.R;
-import com.chandlersystem.chandler.data.models.retrofit.Deal;
 import com.chandlersystem.chandler.databinding.ItemBidBinding;
-import com.chandlersystem.chandler.databinding.ItemCartTransactionBinding;
-import com.chandlersystem.chandler.ui.deal_detail.DealDetailActivity;
 import com.chandlersystem.chandler.utilities.ViewUtil;
 import com.jakewharton.rxbinding2.view.RxView;
 

@@ -210,4 +210,11 @@ ba gác \"ship\" tới."</string>
     <string name="content_create_new_deal_successfully">Create new deal successfully</string>
     <string name="content_create_new_request_successfully">Create new request successfully</string>
     <string name="content_update_profile_successfully">Update profile successfully</string>
+    <string name="content_edit_your_profile">Edit your profile</string>
+    <string name="content_become_a_shipper">Become a shipper</string>
+    <string name="content_your_order">Your orders</string>
+    <string name="content_your_hot_deal">Your hot deals</string>
+    <string name="content_want_to_become_a_shipper">Want to be the shipper of Chandler.\n Click the button below</string>
+    <string name="content_please_read_our_term_and_condition">Please read out <a href="https://google.com.vn">term and condition</a> for more information</string>
+    <string name="content_your_request">Your requests</string>
 </resources>

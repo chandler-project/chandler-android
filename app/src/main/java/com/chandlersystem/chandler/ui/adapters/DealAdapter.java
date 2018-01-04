@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chandlersystem.chandler.R;
-import com.chandlersystem.chandler.data.models.retrofit.Deal;
+import com.chandlersystem.chandler.data.models.pojo.Deal;
 import com.chandlersystem.chandler.databinding.ItemDealBinding;
 import com.chandlersystem.chandler.databinding.ItemDealSortByCategoryBinding;
 import com.chandlersystem.chandler.utilities.RxUtil;
@@ -66,11 +66,10 @@ public class DealAdapter extends RecyclerView.Adapter {
             setupViews(mainDealHolder.mBinding, deal);
             clickDeal(mainDealHolder, deal);
 
-            // Fake -- will remote these line later
-            if (position % 5 == 0) {
-                ViewUtil.toggleView(mainDealHolder.mBinding.layoutCategoryName.layoutCategoryName, true);
-            } else {
+            if (position > 0 && deal.getCategoryId().equals(mDealList.get(position - 1).getCategoryId())) {
                 ViewUtil.toggleView(mainDealHolder.mBinding.layoutCategoryName.layoutCategoryName, false);
+            } else {
+                ViewUtil.toggleView(mainDealHolder.mBinding.layoutCategoryName.layoutCategoryName, true);
             }
         } else {
             ExtraDealHolder extraDealHolder = (ExtraDealHolder) holder;
