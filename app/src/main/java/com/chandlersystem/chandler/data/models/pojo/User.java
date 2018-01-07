@@ -67,6 +67,11 @@ public class User extends BaseRXModel {
     @Column
     private String lastLogin;
 
+    @SerializedName("isShipper")
+    @Expose
+    @Column
+    private boolean isShipper;
+
     @Column
     private String authorization;
 
@@ -178,5 +183,33 @@ public class User extends BaseRXModel {
 
     public void setFirstLogin(boolean firstLogin) {
         isFirstLogin = firstLogin;
+    }
+
+    public boolean isShipper() {
+        return isShipper;
+    }
+
+    public void setShipper(boolean shipper) {
+        isShipper = shipper;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "gender=" + gender +
+                ", bio='" + bio + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", points=" + points +
+                ", email='" + email + '\'' +
+                ", id='" + id + '\'' +
+                ", created='" + created + '\'' +
+                ", modified='" + modified + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", isNewAccount=" + isNewAccount +
+                ", lastLogin='" + lastLogin + '\'' +
+                ", isShipper=" + isShipper +
+                ", authorization='" + authorization + '\'' +
+                ", isFirstLogin=" + isFirstLogin +
+                '}';
     }
 }

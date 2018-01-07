@@ -227,7 +227,7 @@ public class DealFragment extends Fragment {
 
 
     private void startDealDetailActivity(Deal deal) {
-        Intent i = DealDetailActivity.getInstance(getContext());
+        Intent i = DealDetailActivity.getInstance(getContext(), deal);
         startActivity(i);
     }
 

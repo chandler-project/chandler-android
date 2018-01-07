@@ -82,7 +82,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
             return;
         }
 
-        mContext.startActivity(DealDetailActivity.getInstance(mContext));
+        mContext.startActivity(DealDetailActivity.getInstance(mContext, deal));
     }
 
     private void setupViews(ItemCartTransactionBinding binding, Deal deal) {

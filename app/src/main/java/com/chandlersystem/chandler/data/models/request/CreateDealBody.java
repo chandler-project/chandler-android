@@ -8,20 +8,20 @@ public class CreateDealBody {
     private float price;
     private float shippingPrice;
     private String currency;
-    private String remainTime;
+    private String shippingTime;
     private String productDesc;
     private List<String> productPics;
 
     public CreateDealBody() {
     }
 
-    public CreateDealBody(String productName, String reference, float price, float shippingPrice, String currency, String remainTime, String productDesc, List<String> productPics) {
+    public CreateDealBody(String productName, String reference, float price, float shippingPrice, String currency, String shippingTime, String productDesc, List<String> productPics) {
         this.productName = productName;
         this.reference = reference;
         this.price = price;
         this.shippingPrice = shippingPrice;
         this.currency = currency;
-        this.remainTime = remainTime;
+        this.shippingTime = shippingTime;
         this.productDesc = productDesc;
         this.productPics = productPics;
     }
@@ -66,12 +66,12 @@ public class CreateDealBody {
         this.currency = currency;
     }
 
-    public String getRemainTime() {
-        return remainTime;
+    public String getShippingTime() {
+        return shippingTime;
     }
 
-    public void setRemainTime(String remainTime) {
-        this.remainTime = remainTime;
+    public void setShippingTime(String shippingTime) {
+        this.shippingTime = shippingTime;
     }
 
     public String getProductDesc() {

@@ -24,12 +24,21 @@ public class DealActivityFragment extends Fragment {
     private FragmentDealActivityBinding mBinding;
     private UserActivityAdapter mUserActivityAdapter;
 
+    private Deal mDeal;
+
+    private static final String ARGUMENT_DEAL = "argument-deal";
+
     public DealActivityFragment() {
         // Required empty public constructor
     }
 
-    public static DealActivityFragment newInstance() {
-        return new DealActivityFragment();
+    public static DealActivityFragment newInstance(Deal deal) {
+
+        DealActivityFragment fragment = new DealActivityFragment();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(ARGUMENT_DEAL, deal);
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     @Override
@@ -48,43 +57,13 @@ public class DealActivityFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mDeal = getArguments().getParcelable(ARGUMENT_DEAL);
         setupRecyclerView();
-        ChandlerApplication.getApplicationComponent(getContext()).getChandlerApiV1();
     }
 
     private void setupRecyclerView() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        List<Deal> dealList = new ArrayList<>();
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        mUserActivityAdapter = new UserActivityAdapter(getContext(), dealList);
+        mUserActivityAdapter = new UserActivityAdapter(getContext(), mDeal.getRequesters());
         mBinding.recyclerViewActivities.setLayoutManager(layoutManager);
         mBinding.recyclerViewActivities.setNestedScrollingEnabled(true);
         mBinding.recyclerViewActivities.setHasFixedSize(true);

@@ -1,14 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/list"
-    android:name="com.chandlersystem.chandler.ui.requests.RequestsFragment"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginLeft="@dimen/spacing_smaller"
-    android:layout_marginRight="@dimen/spacing_smaller"
-    android:background="@color/colorBackgroundGray"
-    app:layoutManager="LinearLayoutManager"
-    tools:context="com.chandlersystem.chandler.ui.requests.RequestsFragment"
-    tools:listitem="@layout/fragment_request_item" />
+<layout>
+
+    <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/layout_swipe"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBackgroundGray">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/layout_toolbar"
+                layout="@layout/item_extra_toolbar"
+                android:visibility="gone" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/list"
+                android:name="com.chandlersystem.chandler.ui.requests.RequestsFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context="com.chandlersystem.chandler.ui.requests.RequestsFragment"
+                tools:listitem="@layout/fragment_request_item" />
+        </LinearLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
+</layout>
+

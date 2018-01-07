@@ -8,9 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chandlersystem.chandler.R;
+import com.chandlersystem.chandler.configs.ApiConstant;
+import com.chandlersystem.chandler.data.models.pojo.Owner;
+import com.chandlersystem.chandler.data.models.pojo.Request;
+import com.chandlersystem.chandler.data.models.pojo.Shipper;
 import com.chandlersystem.chandler.databinding.FragmentRequestItemBinding;
-import com.chandlersystem.chandler.ui.requests.RequestsFragment.OnListRequestFragmentInteractionListener;
-import com.chandlersystem.chandler.ui.requests.dummy.DummyContent.DummyItem;
+import com.chandlersystem.chandler.utilities.ValidateUtil;
 import com.chandlersystem.chandler.utilities.ViewUtil;
 import com.jakewharton.rxbinding2.view.RxView;
 
@@ -19,26 +22,19 @@ import java.util.List;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.subjects.PublishSubject;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnListRequestFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
- */
 public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
-    private final OnListRequestFragmentInteractionListener mListener;
+    private final List<Request> mValues;
     private Context mContext;
 
-    private final PublishSubject<DummyItem> mRequestClicks = PublishSubject.create();
+    private final PublishSubject<Request> mRequestClicks = PublishSubject.create();
 
-    public PublishSubject<DummyItem> getRequestClicks() {
+    public PublishSubject<Request> getRequestClicks() {
         return mRequestClicks;
     }
 
-    public RequestAdapter(List<DummyItem> mValues, OnListRequestFragmentInteractionListener mListener, Context mContext) {
+    public RequestAdapter(List<Request> mValues, Context mContext) {
         this.mValues = mValues;
-        this.mListener = mListener;
         this.mContext = mContext;
     }
 
@@ -52,19 +48,13 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
+        Request request = mValues.get(position);
 
-        holder.itemView.setOnClickListener(v -> {
-            if (null != mListener) {
-                // Notify the active callbacks interface (the activity, if the
-                // fragment is attached to one) that an item has been selected.
-                mListener.onRequestFragmentInteraction(holder.mItem);
-            }
-        });
-        setupViews(holder.mBinding);
+        setupViews(holder.mBinding, request);
         requestClicks(holder, holder.mItem);
     }
 
-    private void requestClicks(ViewHolder holder, DummyItem mItem) {
+    private void requestClicks(ViewHolder holder, Request mItem) {
         if (holder.mDisposable != null && !holder.mDisposable.isDisposed()) {
             holder.mDisposable.dispose();
         }
@@ -73,19 +63,30 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
                 .subscribe(o -> mRequestClicks.onNext(mItem), Throwable::printStackTrace);
     }
 
-    private void setupViews(FragmentRequestItemBinding binding) {
-        ViewUtil.showImage(mContext, "http://lorempixel.com/50/50/sports/2/", binding.layoutProfile.ivProfile);
-        ViewUtil.setText(binding.layoutProfile.tvUserName, "Serious Bee");
-        ViewUtil.setText(binding.tvDate, "Need it in 10/07/1018");
-        ViewUtil.setText(binding.layoutProfile.tvUserPoint, "12k");
-        ViewUtil.setText(binding.tvEndDate, "20/7/2018");
-        ViewUtil.showImage(mContext, "http://lorempixel.com/400/320/sports/", binding.ivProduct);
-        ViewUtil.setText(binding.tvPrice, "$200");
-        ViewUtil.setText(binding.tvProductTitle, "What is Lorem Ipsum?");
-        ViewUtil.setText(binding.tvProductLink, "https://google.com.vn");
-        ViewUtil.setText(binding.tvProductDetail, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s");
-        ViewUtil.setText(binding.tvAddress, "Da Nang");
-        ViewUtil.setText(binding.layoutCategoryName.tvCategoryName, "Trending");
+    private void setupViews(FragmentRequestItemBinding binding, Request request) {
+        if (request.getProductPics() != null && !request.getProductPics().isEmpty() && ValidateUtil.checkString(request.getProductPics().get(0))) {
+            ViewUtil.showImage(mContext, request.getProductPics().get(0), binding.ivProduct);
+            ViewUtil.toggleView(binding.ivProduct, true);
+        } else {
+            ViewUtil.toggleView(binding.ivProduct, false);
+        }
+
+        Owner owner = request.getOwner();
+        if (ValidateUtil.checkString(owner.getAvatar())) {
+            ViewUtil.showImage(mContext, ApiConstant.BASE_URL_VER1 + owner.getAvatar(), binding.layoutProfile.ivProfile);
+        } else {
+            ViewUtil.setImage(binding.layoutProfile.ivProfile, R.drawable.ic_placeholder_avatar);
+        }
+        ViewUtil.setText(binding.layoutProfile.tvUserName, owner.getFullName());
+        ViewUtil.setText(binding.layoutProfile.tvUserPoint, owner.getPoints() + owner.getPoints() > 2 ? mContext.getString(R.string.content_points) : mContext.getString(R.string.content_point));
+        ViewUtil.setText(binding.tvPrice, request.getPrice() + request.getCurrency());
+        ViewUtil.setText(binding.tvShippingPrice, mContext.getString(R.string.content_request) + request.getBudget().getMin() + " - " + request.getBudget().getMax() + request.getCurrency());
+        ViewUtil.setText(binding.tvProductTitle, request.getProductName());
+        ViewUtil.setText(binding.tvProductDetail, request.getDescription());
+        ViewUtil.setText(binding.tvDate, request.getDeadline());
+        ViewUtil.setText(binding.tvProductLink, request.getReference());
+        ViewUtil.setText(binding.tvAddress, request.getAddress());
+        ViewUtil.toggleView(binding.layoutCategoryName.tvCategoryName, false);
     }
 
     @Override
@@ -95,7 +96,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private FragmentRequestItemBinding mBinding;
-        public DummyItem mItem;
+        public Request mItem;
         private Disposable mDisposable;
 
         public ViewHolder(View view) {

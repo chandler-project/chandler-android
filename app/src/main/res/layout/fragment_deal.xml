@@ -85,6 +85,7 @@
                 android:layout_height="match_parent"
                 android:layout_below="@id/recyclerView_catgories"
                 android:layout_marginTop="@dimen/spacing_normal"
+                android:background="@color/colorBackgroundGray"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
                 <FrameLayout

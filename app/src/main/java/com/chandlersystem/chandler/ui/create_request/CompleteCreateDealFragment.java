@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 
 import com.chandlersystem.chandler.R;
 import com.chandlersystem.chandler.data.models.request.CreateDealBody;
+import com.chandlersystem.chandler.data.models.request.CreateRequestBody;
 import com.chandlersystem.chandler.databinding.FragmentCompleteCreateDealBinding;
 import com.chandlersystem.chandler.ui.adapters.ItemImageAdapter;
 import com.chandlersystem.chandler.utilities.ValidateUtil;

@@ -8,7 +8,7 @@ import com.chandlersystem.chandler.R;
 import com.chandlersystem.chandler.databinding.ActivityRequestsBinding;
 import com.chandlersystem.chandler.ui.requests.dummy.DummyContent;
 
-public class RequestsActivity extends AppCompatActivity implements RequestsFragment.OnListRequestFragmentInteractionListener {
+public class RequestsActivity extends AppCompatActivity {
 
     private ActivityRequestsBinding mBinding;
 
@@ -21,11 +21,6 @@ public class RequestsActivity extends AppCompatActivity implements RequestsFragm
 
         RequestsFragment fragment = RequestsFragment.newInstance(1);
         getSupportFragmentManager().beginTransaction().replace(R.id.layout_content, fragment).commit();
-
-    }
-
-    @Override
-    public void onRequestFragmentInteraction(DummyContent.DummyItem item) {
 
     }
 }

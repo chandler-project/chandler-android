@@ -98,10 +98,28 @@
                 tools:text="$200" />
 
             <TextView
-                android:id="@+id/tv_end_date"
+                android:id="@+id/tv_shipping_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_price"
+                android:layout_marginLeft="@dimen/spacing_small"
+                android:layout_marginRight="@dimen/spacing_small"
+                android:layout_marginTop="@dimen/spacing_smallest"
+                android:background="@drawable/item_button_rounded_yellow"
+                android:fontFamily="@font/cabin_bold"
+                android:paddingBottom="@dimen/spacing_smallest"
+                android:paddingLeft="@dimen/spacing_small"
+                android:paddingRight="@dimen/spacing_small"
+                android:paddingTop="@dimen/spacing_smallest"
+                android:textColor="@color/colorTextGray"
+                android:textSize="@dimen/text_size_normal"
+                tools:text="$200" />
+
+            <TextView
+                android:id="@+id/tv_end_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_shipping_price"
                 android:layout_marginLeft="@dimen/spacing_small"
                 android:layout_marginRight="@dimen/spacing_small"
                 android:layout_marginTop="@dimen/spacing_smallest"

@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.chandlersystem.chandler.ChandlerApplication;
 import com.chandlersystem.chandler.R;
+import com.chandlersystem.chandler.database.UserManager;
 import com.chandlersystem.chandler.databinding.ActivityMainBinding;
 import com.chandlersystem.chandler.di.components.ActivityComponent;
 import com.chandlersystem.chandler.di.components.DaggerActivityComponent;
@@ -38,7 +39,6 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener,
         ViewPager.OnPageChangeListener, DealFragment.OnFragmentInteractionListener,
         CreateDealRequestFragment.OnCreateDealRequestInteraction,
-        RequestsFragment.OnListRequestFragmentInteractionListener,
         ReviewsFragment.OnReviewInteractListener {
     private static final String TAG = MainActivity.class.getCanonicalName();
 
@@ -172,13 +172,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onCreateDeal() {
-        Intent i = new Intent(this, CreateDealActivity.class);
-        startActivity(i);
-    }
-
-    @Override
-    public void onRequestFragmentInteraction(DummyContent.DummyItem request) {
-        Toast.makeText(this, "item clicked: " + request.content, Toast.LENGTH_SHORT).show();
+        boolean isShipper = UserManager.getUserSync().isShipper();
+        if (!isShipper) {
+            Toast.makeText(this, getString(R.string.content_you_have_to_be_shipper_to_create_deal), Toast.LENGTH_SHORT).show();
+        } else {
+            Intent i = new Intent(this, CreateDealActivity.class);
+            startActivity(i);
+        }
     }
 
     @Override

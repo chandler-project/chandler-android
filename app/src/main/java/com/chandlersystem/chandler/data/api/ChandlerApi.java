@@ -2,6 +2,7 @@ package com.chandlersystem.chandler.data.api;
 
 import com.chandlersystem.chandler.data.models.pojo.Category;
 import com.chandlersystem.chandler.data.models.pojo.Deal;
+import com.chandlersystem.chandler.data.models.pojo.Request;
 import com.chandlersystem.chandler.data.models.pojo.UploadImage;
 import com.chandlersystem.chandler.data.models.pojo.User;
 import com.chandlersystem.chandler.data.models.request.CreateDealBody;
@@ -35,8 +36,17 @@ public interface ChandlerApi {
     @GET("/api/Categories")
     Observable<RetrofitResponseListItem<Category>> getCategoryList();
 
-    @GET("/api/Deals")
+    @GET("/api/Deals?filter={\"include\": \"category\"}")
     Observable<RetrofitResponseListItem<Deal>> getDealList(@Query("access_token") String accessToken);
+
+    @GET("/api/Deals/new-feed")
+    Observable<RetrofitResponseListItem<Deal>> getDealNewFeed(@Query("access_token") String accessToken);
+
+    @GET("/api/Deals/{deal_id}/comments")
+    Observable<RetrofitResponseListItem<Deal>> getDealNewFeed(@Query("access_token") String accessToken);
+
+    @GET("/api/Requests")
+    Observable<RetrofitResponseListItem<Request>> getRequestList(@Query("access_token") String accessToken);
 
     @POST("/api/Members/logout")
     Observable<RetrofitResponseItem> logout(@Query("access_token") String accessToken);
@@ -60,4 +70,7 @@ public interface ChandlerApi {
     @Multipart
     @POST("api/Uploads/chandler/upload")
     Observable<RetrofitResponseItem<UploadImage>> uploadImage(@Query("access_token") String accessToken, @Part MultipartBody.Part file);
+
+    @PATCH("api/Members/{user_id}/shipper")
+    Observable<RetrofitResponseItem<User>> becomeShipper(@Path("user_id") String userId, @Query("access_token") String accessToken);
 }

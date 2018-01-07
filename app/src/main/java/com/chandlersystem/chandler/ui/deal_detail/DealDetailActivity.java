@@ -8,8 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.chandlersystem.chandler.R;
+import com.chandlersystem.chandler.data.models.pojo.Deal;
+import com.chandlersystem.chandler.database.UserManager;
 import com.chandlersystem.chandler.databinding.ActivityDealDetailBinding;
 import com.chandlersystem.chandler.ui.adapters.DealTabAdapter;
+import com.chandlersystem.chandler.utilities.ViewUtil;
 import com.jakewharton.rxbinding2.view.RxView;
 
 import io.reactivex.Observable;
@@ -19,16 +22,28 @@ public class DealDetailActivity extends AppCompatActivity {
     private ActivityDealDetailBinding mBinding;
     private final CompositeDisposable mCompositeDisposable = new CompositeDisposable();
 
-    public static Intent getInstance(Context context) {
-        return new Intent(context, DealDetailActivity.class);
+    private static final String ARGUMENT_DEAL = "argument-deal";
+
+    private Deal mDeal;
+
+    public static Intent getInstance(Context context, Deal deal) {
+        Intent i = new Intent(context, DealDetailActivity.class);
+        i.putExtra(ARGUMENT_DEAL, deal);
+        return i;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_deal_detail);
-        setupToolbar();
-        setupViewPagerAndTabLayout();
+
+        mDeal = getIntent().getParcelableExtra(ARGUMENT_DEAL);
+        if (mDeal.getShipper().getId().equals(UserManager.getUserSync().getId())) {
+            ViewUtil.toggleView(mBinding.btnBuy, false);
+        }
+
+        setupToolbar(mDeal);
+        setupViewPagerAndTabLayout(mDeal);
         handleEvents();
     }
 
@@ -50,13 +65,13 @@ public class DealDetailActivity extends AppCompatActivity {
         return RxView.clicks(mBinding.btnBuy);
     }
 
-    private void setupToolbar() {
-        mBinding.layoutToolbar.tvTitle.setText("MDR 1000 (Black version)");
-        mBinding.layoutToolbar.tvSubTitle.setText("1000 buyer");
+    private void setupToolbar(Deal mDeal) {
+        mBinding.layoutToolbar.tvTitle.setText(mDeal.getProductName());
+        mBinding.layoutToolbar.tvSubTitle.setText(mDeal.getRequesters().size() + " " + getString(R.string.content_requester));
     }
 
-    private void setupViewPagerAndTabLayout() {
-        DealTabAdapter adapter = new DealTabAdapter(getSupportFragmentManager(), this);
+    private void setupViewPagerAndTabLayout(Deal mDeal) {
+        DealTabAdapter adapter = new DealTabAdapter(getSupportFragmentManager(), this, mDeal);
         mBinding.viewpagerProduct.setAdapter(adapter);
         mBinding.viewpagerProduct.setOffscreenPageLimit(3);
 

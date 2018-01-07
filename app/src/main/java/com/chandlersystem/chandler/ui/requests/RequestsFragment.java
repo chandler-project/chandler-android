@@ -1,8 +1,12 @@
 package com.chandlersystem.chandler.ui.requests;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
@@ -14,38 +18,52 @@ import android.view.ViewGroup;
 
 import com.chandlersystem.chandler.R;
 import com.chandlersystem.chandler.custom_views.LinearItemDecoration;
+import com.chandlersystem.chandler.data.api.ChandlerApi;
+import com.chandlersystem.chandler.data.models.pojo.Request;
+import com.chandlersystem.chandler.data.models.response.RetrofitResponseListItem;
+import com.chandlersystem.chandler.database.UserManager;
+import com.chandlersystem.chandler.databinding.FragmentRequestListBinding;
+import com.chandlersystem.chandler.ui.main.MainActivity;
 import com.chandlersystem.chandler.ui.request_detail.RequestDetailActivity;
 import com.chandlersystem.chandler.ui.requests.dummy.DummyContent;
 import com.chandlersystem.chandler.ui.requests.dummy.DummyContent.DummyItem;
+import com.chandlersystem.chandler.utilities.RxUtil;
+import com.jakewharton.rxbinding2.support.v4.widget.RxSwipeRefreshLayout;
 
+import java.util.List;
+
+import javax.inject.Inject;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
 
-/**
- * A fragment representing a list of Items.
- * <p/>
- * Activities containing this fragment MUST implement the {@link OnListRequestFragmentInteractionListener}
- * interface.
- */
 public class RequestsFragment extends Fragment {
     private final CompositeDisposable mCompositeDisposable = new CompositeDisposable();
 
-    // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
+
     private int mColumnCount = 1;
-    private OnListRequestFragmentInteractionListener mListener;
+
     private RequestAdapter mAdapter;
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
+    private FragmentRequestListBinding mBinding;
+
+    @Inject
+    ChandlerApi mApi;
+
     public RequestsFragment() {
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof MainActivity) {
+            MainActivity mainActivity = (MainActivity) activity;
+            mainActivity.getActivityComponent().inject(this);
+        }
+    }
+
     public static RequestsFragment newInstance(int columnCount) {
         RequestsFragment fragment = new RequestsFragment();
         Bundle args = new Bundle();
@@ -66,66 +84,65 @@ public class RequestsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_request_list, container, false);
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_request_list, container, false);
+        return mBinding.getRoot();
+    }
 
-        // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
-            recyclerView.addItemDecoration(new LinearItemDecoration(getResources().getDimensionPixelSize(R.dimen.spacing_normal)));
-            mAdapter = new RequestAdapter(DummyContent.ITEMS, mListener, getContext());
-            recyclerView.setAdapter(mAdapter);
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setupViews();
+        callApiGetRequest();
+        handleEvents();
+    }
 
-            requestClicks();
-
+    private void setupViews() {
+        if (mColumnCount <= 1) {
+            mBinding.list.setLayoutManager(new LinearLayoutManager(getContext()));
+        } else {
+            mBinding.list.setLayoutManager(new GridLayoutManager(getContext(), mColumnCount));
         }
-        return view;
+        mBinding.list.addItemDecoration(new LinearItemDecoration(getResources().getDimensionPixelSize(R.dimen.spacing_normal)));
+    }
+
+    private void handleEvents() {
+        mCompositeDisposable.add(RxSwipeRefreshLayout.refreshes(mBinding.layoutSwipe)
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(o -> {
+                    mBinding.layoutSwipe.setRefreshing(false);
+                    callApiGetRequest();
+                }, Throwable::printStackTrace));
+    }
+
+    private void callApiGetRequest() {
+        mCompositeDisposable.add(
+                mApi.getRequestList(UserManager.getUserSync().getAuthorization())
+                        .compose(RxUtil.withSchedulers())
+                        .subscribe(retrofitResponseListItem -> setAdapter(retrofitResponseListItem.items),
+                                Throwable::printStackTrace));
+    }
+
+    private void setAdapter(List<Request> items) {
+        mAdapter = new RequestAdapter(items, getContext());
+        mBinding.list.setAdapter(mAdapter);
+
+        requestClicks();
     }
 
     private void requestClicks() {
         mCompositeDisposable.add(mAdapter.getRequestClicks()
-                .subscribe(o -> startRequestDetailActivity(), Throwable::printStackTrace));
+                .subscribe(this::startRequestDetailActivity, Throwable::printStackTrace));
     }
 
-    private void startRequestDetailActivity() {
-        Intent intent = RequestDetailActivity.getInstance(getContext());
+    private void startRequestDetailActivity(Request request) {
+        Intent intent = RequestDetailActivity.getInstance(getContext(), request);
         startActivity(intent);
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnListRequestFragmentInteractionListener) {
-            mListener = (OnListRequestFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement ProductSearchListener");
-        }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnListRequestFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onRequestFragmentInteraction(DummyItem request);
+        mCompositeDisposable.clear();
     }
 }

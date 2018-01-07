@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.chandlersystem.chandler.GlideApp;
 import com.chandlersystem.chandler.R;
@@ -25,6 +26,8 @@ import com.chandlersystem.chandler.databinding.FragmentProfileBinding;
 import com.chandlersystem.chandler.ui.become_shipper.BecomeShipperActivity;
 import com.chandlersystem.chandler.ui.login.LoginActivity;
 import com.chandlersystem.chandler.ui.main.MainActivity;
+import com.chandlersystem.chandler.ui.user_deal.UserDealActivity;
+import com.chandlersystem.chandler.ui.user_request.UserRequestActivity;
 import com.chandlersystem.chandler.utilities.CircleTransform;
 import com.chandlersystem.chandler.utilities.LogUtil;
 import com.chandlersystem.chandler.utilities.RxUtil;
@@ -108,7 +111,36 @@ public class ProfileFragment extends Fragment {
                 .subscribe(o -> startEditProfileActivity(), Throwable::printStackTrace));
 
         mCompositeDisposable.add(signOut().subscribe(o -> showLogoutDialog(), Throwable::printStackTrace));
-        mCompositeDisposable.add(becomeShipper().subscribe(o -> startBecomeShipperActivity(), Throwable::printStackTrace));
+
+        mCompositeDisposable.add(becomeShipper()
+                .subscribe(o -> {
+                    if (UserManager.getUserSync().isShipper()) {
+                        Toast.makeText(getContext(), getString(R.string.content_you_already_shipper), Toast.LENGTH_SHORT).show();
+                    } else {
+                        startBecomeShipperActivity();
+                    }
+
+                }, Throwable::printStackTrace));
+
+        mCompositeDisposable.add(yourDeal().subscribe(o -> startUserDealActivity(), Throwable::printStackTrace));
+
+        mCompositeDisposable.add(yourRequest().subscribe(o -> startUserRequestActivity(), Throwable::printStackTrace));
+    }
+
+    private void startUserRequestActivity() {
+        startActivity(UserRequestActivity.getIntent(getContext()));
+    }
+
+    private Observable<Object> yourRequest() {
+        return RxView.clicks(mBinding.layoutContent.layoutYourRequest);
+    }
+
+    private void startUserDealActivity() {
+        startActivity(UserDealActivity.getInstance(getContext()));
+    }
+
+    private Observable<Object> yourDeal() {
+        return RxView.clicks(mBinding.layoutContent.layoutYourHotDeal);
     }
 
     private void startBecomeShipperActivity() {

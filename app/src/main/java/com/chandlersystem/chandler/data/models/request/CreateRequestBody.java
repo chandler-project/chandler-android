@@ -7,21 +7,32 @@ public class CreateRequestBody {
     private String reference;
     private List<String> productPics;
     private String description;
-    private String budget;
+    private BudgetBody budget;
+    private String currency;
     private String deadline;
     private String address;
+    private float price;
 
     public CreateRequestBody() {
     }
 
-    public CreateRequestBody(String productName, String reference, List<String> productPics, String description, String budget, String deadline, String address) {
-        this.productName = productName;
-        this.reference = reference;
-        this.productPics = productPics;
-        this.description = description;
-        this.budget = budget;
-        this.deadline = deadline;
-        this.address = address;
+    public static CreateRequestBody valueOf(CreateDealBody createDealBody) {
+        CreateRequestBody createRequestBody = new CreateRequestBody();
+        createRequestBody.setProductName(createDealBody.getProductName());
+        createRequestBody.setPrice(createDealBody.getPrice());
+        createRequestBody.setReference(createDealBody.getReference());
+        createRequestBody.setDescription(createDealBody.getProductDesc());
+        createRequestBody.setCurrency("VND");
+        createRequestBody.setDeadline(createDealBody.getShippingTime());
+        return createRequestBody;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
     }
 
     public String getProductName() {
@@ -56,12 +67,20 @@ public class CreateRequestBody {
         this.description = description;
     }
 
-    public String getBudget() {
+    public BudgetBody getBudget() {
         return budget;
     }
 
-    public void setBudget(String budget) {
+    public void setBudget(BudgetBody budget) {
         this.budget = budget;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 
     public String getDeadline() {

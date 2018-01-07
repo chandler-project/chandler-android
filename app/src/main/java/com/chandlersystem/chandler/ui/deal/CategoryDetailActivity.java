@@ -66,35 +66,6 @@ public class CategoryDetailActivity extends AppCompatActivity {
 
     private void setAdapter() {
         List<Deal> dealList = new ArrayList<>();
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
         mDealAdapter = new DealAdapter(this, dealList, DealAdapter.DealType.DEAL_EXTRA);
         mBinding.recyclerViewDeals.setAdapter(mDealAdapter);
 
@@ -103,11 +74,11 @@ public class CategoryDetailActivity extends AppCompatActivity {
 
     private void dealClicks() {
         mCompositeDisposable.add(mDealAdapter.getDealClicks()
-                .subscribe(deal -> startDealDetailActivity(), Throwable::printStackTrace));
+                .subscribe(this::startDealDetailActivity, Throwable::printStackTrace));
     }
 
-    private void startDealDetailActivity() {
-        startActivity(DealDetailActivity.getInstance(this));
+    private void startDealDetailActivity(Deal deal) {
+        startActivity(DealDetailActivity.getInstance(this, deal));
     }
 
     private void setupToolbar() {

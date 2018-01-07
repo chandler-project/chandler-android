@@ -1,9 +1,12 @@
 package com.chandlersystem.chandler.data.models.pojo;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Category {
+public class Category implements Parcelable {
     @SerializedName("name")
     @Expose
     private String name;
@@ -28,6 +31,27 @@ public class Category {
 
     public Category() {
     }
+
+    protected Category(Parcel in) {
+        name = in.readString();
+        slug = in.readString();
+        description = in.readString();
+        picture = in.readString();
+        id = in.readString();
+        isSelected = in.readByte() != 0;
+    }
+
+    public static final Creator<Category> CREATOR = new Creator<Category>() {
+        @Override
+        public Category createFromParcel(Parcel in) {
+            return new Category(in);
+        }
+
+        @Override
+        public Category[] newArray(int size) {
+            return new Category[size];
+        }
+    };
 
     public String getName() {
         return name;
@@ -79,5 +103,20 @@ public class Category {
 
     public void toggleSelectedValue() {
         setSelected(!isSelected);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(name);
+        parcel.writeString(slug);
+        parcel.writeString(description);
+        parcel.writeString(picture);
+        parcel.writeString(id);
+        parcel.writeByte((byte) (isSelected ? 1 : 0));
     }
 }

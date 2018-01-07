@@ -7,11 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.chandlersystem.chandler.R;
+import com.chandlersystem.chandler.configs.ApiConstant;
 import com.chandlersystem.chandler.data.models.pojo.Deal;
+import com.chandlersystem.chandler.data.models.pojo.Shipper;
 import com.chandlersystem.chandler.databinding.ItemDealBinding;
 import com.chandlersystem.chandler.databinding.ItemDealSortByCategoryBinding;
 import com.chandlersystem.chandler.utilities.RxUtil;
+import com.chandlersystem.chandler.utilities.ValidateUtil;
 import com.chandlersystem.chandler.utilities.ViewUtil;
 import com.jakewharton.rxbinding2.view.RxView;
 
@@ -101,26 +105,51 @@ public class DealAdapter extends RecyclerView.Adapter {
     }
 
     private void setupViews(ItemDealBinding binding, Deal deal) {
-        ViewUtil.showImage(mContext, "http://lorempixel.com/50/50/sports/1/", binding.layoutProfile.ivProfile);
-        ViewUtil.setText(binding.layoutProfile.tvUserName, "Serious Bee");
-        ViewUtil.setText(binding.layoutProfile.tvUserPoint, "12k");
-        ViewUtil.setText(binding.tvEndDate, "20/7/2018");
-        ViewUtil.showImage(mContext, "http://lorempixel.com/400/320/sports/", binding.ivProduct);
-        ViewUtil.setText(binding.tvPrice, "$200");
-        ViewUtil.setText(binding.tvProductTitle, "What is Lorem Ipsum?");
-        ViewUtil.setText(binding.tvProductDetail, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s");
-        ViewUtil.setText(binding.layoutCategoryName.tvCategoryName, "Trending");
+        if (deal.getProductPics() != null && !deal.getProductPics().isEmpty() && ValidateUtil.checkString(deal.getProductPics().get(0))) {
+            ViewUtil.showImage(mContext, deal.getProductPics().get(0), binding.ivProduct);
+            ViewUtil.toggleView(binding.ivProduct, true);
+        } else {
+            ViewUtil.toggleView(binding.ivProduct, false);
+        }
+
+        Shipper shipper = deal.getShipper();
+        if (ValidateUtil.checkString(shipper.getAvatar())) {
+            ViewUtil.showImage(mContext, ApiConstant.BASE_URL_VER1 + shipper.getAvatar(), binding.layoutProfile.ivProfile);
+        } else {
+            ViewUtil.setImage(binding.layoutProfile.ivProfile, R.drawable.ic_placeholder_avatar);
+        }
+
+        ViewUtil.setText(binding.layoutProfile.tvUserName, shipper.getFullName());
+        ViewUtil.setText(binding.layoutProfile.tvUserPoint, shipper.getPoints() + shipper.getPoints() > 2 ? mContext.getString(R.string.content_points) : mContext.getString(R.string.content_point));
+        ViewUtil.setText(binding.tvEndDate, deal.getShippingTime());
+        ViewUtil.setText(binding.tvPrice, deal.getPrice() + deal.getCurrency());
+        ViewUtil.setText(binding.tvShippingPrice, mContext.getString(R.string.content_shipping_price) + deal.getShippingPrice() + deal.getCurrency());
+        ViewUtil.setText(binding.tvProductTitle, deal.getProductName());
+        ViewUtil.setText(binding.tvProductDetail, deal.getProductDesc());
+        ViewUtil.setText(binding.layoutCategoryName.tvCategoryName, deal.getCategory().getName());
     }
 
     private void setupViews(ItemDealSortByCategoryBinding binding, Deal deal) {
-        ViewUtil.showImage(mContext, "http://lorempixel.com/50/50/sports/1/", binding.layoutProfile.ivProfile);
-        ViewUtil.setText(binding.layoutProfile.tvUserName, "Serious Bee");
-        ViewUtil.setText(binding.layoutProfile.tvUserPoint, "12k");
-        ViewUtil.setText(binding.tvEndDate, "20/7/2018");
-        ViewUtil.showImage(mContext, "http://lorempixel.com/400/320/sports/", binding.ivProduct);
-        ViewUtil.setText(binding.tvPrice, "$200");
-        ViewUtil.setText(binding.tvProductTitle, "What is Lorem Ipsum?");
-        ViewUtil.setText(binding.tvProductDetail, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s");
+        if (deal.getProductPics() != null && !deal.getProductPics().isEmpty() && ValidateUtil.checkString(deal.getProductPics().get(0))) {
+            ViewUtil.showImage(mContext, deal.getProductPics().get(0), binding.ivProduct);
+            ViewUtil.toggleView(binding.ivProduct, true);
+        } else {
+            ViewUtil.toggleView(binding.ivProduct, false);
+        }
+
+        Shipper shipper = deal.getShipper();
+        if (ValidateUtil.checkString(shipper.getAvatar())) {
+            ViewUtil.showImage(mContext, ApiConstant.BASE_URL_VER1 + shipper.getAvatar(), binding.layoutProfile.ivProfile);
+        } else {
+            ViewUtil.setImage(binding.layoutProfile.ivProfile, R.drawable.ic_placeholder_avatar);
+        }
+
+        ViewUtil.setText(binding.layoutProfile.tvUserName, shipper.getFullName());
+        ViewUtil.setText(binding.layoutProfile.tvUserPoint, shipper.getPoints() + shipper.getPoints() > 2 ? mContext.getString(R.string.content_points) : mContext.getString(R.string.content_point));
+        ViewUtil.setText(binding.tvEndDate, deal.getShippingTime());
+        ViewUtil.setText(binding.tvPrice, deal.getPrice() + deal.getCurrency());
+        ViewUtil.setText(binding.tvProductTitle, deal.getProductName());
+        ViewUtil.setText(binding.tvProductDetail, deal.getProductDesc());
     }
 
     @Override

@@ -59,13 +59,22 @@ public class SplashActivity extends AppCompatActivity {
     private void handleEvents() {
         mCompositeDisposable.add(
                 RxView.clicks(mBinding.layoutButtonLoginAsGuest.btnPrimary)
-                        .compose(RxUtil.withLongThrottleFirst())
-                        .subscribe(o -> startMainActivity()));
+                        .subscribe(o -> explore(), Throwable::printStackTrace));
 
         mCompositeDisposable.add(
                 RxView.clicks(mBinding.tvLogin)
                         .compose(RxUtil.withLongThrottleFirst())
-                        .subscribe(o -> startLoginActivity()));
+                        .subscribe(o -> startLoginActivity(), Throwable::printStackTrace));
+    }
+
+    private void explore() {
+        int currentPosition = mBinding.viewpagerOnBoarding.getCurrentItem();
+        if (currentPosition < 3) {
+            int nextPage = currentPosition + 1;
+            mBinding.viewpagerOnBoarding.setCurrentItem(nextPage);
+        } else {
+            startLoginActivity();
+        }
     }
 
     private void startMainActivity() {

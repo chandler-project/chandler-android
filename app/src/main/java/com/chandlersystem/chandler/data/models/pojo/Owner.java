@@ -7,39 +7,37 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Shipper implements Parcelable{
+public class Owner implements Parcelable {
+
     @SerializedName("avatar")
     @Expose
     private String avatar;
-
-    @SerializedName("id")
-    @Expose
-    private String id;
-
     @SerializedName("points")
     @Expose
     private int points;
-
+    @SerializedName("id")
+    @Expose
+    private String id;
     @SerializedName("fullName")
     @Expose
     private String fullName;
 
-    protected Shipper(Parcel in) {
+    protected Owner(Parcel in) {
         avatar = in.readString();
-        id = in.readString();
         points = in.readInt();
+        id = in.readString();
         fullName = in.readString();
     }
 
-    public static final Creator<Shipper> CREATOR = new Creator<Shipper>() {
+    public static final Creator<Owner> CREATOR = new Creator<Owner>() {
         @Override
-        public Shipper createFromParcel(Parcel in) {
-            return new Shipper(in);
+        public Owner createFromParcel(Parcel in) {
+            return new Owner(in);
         }
 
         @Override
-        public Shipper[] newArray(int size) {
-            return new Shipper[size];
+        public Owner[] newArray(int size) {
+            return new Owner[size];
         }
     };
 
@@ -51,20 +49,20 @@ public class Shipper implements Parcelable{
         this.avatar = avatar;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public int getPoints() {
         return points;
     }
 
     public void setPoints(int points) {
         this.points = points;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getFullName() {
@@ -83,8 +81,8 @@ public class Shipper implements Parcelable{
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(avatar);
-        parcel.writeString(id);
         parcel.writeInt(points);
+        parcel.writeString(id);
         parcel.writeString(fullName);
     }
 }

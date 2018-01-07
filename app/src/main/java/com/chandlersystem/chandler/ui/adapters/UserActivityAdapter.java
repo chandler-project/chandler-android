@@ -8,8 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chandlersystem.chandler.R;
-import com.chandlersystem.chandler.data.models.pojo.Deal;
+import com.chandlersystem.chandler.configs.ApiConstant;
+import com.chandlersystem.chandler.data.models.pojo.Owner;
+import com.chandlersystem.chandler.data.models.pojo.Owner;
+import com.chandlersystem.chandler.data.models.pojo.Shipper;
 import com.chandlersystem.chandler.databinding.ItemUserActivityBinding;
+import com.chandlersystem.chandler.utilities.ValidateUtil;
 import com.chandlersystem.chandler.utilities.ViewUtil;
 
 import java.util.List;
@@ -22,18 +26,18 @@ public class UserActivityAdapter extends RecyclerView.Adapter<UserActivityAdapte
 
     private Context mContext;
 
-    private List<Deal> mDealList;
+    private List<Owner> mOwnerList;
 
-    private final PublishSubject<Deal> mDealClicks = PublishSubject.create();
+    private final PublishSubject<Owner> mOwnerClicks = PublishSubject.create();
 
 
-    public PublishSubject<Deal> getDealClicks() {
-        return mDealClicks;
+    public PublishSubject<Owner> getOwnerClicks() {
+        return mOwnerClicks;
     }
 
-    public UserActivityAdapter(Context context, List<Deal> categories) {
+    public UserActivityAdapter(Context context, List<Owner> categories) {
         this.mContext = context;
-        this.mDealList = categories;
+        this.mOwnerList = categories;
     }
 
     @Override
@@ -43,21 +47,24 @@ public class UserActivityAdapter extends RecyclerView.Adapter<UserActivityAdapte
 
     @Override
     public void onBindViewHolder(UserActivityHolder holder, int position) {
-        Deal deal = mDealList.get(position);
+        Owner Owner = mOwnerList.get(position);
 
-        setupViews(holder.mBinding, deal);
+        setupViews(holder.mBinding, Owner);
     }
 
-    private void setupViews(ItemUserActivityBinding binding, Deal deal) {
-        ViewUtil.showImage(mContext, "http://lorempixel.com/50/50/sports/1/", binding.layoutProfile.ivProfile);
-        ViewUtil.setText(binding.layoutProfile.tvUserName, "Serious Bee");
-        ViewUtil.setText(binding.layoutProfile.tvUserPoint, "12k");
-        ViewUtil.setText(binding.tvTime, "20/7/2018");
+    private void setupViews(ItemUserActivityBinding binding, Owner owner) {
+        if (ValidateUtil.checkString(owner.getAvatar())) {
+            ViewUtil.showImage(mContext, ApiConstant.BASE_URL_VER1 + owner.getAvatar(), binding.layoutProfile.ivProfile);
+        } else {
+            ViewUtil.setImage(binding.layoutProfile.ivProfile, R.drawable.ic_placeholder_avatar);
+        }
+        ViewUtil.setText(binding.layoutProfile.tvUserName, owner.getFullName());
+        ViewUtil.setText(binding.layoutProfile.tvUserPoint, owner.getPoints() + owner.getPoints() > 2 ? mContext.getString(R.string.content_points) : mContext.getString(R.string.content_point));
     }
 
     @Override
     public int getItemCount() {
-        return mDealList.size();
+        return mOwnerList.size();
     }
 
     static class UserActivityHolder extends RecyclerView.ViewHolder {

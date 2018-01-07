@@ -29,25 +29,6 @@
                 android:layout_marginLeft="@dimen/spacing_small"
                 android:layout_marginRight="@dimen/spacing_small"
                 android:layout_marginTop="@dimen/spacing_smaller" />
-
-            <TextView
-                android:id="@+id/tv_end_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="@dimen/spacing_small"
-                android:layout_marginRight="@dimen/spacing_small"
-                android:layout_marginTop="@dimen/spacing_smaller"
-                android:fontFamily="@font/cabin_regular"
-                android:paddingBottom="@dimen/spacing_smallest"
-                android:paddingLeft="@dimen/spacing_small"
-                android:paddingRight="@dimen/spacing_small"
-                android:paddingTop="@dimen/spacing_smallest"
-                android:textColor="@color/colorTextGray"
-                android:textSize="@dimen/text_size_normal"
-                tools:text="5 phut truoc" />
         </RelativeLayout>
 
         <ImageView
@@ -61,7 +42,7 @@
 
         <LinearLayout
             android:id="@+id/layout_price"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/iv_product"
             android:layout_marginTop="@dimen/spacing_smaller"
@@ -81,44 +62,64 @@
                 android:paddingTop="@dimen/spacing_smallest"
                 android:textColor="@color/colorTextGray"
                 android:textSize="@dimen/text_size_normal"
-                tools:text="$200" />
+                tools:text="$2000000000000000" />
 
             <TextView
-                android:id="@+id/tv_date"
+                android:id="@+id/tv_shipping_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/spacing_small"
-                android:background="@drawable/item_button_rounded_red"
-                android:fontFamily="@font/cabin_bold"
+                android:background="@drawable/item_button_rounded_yellow"
+                android:fontFamily="@font/cabin_regular"
                 android:paddingBottom="@dimen/spacing_smallest"
                 android:paddingLeft="@dimen/spacing_small"
                 android:paddingRight="@dimen/spacing_small"
                 android:paddingTop="@dimen/spacing_smallest"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorTextPrimary"
                 android:textSize="@dimen/text_size_normal"
-                tools:text="Need it in 20/07/2017" />
-
-            <TextView
-                android:id="@+id/tv_address"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/spacing_small"
-                android:background="@drawable/item_button_rounded_cyan"
-                android:fontFamily="@font/cabin_bold"
-                android:paddingBottom="@dimen/spacing_smallest"
-                android:paddingLeft="@dimen/spacing_small"
-                android:paddingRight="@dimen/spacing_small"
-                android:paddingTop="@dimen/spacing_smallest"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/text_size_normal"
-                tools:text="TPHCM" />
+                tools:text="5 phut truoc" />
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout_price"
+            android:layout_marginLeft="@dimen/spacing_small"
+            android:layout_marginRight="@dimen/spacing_small"
+            android:layout_marginTop="@dimen/spacing_smaller"
+            android:background="@drawable/item_button_rounded_cyan"
+            android:fontFamily="@font/cabin_bold"
+            android:paddingBottom="@dimen/spacing_smallest"
+            android:paddingLeft="@dimen/spacing_small"
+            android:paddingRight="@dimen/spacing_small"
+            android:paddingTop="@dimen/spacing_smallest"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/text_size_normal"
+            tools:text="TPHCM" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/tv_address"
+            android:layout_marginEnd="@dimen/spacing_small"
+            android:layout_marginRight="@dimen/spacing_small"
+            android:layout_toRightOf="@id/tv_address"
+            android:background="@drawable/item_button_rounded_red"
+            android:fontFamily="@font/cabin_bold"
+            android:paddingBottom="@dimen/spacing_smallest"
+            android:paddingLeft="@dimen/spacing_small"
+            android:paddingRight="@dimen/spacing_small"
+            android:paddingTop="@dimen/spacing_smallest"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/text_size_normal"
+            tools:text="Need it in 20/07/2017" />
 
         <TextView
             android:id="@+id/tv_product_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/layout_price"
+            android:layout_below="@id/tv_address"
             android:layout_marginLeft="@dimen/spacing_small"
             android:layout_marginRight="@dimen/spacing_small"
             android:layout_marginTop="@dimen/spacing_small"

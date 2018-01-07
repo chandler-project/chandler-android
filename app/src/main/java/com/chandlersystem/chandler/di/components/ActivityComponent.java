@@ -2,6 +2,7 @@ package com.chandlersystem.chandler.di.components;
 
 import com.chandlersystem.chandler.di.modules.ActivityModule;
 import com.chandlersystem.chandler.di.scopes.PerActivity;
+import com.chandlersystem.chandler.ui.become_shipper.BecomeShipperActivity;
 import com.chandlersystem.chandler.ui.create_deal.CreateDealActivity;
 import com.chandlersystem.chandler.ui.create_request.CreateRequestActivity;
 import com.chandlersystem.chandler.ui.create_request.SelectCategoryFragment;
@@ -9,7 +10,10 @@ import com.chandlersystem.chandler.ui.deal.DealFragment;
 import com.chandlersystem.chandler.ui.login.LoginActivity;
 import com.chandlersystem.chandler.ui.profile.EditProfileActivity;
 import com.chandlersystem.chandler.ui.profile.ProfileFragment;
+import com.chandlersystem.chandler.ui.requests.RequestsFragment;
 import com.chandlersystem.chandler.ui.select_category.SelectCategoryActivity;
+import com.chandlersystem.chandler.ui.user_deal.UserDealActivity;
+import com.chandlersystem.chandler.ui.user_request.UserRequestActivity;
 
 import dagger.Component;
 
@@ -20,6 +24,8 @@ import dagger.Component;
 @Component(dependencies = ApplicationComponent.class, modules = ActivityModule.class)
 public interface ActivityComponent {
     void inject(LoginActivity loginActivity);
+
+    void inject(RequestsFragment requestsFragment);
 
     void inject(DealFragment dealFragment);
 
@@ -34,4 +40,10 @@ public interface ActivityComponent {
     void inject(CreateRequestActivity createRequestActivity);
 
     void inject(EditProfileActivity editProfileActivity);
+
+    void inject(BecomeShipperActivity becomeShipperActivity);
+
+    void inject(UserDealActivity userDealActivity);
+
+    void inject(UserRequestActivity userRequestActivity);
 }

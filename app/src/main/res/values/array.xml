@@ -8,19 +8,19 @@
     </string-array>
 
     <string-array name="shipping_price">
-        <item>150.000</item>
-        <item>300.000</item>
-        <item>500.000</item>
-        <item>700.000</item>
-        <item>1.000.000</item>
+        <item>150000</item>
+        <item>300000</item>
+        <item>500000</item>
+        <item>700000</item>
+        <item>1000000</item>
     </string-array>
 
     <string-array name="budget">
-        <item>@string/content_budget_very_small</item>
-        <item>@string/content_budget_small</item>
-        <item>@string/content_budget_normal</item>
-        <item>@string/content_budget_big</item>
-        <item>@string/content_budget_huge</item>
+        <item>100000 - 200000</item>
+        <item>200000 - 400000</item>
+        <item>400000 - 600000</item>
+        <item>600000 - 100000</item>
+        <item>100000 - 990000</item>
     </string-array>
 
     <string-array name="cities">

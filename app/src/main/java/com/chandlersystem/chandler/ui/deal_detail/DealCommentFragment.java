@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DealCommentFragment extends Fragment {
+    private static final String ARGUMENT_DEAL = "argument-deal";
+
     private FragmentDealCommentBinding mBinding;
     private CommentAdapter mUserCommentAdapter;
 
@@ -27,8 +29,12 @@ public class DealCommentFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static DealCommentFragment newInstance() {
-        return new DealCommentFragment();
+    public static DealCommentFragment newInstance(Deal deal) {
+        DealCommentFragment fragment = new DealCommentFragment();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(ARGUMENT_DEAL, deal);
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     @Override
@@ -51,43 +57,14 @@ public class DealCommentFragment extends Fragment {
     }
 
     private void setupRecyclerView() {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+       /* LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         List<Deal> dealList = new ArrayList<>();
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
-        dealList.add(new Deal());
         mUserCommentAdapter = new CommentAdapter(getContext(), dealList);
         mBinding.recyclerViewComments.setLayoutManager(layoutManager);
         mBinding.recyclerViewComments.setNestedScrollingEnabled(true);
         mBinding.recyclerViewComments.setHasFixedSize(true);
         mBinding.recyclerViewComments.addItemDecoration(new LinearItemDecoration(getResources().getDimensionPixelSize(R.dimen.spacing_small)));
-        mBinding.recyclerViewComments.setAdapter(mUserCommentAdapter);
+        mBinding.recyclerViewComments.setAdapter(mUserCommentAdapter);*/
     }
 
 }

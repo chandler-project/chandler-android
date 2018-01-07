@@ -271,7 +271,8 @@ public class CreateDealActivity extends AppCompatActivity implements ViewPager.O
 
         request.setProductPics(urlList);
         request.setShippingPrice(Float.valueOf(mShippingPrice));
-        request.setRemainTime("2017-12-22T07:09:33.752Z");
+        request.setShippingTime(mDate);
+        request.setCurrency("VND");
 
         mCompositeDisposable.add(mApi.createDeal(request, mCategory.getId(), UserManager.getUserSync().getAuthorization())
                 .compose(RxUtil.withSchedulers())

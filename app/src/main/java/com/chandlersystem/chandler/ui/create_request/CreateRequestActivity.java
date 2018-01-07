@@ -20,7 +20,9 @@ import com.chandlersystem.chandler.data.api.ChandlerApi;
 import com.chandlersystem.chandler.data.models.pojo.Category;
 import com.chandlersystem.chandler.data.models.pojo.FileUpload;
 import com.chandlersystem.chandler.data.models.pojo.UploadImage;
+import com.chandlersystem.chandler.data.models.request.BudgetBody;
 import com.chandlersystem.chandler.data.models.request.CreateDealBody;
+import com.chandlersystem.chandler.data.models.request.CreateRequestBody;
 import com.chandlersystem.chandler.data.models.response.RetrofitResponseItem;
 import com.chandlersystem.chandler.database.UserManager;
 import com.chandlersystem.chandler.databinding.ActivityCreateRequestBinding;
@@ -60,8 +62,7 @@ public class CreateRequestActivity extends AppCompatActivity implements ViewPage
 
     private Category mCategory;
     private String mDate;
-    private String mMinPrice;
-    private String mMaxPrice;
+    private String mPrice;
     private String mCity;
 
     @Inject
@@ -159,7 +160,7 @@ public class CreateRequestActivity extends AppCompatActivity implements ViewPage
 
     @Override
     public void onPriceInserted(String price) {
-        mMinPrice = price;
+        mPrice = price;
         goToNextPage();
     }
 
@@ -259,23 +260,31 @@ public class CreateRequestActivity extends AppCompatActivity implements ViewPage
         mCompositeDisposable.add(mApi.uploadImages(UserManager.getUserSync().getAuthorization(), filePartList)
                 .compose(RxUtil.withSchedulers())
                 .doOnSubscribe(disposable -> ViewUtil.toggleView(mBinding.layoutProgressBar.progressBar, true))
-                .subscribe(responseItem -> createDealApi(responseItem, request), throwable -> {
+                .subscribe(responseItem -> createRequestApi(responseItem, request), throwable -> {
                     ViewUtil.toggleView(mBinding.layoutProgressBar.progressBar, false);
                     DialogUtil.showErrorDialog(this, throwable);
                 }));
     }
 
-    private void createDealApi(RetrofitResponseItem<UploadImage> result, CreateDealBody request) {
+    private void createRequestApi(RetrofitResponseItem<UploadImage> result, CreateDealBody request) {
         List<String> urlList = new ArrayList<>();
         for (FileUpload fileUpload : result.item.getResult().getFiles().getFileUpload()) {
             urlList.add("http://etylash.xyz:3001/" + fileUpload.getName());
         }
 
-        request.setProductPics(urlList);
-        //request.setShippingPrice(Float.valueOf(mShippingPrice));
-        request.setRemainTime("2017-12-22T07:09:33.752Z");
+        CreateRequestBody createRequestBody = CreateRequestBody.valueOf(request);
+        createRequestBody.setProductPics(urlList);
+        createRequestBody.setAddress(mCity);
+        if (mPrice.contains(" - ")) {
+            createRequestBody.setBudget(new BudgetBody(Float.valueOf(mPrice.split(" - ")[0])
+                    , Float.valueOf(mPrice.split(" - ")[1])));
+        } else {
+            createRequestBody.setBudget(new BudgetBody(Float.valueOf(mPrice), Float.valueOf(mPrice)));
+        }
 
-        mCompositeDisposable.add(mApi.createDeal(request, mCategory.getId(), UserManager.getUserSync().getAuthorization())
+        createRequestBody.setDeadline(mDate);
+
+        mCompositeDisposable.add(mApi.createRequest(createRequestBody, mCategory.getId(), UserManager.getUserSync().getAuthorization())
                 .compose(RxUtil.withSchedulers())
                 .doOnTerminate(() -> ViewUtil.toggleView(mBinding.layoutProgressBar.progressBar, false))
                 .subscribe(response -> onCreateDealSuccessfully(),
