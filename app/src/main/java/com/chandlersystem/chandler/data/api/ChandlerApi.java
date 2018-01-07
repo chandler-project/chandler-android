@@ -43,7 +43,7 @@ public interface ChandlerApi {
     Observable<RetrofitResponseListItem<Deal>> getDealNewFeed(@Query("access_token") String accessToken);
 
     @GET("/api/Deals/{deal_id}/comments")
-    Observable<RetrofitResponseListItem<Deal>> getDealNewFeed(@Query("access_token") String accessToken);
+    Observable<RetrofitResponseListItem<Deal>> getComment(@Query("access_token") String accessToken);
 
     @GET("/api/Requests")
     Observable<RetrofitResponseListItem<Request>> getRequestList(@Query("access_token") String accessToken);
