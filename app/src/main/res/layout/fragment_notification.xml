@@ -7,6 +7,7 @@
         tools:context="com.chandlersystem.chandler.ui.notification.NotificationFragment">
 
         <android.support.v7.widget.RecyclerView
+            tools:listitem="@layout/item_notification"
             android:id="@+id/rv_notifications"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
