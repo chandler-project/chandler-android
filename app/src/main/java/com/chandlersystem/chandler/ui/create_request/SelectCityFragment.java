@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chandlersystem.chandler.R;
+import com.chandlersystem.chandler.databinding.FragmentSelectCityBinding;
 import com.chandlersystem.chandler.databinding.FragmentSelectItemBinding;
 import com.chandlersystem.chandler.ui.adapters.SelectCityAdapter;
 import com.chandlersystem.chandler.utilities.ViewUtil;
@@ -24,7 +25,7 @@ import io.reactivex.disposables.CompositeDisposable;
  */
 public class SelectCityFragment extends Fragment {
 
-    private FragmentSelectItemBinding mBinding;
+    private FragmentSelectCityBinding mBinding;
 
     private SelectCityAdapter mCityAdapter;
 
@@ -65,7 +66,7 @@ public class SelectCityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_select_item, container, false);
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_select_city, container, false);
         return mBinding.getRoot();
     }
 

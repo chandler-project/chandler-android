@@ -141,16 +141,16 @@ public class DealFragment extends Fragment {
 
     private void smallCategoryItemClicks() {
         mCompositeDisposable.add(mSmallCategoryAdapter.getCategoryClicks()
-                .subscribe(category -> startCategoryDetailActivity(), Throwable::printStackTrace));
+                .subscribe(this::startCategoryDetailActivity, Throwable::printStackTrace));
     }
 
-    private void startCategoryDetailActivity() {
-        startActivity(CategoryDetailActivity.getInstance(getContext()));
+    private void startCategoryDetailActivity(Category category) {
+        startActivity(CategoryDetailActivity.getInstance(getContext(), category));
     }
 
     private void bigCategoryItemClicks() {
         mCompositeDisposable.add(mCategoryAdapter.getCategoryClicks()
-                .subscribe(category -> startCategoryDetailActivity(), Throwable::printStackTrace));
+                .subscribe(this::startCategoryDetailActivity, Throwable::printStackTrace));
     }
 
     private void setupToolbar() {
@@ -186,7 +186,7 @@ public class DealFragment extends Fragment {
 
     private void callApiGetAllDeal() {
         mCompositeDisposable.add(
-                mApi.getDealList(UserManager.getUserSync().getAuthorization())
+                mApi.getDealNewFeed(UserManager.getUserSync().getAuthorization())
                         .compose(RxUtil.withSchedulers())
                         .compose(RxUtil.withProgressBar(mBinding.layoutProgressBar.progressBar))
                         .map(dealRetrofitResponseListItem -> dealRetrofitResponseListItem.items)

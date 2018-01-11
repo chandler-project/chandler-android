@@ -2,9 +2,70 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.chandlersystem.chandler.ui.deal_detail.DealActivityFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView_comments"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/spacing_smaller">
+
+            <EditText
+                android:id="@+id/et_comment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_button_rounded_stroke"
+                android:ems="10"
+                android:fontFamily="@font/cabin_regular"
+                android:gravity="top|left"
+                android:hint="@string/content_what_is_your_comment"
+                android:inputType="textMultiLine"
+                android:lines="6"
+                android:maxLines="4"
+                android:minLines="4"
+                android:padding="@dimen/spacing_small"
+                android:scrollbars="vertical"
+                android:textColorHint="@color/colorTextGray"
+                android:textSize="@dimen/text_size_big" />
+
+            <include
+                android:id="@+id/layout_comment_image"
+                layout="@layout/item_comment_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/et_comment"
+                android:layout_marginTop="@dimen/spacing_smallest" />
+
+            <include
+                android:id="@+id/layout_comment_button"
+                layout="@layout/item_button_primary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_smallest" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/spacing_small">
+
+            <com.chandlersystem.chandler.RecyclerViewWithEmptyState
+                android:id="@+id/recyclerView_comments"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <include
+                android:id="@+id/layout_empty"
+                layout="@layout/item_empty"
+                android:visibility="gone" />
+
+            <include
+                android:id="@+id/layout_progress_bar"
+                layout="@layout/item_progress_bar"
+                android:visibility="gone" />
+        </FrameLayout>
+    </LinearLayout>
 </layout>

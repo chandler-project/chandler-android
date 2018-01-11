@@ -51,7 +51,8 @@ public class CreateRequestActivity extends AppCompatActivity implements ViewPage
         CompleteCreateDealFragment.CompleteCreateDealListener,
         SelectCategoryFragment.SelectCategoryListener,
         SelectDateFragment.SelectDateListener,
-        SelectPriceFragment.SelectPriceListener, SelectCityFragment.SelectCityListener {
+        SelectPriceFragment.SelectPriceListener, SelectCityFragment.SelectCityListener,
+        SelectAmountFragment.SelectAmountListener {
     private static final int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 0;
 
     private ActivityCreateRequestBinding mBinding;
@@ -64,6 +65,7 @@ public class CreateRequestActivity extends AppCompatActivity implements ViewPage
     private String mDate;
     private String mPrice;
     private String mCity;
+    private String mAmount;
 
     @Inject
     ChandlerApi mApi;
@@ -283,6 +285,7 @@ public class CreateRequestActivity extends AppCompatActivity implements ViewPage
         }
 
         createRequestBody.setDeadline(mDate);
+        createRequestBody.setAmount(Integer.parseInt(mAmount));
 
         mCompositeDisposable.add(mApi.createRequest(createRequestBody, mCategory.getId(), UserManager.getUserSync().getAuthorization())
                 .compose(RxUtil.withSchedulers())
@@ -312,5 +315,11 @@ public class CreateRequestActivity extends AppCompatActivity implements ViewPage
             int index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
             return cursor.getString(index);
         }
+    }
+
+    @Override
+    public void onAmountSelected(String amount) {
+        mAmount = amount;
+        goToNextPage();
     }
 }

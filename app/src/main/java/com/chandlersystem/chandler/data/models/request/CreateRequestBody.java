@@ -12,6 +12,7 @@ public class CreateRequestBody {
     private String deadline;
     private String address;
     private float price;
+    private int amount;
 
     public CreateRequestBody() {
     }
@@ -25,6 +26,14 @@ public class CreateRequestBody {
         createRequestBody.setCurrency("VND");
         createRequestBody.setDeadline(createDealBody.getShippingTime());
         return createRequestBody;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
     public float getPrice() {

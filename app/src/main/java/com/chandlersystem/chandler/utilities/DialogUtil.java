@@ -2,9 +2,17 @@ package com.chandlersystem.chandler.utilities;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+
+import com.chandlersystem.chandler.ui.dialogs.BidDialog;
 
 public class DialogUtil {
+    private static final String DIALOG_BID_TAG = "dialog-tag-bid";
+
     private DialogUtil() {
         // Private constructor for class which full of constants
     }
@@ -16,6 +24,30 @@ public class DialogUtil {
                 .setPositiveButton("OK", (dialog, id) -> dialog.dismiss());
         AlertDialog alert = builder.create();
         alert.show();
+    }
+
+    public static void showBidDialog(Context context, int requestAmount) {
+        BidDialog bidDialog = BidDialog.getInstance(requestAmount);
+        showDialog(context, bidDialog, DIALOG_BID_TAG);
+    }
+
+    public static void showDialog(Context context, DialogFragment dialog, String tag) {
+        if (context instanceof AppCompatActivity) {
+            AppCompatActivity appCompatActivity = (AppCompatActivity) context;
+            // Check if activity state is available or not
+            // If it was destroyed or paused, then show nothing
+            if (!appCompatActivity.isFinishing()) {
+                try {
+                    FragmentManager fm = appCompatActivity
+                            .getSupportFragmentManager();
+                    FragmentTransaction ft = fm.beginTransaction();
+
+                    dialog.show(ft, tag);
+                } catch (IllegalStateException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     /*private static final String TAG_MESSAGE_DIALOG = "message-dialog";
@@ -68,32 +100,6 @@ public class DialogUtil {
     }
 
     *//**
-     * Show pure @DialogFragment with TAG
-     *
-     * @param context
-     * @param dialog
-     * @param tag
-     *//*
-    public static void showDialog(Context context, DialogFragment dialog, String tag) {
-        if (context instanceof AppCompatActivity) {
-            AppCompatActivity appCompatActivity = (AppCompatActivity) context;
-            // Check if activity state is available or not
-            // If it was destroyed or paused, then show nothing
-            if (!appCompatActivity.isFinishing()) {
-                try {
-                    FragmentManager fm = appCompatActivity
-                            .getSupportFragmentManager();
-                    FragmentTransaction ft = fm.beginTransaction();
-
-                    dialog.show(ft, tag);
-                } catch (IllegalStateException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-    *//**
      * Create new progress dialog with message inside, then show it
      *
      * @param context
@@ -102,7 +108,7 @@ public class DialogUtil {
      *//*
     public static ProgressDialog showProgressDialog(Context context, String mess) {
         ProgressDialog progressDialog = new ProgressDialog(context);
-        progressDialog.setMessage(mess);
+        progressDialog.setupViews(mess);
         progressDialog.show();
         return progressDialog;
     }

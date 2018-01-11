@@ -14,6 +14,7 @@ import com.chandlersystem.chandler.R;
 import com.chandlersystem.chandler.custom_views.LinearItemDecoration;
 import com.chandlersystem.chandler.databinding.FragmentBidBinding;
 import com.chandlersystem.chandler.ui.adapters.BidAdapter;
+import com.chandlersystem.chandler.utilities.ViewUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,9 +71,12 @@ public class BidFragment extends Fragment {
         bidList.add("");
         bidList.add("");
         mBidAdapter = new BidAdapter(getContext(), bidList);
-        mBinding.recyclerViewActivities.setLayoutManager(layoutManager);
-        mBinding.recyclerViewActivities.setNestedScrollingEnabled(true);
-        mBinding.recyclerViewActivities.setHasFixedSize(true);
-        mBinding.recyclerViewActivities.setAdapter(mBidAdapter);
+        mBinding.recyclerViewBids.setLayoutManager(layoutManager);
+        mBinding.recyclerViewBids.setNestedScrollingEnabled(true);
+        mBinding.recyclerViewBids.setHasFixedSize(true);
+        mBinding.recyclerViewBids.setEmptyView(mBinding.layoutEmpty.layoutEmpty);
+        mBinding.layoutEmpty.tvEmpty.setText(getText(R.string.content_there_is_no_bidder));
+        ViewUtil.setImage(mBinding.layoutEmpty.ivEmpty, R.drawable.ic_empty_user);
+        mBinding.recyclerViewBids.setAdapter(mBidAdapter);
     }
 }

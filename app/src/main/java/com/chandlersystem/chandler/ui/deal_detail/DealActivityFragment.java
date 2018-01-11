@@ -16,6 +16,7 @@ import com.chandlersystem.chandler.custom_views.LinearItemDecoration;
 import com.chandlersystem.chandler.data.models.pojo.Deal;
 import com.chandlersystem.chandler.databinding.FragmentDealActivityBinding;
 import com.chandlersystem.chandler.ui.adapters.UserActivityAdapter;
+import com.chandlersystem.chandler.utilities.ViewUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,6 +69,9 @@ public class DealActivityFragment extends Fragment {
         mBinding.recyclerViewActivities.setNestedScrollingEnabled(true);
         mBinding.recyclerViewActivities.setHasFixedSize(true);
         mBinding.recyclerViewActivities.addItemDecoration(new LinearItemDecoration(getResources().getDimensionPixelSize(R.dimen.spacing_small)));
+        mBinding.recyclerViewActivities.setEmptyView(mBinding.layoutEmpty.layoutEmpty);
+        mBinding.layoutEmpty.tvEmpty.setText(getText(R.string.content_there_is_no_requester));
+        ViewUtil.setImage(mBinding.layoutEmpty.ivEmpty, R.drawable.ic_empty_user);
         mBinding.recyclerViewActivities.setAdapter(mUserActivityAdapter);
     }
 }

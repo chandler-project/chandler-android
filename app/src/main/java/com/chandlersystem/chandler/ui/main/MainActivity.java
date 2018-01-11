@@ -5,6 +5,10 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Looper;
+import android.os.Message;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -31,6 +35,7 @@ import com.chandlersystem.chandler.ui.profile.ProfileFragment;
 import com.chandlersystem.chandler.ui.profile.ReviewsFragment;
 import com.chandlersystem.chandler.ui.requests.RequestsFragment;
 import com.chandlersystem.chandler.ui.requests.dummy.DummyContent;
+import com.chandlersystem.chandler.utilities.LogUtil;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -61,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         return mActivityComponent;
+
     }
 
     @Override

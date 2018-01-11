@@ -28,6 +28,7 @@ import com.chandlersystem.chandler.ui.request_detail.RequestDetailActivity;
 import com.chandlersystem.chandler.ui.requests.dummy.DummyContent;
 import com.chandlersystem.chandler.ui.requests.dummy.DummyContent.DummyItem;
 import com.chandlersystem.chandler.utilities.RxUtil;
+import com.chandlersystem.chandler.utilities.ViewUtil;
 import com.jakewharton.rxbinding2.support.v4.widget.RxSwipeRefreshLayout;
 
 import java.util.List;
@@ -103,6 +104,9 @@ public class RequestsFragment extends Fragment {
             mBinding.list.setLayoutManager(new GridLayoutManager(getContext(), mColumnCount));
         }
         mBinding.list.addItemDecoration(new LinearItemDecoration(getResources().getDimensionPixelSize(R.dimen.spacing_normal)));
+        mBinding.list.setEmptyView(mBinding.layoutEmpty.layoutEmpty);
+        mBinding.layoutEmpty.tvEmpty.setText(getText(R.string.content_there_is_no_request));
+        ViewUtil.setImage(mBinding.layoutEmpty.ivEmpty, R.drawable.ic_empty_rocket);
     }
 
     private void handleEvents() {
@@ -116,11 +120,10 @@ public class RequestsFragment extends Fragment {
     }
 
     private void callApiGetRequest() {
-        mCompositeDisposable.add(
-                mApi.getRequestList(UserManager.getUserSync().getAuthorization())
-                        .compose(RxUtil.withSchedulers())
-                        .subscribe(retrofitResponseListItem -> setAdapter(retrofitResponseListItem.items),
-                                Throwable::printStackTrace));
+        mCompositeDisposable.add(mApi.getRequestNewFeed(UserManager.getUserSync().getAuthorization())
+                .compose(RxUtil.withSchedulers())
+                .subscribe(retrofitResponseListItem -> setAdapter(retrofitResponseListItem.items),
+                        Throwable::printStackTrace));
     }
 
     private void setAdapter(List<Request> items) {

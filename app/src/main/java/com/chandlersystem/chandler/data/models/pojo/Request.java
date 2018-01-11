@@ -53,6 +53,9 @@ public class Request implements Parcelable {
     @SerializedName("price")
     @Expose
     private float price;
+    @SerializedName("amount")
+    @Expose
+    private int amount;
 
     protected Request(Parcel in) {
         productName = in.readString();
@@ -69,6 +72,7 @@ public class Request implements Parcelable {
         created = in.readString();
         modified = in.readString();
         price = in.readFloat();
+        amount = in.readInt();
     }
 
     public static final Creator<Request> CREATOR = new Creator<Request>() {
@@ -82,6 +86,14 @@ public class Request implements Parcelable {
             return new Request[size];
         }
     };
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
 
     public float getPrice() {
         return price;
@@ -216,5 +228,6 @@ public class Request implements Parcelable {
         parcel.writeString(created);
         parcel.writeString(modified);
         parcel.writeFloat(price);
+        parcel.writeInt(amount);
     }
 }

@@ -8,8 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chandlersystem.chandler.R;
-import com.chandlersystem.chandler.data.models.pojo.Deal;
+import com.chandlersystem.chandler.configs.ApiConstant;
+import com.chandlersystem.chandler.data.models.pojo.Comment;
+import com.chandlersystem.chandler.data.models.pojo.Owner;
+import com.chandlersystem.chandler.data.models.pojo.Shipper;
 import com.chandlersystem.chandler.databinding.ItemUserCommentBinding;
+import com.chandlersystem.chandler.utilities.ValidateUtil;
 import com.chandlersystem.chandler.utilities.ViewUtil;
 
 import java.util.List;
@@ -22,18 +26,18 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentH
 
     private Context mContext;
 
-    private List<Deal> mDealList;
+    private List<Comment> mCommentList;
 
-    private final PublishSubject<Deal> mDealClicks = PublishSubject.create();
+    private final PublishSubject<Comment> mCommentClicks = PublishSubject.create();
 
 
-    public PublishSubject<Deal> getDealClicks() {
-        return mDealClicks;
+    public PublishSubject<Comment> getCommentClicks() {
+        return mCommentClicks;
     }
 
-    public CommentAdapter(Context context, List<Deal> categories) {
+    public CommentAdapter(Context context, List<Comment> categories) {
         this.mContext = context;
-        this.mDealList = categories;
+        this.mCommentList = categories;
     }
 
     @Override
@@ -43,24 +47,33 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentH
 
     @Override
     public void onBindViewHolder(CommentHolder holder, int position) {
-        Deal deal = mDealList.get(position);
-
-        setupViews(holder.mBinding, deal);
+        Comment Comment = mCommentList.get(position);
+        setupViews(holder.mBinding, Comment);
     }
 
-    private void setupViews(ItemUserCommentBinding binding, Deal deal) {
-        ViewUtil.showImage(mContext, "http://lorempixel.com/50/50/sports/1/", binding.layoutProfile.ivProfile);
-        ViewUtil.setText(binding.layoutProfile.tvUserName, "Serious Bee");
-        ViewUtil.setText(binding.layoutProfile.tvUserPoint, "12k");
-        ViewUtil.setText(binding.tvTime, "20/7/2018");
-        ViewUtil.showImage(mContext, "http://lorempixel.com/400/300/sports/1/", binding.ivComment);
-        ViewUtil.toggleView(binding.ivComment, true);
-        ViewUtil.setText(binding.tvComment, "Lorem ipsum");
+    private void setupViews(ItemUserCommentBinding binding, Comment comment) {
+        if (comment.getImages() != null && !comment.getImages().isEmpty() && ValidateUtil.checkString(comment.getImages().get(0))) {
+            ViewUtil.showImage(mContext, comment.getImages().get(0), binding.ivComment);
+            ViewUtil.toggleView(binding.ivComment, true);
+        } else {
+            ViewUtil.toggleView(binding.ivComment, false);
+        }
+
+        Owner owner = comment.getOwner();
+        if (ValidateUtil.checkString(owner.getAvatar())) {
+            ViewUtil.showImage(mContext, ApiConstant.BASE_URL_VER1 + owner.getAvatar(), binding.layoutProfile.ivProfile);
+        } else {
+            ViewUtil.setImage(binding.layoutProfile.ivProfile, R.drawable.ic_placeholder_avatar);
+        }
+
+        ViewUtil.setText(binding.layoutProfile.tvUserName, owner.getFullName());
+        ViewUtil.setText(binding.layoutProfile.tvUserPoint, owner.getPoints() + owner.getPoints() > 2 ? mContext.getString(R.string.content_points) : mContext.getString(R.string.content_point));
+        ViewUtil.setText(binding.tvComment, comment.getContent());
     }
 
     @Override
     public int getItemCount() {
-        return mDealList.size();
+        return mCommentList.size();
     }
 
     static class CommentHolder extends RecyclerView.ViewHolder {

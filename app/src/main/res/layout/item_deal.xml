@@ -90,7 +90,6 @@
                 android:id="@+id/tv_shipping_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/spacing_small"
                 android:background="@drawable/item_button_rounded_cyan"
                 android:fontFamily="@font/cabin_bold"
                 android:paddingBottom="@dimen/spacing_smallest"
@@ -101,12 +100,8 @@
                 android:textSize="@dimen/text_size_normal"
                 tools:text="$200" />
 
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="@color/colorInactive" />
-
             <include
+                android:id="@+id/layout_many_profile"
                 layout="@layout/item_many_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -25,6 +25,5 @@
             android:text="@string/content_add_image"
             android:textColor="@color/colorTextGray"
             android:textSize="@dimen/text_size_normal" />
-
     </LinearLayout>
 </layout>

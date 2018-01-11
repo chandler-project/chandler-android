@@ -23,6 +23,7 @@ import com.chandlersystem.chandler.ui.request_detail.RequestDetailActivity;
 import com.chandlersystem.chandler.ui.requests.RequestAdapter;
 import com.chandlersystem.chandler.utilities.DialogUtil;
 import com.chandlersystem.chandler.utilities.RxUtil;
+import com.chandlersystem.chandler.utilities.ViewUtil;
 import com.jakewharton.rxbinding2.support.v4.widget.RxSwipeRefreshLayout;
 
 import java.util.List;
@@ -71,6 +72,9 @@ public class UserRequestActivity extends AppCompatActivity {
     private void setupViews() {
         mBinding.list.setLayoutManager(new LinearLayoutManager(this));
         mBinding.list.addItemDecoration(new LinearItemDecoration(getResources().getDimensionPixelSize(R.dimen.spacing_normal)));
+        mBinding.list.setEmptyView(mBinding.layoutEmpty.layoutEmpty);
+        mBinding.layoutEmpty.tvEmpty.setText(getText(R.string.content_there_is_no_request));
+        ViewUtil.setImage(mBinding.layoutEmpty.ivEmpty, R.drawable.ic_empty_rocket);
         mBinding.layoutToolbar.layoutToolbar.setVisibility(View.VISIBLE);
         mBinding.layoutToolbar.tvTitle.setText(getText(R.string.content_your_request));
     }
