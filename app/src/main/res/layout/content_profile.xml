@@ -119,231 +119,278 @@
             </RelativeLayout>
         </LinearLayout>
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
-            <RelativeLayout
-                android:id="@+id/layout_edit_profile"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorWhite">
+                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tv_edit_profile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/spacing_small"
-                    android:layout_marginRight="@dimen/spacing_small"
-                    android:layout_marginTop="@dimen/spacing_normal"
-                    android:fontFamily="@font/cabin_regular"
-                    android:text="@string/content_edit_your_profile"
-                    android:textColor="@color/colorTextGray"
-                    android:textSize="@dimen/text_size_large" />
-
-                <ImageView
-                    android:layout_width="@dimen/ico_size_normal"
-                    android:layout_height="@dimen/ico_size_normal"
-                    android:layout_alignBottom="@id/tv_edit_profile"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_gravity="end|center_vertical"
-                    android:layout_marginLeft="@dimen/spacing_small"
-                    android:layout_marginRight="@dimen/spacing_small"
-                    android:baselineAlignBottom="true"
-                    android:src="@drawable/ic_right" />
-
-                <View
+                <RelativeLayout
+                    android:id="@+id/layout_edit_profile"
                     android:layout_width="match_parent"
-                    android:layout_height="0.5px"
-                    android:layout_below="@id/tv_edit_profile"
-                    android:layout_marginLeft="@dimen/spacing_small"
-                    android:layout_marginRight="@dimen/spacing_small"
-                    android:layout_marginTop="@dimen/spacing_normal"
-                    android:background="@color/colorBlack10" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/layout_become_shipper"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorWhite">
-
-                <TextView
-                    android:id="@+id/tv_become_shipper"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/spacing_small"
-                    android:layout_marginRight="@dimen/spacing_small"
-                    android:layout_marginTop="@dimen/spacing_normal"
-                    android:fontFamily="@font/cabin_regular"
-                    android:text="@string/content_become_a_shipper"
-                    android:textColor="@color/colorTextGray"
-                    android:textSize="@dimen/text_size_large" />
+                    android:background="@color/colorWhite">
 
-                <ImageView
-                    android:layout_width="@dimen/ico_size_normal"
-                    android:layout_height="@dimen/ico_size_normal"
-                    android:layout_alignBottom="@id/tv_become_shipper"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_gravity="end|center_vertical"
-                    android:layout_marginLeft="@dimen/spacing_small"
-                    android:layout_marginRight="@dimen/spacing_small"
-                    android:baselineAlignBottom="true"
-                    android:src="@drawable/ic_right" />
+                    <TextView
+                        android:id="@+id/tv_edit_profile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/spacing_small"
+                        android:layout_marginRight="@dimen/spacing_small"
+                        android:layout_marginTop="@dimen/spacing_normal"
+                        android:fontFamily="@font/cabin_regular"
+                        android:text="@string/content_edit_your_profile"
+                        android:textColor="@color/colorTextGray"
+                        android:textSize="@dimen/text_size_large" />
 
-                <View
+                    <ImageView
+                        android:layout_width="@dimen/ico_size_normal"
+                        android:layout_height="@dimen/ico_size_normal"
+                        android:layout_alignBottom="@id/tv_edit_profile"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_gravity="end|center_vertical"
+                        android:layout_marginLeft="@dimen/spacing_small"
+                        android:layout_marginRight="@dimen/spacing_small"
+                        android:baselineAlignBottom="true"
+                        android:src="@drawable/ic_right" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5px"
+                        android:layout_below="@id/tv_edit_profile"
+                        android:layout_marginLeft="@dimen/spacing_small"
+                        android:layout_marginRight="@dimen/spacing_small"
+                        android:layout_marginTop="@dimen/spacing_normal"
+                        android:background="@color/colorBlack10" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layout_become_shipper"
                     android:layout_width="match_parent"
-                    android:layout_height="0.5px"
-                    android:layout_below="@id/tv_become_shipper"
-                    android:layout_marginLeft="@dimen/spacing_small"
-                    android:layout_marginRight="@dimen/spacing_small"
-                    android:layout_marginTop="@dimen/spacing_normal"
-                    android:background="@color/colorBlack10" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/layout_your_order"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorWhite">
-
-                <TextView
-                    android:id="@+id/tv_your_order"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/spacing_small"
-                    android:layout_marginRight="@dimen/spacing_small"
-                    android:layout_marginTop="@dimen/spacing_normal"
-                    android:fontFamily="@font/cabin_regular"
-                    android:text="@string/content_your_order"
-                    android:textColor="@color/colorTextGray"
-                    android:textSize="@dimen/text_size_large" />
+                    android:background="@color/colorWhite">
 
-                <ImageView
-                    android:layout_width="@dimen/ico_size_normal"
-                    android:layout_height="@dimen/ico_size_normal"
-                    android:layout_alignBottom="@id/tv_your_order"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_gravity="end|center_vertical"
-                    android:layout_marginLeft="@dimen/spacing_small"
-                    android:layout_marginRight="@dimen/spacing_small"
-                    android:baselineAlignBottom="true"
-                    android:src="@drawable/ic_right" />
+                    <TextView
+                        android:id="@+id/tv_become_shipper"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/spacing_small"
+                        android:layout_marginRight="@dimen/spacing_small"
+                        android:layout_marginTop="@dimen/spacing_normal"
+                        android:fontFamily="@font/cabin_regular"
+                        android:text="@string/content_become_a_shipper"
+                        android:textColor="@color/colorTextGray"
+                        android:textSize="@dimen/text_size_large" />
 
-                <View
+                    <ImageView
+                        android:layout_width="@dimen/ico_size_normal"
+                        android:layout_height="@dimen/ico_size_normal"
+                        android:layout_alignBottom="@id/tv_become_shipper"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_gravity="end|center_vertical"
+                        android:layout_marginLeft="@dimen/spacing_small"
+                        android:layout_marginRight="@dimen/spacing_small"
+                        android:baselineAlignBottom="true"
+                        android:src="@drawable/ic_right" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5px"
+                        android:layout_below="@id/tv_become_shipper"
+                        android:layout_marginLeft="@dimen/spacing_small"
+                        android:layout_marginRight="@dimen/spacing_small"
+                        android:layout_marginTop="@dimen/spacing_normal"
+                        android:background="@color/colorBlack10" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layout_feedback"
                     android:layout_width="match_parent"
-                    android:layout_height="0.5px"
-                    android:layout_below="@id/tv_your_order"
-                    android:layout_marginLeft="@dimen/spacing_small"
-                    android:layout_marginRight="@dimen/spacing_small"
-                    android:layout_marginTop="@dimen/spacing_normal"
-                    android:background="@color/colorBlack10" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/layout_your_hot_deal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorWhite">
-
-                <TextView
-                    android:id="@+id/tv_your_hot_deal"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/spacing_small"
-                    android:layout_marginRight="@dimen/spacing_small"
-                    android:layout_marginTop="@dimen/spacing_normal"
-                    android:fontFamily="@font/cabin_regular"
-                    android:text="@string/content_your_hot_deal"
-                    android:textColor="@color/colorTextGray"
-                    android:textSize="@dimen/text_size_large" />
+                    android:background="@color/colorWhite">
 
-                <ImageView
-                    android:layout_width="@dimen/ico_size_normal"
-                    android:layout_height="@dimen/ico_size_normal"
-                    android:layout_alignBottom="@id/tv_your_hot_deal"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_gravity="end|center_vertical"
-                    android:layout_marginLeft="@dimen/spacing_small"
-                    android:layout_marginRight="@dimen/spacing_small"
-                    android:baselineAlignBottom="true"
-                    android:src="@drawable/ic_right" />
+                    <TextView
+                        android:id="@+id/tv_feedback"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/spacing_small"
+                        android:layout_marginRight="@dimen/spacing_small"
+                        android:layout_marginTop="@dimen/spacing_normal"
+                        android:fontFamily="@font/cabin_regular"
+                        android:text="@string/content_your_feedback"
+                        android:textColor="@color/colorTextGray"
+                        android:textSize="@dimen/text_size_large" />
 
-                <View
+                    <ImageView
+                        android:layout_width="@dimen/ico_size_normal"
+                        android:layout_height="@dimen/ico_size_normal"
+                        android:layout_alignBottom="@id/tv_feedback"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_gravity="end|center_vertical"
+                        android:layout_marginLeft="@dimen/spacing_small"
+                        android:layout_marginRight="@dimen/spacing_small"
+                        android:baselineAlignBottom="true"
+                        android:src="@drawable/ic_right" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5px"
+                        android:layout_below="@id/tv_feedback"
+                        android:layout_marginLeft="@dimen/spacing_small"
+                        android:layout_marginRight="@dimen/spacing_small"
+                        android:layout_marginTop="@dimen/spacing_normal"
+                        android:background="@color/colorBlack10" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layout_your_order"
                     android:layout_width="match_parent"
-                    android:layout_height="0.5px"
-                    android:layout_below="@id/tv_your_hot_deal"
-                    android:layout_marginLeft="@dimen/spacing_small"
-                    android:layout_marginRight="@dimen/spacing_small"
-                    android:layout_marginTop="@dimen/spacing_normal"
-                    android:background="@color/colorBlack10" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/layout_your_request"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorWhite">
-
-                <TextView
-                    android:id="@+id/tv_your_request"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/spacing_small"
-                    android:layout_marginRight="@dimen/spacing_small"
-                    android:layout_marginTop="@dimen/spacing_normal"
-                    android:fontFamily="@font/cabin_regular"
-                    android:text="@string/content_your_request"
-                    android:textColor="@color/colorTextGray"
-                    android:textSize="@dimen/text_size_large" />
+                    android:background="@color/colorWhite">
 
-                <ImageView
-                    android:layout_width="@dimen/ico_size_normal"
-                    android:layout_height="@dimen/ico_size_normal"
-                    android:layout_alignBottom="@id/tv_your_request"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_gravity="end|center_vertical"
-                    android:layout_marginLeft="@dimen/spacing_small"
-                    android:layout_marginRight="@dimen/spacing_small"
-                    android:baselineAlignBottom="true"
-                    android:src="@drawable/ic_right" />
+                    <TextView
+                        android:id="@+id/tv_your_order"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/spacing_small"
+                        android:layout_marginRight="@dimen/spacing_small"
+                        android:layout_marginTop="@dimen/spacing_normal"
+                        android:fontFamily="@font/cabin_regular"
+                        android:text="@string/content_your_order"
+                        android:textColor="@color/colorTextGray"
+                        android:textSize="@dimen/text_size_large" />
 
-                <View
+                    <ImageView
+                        android:layout_width="@dimen/ico_size_normal"
+                        android:layout_height="@dimen/ico_size_normal"
+                        android:layout_alignBottom="@id/tv_your_order"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_gravity="end|center_vertical"
+                        android:layout_marginLeft="@dimen/spacing_small"
+                        android:layout_marginRight="@dimen/spacing_small"
+                        android:baselineAlignBottom="true"
+                        android:src="@drawable/ic_right" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5px"
+                        android:layout_below="@id/tv_your_order"
+                        android:layout_marginLeft="@dimen/spacing_small"
+                        android:layout_marginRight="@dimen/spacing_small"
+                        android:layout_marginTop="@dimen/spacing_normal"
+                        android:background="@color/colorBlack10" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layout_your_hot_deal"
                     android:layout_width="match_parent"
-                    android:layout_height="0.5px"
-                    android:layout_below="@id/tv_your_request"
-                    android:layout_marginLeft="@dimen/spacing_small"
-                    android:layout_marginRight="@dimen/spacing_small"
-                    android:layout_marginTop="@dimen/spacing_normal"
-                    android:background="@color/colorBlack10" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/layout_sign_out"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorWhite">
-
-                <TextView
-                    android:id="@+id/tv_sign_out"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/spacing_small"
-                    android:layout_marginRight="@dimen/spacing_small"
-                    android:layout_marginTop="@dimen/spacing_normal"
-                    android:fontFamily="@font/cabin_regular"
-                    android:text="@string/content_sign_out"
-                    android:textColor="@color/colorTextGray"
-                    android:textSize="@dimen/text_size_large" />
-            </RelativeLayout>
+                    android:background="@color/colorWhite">
 
-        </LinearLayout>
+                    <TextView
+                        android:id="@+id/tv_your_hot_deal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/spacing_small"
+                        android:layout_marginRight="@dimen/spacing_small"
+                        android:layout_marginTop="@dimen/spacing_normal"
+                        android:fontFamily="@font/cabin_regular"
+                        android:text="@string/content_your_hot_deal"
+                        android:textColor="@color/colorTextGray"
+                        android:textSize="@dimen/text_size_large" />
+
+                    <ImageView
+                        android:layout_width="@dimen/ico_size_normal"
+                        android:layout_height="@dimen/ico_size_normal"
+                        android:layout_alignBottom="@id/tv_your_hot_deal"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_gravity="end|center_vertical"
+                        android:layout_marginLeft="@dimen/spacing_small"
+                        android:layout_marginRight="@dimen/spacing_small"
+                        android:baselineAlignBottom="true"
+                        android:src="@drawable/ic_right" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5px"
+                        android:layout_below="@id/tv_your_hot_deal"
+                        android:layout_marginLeft="@dimen/spacing_small"
+                        android:layout_marginRight="@dimen/spacing_small"
+                        android:layout_marginTop="@dimen/spacing_normal"
+                        android:background="@color/colorBlack10" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layout_your_request"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite">
+
+                    <TextView
+                        android:id="@+id/tv_your_request"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/spacing_small"
+                        android:layout_marginRight="@dimen/spacing_small"
+                        android:layout_marginTop="@dimen/spacing_normal"
+                        android:fontFamily="@font/cabin_regular"
+                        android:text="@string/content_your_request"
+                        android:textColor="@color/colorTextGray"
+                        android:textSize="@dimen/text_size_large" />
+
+                    <ImageView
+                        android:layout_width="@dimen/ico_size_normal"
+                        android:layout_height="@dimen/ico_size_normal"
+                        android:layout_alignBottom="@id/tv_your_request"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_gravity="end|center_vertical"
+                        android:layout_marginLeft="@dimen/spacing_small"
+                        android:layout_marginRight="@dimen/spacing_small"
+                        android:baselineAlignBottom="true"
+                        android:src="@drawable/ic_right" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5px"
+                        android:layout_below="@id/tv_your_request"
+                        android:layout_marginLeft="@dimen/spacing_small"
+                        android:layout_marginRight="@dimen/spacing_small"
+                        android:layout_marginTop="@dimen/spacing_normal"
+                        android:background="@color/colorBlack10" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layout_sign_out"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:paddingBottom="@dimen/spacing_normal">
+
+                    <TextView
+                        android:id="@+id/tv_sign_out"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/spacing_small"
+                        android:layout_marginRight="@dimen/spacing_small"
+                        android:layout_marginTop="@dimen/spacing_normal"
+                        android:fontFamily="@font/cabin_regular"
+                        android:text="@string/content_sign_out"
+                        android:textColor="@color/colorTextGray"
+                        android:textSize="@dimen/text_size_large" />
+                </RelativeLayout>
+
+            </LinearLayout>
+        </ScrollView>
     </LinearLayout>
 </layout>
 

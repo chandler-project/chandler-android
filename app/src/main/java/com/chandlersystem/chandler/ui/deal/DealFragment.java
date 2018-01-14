@@ -185,12 +185,11 @@ public class DealFragment extends Fragment {
     }
 
     private void callApiGetAllDeal() {
-        mCompositeDisposable.add(
-                mApi.getDealNewFeed(UserManager.getUserSync().getAuthorization())
-                        .compose(RxUtil.withSchedulers())
-                        .compose(RxUtil.withProgressBar(mBinding.layoutProgressBar.progressBar))
-                        .map(dealRetrofitResponseListItem -> dealRetrofitResponseListItem.items)
-                        .subscribe(this::setDealAdapter, throwable -> DialogUtil.showErrorDialog(getContext(), throwable)));
+        mCompositeDisposable.add(mApi.getDealNewFeed(UserManager.getUserSync().getAuthorization())
+                .compose(RxUtil.withSchedulers())
+                .compose(RxUtil.withProgressBar(mBinding.layoutProgressBar.progressBar))
+                .map(dealRetrofitResponseListItem -> dealRetrofitResponseListItem.items)
+                .subscribe(this::setDealAdapter, throwable -> DialogUtil.showErrorDialog(getContext(), throwable)));
     }
 
     private void setDealAdapter(List<Deal> dealList) {

@@ -151,7 +151,8 @@
         <activity android:name=".ui.cart.CartActivity" />
         <activity android:name=".ui.become_shipper.BecomeShipperActivity" />
         <activity android:name=".ui.user_deal.UserDealActivity" />
-        <activity android:name=".ui.user_request.UserRequestActivity"></activity>
+        <activity android:name=".ui.user_request.UserRequestActivity" />
+        <activity android:name=".ui.feedback.FeedbackActivity"></activity>
     </application>
 
 </manifest>

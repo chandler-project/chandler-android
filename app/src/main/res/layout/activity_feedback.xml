@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBackgroundGray">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorBackgroundGray"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/layout_toolbar"
+                layout="@layout/item_extra_toolbar" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.chandlersystem.chandler.RecyclerViewWithEmptyState
+                    android:id="@+id/recyclerView_feedback"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+                <include
+                    android:id="@+id/layout_empty"
+                    layout="@layout/item_empty"
+                    android:visibility="gone" />
+            </FrameLayout>
+        </LinearLayout>
+
+        <include
+            android:id="@+id/layout_progress_bar"
+            layout="@layout/item_progress_bar"
+            android:visibility="gone" />
+    </FrameLayout>
+
+</layout>

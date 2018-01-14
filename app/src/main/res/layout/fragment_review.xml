@@ -44,7 +44,7 @@
                 android:textSize="@dimen/text_size_normal" />
 
             <include
-                android:id="@+id/profile"
+                android:id="@+id/layout_profile"
                 layout="@layout/item_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

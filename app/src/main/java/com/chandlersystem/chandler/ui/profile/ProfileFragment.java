@@ -24,6 +24,7 @@ import com.chandlersystem.chandler.database.UserManager;
 import com.chandlersystem.chandler.database.UserObservation;
 import com.chandlersystem.chandler.databinding.FragmentProfileBinding;
 import com.chandlersystem.chandler.ui.become_shipper.BecomeShipperActivity;
+import com.chandlersystem.chandler.ui.feedback.FeedbackActivity;
 import com.chandlersystem.chandler.ui.login.LoginActivity;
 import com.chandlersystem.chandler.ui.main.MainActivity;
 import com.chandlersystem.chandler.ui.user_deal.UserDealActivity;
@@ -125,6 +126,16 @@ public class ProfileFragment extends Fragment {
         mCompositeDisposable.add(yourDeal().subscribe(o -> startUserDealActivity(), Throwable::printStackTrace));
 
         mCompositeDisposable.add(yourRequest().subscribe(o -> startUserRequestActivity(), Throwable::printStackTrace));
+
+        mCompositeDisposable.add(yourFeedback().subscribe(o -> startFeedbackActivity(), Throwable::printStackTrace));
+    }
+
+    private void startFeedbackActivity() {
+        startActivity(FeedbackActivity.getInstance(getContext()));
+    }
+
+    private Observable<Object> yourFeedback() {
+        return RxView.clicks(mBinding.layoutContent.layoutFeedback);
     }
 
     private void startUserRequestActivity() {

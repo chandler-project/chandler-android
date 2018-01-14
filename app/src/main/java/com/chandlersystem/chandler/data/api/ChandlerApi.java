@@ -3,6 +3,7 @@ package com.chandlersystem.chandler.data.api;
 import com.chandlersystem.chandler.data.models.pojo.Category;
 import com.chandlersystem.chandler.data.models.pojo.Comment;
 import com.chandlersystem.chandler.data.models.pojo.Deal;
+import com.chandlersystem.chandler.data.models.pojo.Feedback;
 import com.chandlersystem.chandler.data.models.pojo.Request;
 import com.chandlersystem.chandler.data.models.pojo.UploadImage;
 import com.chandlersystem.chandler.data.models.pojo.User;
@@ -44,7 +45,7 @@ public interface ChandlerApi {
     @GET("/api/Categories/{category_id}/Deals")
     Observable<RetrofitResponseListItem<Deal>> getDealListOfCategory(@Path("category_id") String categoryId, @Query("access_token") String accessToken);
 
-    @GET("/api/Deals/new-feeds")
+    @GET("/api/Deals/new-feeds?filter={\"include\": \"category\"}")
     Observable<RetrofitResponseListItem<Deal>> getDealNewFeed(@Query("access_token") String accessToken);
 
     @GET("/api/Requests/new-feeds")
@@ -58,6 +59,9 @@ public interface ChandlerApi {
 
     @PATCH("/api/Requests/{request_id}/bid")
     Observable<RetrofitResponseListItem> bidRequest(@Query("access_token") String accessToken);
+
+    @GET("/api/Members/{member_id}/feedback")
+    Observable<RetrofitResponseListItem<Feedback>> getFeedback(@Path("member_id") String memberId, @Query("access_token") String accessToken);
 
     @GET("/api/Requests")
     Observable<RetrofitResponseListItem<Request>> getRequestList(@Query("access_token") String accessToken);

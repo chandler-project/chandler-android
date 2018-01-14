@@ -5,10 +5,6 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.HandlerThread;
-import android.os.Looper;
-import android.os.Message;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -32,19 +28,14 @@ import com.chandlersystem.chandler.ui.main.state.MainState;
 import com.chandlersystem.chandler.ui.notification.NotificationFragment;
 import com.chandlersystem.chandler.ui.product_search.ProductSearchActivity;
 import com.chandlersystem.chandler.ui.profile.ProfileFragment;
-import com.chandlersystem.chandler.ui.profile.ReviewsFragment;
 import com.chandlersystem.chandler.ui.requests.RequestsFragment;
-import com.chandlersystem.chandler.ui.requests.dummy.DummyContent;
-import com.chandlersystem.chandler.utilities.LogUtil;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener,
         ViewPager.OnPageChangeListener, DealFragment.OnFragmentInteractionListener,
-        CreateDealRequestFragment.OnCreateDealRequestInteraction,
-        ReviewsFragment.OnReviewInteractListener {
+        CreateDealRequestFragment.OnCreateDealRequestInteraction {
     private static final String TAG = MainActivity.class.getCanonicalName();
 
     private ActivityMainBinding mBinding;
@@ -185,10 +176,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent i = new Intent(this, CreateDealActivity.class);
             startActivity(i);
         }
-    }
-
-    @Override
-    public void onReviewInteraction(com.chandlersystem.chandler.ui.profile.dummy.DummyContent.DummyItem review) {
-        Snackbar.make(mBinding.getRoot(), "Review clicked", Snackbar.LENGTH_SHORT).show();
     }
 }

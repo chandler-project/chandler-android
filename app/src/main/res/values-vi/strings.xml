@@ -237,4 +237,5 @@ ba gác \"ship\" tới."</string>
     <string name="content_price_per_product_hint">Ex: 20</string>
     <string name="content_delivery_time">Estimate delivery time</string>
     <string name="content_post_comment_success">Post comment successfully</string>
+    <string name="content_there_is_no_feedback">There is no feedback</string>
 </resources>

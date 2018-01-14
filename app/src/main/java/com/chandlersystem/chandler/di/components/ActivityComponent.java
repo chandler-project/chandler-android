@@ -9,6 +9,7 @@ import com.chandlersystem.chandler.ui.create_request.SelectCategoryFragment;
 import com.chandlersystem.chandler.ui.deal.CategoryDetailActivity;
 import com.chandlersystem.chandler.ui.deal.DealFragment;
 import com.chandlersystem.chandler.ui.deal_detail.DealCommentFragment;
+import com.chandlersystem.chandler.ui.feedback.FeedbackActivity;
 import com.chandlersystem.chandler.ui.login.LoginActivity;
 import com.chandlersystem.chandler.ui.profile.EditProfileActivity;
 import com.chandlersystem.chandler.ui.profile.ProfileFragment;
@@ -26,6 +27,8 @@ import dagger.Component;
 @Component(dependencies = ApplicationComponent.class, modules = ActivityModule.class)
 public interface ActivityComponent {
     void inject(LoginActivity loginActivity);
+
+    void inject(FeedbackActivity feedbackActivity);
 
     void inject(CategoryDetailActivity categoryDetailActivity);
 

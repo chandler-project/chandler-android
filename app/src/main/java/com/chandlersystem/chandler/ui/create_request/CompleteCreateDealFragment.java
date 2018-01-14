@@ -129,7 +129,7 @@ public class CompleteCreateDealFragment extends Fragment {
         return RxTextView.textChanges(mBinding.etName)
                 .map(charSequence -> {
                     int textLength = charSequence.toString().length();
-                    return textLength >= 6 && textLength <= 100;
+                    return textLength >= 6;
                 });
     }
 
@@ -137,7 +137,7 @@ public class CompleteCreateDealFragment extends Fragment {
         return RxTextView.textChanges(mBinding.etLinkUrl)
                 .map(charSequence -> {
                     int textLength = charSequence.toString().length();
-                    return textLength >= 6 && textLength <= 100 && ValidateUtil.checkUrl(charSequence.toString());
+                    return textLength >= 6 && ValidateUtil.checkUrl(charSequence.toString());
                 });
     }
 
