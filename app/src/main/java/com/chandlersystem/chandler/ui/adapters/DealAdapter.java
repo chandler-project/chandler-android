@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide;
 import com.chandlersystem.chandler.R;
 import com.chandlersystem.chandler.configs.ApiConstant;
 import com.chandlersystem.chandler.data.models.pojo.Deal;
+import com.chandlersystem.chandler.data.models.pojo.Owner;
 import com.chandlersystem.chandler.data.models.pojo.Shipper;
 import com.chandlersystem.chandler.databinding.ItemDealBinding;
 import com.chandlersystem.chandler.databinding.ItemDealSortByCategoryBinding;
@@ -127,6 +128,39 @@ public class DealAdapter extends RecyclerView.Adapter {
         ViewUtil.setText(binding.tvProductTitle, deal.getProductName());
         ViewUtil.setText(binding.tvProductDetail, deal.getProductDesc());
         ViewUtil.setText(binding.layoutCategoryName.tvCategoryName, deal.getCategory().getName());
+
+        List<Owner> requesterList = deal.getRequesters();
+        if (requesterList != null && !requesterList.isEmpty()) {
+            ViewUtil.toggleView(binding.layoutManyProfile.layoutManyProfile, true);
+            ViewUtil.setText(binding.layoutManyProfile.tvManyProfile, requesterList.size() + " " + mContext.getString(R.string.content_requester));
+
+            if (requesterList.get(0) != null) {
+                Owner owner0 = requesterList.get(0);
+                ViewUtil.showImage(mContext, ApiConstant.BASE_URL_VER1 + owner0.getAvatar(), binding.layoutManyProfile.ivProfile1);
+                ViewUtil.toggleView(binding.layoutManyProfile.layoutProfile1, true);
+            } else {
+                ViewUtil.toggleView(binding.layoutManyProfile.layoutProfile1, false);
+            }
+
+            if (requesterList.size() >= 2) {
+                Owner owner1 = requesterList.get(1);
+                ViewUtil.showImage(mContext, ApiConstant.BASE_URL_VER1 + owner1.getAvatar(), binding.layoutManyProfile.ivProfile2);
+                ViewUtil.toggleView(binding.layoutManyProfile.layoutProfile2, true);
+            } else {
+                ViewUtil.toggleView(binding.layoutManyProfile.layoutProfile2, false);
+            }
+
+            if (requesterList.size() >= 3) {
+                Owner owner2 = requesterList.get(2);
+                ViewUtil.showImage(mContext, ApiConstant.BASE_URL_VER1 + owner2.getAvatar(), binding.layoutManyProfile.ivProfile3);
+                ViewUtil.toggleView(binding.layoutManyProfile.layoutProfile3, true);
+            } else {
+                ViewUtil.toggleView(binding.layoutManyProfile.layoutProfile3, false);
+            }
+
+        } else {
+            ViewUtil.toggleView(binding.layoutManyProfile.layoutManyProfile, false);
+        }
     }
 
     private void setupViews(ItemDealSortByCategoryBinding binding, Deal deal) {

@@ -3,9 +3,19 @@
     tools:context="com.chandlersystem.chandler.ui.deal_detail.DealActivityFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <android.support.v7.widget.RecyclerView
-        tools:listitem="@layout/item_bid"
-        android:id="@+id/recyclerView_activities"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <com.chandlersystem.chandler.RecyclerViewWithEmptyState
+            android:id="@+id/recyclerView_bids"
+            tools:listitem="@layout/item_bid"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <include
+            android:id="@+id/layout_empty"
+            layout="@layout/item_empty"
+            android:visibility="gone" />
+    </FrameLayout>
 </layout>

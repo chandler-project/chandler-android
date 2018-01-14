@@ -24,6 +24,7 @@ import com.chandlersystem.chandler.ui.deal.CategoryDetailActivity;
 import com.chandlersystem.chandler.ui.deal_detail.DealDetailActivity;
 import com.chandlersystem.chandler.utilities.DialogUtil;
 import com.chandlersystem.chandler.utilities.RxUtil;
+import com.chandlersystem.chandler.utilities.ViewUtil;
 import com.jakewharton.rxbinding2.view.RxView;
 
 import java.util.ArrayList;
@@ -95,6 +96,9 @@ public class UserDealActivity extends AppCompatActivity {
         mBinding.recyclerViewDeals.setLayoutManager(gridLayoutManager);
         mBinding.recyclerViewDeals.setNestedScrollingEnabled(true);
         mBinding.recyclerViewDeals.setHasFixedSize(true);
+        mBinding.recyclerViewDeals.setEmptyView(mBinding.layoutEmpty.layoutEmpty);
+        mBinding.layoutEmpty.tvEmpty.setText(getText(R.string.content_there_is_no_deal));
+        ViewUtil.setImage(mBinding.layoutEmpty.ivEmpty, R.drawable.ic_empty_aerostat);
     }
 
     private void setAdapter(List<Deal> dealList) {

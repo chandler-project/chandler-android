@@ -69,10 +69,29 @@ public class CartActivity extends AppCompatActivity {
 
     private void setupCartRecyclerView() {
         mDealList = new ArrayList<>();
+        mDealList.add(new Deal());
+        mDealList.add(new Deal());
+        mDealList.add(new Deal());
+        mDealList.add(new Deal());
+        mDealList.add(new Deal());
+        mDealList.add(new Deal());
+        mDealList.add(new Deal());
+        mDealList.add(new Deal());
+        mDealList.add(new Deal());
+        mDealList.add(new Deal());
+        mDealList.add(new Deal());
+        mDealList.add(new Deal());
+        mDealList.add(new Deal());
+        mDealList.add(new Deal());
+        mDealList.add(new Deal());
+        mDealList.add(new Deal());
+        mDealList.add(new Deal());
+        mDealList.add(new Deal());
+
+
         mAdapter = new CartAdapter(this, mDealList);
         mBinding.rvCart.setHasFixedSize(true);
         mBinding.rvCart.setLayoutManager(new LinearLayoutManager(this));
-
         mBinding.rvCart.setAdapter(mAdapter);
     }
 

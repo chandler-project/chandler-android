@@ -69,6 +69,9 @@ public class Deal implements Parcelable {
     @Expose
     private Category category;
 
+    public Deal() {
+    }
+
     protected Deal(Parcel in) {
         productName = in.readString();
         reference = in.readString();

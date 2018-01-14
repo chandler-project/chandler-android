@@ -256,5 +256,22 @@
     <string name="content_you_have_to_be_shipper_to_create_deal">You have to be a shipper to create deal</string>
     <string name="content_shipping_price">Ship:</string>
     <string name="content_request">Request:</string>
-    <string name="content_requester">Requesters</string>
+    <string name="content_requester">Requester</string>
+    <string name="content_how_many_do_you_want_to_buy">How many product do you want to buy?</string>
+    <string name="content_hint_amount">Ex: 10</string>
+    <string name="content_please_input_valid_number">Please input a valid number</string>
+    <string name="content_there_is_no_requester">Oop! There is no requester</string>
+    <string name="content_there_is_no_comment">Oh no! There is no comment</string>
+    <string name="content_there_is_no_bidder">Oop! There is no one bid on this request</string>
+    <string name="content_there_is_no_request">Oop! There is no request!</string>
+    <string name="content_there_is_no_deal">Woop! There is no deal.</string>
+    <string name="content_there_is_no_notification">:( There is no notification</string>
+    <string name="content_what_is_your_comment">What do you think about this deal?</string>
+    <string name="content_add_image_for_comment">Add image for comment</string>
+    <string name="content_button_comment">Post comment</string>
+    <string name="content_request_amount">Request amount</string>
+    <string name="content_price_per_product">Price per product</string>
+    <string name="content_price_per_product_hint">Ex: 20</string>
+    <string name="content_delivery_time">Estimate delivery time</string>
+    <string name="content_post_comment_success">Post comment successfully</string>
 </resources>

@@ -16,6 +16,7 @@ import com.chandlersystem.chandler.R;
 import com.chandlersystem.chandler.custom_views.LinearItemDecoration;
 import com.chandlersystem.chandler.databinding.FragmentNotificationBinding;
 import com.chandlersystem.chandler.ui.adapters.NotificationAdapter;
+import com.chandlersystem.chandler.utilities.ViewUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,18 +53,6 @@ public class NotificationFragment extends Fragment {
 
     private void setupAdapter() {
         List<String> mNotificationList = new ArrayList<>();
-        mNotificationList.add(new String("Hello world"));
-        mNotificationList.add(new String("Hello world"));
-        mNotificationList.add(new String("Hello world"));
-        mNotificationList.add(new String("Hello world"));
-        mNotificationList.add(new String("Hello world"));
-        mNotificationList.add(new String("Hello world"));
-        mNotificationList.add(new String("Hello world"));
-        mNotificationList.add(new String("Hello world"));
-        mNotificationList.add(new String("Hello world"));
-        mNotificationList.add(new String("Hello world"));
-        mNotificationList.add(new String("Hello world"));
-        mNotificationList.add(new String("Hello world"));
         mAdapter = new NotificationAdapter(getContext(), mNotificationList);
         mBinding.rvNotifications.setAdapter(mAdapter);
     }
@@ -75,5 +64,8 @@ public class NotificationFragment extends Fragment {
     private void setupNotificationRecyclerView() {
         mBinding.rvNotifications.setHasFixedSize(true);
         mBinding.rvNotifications.setLayoutManager(new LinearLayoutManager(getContext()));
+        mBinding.rvNotifications.setEmptyView(mBinding.layoutEmpty.layoutEmpty);
+        mBinding.layoutEmpty.tvEmpty.setText(getText(R.string.content_there_is_no_notification));
+        ViewUtil.setImage(mBinding.layoutEmpty.ivEmpty, R.drawable.ic_empty_lighthouse);
     }
 }

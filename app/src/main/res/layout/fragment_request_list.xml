@@ -19,13 +19,24 @@
                 layout="@layout/item_extra_toolbar"
                 android:visibility="gone" />
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/list"
-                android:name="com.chandlersystem.chandler.ui.requests.RequestsFragment"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:context="com.chandlersystem.chandler.ui.requests.RequestsFragment"
-                tools:listitem="@layout/fragment_request_item" />
+                android:layout_height="match_parent">
+
+                <com.chandlersystem.chandler.RecyclerViewWithEmptyState
+                    android:id="@+id/list"
+                    android:name="com.chandlersystem.chandler.ui.requests.RequestsFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:context="com.chandlersystem.chandler.ui.requests.RequestsFragment"
+                    tools:listitem="@layout/fragment_request_item" />
+
+                <include
+                    android:id="@+id/layout_empty"
+                    layout="@layout/item_empty"
+                    android:visibility="gone" />
+
+            </FrameLayout>
         </LinearLayout>
     </android.support.v4.widget.SwipeRefreshLayout>
 </layout>

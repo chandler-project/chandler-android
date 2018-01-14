@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_small"
+        android:background="@color/colorWhite"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_small">
+
+        <TextView
+            android:id="@+id/tv_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/spacing_small"
+            android:layout_marginRight="@dimen/spacing_small"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:fontFamily="@font/cabin_regular"
+            android:text="@string/content_bid"
+            android:textColor="@color/colorTextPrimary"
+            android:textSize="@dimen/text_size_large" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:background="@color/colorBlack10" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:background="@null"
+            android:fontFamily="@font/cabin_medium"
+            android:gravity="top"
+            android:text="@string/content_request_amount"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/text_size_normal" />
+
+        <TextView
+            android:id="@+id/et_amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_smallest"
+            android:background="@null"
+            android:editable="false"
+            android:ems="10"
+            android:fontFamily="@font/cabin_regular"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textColor="@color/colorTextGray"
+            android:textColorHint="@color/colorTextGray"
+            android:textSize="@dimen/text_size_big"
+            tools:text="1" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:background="@null"
+            android:fontFamily="@font/cabin_medium"
+            android:gravity="top"
+            android:text="@string/content_price_per_product"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/text_size_normal" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/et_price"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_smallest"
+                android:layout_weight="8"
+                android:background="@null"
+                android:ems="10"
+                android:fontFamily="@font/cabin_regular"
+                android:hint="@string/content_price_per_product_hint"
+                android:inputType="number"
+                android:maxLines="1"
+                android:textColor="@color/colorTextGray"
+                android:textColorHint="@color/colorTextGray"
+                android:textSize="@dimen/text_size_big"
+                tools:text="200" />
+
+            <TextView
+                android:id="@+id/tv_currency"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_smallest"
+                android:layout_weight="1"
+                android:background="@null"
+                android:fontFamily="@font/cabin_regular"
+                android:text="VND"
+                android:textColor="@color/colorTextGray"
+                android:textColorHint="@color/colorTextGray"
+                android:textSize="@dimen/text_size_big" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:background="@null"
+            android:fontFamily="@font/cabin_medium"
+            android:gravity="top"
+            android:text="@string/content_delivery_time"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/text_size_normal" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/et_delivery_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_smallest"
+                android:layout_weight="8"
+                android:background="@null"
+                android:ems="10"
+                android:fontFamily="@font/cabin_regular"
+                android:hint="Ex: 20"
+                android:inputType="number"
+                android:maxLines="1"
+                android:textColor="@color/colorTextGray"
+                android:textColorHint="@color/colorTextGray"
+                android:textSize="@dimen/text_size_big" />
+
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_smallest"
+                android:layout_weight="1"
+                android:background="@null"
+                android:fontFamily="@font/cabin_regular"
+                android:text="Day"
+                android:textColor="@color/colorTextGray"
+                android:textColorHint="@color/colorTextGray"
+                android:textSize="@dimen/text_size_big" />
+        </LinearLayout>
+
+        <include
+            android:id="@+id/layout_button_bid"
+            layout="@layout/item_button_primary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_small" />
+    </LinearLayout>
+</layout>

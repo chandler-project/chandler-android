@@ -44,7 +44,7 @@ public class DealTabAdapter extends FragmentPagerAdapter {
             default:
                 return context.getString(R.string.content_detail);
             case 1:
-                return context.getString(R.string.content_activity);
+                return context.getString(R.string.content_requester);
             case 2:
                 return context.getString(R.string.content_comment);
         }

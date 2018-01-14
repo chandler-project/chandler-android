@@ -18,11 +18,21 @@
                 android:id="@+id/layout_toolbar"
                 layout="@layout/item_extra_toolbar" />
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerView_deals"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+                android:layout_height="match_parent">
+
+                <com.chandlersystem.chandler.RecyclerViewWithEmptyState
+                    android:id="@+id/recyclerView_deals"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+                <include
+                    android:id="@+id/layout_empty"
+                    layout="@layout/item_empty"
+                    android:visibility="gone" />
+            </FrameLayout>
         </LinearLayout>
 
         <include
