@@ -254,7 +254,7 @@
     <string name="content_your_request">Your requests</string>
     <string name="content_you_already_shipper">You already a shipper</string>
     <string name="content_you_have_to_be_shipper_to_create_deal">You have to be a shipper to create deal</string>
-    <string name="content_shipping_price">Ship:</string>
+    <string name="content_shipping_price">Ship price: </string>
     <string name="content_request">Request:</string>
     <string name="content_requester">Requester</string>
     <string name="content_how_many_do_you_want_to_buy">How many product do you want to buy?</string>
@@ -270,10 +270,19 @@
     <string name="content_add_image_for_comment">Add image for comment</string>
     <string name="content_button_comment">Post comment</string>
     <string name="content_request_amount">Request amount</string>
-    <string name="content_price_per_product">Price per product</string>
+    <string name="content_estimate_full_price">Full price</string>
     <string name="content_price_per_product_hint">Ex: 20</string>
     <string name="content_delivery_time">Estimate delivery time</string>
     <string name="content_post_comment_success">Post comment successfully</string>
     <string name="content_your_feedback">Your feedback</string>
     <string name="content_there_is_no_feedback">There is no feedback</string>
+    <string name="content_buy_error">Đặt mua thất bại, xin vui lòng thử lại sau</string>
+    <string name="content_buy_success">Đặt mua thành công.</string>
+    <string name="content_bid_error">Đặt giá thất bại. Xin vui lòng thử lại sau</string>
+    <string name="content_bid_sucess">Đặt giá thành công</string>
+    <string name="content_note">Note</string>
+    <string name="content_example_note">Tôi sẽ giao hàng đúng hẹn</string>
+    <string name="content_hot_deal">Hot deals</string>
+    <string name="content_requests">Requests</string>
+    <string name="content_user_profile">Thông tin người dùng</string>
 </resources>

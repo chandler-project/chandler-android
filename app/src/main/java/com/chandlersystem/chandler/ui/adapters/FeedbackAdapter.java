@@ -2,7 +2,6 @@ package com.chandlersystem.chandler.ui.adapters;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +11,8 @@ import com.chandlersystem.chandler.R;
 import com.chandlersystem.chandler.configs.ApiConstant;
 import com.chandlersystem.chandler.data.models.pojo.Feedback;
 import com.chandlersystem.chandler.data.models.pojo.Owner;
-import com.chandlersystem.chandler.data.models.pojo.Shipper;
 import com.chandlersystem.chandler.databinding.FragmentReviewBinding;
+import com.chandlersystem.chandler.ui.profile.UserProfileActivity;
 import com.chandlersystem.chandler.utilities.ValidateUtil;
 import com.chandlersystem.chandler.utilities.ViewUtil;
 
@@ -23,11 +22,11 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.ViewHo
 
     private final List<Feedback> mValues;
 
-    private Context context;
+    private Context mContext;
 
-    public FeedbackAdapter(List<Feedback> mValues, Context context) {
+    public FeedbackAdapter(List<Feedback> mValues, Context mContext) {
         this.mValues = mValues;
-        this.context = context;
+        this.mContext = mContext;
     }
 
     @Override
@@ -43,15 +42,19 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.ViewHo
 
         Owner owner = feedback.getOwner();
         if (ValidateUtil.checkString(owner.getAvatar())) {
-            ViewUtil.showImage(context, ApiConstant.BASE_URL_VER1 + owner.getAvatar(), holder.mBinding.layoutProfile.ivProfile);
+            ViewUtil.showImage(mContext, ApiConstant.BASE_URL_VER1 + owner.getAvatar(), holder.mBinding.layoutProfile.ivProfile);
         } else {
             ViewUtil.setImage(holder.mBinding.layoutProfile.ivProfile, R.drawable.ic_placeholder_avatar);
         }
 
         ViewUtil.setText(holder.mBinding.layoutProfile.tvUserName, owner.getFullName());
-        ViewUtil.setText(holder.mBinding.layoutProfile.tvUserPoint, owner.getPoints() + owner.getPoints() > 2 ? context.getString(R.string.content_points) : context.getString(R.string.content_point));
+        ViewUtil.setText(holder.mBinding.layoutProfile.tvUserPoint, owner.getPoints() + owner.getPoints() > 2 ? mContext.getString(R.string.content_points) : mContext.getString(R.string.content_point));
 
         holder.mBinding.content.setText(feedback.getContent());
+
+        holder.mBinding.layoutProfile.layoutProfile.setOnClickListener(v -> {
+            mContext.startActivity(UserProfileActivity.getIntent(mContext));
+        });
     }
 
     @Override

@@ -9,12 +9,18 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.chandlersystem.chandler.R;
+import com.chandlersystem.chandler.configs.ApiConstant;
+import com.chandlersystem.chandler.data.models.pojo.Bidder;
+import com.chandlersystem.chandler.data.models.pojo.Shipper;
 import com.chandlersystem.chandler.databinding.ItemBidBinding;
+import com.chandlersystem.chandler.ui.profile.UserProfileActivity;
+import com.chandlersystem.chandler.utilities.ValidateUtil;
 import com.chandlersystem.chandler.utilities.ViewUtil;
 import com.jakewharton.rxbinding2.view.RxView;
 
 import java.util.List;
 
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.subjects.PublishSubject;
 
@@ -23,16 +29,16 @@ public class BidAdapter extends RecyclerView.Adapter<BidAdapter.BidHolder> {
 
     private Context mContext;
 
-    private List<String> mBidList;
+    private List<Bidder> mBidList;
 
-    private final PublishSubject<String> mBidClick = PublishSubject.create();
+    private final PublishSubject<Bidder> mBidClick = PublishSubject.create();
 
 
-    public PublishSubject<String> getDealClick() {
+    public PublishSubject<Bidder> getBidClick() {
         return mBidClick;
     }
 
-    public BidAdapter(Context context, List<String> dealList) {
+    public BidAdapter(Context context, List<Bidder> dealList) {
         this.mContext = context;
         this.mBidList = dealList;
     }
@@ -44,29 +50,38 @@ public class BidAdapter extends RecyclerView.Adapter<BidAdapter.BidHolder> {
 
     @Override
     public void onBindViewHolder(BidHolder holder, int position) {
-        String string = mBidList.get(position);
+        Bidder bidder = mBidList.get(position);
 
-        setupViews(holder.mBinding, string);
-        handleEvents(holder, position);
+        setupViews(holder.mBinding, bidder);
+        handleEvents(holder, bidder);
     }
 
-    private void handleEvents(BidHolder holder, int position) {
-        if (holder.mDisposable != null && !holder.mDisposable.isDisposed()) {
-            holder.mDisposable.dispose();
+    private void handleEvents(BidHolder holder, Bidder bidder) {
+        if (!holder.mDisposable.isDisposed()) {
+            holder.mDisposable.clear();
         }
 
-        holder.mDisposable = RxView.clicks(holder.mBinding.btnAccept)
+        holder.mDisposable.add(RxView.clicks(holder.mBinding.btnAccept)
+                .subscribe(o -> mBidClick.onNext(bidder), Throwable::printStackTrace));
+
+        holder.mDisposable.add(RxView.clicks(holder.mBinding.layoutProfile.layoutProfile)
                 .subscribe(o -> {
-                    Toast.makeText(mContext, "Hoora!!!!", Toast.LENGTH_SHORT).show();
-                }, Throwable::printStackTrace);
+                    mContext.startActivity(UserProfileActivity.getIntent(mContext));
+                }, Throwable::printStackTrace));
     }
 
-    private void setupViews(ItemBidBinding binding, String string) {
-        ViewUtil.setImage(binding.layoutProfile.ivProfile, R.drawable.avatar);
-        ViewUtil.setText(binding.layoutProfile.tvUserName, "Nguyen Hoang Phat");
-        ViewUtil.setText(binding.layoutProfile.tvUserPoint, "1000");
-        ViewUtil.setText(binding.tvContent, "The cheapest price is here. Let me bring it to you");
-        ViewUtil.setText(binding.tvBidPrice, "Bid gia: 20$");
+    private void setupViews(ItemBidBinding binding, Bidder bidder) {
+        if (ValidateUtil.checkString(bidder.getAvatar())) {
+            ViewUtil.showImage(mContext, ApiConstant.BASE_URL_VER1 + bidder.getAvatar(), binding.layoutProfile.ivProfile);
+        } else {
+            ViewUtil.setImage(binding.layoutProfile.ivProfile, R.drawable.ic_placeholder_avatar);
+        }
+
+        ViewUtil.setText(binding.layoutProfile.tvUserName, bidder.getFullName());
+        ViewUtil.setText(binding.layoutProfile.tvUserPoint, bidder.getPoints() + " " + (bidder.getPoints() > 2 ? mContext.getString(R.string.content_points) : mContext.getString(R.string.content_point)));
+
+        ViewUtil.setText(binding.tvContent, bidder.getSentence());
+        ViewUtil.setText(binding.tvBidPrice, String.valueOf(bidder.getPrice()) + " VND");
     }
 
     @Override
@@ -75,7 +90,7 @@ public class BidAdapter extends RecyclerView.Adapter<BidAdapter.BidHolder> {
     }
 
     static class BidHolder extends RecyclerView.ViewHolder {
-        private Disposable mDisposable;
+        private final CompositeDisposable mDisposable = new CompositeDisposable();
         private ItemBidBinding mBinding;
 
         public BidHolder(View itemView) {

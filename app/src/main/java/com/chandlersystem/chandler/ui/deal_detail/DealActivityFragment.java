@@ -34,7 +34,6 @@ public class DealActivityFragment extends Fragment {
     }
 
     public static DealActivityFragment newInstance(Deal deal) {
-
         DealActivityFragment fragment = new DealActivityFragment();
         Bundle bundle = new Bundle();
         bundle.putParcelable(ARGUMENT_DEAL, deal);

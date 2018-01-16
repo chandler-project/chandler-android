@@ -13,8 +13,10 @@ import com.chandlersystem.chandler.data.models.pojo.Owner;
 import com.chandlersystem.chandler.data.models.pojo.Owner;
 import com.chandlersystem.chandler.data.models.pojo.Shipper;
 import com.chandlersystem.chandler.databinding.ItemUserActivityBinding;
+import com.chandlersystem.chandler.ui.profile.UserProfileActivity;
 import com.chandlersystem.chandler.utilities.ValidateUtil;
 import com.chandlersystem.chandler.utilities.ViewUtil;
+import com.jakewharton.rxbinding2.view.RxView;
 
 import java.util.List;
 
@@ -47,9 +49,20 @@ public class UserActivityAdapter extends RecyclerView.Adapter<UserActivityAdapte
 
     @Override
     public void onBindViewHolder(UserActivityHolder holder, int position) {
-        Owner Owner = mOwnerList.get(position);
+        Owner owner = mOwnerList.get(position);
+        setupViews(holder.mBinding, owner);
+        handleEvents(holder, owner);
+    }
 
-        setupViews(holder.mBinding, Owner);
+    private void handleEvents(UserActivityHolder holder, Owner owner) {
+        if (holder.mDisposable != null && !holder.mDisposable.isDisposed()) {
+            holder.mDisposable.dispose();
+        }
+
+        holder.mDisposable = (RxView.clicks(holder.mBinding.layoutProfile.layoutProfile)
+                .subscribe(o -> {
+                    mContext.startActivity(UserProfileActivity.getIntent(mContext));
+                }, Throwable::printStackTrace));
     }
 
     private void setupViews(ItemUserActivityBinding binding, Owner owner) {
@@ -59,7 +72,7 @@ public class UserActivityAdapter extends RecyclerView.Adapter<UserActivityAdapte
             ViewUtil.setImage(binding.layoutProfile.ivProfile, R.drawable.ic_placeholder_avatar);
         }
         ViewUtil.setText(binding.layoutProfile.tvUserName, owner.getFullName());
-        ViewUtil.setText(binding.layoutProfile.tvUserPoint, owner.getPoints() + owner.getPoints() > 2 ? mContext.getString(R.string.content_points) : mContext.getString(R.string.content_point));
+        ViewUtil.setText(binding.layoutProfile.tvUserPoint, owner.getPoints() + (owner.getPoints() > 2 ? mContext.getString(R.string.content_points) : mContext.getString(R.string.content_point)));
     }
 
     @Override

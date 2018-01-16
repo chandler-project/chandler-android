@@ -9,16 +9,19 @@ import android.view.ViewGroup;
 
 import com.chandlersystem.chandler.R;
 import com.chandlersystem.chandler.configs.ApiConstant;
+import com.chandlersystem.chandler.data.models.pojo.Bidder;
 import com.chandlersystem.chandler.data.models.pojo.Owner;
 import com.chandlersystem.chandler.data.models.pojo.Request;
 import com.chandlersystem.chandler.data.models.pojo.Shipper;
 import com.chandlersystem.chandler.databinding.FragmentRequestItemBinding;
+import com.chandlersystem.chandler.ui.profile.UserProfileActivity;
 import com.chandlersystem.chandler.utilities.ValidateUtil;
 import com.chandlersystem.chandler.utilities.ViewUtil;
 import com.jakewharton.rxbinding2.view.RxView;
 
 import java.util.List;
 
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.subjects.PublishSubject;
 
@@ -47,20 +50,24 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
         Request request = mValues.get(position);
 
         setupViews(holder.mBinding, request);
-        requestClicks(holder, holder.mItem);
+        requestClicks(holder, request);
     }
 
-    private void requestClicks(ViewHolder holder, Request mItem) {
-        if (holder.mDisposable != null && !holder.mDisposable.isDisposed()) {
-            holder.mDisposable.dispose();
+    private void requestClicks(ViewHolder holder, Request request) {
+        if (!holder.mDisposable.isDisposed()) {
+            holder.mDisposable.clear();
         }
 
-        holder.mDisposable = RxView.clicks(holder.itemView)
-                .subscribe(o -> mRequestClicks.onNext(mItem), Throwable::printStackTrace);
+        holder.mDisposable.add(RxView.clicks(holder.itemView)
+                .subscribe(o -> mRequestClicks.onNext(request), Throwable::printStackTrace));
+
+        holder.mDisposable.add(RxView.clicks(holder.mBinding.layoutProfile.layoutProfile)
+                .subscribe(o -> {
+                    mContext.startActivity(UserProfileActivity.getIntent(mContext));
+                }, Throwable::printStackTrace));
     }
 
     private void setupViews(FragmentRequestItemBinding binding, Request request) {
@@ -78,7 +85,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
             ViewUtil.setImage(binding.layoutProfile.ivProfile, R.drawable.ic_placeholder_avatar);
         }
         ViewUtil.setText(binding.layoutProfile.tvUserName, owner.getFullName());
-        ViewUtil.setText(binding.layoutProfile.tvUserPoint, owner.getPoints() + owner.getPoints() > 2 ? mContext.getString(R.string.content_points) : mContext.getString(R.string.content_point));
+        ViewUtil.setText(binding.layoutProfile.tvUserPoint, owner.getPoints() + " " + (owner.getPoints() > 2 ? mContext.getString(R.string.content_points) : mContext.getString(R.string.content_point)));
         ViewUtil.setText(binding.tvPrice, request.getPrice() + request.getCurrency());
         ViewUtil.setText(binding.tvShippingPrice, mContext.getString(R.string.content_request) + request.getBudget().getMin() + " - " + request.getBudget().getMax() + request.getCurrency());
         ViewUtil.setText(binding.tvProductTitle, request.getProductName());
@@ -88,13 +95,13 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
         ViewUtil.setText(binding.tvAddress, request.getAddress());
         ViewUtil.setText(binding.tvAmount, "x" + request.getAmount());
 
-        /*List<Owner> requesterList = request.getRequesters();
+        List<Bidder> requesterList = request.getBidders();
         if (requesterList != null && !requesterList.isEmpty()) {
             ViewUtil.toggleView(binding.layoutManyProfile.layoutManyProfile, true);
             ViewUtil.setText(binding.layoutManyProfile.tvManyProfile, requesterList.size() + " " + mContext.getString(R.string.content_requester));
 
             if (requesterList.get(0) != null) {
-                Owner owner0 = requesterList.get(0);
+                Bidder owner0 = requesterList.get(0);
                 ViewUtil.showImage(mContext, ApiConstant.BASE_URL_VER1 + owner0.getAvatar(), binding.layoutManyProfile.ivProfile1);
                 ViewUtil.toggleView(binding.layoutManyProfile.layoutProfile1, true);
             } else {
@@ -102,7 +109,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
             }
 
             if (requesterList.size() >= 2) {
-                Owner owner1 = requesterList.get(1);
+                Bidder owner1 = requesterList.get(1);
                 ViewUtil.showImage(mContext, ApiConstant.BASE_URL_VER1 + owner1.getAvatar(), binding.layoutManyProfile.ivProfile2);
                 ViewUtil.toggleView(binding.layoutManyProfile.layoutProfile2, true);
             } else {
@@ -110,7 +117,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
             }
 
             if (requesterList.size() >= 3) {
-                Owner owner2 = requesterList.get(2);
+                Bidder owner2 = requesterList.get(2);
                 ViewUtil.showImage(mContext, ApiConstant.BASE_URL_VER1 + owner2.getAvatar(), binding.layoutManyProfile.ivProfile3);
                 ViewUtil.toggleView(binding.layoutManyProfile.layoutProfile3, true);
             } else {
@@ -119,7 +126,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
 
         } else {
             ViewUtil.toggleView(binding.layoutManyProfile.layoutManyProfile, false);
-        }*/
+        }
     }
 
     @Override
@@ -129,8 +136,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private FragmentRequestItemBinding mBinding;
-        public Request mItem;
-        private Disposable mDisposable;
+        private final CompositeDisposable mDisposable = new CompositeDisposable();
 
         public ViewHolder(View view) {
             super(view);

@@ -5,7 +5,6 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,16 +13,15 @@ import com.chandlersystem.chandler.R;
 import com.chandlersystem.chandler.configs.ApiConstant;
 import com.chandlersystem.chandler.data.models.pojo.Owner;
 import com.chandlersystem.chandler.data.models.pojo.Request;
-import com.chandlersystem.chandler.databinding.FragmentDealInforBinding;
 import com.chandlersystem.chandler.databinding.FragmentRequestInforBinding;
 import com.chandlersystem.chandler.ui.adapters.ImagePagerAdapter;
+import com.chandlersystem.chandler.ui.profile.UserProfileActivity;
 import com.chandlersystem.chandler.utilities.ValidateUtil;
 import com.chandlersystem.chandler.utilities.ViewUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class RequestInforFragment extends Fragment {
+public class RequestInfoFragment extends Fragment {
     private FragmentRequestInforBinding mBinding;
 
     private List<String> mProductImageList;
@@ -33,12 +31,12 @@ public class RequestInforFragment extends Fragment {
 
     private Request mRequest;
 
-    public RequestInforFragment() {
+    public RequestInfoFragment() {
         // Required empty public constructor
     }
 
-    public static RequestInforFragment newInstance(Request request) {
-        RequestInforFragment fragment = new RequestInforFragment();
+    public static RequestInfoFragment newInstance(Request request) {
+        RequestInfoFragment fragment = new RequestInfoFragment();
         Bundle bundle = new Bundle();
         bundle.putParcelable(ARGUMENT_REQUEST, request);
         fragment.setArguments(bundle);
@@ -62,6 +60,11 @@ public class RequestInforFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mRequest = getArguments().getParcelable(ARGUMENT_REQUEST);
+        setupViews();
+        handleEvents();
+    }
+
+    private void setupViews() {
         setupImageSlideShow();
         setDealTitle();
         setProfile();
@@ -70,6 +73,10 @@ public class RequestInforFragment extends Fragment {
         setReactionAmount();
         setLinkPreview();
         setDealDetail();
+    }
+
+    private void handleEvents() {
+        mBinding.layoutProfile.layoutProfile.setOnClickListener(v -> startActivity(UserProfileActivity.getIntent(getContext())));
     }
 
     private void setDealDetail() {

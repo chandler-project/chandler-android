@@ -9,10 +9,13 @@ import com.chandlersystem.chandler.ui.create_request.SelectCategoryFragment;
 import com.chandlersystem.chandler.ui.deal.CategoryDetailActivity;
 import com.chandlersystem.chandler.ui.deal.DealFragment;
 import com.chandlersystem.chandler.ui.deal_detail.DealCommentFragment;
+import com.chandlersystem.chandler.ui.deal_detail.DealDetailActivity;
+import com.chandlersystem.chandler.ui.deal_detail.DealInfoFragment;
 import com.chandlersystem.chandler.ui.feedback.FeedbackActivity;
 import com.chandlersystem.chandler.ui.login.LoginActivity;
 import com.chandlersystem.chandler.ui.profile.EditProfileActivity;
 import com.chandlersystem.chandler.ui.profile.ProfileFragment;
+import com.chandlersystem.chandler.ui.request_detail.RequestDetailActivity;
 import com.chandlersystem.chandler.ui.requests.RequestsFragment;
 import com.chandlersystem.chandler.ui.select_category.SelectCategoryActivity;
 import com.chandlersystem.chandler.ui.user_deal.UserDealActivity;
@@ -28,6 +31,10 @@ import dagger.Component;
 public interface ActivityComponent {
     void inject(LoginActivity loginActivity);
 
+    void inject(RequestDetailActivity requestDetailActivity);
+
+    void inject(DealDetailActivity dealDetailActivity);
+
     void inject(FeedbackActivity feedbackActivity);
 
     void inject(CategoryDetailActivity categoryDetailActivity);
@@ -39,6 +46,8 @@ public interface ActivityComponent {
     void inject(DealFragment dealFragment);
 
     void inject(SelectCategoryFragment selectCategoryFragment);
+
+    void inject(DealInfoFragment dealInfoFragment);
 
     void inject(SelectCategoryActivity selectCategoryActivity);
 

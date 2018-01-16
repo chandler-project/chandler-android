@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 
 import com.chandlersystem.chandler.R;
 import com.chandlersystem.chandler.custom_views.LinearItemDecoration;
+import com.chandlersystem.chandler.data.models.pojo.Bidder;
+import com.chandlersystem.chandler.data.models.pojo.Request;
 import com.chandlersystem.chandler.databinding.FragmentBidBinding;
 import com.chandlersystem.chandler.ui.adapters.BidAdapter;
 import com.chandlersystem.chandler.utilities.ViewUtil;
@@ -23,12 +25,20 @@ public class BidFragment extends Fragment {
     private FragmentBidBinding mBinding;
     private BidAdapter mBidAdapter;
 
+    private static final String ARGUMENT_REQUEST = "argument-request";
+
+    private Request mRequest;
+
     public BidFragment() {
         // Required empty public constructor
     }
 
-    public static BidFragment newInstance() {
-        return new BidFragment();
+    public static BidFragment newInstance(Request request) {
+        BidFragment fragment = new BidFragment();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(ARGUMENT_REQUEST, request);
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     @Override
@@ -47,29 +57,13 @@ public class BidFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mRequest = getArguments().getParcelable(ARGUMENT_REQUEST);
         setupRecyclerView();
     }
 
     private void setupRecyclerView() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        List<String> bidList = new ArrayList<>();
-        bidList.add("");
-        bidList.add("");
-        bidList.add("");
-        bidList.add("");
-        bidList.add("");
-        bidList.add("");
-        bidList.add("");
-        bidList.add("");
-        bidList.add("");
-        bidList.add("");
-        bidList.add("");
-        bidList.add("");
-        bidList.add("");
-        bidList.add("");
-        bidList.add("");
-        bidList.add("");
-        bidList.add("");
+        List<Bidder> bidList = mRequest.getBidders();
         mBidAdapter = new BidAdapter(getContext(), bidList);
         mBinding.recyclerViewBids.setLayoutManager(layoutManager);
         mBinding.recyclerViewBids.setNestedScrollingEnabled(true);

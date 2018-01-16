@@ -10,7 +10,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context="com.chandlersystem.chandler.ui.deal_detail.DealInforFragment">
+            tools:context="com.chandlersystem.chandler.ui.deal_detail.DealInfoFragment">
 
             <FrameLayout
                 android:id="@+id/layout_slide_show"
@@ -75,10 +75,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_below="@+id/layout_slide_show"
+                android:layout_below="@+id/tv_deal_title"
                 android:layout_marginLeft="@dimen/spacing_small"
-                android:layout_marginRight="@dimen/spacing_small"
-                android:layout_marginTop="@dimen/spacing_small" />
+                android:layout_marginRight="@dimen/spacing_small" />
 
             <TextView
                 android:id="@+id/tv_price"

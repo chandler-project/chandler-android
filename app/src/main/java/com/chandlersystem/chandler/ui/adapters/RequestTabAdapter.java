@@ -8,7 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import com.chandlersystem.chandler.R;
 import com.chandlersystem.chandler.data.models.pojo.Request;
 import com.chandlersystem.chandler.ui.request_detail.BidFragment;
-import com.chandlersystem.chandler.ui.request_detail.RequestInforFragment;
+import com.chandlersystem.chandler.ui.request_detail.RequestInfoFragment;
 
 public class RequestTabAdapter extends FragmentPagerAdapter {
     private Context context;
@@ -24,9 +24,9 @@ public class RequestTabAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             default:
-                return RequestInforFragment.newInstance(request);
+                return RequestInfoFragment.newInstance(request);
             case 1:
-                return BidFragment.newInstance();
+                return BidFragment.newInstance(request);
         }
     }
 

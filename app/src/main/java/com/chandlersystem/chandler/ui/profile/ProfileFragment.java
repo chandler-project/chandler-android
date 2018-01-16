@@ -87,6 +87,13 @@ public class ProfileFragment extends Fragment {
         handleEvents();
     }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mCompositeDisposable.clear();
+        mUserObservation.unregister();
+    }
+
     private void userObservation() {
         mCompositeDisposable.add(mUserObservation.register()
                 .compose(RxUtil.withSchedulers())
@@ -98,13 +105,6 @@ public class ProfileFragment extends Fragment {
         ViewUtil.showImage(getContext(), ApiConstant.BASE_URL_VER1 + user.getAvatar(), mBinding.layoutContent.ivProfile);
         mBinding.layoutContent.description.setText(user.getBio());
         ViewUtil.setText(mBinding.layoutContent.btnPoint, user.getPoints() + " " + (user.getPoints() > 2 ? getString(R.string.content_points) : getString(R.string.content_point)));
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mCompositeDisposable.clear();
-        mUserObservation.unregister();
     }
 
     private void handleEvents() {

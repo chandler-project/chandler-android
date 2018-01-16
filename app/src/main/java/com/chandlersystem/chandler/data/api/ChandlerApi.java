@@ -7,6 +7,7 @@ import com.chandlersystem.chandler.data.models.pojo.Feedback;
 import com.chandlersystem.chandler.data.models.pojo.Request;
 import com.chandlersystem.chandler.data.models.pojo.UploadImage;
 import com.chandlersystem.chandler.data.models.pojo.User;
+import com.chandlersystem.chandler.data.models.request.BidRequestBody;
 import com.chandlersystem.chandler.data.models.request.CommentBody;
 import com.chandlersystem.chandler.data.models.request.CreateDealBody;
 import com.chandlersystem.chandler.data.models.request.CreateRequestBody;
@@ -23,6 +24,7 @@ import java.util.List;
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import retrofit2.Call;
+import retrofit2.Retrofit;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
@@ -51,14 +53,23 @@ public interface ChandlerApi {
     @GET("/api/Requests/new-feeds")
     Observable<RetrofitResponseListItem<Request>> getRequestNewFeed(@Query("access_token") String accessToken);
 
-    @GET("/api/Deals/{deal_id}/comments")
+    @PATCH("/api/Deals/{deal_id}/upvote")
+    Observable<RetrofitResponseItem> upVote(@Path("deal_id") String dealId, @Query("access_token") String access_token);
+
+    @PATCH("/api/Deals/{deal_id}/downvote")
+    Observable<RetrofitResponseItem> downVote(@Path("deal_id") String dealId, @Query("access_token") String access_token);
+
+    @GET("/api/Deals/{deal_id}/comments?filter={\"order\": \"modified DESC\"}")
     Observable<RetrofitResponseListItem<Comment>> getComment(@Path("deal_id") String dealId, @Query("access_token") String accessToken);
 
     @POST("/api/Deals/{deal_id}/comments")
     Observable<RetrofitResponseItem> postComment(@Body CommentBody commentBody, @Path("deal_id") String dealId, @Query("access_token") String accessToken);
 
+    @PATCH("/api/Deals/{deal_id}/request")
+    Observable<RetrofitResponseItem<Deal>> buyDeal(@Path("deal_id") String dealId, @Query("access_token") String accessToken, @Query("amount") float amount);
+
     @PATCH("/api/Requests/{request_id}/bid")
-    Observable<RetrofitResponseListItem> bidRequest(@Query("access_token") String accessToken);
+    Observable<RetrofitResponseItem<Request>> bidRequest(@Body BidRequestBody bidRequestBody, @Path("request_id") String requestId, @Query("access_token") String accessToken);
 
     @GET("/api/Members/{member_id}/feedback")
     Observable<RetrofitResponseListItem<Feedback>> getFeedback(@Path("member_id") String memberId, @Query("access_token") String accessToken);

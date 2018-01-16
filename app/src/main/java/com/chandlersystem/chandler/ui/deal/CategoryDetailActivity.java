@@ -1,6 +1,5 @@
 package com.chandlersystem.chandler.ui.deal;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
@@ -25,7 +24,6 @@ import com.chandlersystem.chandler.utilities.DialogUtil;
 import com.chandlersystem.chandler.utilities.RxUtil;
 import com.jakewharton.rxbinding2.view.RxView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -114,10 +112,32 @@ public class CategoryDetailActivity extends AppCompatActivity {
         mDealAdapter = new DealAdapter(this, dealList, DealAdapter.DealType.DEAL_EXTRA);
         mBinding.recyclerViewDeals.setAdapter(mDealAdapter);
 
-        dealClicks();
+        clickDeal();
+        clickUpvote();
+        clickDownVote();
     }
 
-    private void dealClicks() {
+    private void clickDownVote() {
+        mCompositeDisposable.add(mDealAdapter.getDownvotes().subscribe(deal -> {
+            mCompositeDisposable.add(
+                    mApi.downVote(deal.getId(), UserManager.getUserSync().getAuthorization())
+                            .compose(RxUtil.withSchedulers())
+                            .subscribe(retrofitResponseItem -> {
+                            }, Throwable::printStackTrace));
+        }, Throwable::printStackTrace));
+    }
+
+    private void clickUpvote() {
+        mCompositeDisposable.add(mDealAdapter.getUpvotes().subscribe(deal -> {
+            mCompositeDisposable.add(
+                    mApi.upVote(deal.getId(), UserManager.getUserSync().getAuthorization())
+                            .compose(RxUtil.withSchedulers())
+                            .subscribe(retrofitResponseItem -> {
+                            }, Throwable::printStackTrace));
+        }, Throwable::printStackTrace));
+    }
+
+    private void clickDeal() {
         mCompositeDisposable.add(mDealAdapter.getDealClicks()
                 .subscribe(this::startDealDetailActivity, Throwable::printStackTrace));
     }
@@ -127,6 +147,6 @@ public class CategoryDetailActivity extends AppCompatActivity {
     }
 
     private void setupToolbar() {
-        mBinding.layoutToolbar.tvTitle.setText("This is category name");
+        mBinding.layoutToolbar.tvTitle.setText(mCategory.getName());
     }
 }

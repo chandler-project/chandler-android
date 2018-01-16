@@ -141,6 +141,8 @@
             android:layout_marginRight="@dimen/spacing_small"
             android:layout_marginTop="@dimen/spacing_small"
             android:fontFamily="@font/cabin_bold"
+            android:lines="1"
+            android:maxLines="1"
             android:textColor="@color/colorTextPrimary"
             android:textSize="@dimen/text_size_large"
             tools:text="Samsung Galaxy S8 brand new" />
@@ -154,6 +156,7 @@
             android:layout_marginRight="@dimen/spacing_small"
             android:layout_marginTop="@dimen/spacing_smallest"
             android:fontFamily="@font/cabin_bold"
+            android:lines="2"
             android:maxLines="2"
             android:textColor="@color/colorTextGray"
             android:textSize="@dimen/text_size_normal"
@@ -169,6 +172,7 @@
             android:layout_marginTop="@dimen/spacing_smallest"
             android:fontFamily="@font/cabin_bold"
             android:maxLines="2"
+            android:singleLine="true"
             android:textColor="@color/colorPrimary"
             android:textColorLink="@color/colorPrimary"
             android:textSize="@dimen/text_size_normal"
@@ -187,6 +191,7 @@
             android:text="@string/content_bid" />
 
         <include
+            android:id="@+id/layout_many_profile"
             layout="@layout/item_many_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

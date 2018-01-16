@@ -13,11 +13,14 @@ import com.chandlersystem.chandler.data.models.pojo.Comment;
 import com.chandlersystem.chandler.data.models.pojo.Owner;
 import com.chandlersystem.chandler.data.models.pojo.Shipper;
 import com.chandlersystem.chandler.databinding.ItemUserCommentBinding;
+import com.chandlersystem.chandler.ui.profile.UserProfileActivity;
 import com.chandlersystem.chandler.utilities.ValidateUtil;
 import com.chandlersystem.chandler.utilities.ViewUtil;
+import com.jakewharton.rxbinding2.view.RxView;
 
 import java.util.List;
 
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.subjects.PublishSubject;
 
@@ -47,8 +50,20 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentH
 
     @Override
     public void onBindViewHolder(CommentHolder holder, int position) {
-        Comment Comment = mCommentList.get(position);
-        setupViews(holder.mBinding, Comment);
+        Comment comment = mCommentList.get(position);
+        setupViews(holder.mBinding, comment);
+        handleEvents(holder, comment);
+    }
+
+    private void handleEvents(CommentHolder holder, Comment comment) {
+        if (!holder.mDisposable.isDisposed()) {
+            holder.mDisposable.clear();
+        }
+
+        holder.mDisposable.add(RxView.clicks(holder.mBinding.layoutProfile.layoutProfile)
+                .subscribe(o -> {
+                    mContext.startActivity(UserProfileActivity.getIntent(mContext));
+                }, Throwable::printStackTrace));
     }
 
     private void setupViews(ItemUserCommentBinding binding, Comment comment) {
@@ -67,7 +82,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentH
         }
 
         ViewUtil.setText(binding.layoutProfile.tvUserName, owner.getFullName());
-        ViewUtil.setText(binding.layoutProfile.tvUserPoint, owner.getPoints() + owner.getPoints() > 2 ? mContext.getString(R.string.content_points) : mContext.getString(R.string.content_point));
+        ViewUtil.setText(binding.layoutProfile.tvUserPoint, owner.getPoints() + " " + (owner.getPoints() > 2 ? mContext.getString(R.string.content_points) : mContext.getString(R.string.content_point)));
         ViewUtil.setText(binding.tvComment, comment.getContent());
     }
 
@@ -77,7 +92,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentH
     }
 
     static class CommentHolder extends RecyclerView.ViewHolder {
-        private Disposable mDisposable;
+        private final CompositeDisposable mDisposable = new CompositeDisposable();
         private ItemUserCommentBinding mBinding;
 
         public CommentHolder(View itemView) {

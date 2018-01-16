@@ -20,6 +20,9 @@ public class Request implements Parcelable {
     @SerializedName("productPics")
     @Expose
     private List<String> productPics = null;
+    @SerializedName("bidders")
+    @Expose
+    private List<Bidder> bidders;
     @SerializedName("description")
     @Expose
     private String description;
@@ -61,6 +64,7 @@ public class Request implements Parcelable {
         productName = in.readString();
         reference = in.readString();
         productPics = in.createStringArrayList();
+        bidders = in.createTypedArrayList(Bidder.CREATOR);
         description = in.readString();
         budget = in.readParcelable(Budget.class.getClassLoader());
         currency = in.readString();
@@ -207,27 +211,36 @@ public class Request implements Parcelable {
         this.modified = modified;
     }
 
+    public List<Bidder> getBidders() {
+        return bidders;
+    }
+
+    public void setBidders(List<Bidder> bidders) {
+        this.bidders = bidders;
+    }
+
     @Override
     public int describeContents() {
         return 0;
     }
 
     @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(productName);
-        parcel.writeString(reference);
-        parcel.writeStringList(productPics);
-        parcel.writeString(description);
-        parcel.writeParcelable(budget, i);
-        parcel.writeString(currency);
-        parcel.writeString(deadline);
-        parcel.writeString(address);
-        parcel.writeParcelable(owner, i);
-        parcel.writeString(id);
-        parcel.writeString(categoryId);
-        parcel.writeString(created);
-        parcel.writeString(modified);
-        parcel.writeFloat(price);
-        parcel.writeInt(amount);
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(productName);
+        dest.writeString(reference);
+        dest.writeStringList(productPics);
+        dest.writeTypedList(bidders);
+        dest.writeString(description);
+        dest.writeParcelable(budget, flags);
+        dest.writeString(currency);
+        dest.writeString(deadline);
+        dest.writeString(address);
+        dest.writeParcelable(owner, flags);
+        dest.writeString(id);
+        dest.writeString(categoryId);
+        dest.writeString(created);
+        dest.writeString(modified);
+        dest.writeFloat(price);
+        dest.writeInt(amount);
     }
 }

@@ -9,15 +9,23 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 
 import com.chandlersystem.chandler.R;
+import com.chandlersystem.chandler.data.models.request.BidRequestBody;
 import com.chandlersystem.chandler.databinding.FragmentBidBinding;
 import com.chandlersystem.chandler.databinding.FragmentBidDialogBinding;
 import com.chandlersystem.chandler.utilities.ViewUtil;
+import com.jakewharton.rxbinding2.widget.RxTextView;
+
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 
 public class BidDialog extends DialogFragment {
     // ApiConstant
@@ -29,12 +37,14 @@ public class BidDialog extends DialogFragment {
     private FragmentBidDialogBinding mBinding;
 
     // Callback event
-    private OnAlertDialogInteraction mCallback;
+    private BidDialogCallback mCallback;
+
+    private final CompositeDisposable mCompositeDisposable = new CompositeDisposable();
 
     private int mAmount;
 
-    public interface OnAlertDialogInteraction {
-        void onAlertDialogDismiss();
+    public interface BidDialogCallback {
+        void onBid(BidRequestBody bidRequestBody);
     }
 
     public static BidDialog getInstance(int amount) {
@@ -48,8 +58,8 @@ public class BidDialog extends DialogFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnAlertDialogInteraction) {
-            mCallback = (OnAlertDialogInteraction) context;
+        if (context instanceof BidDialogCallback) {
+            mCallback = (BidDialogCallback) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnAlertDialogInteraction");
@@ -106,7 +116,64 @@ public class BidDialog extends DialogFragment {
     }
 
     private void handleEvents() {
-        mBinding.layoutButtonBid.btnPrimary.setOnClickListener(v -> dismiss());
+
+        mCompositeDisposable.add(formValidated()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::enableButtonBid, Throwable::printStackTrace));
+
+        mBinding.layoutButtonBid.btnPrimary.setOnClickListener(v -> {
+            BidRequestBody body = new BidRequestBody();
+            body.setPrice(Float.parseFloat(mBinding.etPrice.getText().toString()));
+            body.setSpend(Integer.parseInt(mBinding.etDeliveryTime.getText().toString()));
+            body.setSentence(mBinding.etNote.getText().toString());
+            mCallback.onBid(body);
+            dismiss();
+        });
+    }
+
+    private void enableButtonBid(Boolean aBoolean) {
+        if (getContext() == null) {
+            dismiss();
+        }
+
+        mBinding.layoutButtonBid.btnPrimary.setEnabled(aBoolean);
+        if (aBoolean) {
+            mBinding.layoutButtonBid.btnPrimary.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
+        } else {
+            mBinding.layoutButtonBid.btnPrimary.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorInactive));
+        }
+    }
+
+    private Observable<Boolean> formValidated() {
+        return Observable.combineLatest(priceValidated(), dateValidated(), (aBoolean, aBoolean2) -> aBoolean && aBoolean2);
+    }
+
+    private Observable<Boolean> priceValidated() {
+        return RxTextView.textChanges(mBinding.etPrice)
+                .map(charSequence -> {
+                    int currentLength = charSequence.toString().length();
+                    float currentPrice = 0f;
+
+                    if (currentLength > 0) {
+                        currentPrice = Float.valueOf(charSequence.toString());
+                    }
+
+                    return (currentPrice > 1000 && currentPrice < 999999999);
+                });
+    }
+
+    private Observable<Boolean> dateValidated() {
+        return RxTextView.textChanges(mBinding.etDeliveryTime)
+                .map(charSequence -> {
+                    int currentLength = charSequence.toString().length();
+                    int currentDate = 0;
+
+                    if (currentLength > 0) {
+                        currentDate = Integer.valueOf(charSequence.toString());
+                    }
+
+                    return (currentDate > 1);
+                });
     }
 
     @Override
@@ -124,13 +191,5 @@ public class BidDialog extends DialogFragment {
 
         // Call super onResume after sizing
         super.onResume();
-    }
-
-    @Override
-    public void onDismiss(DialogInterface dialog) {
-        super.onDismiss(dialog);
-        if (mCallback != null) {
-            mCallback.onAlertDialogDismiss();
-        }
     }
 }

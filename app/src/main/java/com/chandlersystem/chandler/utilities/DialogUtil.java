@@ -9,9 +9,11 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
 import com.chandlersystem.chandler.ui.dialogs.BidDialog;
+import com.chandlersystem.chandler.ui.dialogs.BuyDialog;
 
 public class DialogUtil {
     private static final String DIALOG_BID_TAG = "dialog-tag-bid";
+    private static final String DIALOG_BUY_TAG = "dialog-tag-buy";
 
     private DialogUtil() {
         // Private constructor for class which full of constants
@@ -29,6 +31,11 @@ public class DialogUtil {
     public static void showBidDialog(Context context, int requestAmount) {
         BidDialog bidDialog = BidDialog.getInstance(requestAmount);
         showDialog(context, bidDialog, DIALOG_BID_TAG);
+    }
+
+    public static void showBuyDialog(Context context) {
+        BuyDialog buyDialog = BuyDialog.getInstance();
+        showDialog(context, buyDialog, DIALOG_BUY_TAG);
     }
 
     public static void showDialog(Context context, DialogFragment dialog, String tag) {

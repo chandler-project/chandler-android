@@ -37,7 +37,7 @@
                 android:paddingRight="@dimen/spacing_small"
                 android:paddingTop="@dimen/spacing_smallest"
                 android:textColor="@color/colorWhite"
-                android:textSize="@dimen/text_size_normal"
+                android:textSize="@dimen/text_size_small"
                 tools:text="End at 27/02/1995" />
         </RelativeLayout>
 
@@ -52,7 +52,7 @@
             android:layout_marginTop="@dimen/spacing_smaller"
             android:fontFamily="@font/cabin_bold"
             android:textColor="@color/colorBlack"
-            android:textSize="@dimen/text_size_big"
+            android:textSize="@dimen/text_size_small"
             tools:text="$200" />
 
         <TextView
@@ -64,6 +64,7 @@
             android:layout_marginRight="@dimen/spacing_smaller"
             android:layout_marginTop="@dimen/spacing_smaller"
             android:fontFamily="@font/cabin_bold"
+            android:maxLines="1"
             android:textColor="@color/colorTextPrimary"
             android:textSize="@dimen/text_size_large"
             tools:text="Samsung Galaxy S8 brand new" />
@@ -77,12 +78,14 @@
             android:layout_marginRight="@dimen/spacing_smaller"
             android:layout_marginTop="@dimen/spacing_smallest"
             android:fontFamily="@font/cabin_bold"
+            android:lines="2"
             android:maxLines="2"
             android:textColor="@color/colorTextGray"
             android:textSize="@dimen/text_size_normal"
             tools:text="Samsung Galaxy S8 brand new" />
 
         <include
+            android:id="@+id/layout_vote"
             layout="@layout/item_vote"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -91,17 +94,15 @@
             android:layout_below="@id/tv_product_detail"
             android:layout_marginBottom="@dimen/spacing_smallest"
             android:layout_marginLeft="@dimen/spacing_smaller"
-            android:layout_marginRight="@dimen/spacing_smaller"
-            android:layout_marginTop="@dimen/spacing_smaller" />
+            android:layout_marginRight="@dimen/spacing_smaller" />
 
         <View
             android:id="@+id/breaking_line"
             android:layout_width="match_parent"
             android:layout_height="0.5px"
             android:layout_below="@id/tv_price"
-            android:layout_marginTop="@dimen/spacing_smaller"
+            android:layout_marginTop="@dimen/spacing_small"
             android:background="@color/colorBlack50" />
-
 
         <include
             android:id="@+id/layout_profile"

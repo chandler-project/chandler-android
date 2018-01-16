@@ -172,6 +172,7 @@ public class DealCommentFragment extends Fragment {
             mCompositeDisposable.add(mApi.uploadImages(UserManager.getUserSync().getAuthorization(), filePartList)
                     .compose(RxUtil.withSchedulers())
                     .doOnSubscribe(disposable -> ViewUtil.toggleView(mBinding.layoutProgressBar.progressBar, true))
+                    .doOnTerminate(() -> ViewUtil.toggleView(mBinding.layoutProgressBar.progressBar, false))
                     .subscribe(responseItem -> {
                         List<String> urlList = new ArrayList<>();
                         for (FileUpload fileUpload : responseItem.item.getResult().getFiles().getFileUpload()) {
@@ -181,7 +182,6 @@ public class DealCommentFragment extends Fragment {
                         commentBody.setImages(urlList);
                         postCommentApi(commentBody);
                     }, throwable -> {
-                        ViewUtil.toggleView(mBinding.layoutProgressBar.progressBar, false);
                         DialogUtil.showErrorDialog(getContext(), throwable);
                     }));
         } else {
@@ -194,9 +194,15 @@ public class DealCommentFragment extends Fragment {
                 .compose(RxUtil.withSchedulers())
                 .subscribe(retrofitResponseListItem -> {
                     Toast.makeText(getContext(), getString(R.string.content_post_comment_success), Toast.LENGTH_SHORT).show();
-                    callApiPostComment();
+                    resetView();
+                    getCommentApi();
                     ViewUtil.hideSoftKey(getActivity());
                 }, throwable -> DialogUtil.showErrorDialog(getContext(), throwable)));
+    }
+
+    private void resetView() {
+        mBinding.etComment.setText("");
+        hideImage();
     }
 
     private MultipartBody.Part getRequestBody(File imageFile) {

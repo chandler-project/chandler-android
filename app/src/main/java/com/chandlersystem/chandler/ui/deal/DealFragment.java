@@ -20,6 +20,7 @@ import com.chandlersystem.chandler.custom_views.LinearItemDecoration;
 import com.chandlersystem.chandler.data.api.ChandlerApi;
 import com.chandlersystem.chandler.data.models.pojo.Category;
 import com.chandlersystem.chandler.data.models.pojo.Deal;
+import com.chandlersystem.chandler.data.models.response.RetrofitResponseItem;
 import com.chandlersystem.chandler.database.UserManager;
 import com.chandlersystem.chandler.databinding.FragmentDealBinding;
 import com.chandlersystem.chandler.ui.adapters.DealAdapter;
@@ -38,6 +39,7 @@ import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
 
 public class DealFragment extends Fragment {
     private FragmentDealBinding mBinding;
@@ -196,6 +198,28 @@ public class DealFragment extends Fragment {
         mDealAdapter = new DealAdapter(getContext(), dealList, DealAdapter.DealType.DEAL_MAIN);
         mBinding.recyclerViewDeals.setAdapter(mDealAdapter);
         clickDeal();
+        clickUpvote();
+        clickDownVote();
+    }
+
+    private void clickDownVote() {
+        mCompositeDisposable.add(mDealAdapter.getDownvotes().subscribe(deal -> {
+            mCompositeDisposable.add(
+                    mApi.downVote(deal.getId(), UserManager.getUserSync().getAuthorization())
+                            .compose(RxUtil.withSchedulers())
+                            .subscribe(retrofitResponseItem -> {
+                            }, Throwable::printStackTrace));
+        }, Throwable::printStackTrace));
+    }
+
+    private void clickUpvote() {
+        mCompositeDisposable.add(mDealAdapter.getUpvotes().subscribe(deal -> {
+            mCompositeDisposable.add(
+                    mApi.upVote(deal.getId(), UserManager.getUserSync().getAuthorization())
+                            .compose(RxUtil.withSchedulers())
+                            .subscribe(retrofitResponseItem -> {
+                            }, Throwable::printStackTrace));
+        }, Throwable::printStackTrace));
     }
 
     private void clickDeal() {

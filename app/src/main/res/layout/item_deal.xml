@@ -99,25 +99,28 @@
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/text_size_normal"
                 tools:text="$200" />
-
-            <include
-                android:id="@+id/layout_many_profile"
-                layout="@layout/item_many_profile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/spacing_small"
-                android:layout_marginRight="@dimen/spacing_small" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv_product_title"
+        <include
+            android:id="@+id/layout_many_profile"
+            layout="@layout/item_many_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/layout_price"
             android:layout_marginLeft="@dimen/spacing_small"
             android:layout_marginRight="@dimen/spacing_small"
+            android:layout_marginTop="@dimen/spacing_small" />
+
+        <TextView
+            android:id="@+id/tv_product_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout_many_profile"
+            android:layout_marginLeft="@dimen/spacing_small"
+            android:layout_marginRight="@dimen/spacing_small"
             android:layout_marginTop="@dimen/spacing_small"
             android:fontFamily="@font/cabin_bold"
+            android:maxLines="2"
             android:textColor="@color/colorTextPrimary"
             android:textSize="@dimen/text_size_large"
             tools:text="Samsung Galaxy S8 brand new" />
@@ -131,12 +134,14 @@
             android:layout_marginRight="@dimen/spacing_small"
             android:layout_marginTop="@dimen/spacing_smallest"
             android:fontFamily="@font/cabin_bold"
+            android:maxLength="120"
             android:maxLines="2"
             android:textColor="@color/colorTextGray"
             android:textSize="@dimen/text_size_normal"
-            tools:text="Samsung Galaxy S8 brand new" />
+            tools:text="Samsung Galaxy S8 brand new Samsung Galaxy S8 brand new Samsung Galaxy S8 brand new Samsung Galaxy S8 brand new Samsung Galaxy S8 brand new Samsung Galaxy S8 brand new" />
 
         <include
+            android:id="@+id/layout_vote"
             layout="@layout/item_vote"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -144,7 +149,7 @@
             android:layout_marginBottom="@dimen/spacing_smallest"
             android:layout_marginLeft="@dimen/spacing_small"
             android:layout_marginRight="@dimen/spacing_small"
-            android:layout_marginTop="@dimen/spacing_smallest" />
+            android:layout_marginTop="@dimen/spacing_smaller" />
 
         <ImageView
             android:layout_width="@dimen/ico_size_largest"
@@ -155,6 +160,7 @@
             android:layout_marginBottom="@dimen/spacing_smallest"
             android:layout_marginLeft="@dimen/spacing_small"
             android:layout_marginRight="@dimen/spacing_small"
+            android:layout_marginTop="@dimen/spacing_smallest"
             android:src="@drawable/ic_shopping" />
     </RelativeLayout>
 </layout>

@@ -40,10 +40,16 @@ public class UserDealActivity extends AppCompatActivity {
 
     private CompositeDisposable mCompositeDisposable = new CompositeDisposable();
 
+    private static final String ARGUMENT_USER_ID = "argument-user-id";
+
     private DealAdapter mDealAdapter;
 
-    public static Intent getInstance(Context context) {
-        return new Intent(context, UserDealActivity.class);
+    private String userId;
+
+    public static Intent getInstance(Context context, String userId) {
+        Intent i = new Intent(context, UserDealActivity.class);
+        i.putExtra(ARGUMENT_USER_ID, userId);
+        return i;
     }
 
     @Inject

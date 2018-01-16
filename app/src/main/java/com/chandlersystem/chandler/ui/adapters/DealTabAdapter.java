@@ -9,7 +9,7 @@ import com.chandlersystem.chandler.R;
 import com.chandlersystem.chandler.data.models.pojo.Deal;
 import com.chandlersystem.chandler.ui.deal_detail.DealActivityFragment;
 import com.chandlersystem.chandler.ui.deal_detail.DealCommentFragment;
-import com.chandlersystem.chandler.ui.deal_detail.DealInforFragment;
+import com.chandlersystem.chandler.ui.deal_detail.DealInfoFragment;
 
 public class DealTabAdapter extends FragmentPagerAdapter {
     private Context context;
@@ -25,7 +25,7 @@ public class DealTabAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             default:
-                return DealInforFragment.newInstance(deal);
+                return DealInfoFragment.newInstance(deal);
             case 1:
                 return DealActivityFragment.newInstance(deal);
             case 2:

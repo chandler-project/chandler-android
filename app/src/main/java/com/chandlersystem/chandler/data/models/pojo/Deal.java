@@ -35,6 +35,12 @@ public class Deal implements Parcelable {
     @SerializedName("productPics")
     @Expose
     private List<String> productPics = null;
+    @SerializedName("upVoters")
+    @Expose
+    private List<String> upVoters;
+    @SerializedName("downVoters")
+    @Expose
+    private List<String> downVoters;
     @SerializedName("shipper")
     @Expose
     private Shipper shipper;
@@ -69,6 +75,10 @@ public class Deal implements Parcelable {
     @Expose
     private Category category;
 
+    private boolean isUpvoted;
+
+    private boolean isDownvoted;
+
     public Deal() {
     }
 
@@ -81,6 +91,8 @@ public class Deal implements Parcelable {
         shippingTime = in.readString();
         productDesc = in.readString();
         productPics = in.createStringArrayList();
+        upVoters = in.createStringArrayList();
+        downVoters = in.createStringArrayList();
         shipper = in.readParcelable(Shipper.class.getClassLoader());
         requesters = in.createTypedArrayList(Owner.CREATOR);
         voters = in.createTypedArrayList(Owner.CREATOR);
@@ -105,6 +117,38 @@ public class Deal implements Parcelable {
             return new Deal[size];
         }
     };
+
+    public boolean isUpvoted() {
+        return isUpvoted;
+    }
+
+    public void setUpvoted(boolean upvoted) {
+        isUpvoted = upvoted;
+    }
+
+    public boolean isDownvoted() {
+        return isDownvoted;
+    }
+
+    public void setDownvoted(boolean downvoted) {
+        isDownvoted = downvoted;
+    }
+
+    public List<String> getUpVoters() {
+        return upVoters;
+    }
+
+    public void setUpVoters(List<String> upVoters) {
+        this.upVoters = upVoters;
+    }
+
+    public List<String> getDownVoters() {
+        return downVoters;
+    }
+
+    public void setDownVoters(List<String> downVoters) {
+        this.downVoters = downVoters;
+    }
 
     public Category getCategory() {
         return category;
@@ -258,32 +302,33 @@ public class Deal implements Parcelable {
         this.categoryId = categoryId;
     }
 
-
     @Override
     public int describeContents() {
         return 0;
     }
 
     @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(productName);
-        parcel.writeString(reference);
-        parcel.writeDouble(price);
-        parcel.writeDouble(shippingPrice);
-        parcel.writeString(currency);
-        parcel.writeString(shippingTime);
-        parcel.writeString(productDesc);
-        parcel.writeStringList(productPics);
-        parcel.writeParcelable(shipper, i);
-        parcel.writeTypedList(requesters);
-        parcel.writeTypedList(voters);
-        parcel.writeInt(upvote);
-        parcel.writeInt(downvote);
-        parcel.writeString(id);
-        parcel.writeString(memberId);
-        parcel.writeString(created);
-        parcel.writeString(modified);
-        parcel.writeString(categoryId);
-        parcel.writeParcelable(category, i);
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(productName);
+        dest.writeString(reference);
+        dest.writeDouble(price);
+        dest.writeDouble(shippingPrice);
+        dest.writeString(currency);
+        dest.writeString(shippingTime);
+        dest.writeString(productDesc);
+        dest.writeStringList(productPics);
+        dest.writeStringList(upVoters);
+        dest.writeStringList(downVoters);
+        dest.writeParcelable(shipper, flags);
+        dest.writeTypedList(requesters);
+        dest.writeTypedList(voters);
+        dest.writeInt(upvote);
+        dest.writeInt(downvote);
+        dest.writeString(id);
+        dest.writeString(memberId);
+        dest.writeString(created);
+        dest.writeString(modified);
+        dest.writeString(categoryId);
+        dest.writeParcelable(category, flags);
     }
 }
