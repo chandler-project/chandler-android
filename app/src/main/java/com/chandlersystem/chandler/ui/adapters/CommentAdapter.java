@@ -62,7 +62,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentH
 
         holder.mDisposable.add(RxView.clicks(holder.mBinding.layoutProfile.layoutProfile)
                 .subscribe(o -> {
-                    mContext.startActivity(UserProfileActivity.getIntent(mContext));
+                    mContext.startActivity(UserProfileActivity.getIntent(mContext, comment.getOwner().getId()));
                 }, Throwable::printStackTrace));
     }
 

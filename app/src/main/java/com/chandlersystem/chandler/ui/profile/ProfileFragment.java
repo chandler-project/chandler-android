@@ -139,7 +139,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void startUserRequestActivity() {
-        startActivity(UserRequestActivity.getIntent(getContext()));
+        startActivity(UserRequestActivity.getIntent(getContext(), UserManager.getUserSync().getId()));
     }
 
     private Observable<Object> yourRequest() {
@@ -147,7 +147,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void startUserDealActivity() {
-        startActivity(UserDealActivity.getInstance(getContext()));
+        startActivity(UserDealActivity.getInstance(getContext(), UserManager.getUserSync().getId()));
     }
 
     private Observable<Object> yourDeal() {

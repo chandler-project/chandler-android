@@ -53,7 +53,7 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.ViewHo
         holder.mBinding.content.setText(feedback.getContent());
 
         holder.mBinding.layoutProfile.layoutProfile.setOnClickListener(v -> {
-            mContext.startActivity(UserProfileActivity.getIntent(mContext));
+            mContext.startActivity(UserProfileActivity.getIntent(mContext, owner.getId()));
         });
     }
 

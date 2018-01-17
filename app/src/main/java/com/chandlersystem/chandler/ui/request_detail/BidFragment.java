@@ -1,6 +1,7 @@
 package com.chandlersystem.chandler.ui.request_detail;
 
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,24 +11,40 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.chandlersystem.chandler.ChandlerApplication;
 import com.chandlersystem.chandler.R;
 import com.chandlersystem.chandler.custom_views.LinearItemDecoration;
+import com.chandlersystem.chandler.data.api.ChandlerApi;
 import com.chandlersystem.chandler.data.models.pojo.Bidder;
 import com.chandlersystem.chandler.data.models.pojo.Request;
+import com.chandlersystem.chandler.database.UserManager;
 import com.chandlersystem.chandler.databinding.FragmentBidBinding;
+import com.chandlersystem.chandler.di.components.ActivityComponent;
+import com.chandlersystem.chandler.di.components.DaggerActivityComponent;
+import com.chandlersystem.chandler.di.modules.ActivityModule;
 import com.chandlersystem.chandler.ui.adapters.BidAdapter;
+import com.chandlersystem.chandler.utilities.RxUtil;
 import com.chandlersystem.chandler.utilities.ViewUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
+import io.reactivex.disposables.CompositeDisposable;
+
 public class BidFragment extends Fragment {
     private FragmentBidBinding mBinding;
     private BidAdapter mBidAdapter;
 
+    private CompositeDisposable mCompositeDisposable = new CompositeDisposable();
+
     private static final String ARGUMENT_REQUEST = "argument-request";
 
     private Request mRequest;
+
+    @Inject
+    ChandlerApi mApi;
 
     public BidFragment() {
         // Required empty public constructor
@@ -39,6 +56,26 @@ public class BidFragment extends Fragment {
         bundle.putParcelable(ARGUMENT_REQUEST, request);
         fragment.setArguments(bundle);
         return fragment;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        ActivityComponent mActivityComponent = DaggerActivityComponent
+                .builder()
+                .activityModule(new ActivityModule(getActivity()))
+                .applicationComponent(ChandlerApplication
+                        .getApplicationComponent(getContext()))
+                .build();
+
+        mActivityComponent.inject(this);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mCompositeDisposable.clear();
     }
 
     @Override
@@ -59,18 +96,42 @@ public class BidFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         mRequest = getArguments().getParcelable(ARGUMENT_REQUEST);
         setupRecyclerView();
+        setAdapter();
+    }
+
+    private void setAdapter() {
+        List<Bidder> bidList = mRequest.getBidders();
+        String userId = UserManager.getUserSync().getId();
+        String requestOwnerId = mRequest.getOwner().getId();
+        mBidAdapter = new BidAdapter(getContext(), bidList, userId.equals(requestOwnerId));
+        mBinding.recyclerViewBids.setAdapter(mBidAdapter);
+        chooseBidder();
+    }
+
+    private void chooseBidder() {
+        if (mBidAdapter == null) {
+            return;
+        }
+
+        mCompositeDisposable.add(mBidAdapter.getBidClick()
+                .subscribe(this::chooseBidderApi, Throwable::printStackTrace));
+    }
+
+    private void chooseBidderApi(Bidder bidder) {
+        mCompositeDisposable.add(mApi.chooseShipperForRequest(mRequest.getId(), bidder.getId())
+                .compose(RxUtil.withSchedulers())
+                .subscribe(retrofitResponseItem -> {
+
+                }, Throwable::printStackTrace));
     }
 
     private void setupRecyclerView() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        List<Bidder> bidList = mRequest.getBidders();
-        mBidAdapter = new BidAdapter(getContext(), bidList);
         mBinding.recyclerViewBids.setLayoutManager(layoutManager);
         mBinding.recyclerViewBids.setNestedScrollingEnabled(true);
         mBinding.recyclerViewBids.setHasFixedSize(true);
         mBinding.recyclerViewBids.setEmptyView(mBinding.layoutEmpty.layoutEmpty);
         mBinding.layoutEmpty.tvEmpty.setText(getText(R.string.content_there_is_no_bidder));
         ViewUtil.setImage(mBinding.layoutEmpty.ivEmpty, R.drawable.ic_empty_user);
-        mBinding.recyclerViewBids.setAdapter(mBidAdapter);
     }
 }

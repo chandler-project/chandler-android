@@ -6,16 +6,24 @@ import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.chandlersystem.chandler.ChandlerApplication;
 import com.chandlersystem.chandler.R;
 import com.chandlersystem.chandler.configs.ApiConstant;
+import com.chandlersystem.chandler.data.api.ChandlerApi;
 import com.chandlersystem.chandler.data.models.pojo.User;
 import com.chandlersystem.chandler.database.UserManager;
 import com.chandlersystem.chandler.databinding.ActivityUserProfileBinding;
+import com.chandlersystem.chandler.di.components.ActivityComponent;
+import com.chandlersystem.chandler.di.components.DaggerActivityComponent;
+import com.chandlersystem.chandler.di.modules.ActivityModule;
 import com.chandlersystem.chandler.ui.feedback.FeedbackActivity;
 import com.chandlersystem.chandler.ui.user_deal.UserDealActivity;
 import com.chandlersystem.chandler.ui.user_request.UserRequestActivity;
+import com.chandlersystem.chandler.utilities.RxUtil;
 import com.chandlersystem.chandler.utilities.ViewUtil;
 import com.jakewharton.rxbinding2.view.RxView;
+
+import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
@@ -27,9 +35,18 @@ public class UserProfileActivity extends AppCompatActivity {
 
     private ActivityUserProfileBinding mBinding;
 
-    public static Intent getIntent(Context context) {
-        return new Intent(context, UserProfileActivity.class);
+    private static final String ARGUMENT_USER_ID = "argument-user-id";
+
+    public static Intent getIntent(Context context, String userId) {
+        Intent i = new Intent(context, UserProfileActivity.class);
+        i.putExtra(ARGUMENT_USER_ID, userId);
+        return i;
     }
+
+    private String mUserId;
+
+    @Inject
+    ChandlerApi mApi;
 
     @Override
     protected void onDestroy() {
@@ -41,9 +58,27 @@ public class UserProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_user_profile);
+
+        ActivityComponent mActivityComponent = DaggerActivityComponent
+                .builder()
+                .activityModule(new ActivityModule(this))
+                .applicationComponent(ChandlerApplication
+                        .getApplicationComponent(this))
+                .build();
+
+        mActivityComponent.inject(this);
+
+        mUserId = getIntent().getStringExtra(ARGUMENT_USER_ID);
+
         setupToolbar();
-        showCustomerInfo(UserManager.getUserSync());
+        customerInfoApi();
         handleEvents();
+    }
+
+    private void customerInfoApi() {
+        mCompositeDisposable.add(mApi.getPublicProfile(mUserId)
+                .compose(RxUtil.withSchedulers())
+                .subscribe(userRetrofitResponseItem -> showCustomerInfo(userRetrofitResponseItem.item), Throwable::printStackTrace));
     }
 
     private void setupToolbar() {
@@ -77,7 +112,7 @@ public class UserProfileActivity extends AppCompatActivity {
     }
 
     private void startUserRequestActivity() {
-        startActivity(UserRequestActivity.getIntent(this));
+        startActivity(UserRequestActivity.getIntent(this, UserManager.getUserSync().getId()));
     }
 
     private Observable<Object> yourRequest() {
@@ -85,7 +120,7 @@ public class UserProfileActivity extends AppCompatActivity {
     }
 
     private void startUserDealActivity() {
-        startActivity(UserDealActivity.getInstance(this));
+        startActivity(UserDealActivity.getInstance(this, UserManager.getUserSync().getId()));
     }
 
     private Observable<Object> yourDeal() {

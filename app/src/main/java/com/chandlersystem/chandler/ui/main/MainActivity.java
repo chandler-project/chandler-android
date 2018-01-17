@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +13,10 @@ import android.widget.Toast;
 
 import com.chandlersystem.chandler.ChandlerApplication;
 import com.chandlersystem.chandler.R;
+import com.chandlersystem.chandler.data.api.ChandlerApi;
+import com.chandlersystem.chandler.data.models.pojo.User;
+import com.chandlersystem.chandler.data.models.request.Device;
+import com.chandlersystem.chandler.data.models.response.RetrofitResponseItem;
 import com.chandlersystem.chandler.database.UserManager;
 import com.chandlersystem.chandler.databinding.ActivityMainBinding;
 import com.chandlersystem.chandler.di.components.ActivityComponent;
@@ -29,9 +32,15 @@ import com.chandlersystem.chandler.ui.notification.NotificationFragment;
 import com.chandlersystem.chandler.ui.product_search.ProductSearchActivity;
 import com.chandlersystem.chandler.ui.profile.ProfileFragment;
 import com.chandlersystem.chandler.ui.requests.RequestsFragment;
+import com.chandlersystem.chandler.utilities.RxUtil;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
+
+import io.reactivex.functions.Consumer;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener,
         ViewPager.OnPageChangeListener, DealFragment.OnFragmentInteractionListener,
@@ -57,15 +66,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         return mActivityComponent;
-
     }
+
+    @Inject
+    ChandlerApi mApi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        getActivityComponent().inject(this);
         setupViews();
         handleEvents();
+        subscribeNotification();
+    }
+
+    private void subscribeNotification() {
+        User user = UserManager.getUserSync();
+        if (user == null) {
+            return;
+        }
+
+        String registrationId = FirebaseInstanceId.getInstance().getToken();
+        Device device = new Device(this, registrationId);
+        mApi.subscribeRegistrationId(device, user.getId(), user.getAuthorization())
+                .compose(RxUtil.withSchedulers())
+                .subscribe(retrofitResponseItem -> {
+
+                }, Throwable::printStackTrace);
     }
 
     private void handleEvents() {

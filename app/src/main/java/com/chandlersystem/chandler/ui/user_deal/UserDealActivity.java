@@ -44,7 +44,7 @@ public class UserDealActivity extends AppCompatActivity {
 
     private DealAdapter mDealAdapter;
 
-    private String userId;
+    private String mUserId;
 
     public static Intent getInstance(Context context, String userId) {
         Intent i = new Intent(context, UserDealActivity.class);
@@ -59,6 +59,8 @@ public class UserDealActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_user_deal);
+
+        mUserId = getIntent().getStringExtra(ARGUMENT_USER_ID);
 
         ActivityComponent mActivityComponent = DaggerActivityComponent
                 .builder()
@@ -75,12 +77,11 @@ public class UserDealActivity extends AppCompatActivity {
     }
 
     private void callApiGetUserDeal() {
-        mCompositeDisposable.add(
-                mApi.getDealList(UserManager.getUserSync().getAuthorization())
-                        .compose(RxUtil.withSchedulers())
-                        .compose(RxUtil.withProgressBar(mBinding.layoutProgressBar.progressBar))
-                        .map(dealRetrofitResponseListItem -> dealRetrofitResponseListItem.items)
-                        .subscribe(this::setAdapter, throwable -> DialogUtil.showErrorDialog(this, throwable)));
+        mCompositeDisposable.add(mApi.getDealList(mUserId)
+                .compose(RxUtil.withSchedulers())
+                .compose(RxUtil.withProgressBar(mBinding.layoutProgressBar.progressBar))
+                .map(dealRetrofitResponseListItem -> dealRetrofitResponseListItem.items)
+                .subscribe(this::setAdapter, throwable -> DialogUtil.showErrorDialog(this, throwable)));
     }
 
     private void handleEvents() {

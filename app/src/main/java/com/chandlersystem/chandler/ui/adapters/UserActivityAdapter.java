@@ -61,7 +61,7 @@ public class UserActivityAdapter extends RecyclerView.Adapter<UserActivityAdapte
 
         holder.mDisposable = (RxView.clicks(holder.mBinding.layoutProfile.layoutProfile)
                 .subscribe(o -> {
-                    mContext.startActivity(UserProfileActivity.getIntent(mContext));
+                    mContext.startActivity(UserProfileActivity.getIntent(mContext, owner.getId()));
                 }, Throwable::printStackTrace));
     }
 

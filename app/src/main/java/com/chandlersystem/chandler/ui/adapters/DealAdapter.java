@@ -127,7 +127,7 @@ public class DealAdapter extends RecyclerView.Adapter {
 
         holder.mDisposable.add(RxView.clicks(holder.mBinding.layoutProfile.layoutProfile)
                 .subscribe(o -> {
-                    mContext.startActivity(UserProfileActivity.getIntent(mContext));
+                    mContext.startActivity(UserProfileActivity.getIntent(mContext, deal.getShipper().getId()));
                 }, Throwable::printStackTrace));
     }
 
@@ -211,7 +211,7 @@ public class DealAdapter extends RecyclerView.Adapter {
 
         holder.mDisposable.add(RxView.clicks(holder.mBinding.layoutProfile.layoutProfile)
                 .subscribe(o -> {
-                    mContext.startActivity(UserProfileActivity.getIntent(mContext));
+                    mContext.startActivity(UserProfileActivity.getIntent(mContext, deal.getShipper().getId()));
                 }, Throwable::printStackTrace));
     }
 
@@ -222,19 +222,19 @@ public class DealAdapter extends RecyclerView.Adapter {
         String userId = UserManager.getUserSync().getId();
 
         if (deal.getUpVoters().contains(userId)) {
-            binding.layoutVote.ivUpvote.setBackgroundResource(R.drawable.ic_upvote_active);
+            binding.layoutVote.ivUpvote.setImageResource(R.drawable.ic_upvote_active);
             deal.setUpvoted(true);
         } else {
             deal.setUpvoted(false);
-            binding.layoutVote.ivUpvote.setBackgroundResource(R.drawable.ic_upvote_inactive);
+            binding.layoutVote.ivUpvote.setImageResource(R.drawable.ic_upvote_inactive);
         }
 
         if (deal.getDownVoters().contains(userId)) {
             deal.setDownvoted(true);
-            binding.layoutVote.ivDownvote.setBackgroundResource(R.drawable.ic_downvote_active);
+            binding.layoutVote.ivDownvote.setImageResource(R.drawable.ic_downvote_active);
         } else {
             deal.setDownvoted(false);
-            binding.layoutVote.ivDownvote.setBackgroundResource(R.drawable.ic_downvote_inactive);
+            binding.layoutVote.ivDownvote.setImageResource(R.drawable.ic_downvote_inactive);
         }
 
         if (deal.getProductPics() != null && !deal.getProductPics().isEmpty() && ValidateUtil.checkString(deal.getProductPics().get(0))) {
@@ -301,15 +301,15 @@ public class DealAdapter extends RecyclerView.Adapter {
         String userId = UserManager.getUserSync().getId();
 
         if (deal.getUpVoters().contains(userId)) {
-            binding.layoutVote.ivUpvote.setBackgroundResource(R.drawable.ic_upvote_active);
+            binding.layoutVote.ivUpvote.setImageResource(R.drawable.ic_upvote_active);
         } else {
-            binding.layoutVote.ivUpvote.setBackgroundResource(R.drawable.ic_upvote_inactive);
+            binding.layoutVote.ivUpvote.setImageResource(R.drawable.ic_upvote_inactive);
         }
 
         if (deal.getDownVoters().contains(userId)) {
-            binding.layoutVote.ivDownvote.setBackgroundResource(R.drawable.ic_downvote_active);
+            binding.layoutVote.ivDownvote.setImageResource(R.drawable.ic_downvote_active);
         } else {
-            binding.layoutVote.ivDownvote.setBackgroundResource(R.drawable.ic_downvote_inactive);
+            binding.layoutVote.ivDownvote.setImageResource(R.drawable.ic_downvote_inactive);
         }
 
         if (deal.getProductPics() != null && !deal.getProductPics().isEmpty() && ValidateUtil.checkString(deal.getProductPics().get(0))) {

@@ -13,8 +13,11 @@ import com.chandlersystem.chandler.ui.deal_detail.DealDetailActivity;
 import com.chandlersystem.chandler.ui.deal_detail.DealInfoFragment;
 import com.chandlersystem.chandler.ui.feedback.FeedbackActivity;
 import com.chandlersystem.chandler.ui.login.LoginActivity;
+import com.chandlersystem.chandler.ui.main.MainActivity;
 import com.chandlersystem.chandler.ui.profile.EditProfileActivity;
 import com.chandlersystem.chandler.ui.profile.ProfileFragment;
+import com.chandlersystem.chandler.ui.profile.UserProfileActivity;
+import com.chandlersystem.chandler.ui.request_detail.BidFragment;
 import com.chandlersystem.chandler.ui.request_detail.RequestDetailActivity;
 import com.chandlersystem.chandler.ui.requests.RequestsFragment;
 import com.chandlersystem.chandler.ui.select_category.SelectCategoryActivity;
@@ -29,6 +32,12 @@ import dagger.Component;
 @PerActivity
 @Component(dependencies = ApplicationComponent.class, modules = ActivityModule.class)
 public interface ActivityComponent {
+    void inject(MainActivity mainActivity);
+
+    void inject(BidFragment bidFragment);
+
+    void inject(UserProfileActivity userProfileActivity);
+
     void inject(LoginActivity loginActivity);
 
     void inject(RequestDetailActivity requestDetailActivity);

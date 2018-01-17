@@ -76,7 +76,7 @@ public class RequestInfoFragment extends Fragment {
     }
 
     private void handleEvents() {
-        mBinding.layoutProfile.layoutProfile.setOnClickListener(v -> startActivity(UserProfileActivity.getIntent(getContext())));
+        mBinding.layoutProfile.layoutProfile.setOnClickListener(v -> startActivity(UserProfileActivity.getIntent(getContext(), mRequest.getOwner().getId())));
     }
 
     private void setDealDetail() {

@@ -40,6 +40,16 @@ public class UserRequestActivity extends AppCompatActivity {
 
     private final CompositeDisposable mCompositeDisposable = new CompositeDisposable();
 
+    private static final String ARGUMENT_USER_ID = "argument-user-id";
+
+    public static Intent getIntent(Context context, String userId) {
+        Intent i = new Intent(context, UserRequestActivity.class);
+        i.putExtra(ARGUMENT_USER_ID, userId);
+        return i;
+    }
+
+    private String mUserId;
+
     @Inject
     ChandlerApi mApi;
 
@@ -54,6 +64,8 @@ public class UserRequestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.fragment_request_list);
 
+        mUserId = getIntent().getStringExtra(ARGUMENT_USER_ID);
+
         ActivityComponent mActivityComponent = DaggerActivityComponent
                 .builder()
                 .activityModule(new ActivityModule(this))
@@ -62,7 +74,6 @@ public class UserRequestActivity extends AppCompatActivity {
                 .build();
 
         mActivityComponent.inject(this);
-
 
         setupViews();
         callApiGetRequest();
@@ -92,11 +103,10 @@ public class UserRequestActivity extends AppCompatActivity {
     }
 
     private void callApiGetRequest() {
-        mCompositeDisposable.add(
-                mApi.getRequestList(UserManager.getUserSync().getAuthorization())
-                        .compose(RxUtil.withSchedulers())
-                        .subscribe(retrofitResponseListItem -> setAdapter(retrofitResponseListItem.items),
-                                throwable -> DialogUtil.showErrorDialog(this, throwable)));
+        mCompositeDisposable.add(mApi.getRequestList(mUserId)
+                .compose(RxUtil.withSchedulers())
+                .subscribe(retrofitResponseListItem -> setAdapter(retrofitResponseListItem.items),
+                        throwable -> DialogUtil.showErrorDialog(this, throwable)));
     }
 
     private void setAdapter(List<Request> items) {
@@ -114,9 +124,5 @@ public class UserRequestActivity extends AppCompatActivity {
     private void startRequestDetailActivity(Request request) {
         Intent intent = RequestDetailActivity.getInstance(this, request);
         startActivity(intent);
-    }
-
-    public static Intent getIntent(Context context) {
-        return new Intent(context, UserRequestActivity.class);
     }
 }

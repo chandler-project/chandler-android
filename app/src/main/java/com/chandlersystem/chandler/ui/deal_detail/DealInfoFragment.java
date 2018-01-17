@@ -110,7 +110,7 @@ public class DealInfoFragment extends Fragment {
     }
 
     private void handleEvents() {
-        mBinding.layoutProfile.layoutProfile.setOnClickListener(v -> startActivity(UserProfileActivity.getIntent(getContext())));
+        mBinding.layoutProfile.layoutProfile.setOnClickListener(v -> startActivity(UserProfileActivity.getIntent(getContext(), mDeal.getShipper().getId())));
 
         mCompositeDisposable.add(RxView.clicks(mBinding.layoutVote.layoutUpvote)
                 .subscribe(o -> {
@@ -211,15 +211,15 @@ public class DealInfoFragment extends Fragment {
         String userId = UserManager.getUserSync().getId();
 
         if (mDeal.getUpVoters().contains(userId)) {
-            mBinding.layoutVote.ivUpvote.setBackgroundResource(R.drawable.ic_upvote_active);
+            mBinding.layoutVote.ivUpvote.setImageResource(R.drawable.ic_upvote_active);
         } else {
-            mBinding.layoutVote.ivUpvote.setBackgroundResource(R.drawable.ic_upvote_inactive);
+            mBinding.layoutVote.ivUpvote.setImageResource(R.drawable.ic_upvote_inactive);
         }
 
         if (mDeal.getDownVoters().contains(userId)) {
-            mBinding.layoutVote.ivDownvote.setBackgroundResource(R.drawable.ic_downvote_active);
+            mBinding.layoutVote.ivDownvote.setImageResource(R.drawable.ic_downvote_active);
         } else {
-            mBinding.layoutVote.ivDownvote.setBackgroundResource(R.drawable.ic_downvote_inactive);
+            mBinding.layoutVote.ivDownvote.setImageResource(R.drawable.ic_downvote_inactive);
         }
     }
 

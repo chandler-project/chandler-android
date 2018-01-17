@@ -12,6 +12,7 @@ import com.chandlersystem.chandler.data.models.request.CommentBody;
 import com.chandlersystem.chandler.data.models.request.CreateDealBody;
 import com.chandlersystem.chandler.data.models.request.CreateRequestBody;
 import com.chandlersystem.chandler.data.models.request.DealRequest;
+import com.chandlersystem.chandler.data.models.request.Device;
 import com.chandlersystem.chandler.data.models.request.EditProfileBody;
 import com.chandlersystem.chandler.data.models.request.LoginRequest;
 import com.chandlersystem.chandler.data.models.request.SelectCategoryRequest;
@@ -41,14 +42,22 @@ public interface ChandlerApi {
     @GET("/api/Categories")
     Observable<RetrofitResponseListItem<Category>> getCategoryList();
 
-    @GET("/api/Deals?filter={\"include\": \"category\"}")
-    Observable<RetrofitResponseListItem<Deal>> getDealList(@Query("access_token") String accessToken);
+    @PATCH("api/Members/{user_id}")
+    Observable<RetrofitResponseItem> subscribeRegistrationId(@Body Device device,
+                                                             @Path("user_id") String userId,
+                                                             @Query("access_token") String accessToken);
+
+    @GET("/api/Members/{member_id}/deals")
+    Observable<RetrofitResponseListItem<Deal>> getDealList(@Path("member_id") String userId);
 
     @GET("/api/Categories/{category_id}/Deals")
     Observable<RetrofitResponseListItem<Deal>> getDealListOfCategory(@Path("category_id") String categoryId, @Query("access_token") String accessToken);
 
     @GET("/api/Deals/new-feeds?filter={\"include\": \"category\"}")
     Observable<RetrofitResponseListItem<Deal>> getDealNewFeed(@Query("access_token") String accessToken);
+
+    @PATCH("api/Requests/{request_id}/{shipper_id}/choose")
+    Observable<RetrofitResponseItem> chooseShipperForRequest(@Path("request_id") String requestId, @Path("shipper_id") String shipperId);
 
     @GET("/api/Requests/new-feeds")
     Observable<RetrofitResponseListItem<Request>> getRequestNewFeed(@Query("access_token") String accessToken);
@@ -74,11 +83,14 @@ public interface ChandlerApi {
     @GET("/api/Members/{member_id}/feedback")
     Observable<RetrofitResponseListItem<Feedback>> getFeedback(@Path("member_id") String memberId, @Query("access_token") String accessToken);
 
-    @GET("/api/Requests")
-    Observable<RetrofitResponseListItem<Request>> getRequestList(@Query("access_token") String accessToken);
+    @GET("/api/Members/{member_id}/requests")
+    Observable<RetrofitResponseListItem<Request>> getRequestList(@Path("member_id") String userId);
+
+    @GET("/api/Members/{member_id}")
+    Observable<RetrofitResponseItem<User>> getPublicProfile(@Path("member_id") String userId);
 
     @POST("/api/Members/logout")
-    Observable<RetrofitResponseItem> logout(@Query("access_token") String acwcessToken);
+    Observable<RetrofitResponseItem> logout(@Query("access_token") String accessToken);
 
     @PATCH("/api/Members/{user_id}")
     Observable<RetrofitResponseItem<User>> editProfile(@Body EditProfileBody editProfileBody, @Path("user_id") String userId, @Query("access_token") String accessToken);
