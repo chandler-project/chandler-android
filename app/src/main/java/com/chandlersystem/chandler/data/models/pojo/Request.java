@@ -41,6 +41,9 @@ public class Request implements Parcelable {
     @SerializedName("owner")
     @Expose
     private Owner owner;
+    @SerializedName("status")
+    @Expose
+    private String status;
     @SerializedName("id")
     @Expose
     private String id;
@@ -71,6 +74,7 @@ public class Request implements Parcelable {
         deadline = in.readString();
         address = in.readString();
         owner = in.readParcelable(Owner.class.getClassLoader());
+        status = in.readString();
         id = in.readString();
         categoryId = in.readString();
         created = in.readString();
@@ -90,6 +94,14 @@ public class Request implements Parcelable {
             return new Request[size];
         }
     };
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public int getAmount() {
         return amount;
@@ -236,6 +248,7 @@ public class Request implements Parcelable {
         dest.writeString(deadline);
         dest.writeString(address);
         dest.writeParcelable(owner, flags);
+        dest.writeString(status);
         dest.writeString(id);
         dest.writeString(categoryId);
         dest.writeString(created);

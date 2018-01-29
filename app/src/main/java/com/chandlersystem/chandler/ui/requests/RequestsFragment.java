@@ -20,6 +20,7 @@ import com.chandlersystem.chandler.R;
 import com.chandlersystem.chandler.custom_views.LinearItemDecoration;
 import com.chandlersystem.chandler.data.api.ChandlerApi;
 import com.chandlersystem.chandler.data.models.pojo.Request;
+import com.chandlersystem.chandler.data.models.request.BidRequestBody;
 import com.chandlersystem.chandler.data.models.response.RetrofitResponseListItem;
 import com.chandlersystem.chandler.database.UserManager;
 import com.chandlersystem.chandler.databinding.FragmentRequestListBinding;
@@ -27,6 +28,7 @@ import com.chandlersystem.chandler.ui.main.MainActivity;
 import com.chandlersystem.chandler.ui.request_detail.RequestDetailActivity;
 import com.chandlersystem.chandler.ui.requests.dummy.DummyContent;
 import com.chandlersystem.chandler.ui.requests.dummy.DummyContent.DummyItem;
+import com.chandlersystem.chandler.utilities.DialogUtil;
 import com.chandlersystem.chandler.utilities.RxUtil;
 import com.chandlersystem.chandler.utilities.ViewUtil;
 import com.jakewharton.rxbinding2.support.v4.widget.RxSwipeRefreshLayout;
@@ -131,6 +133,14 @@ public class RequestsFragment extends Fragment {
         mBinding.list.setAdapter(mAdapter);
 
         requestClicks();
+        requestBidClick();
+    }
+
+    private void requestBidClick() {
+        mCompositeDisposable.add(mAdapter.getRequestBidClick()
+                .subscribe(request -> {
+                    DialogUtil.showBidDialog(getActivity(), request);
+                }, Throwable::printStackTrace));
     }
 
     private void requestClicks() {

@@ -4,6 +4,8 @@ import com.chandlersystem.chandler.data.models.pojo.Category;
 import com.chandlersystem.chandler.data.models.pojo.Comment;
 import com.chandlersystem.chandler.data.models.pojo.Deal;
 import com.chandlersystem.chandler.data.models.pojo.Feedback;
+import com.chandlersystem.chandler.data.models.pojo.Order;
+import com.chandlersystem.chandler.data.models.pojo.OrderCount;
 import com.chandlersystem.chandler.data.models.pojo.Request;
 import com.chandlersystem.chandler.data.models.pojo.UploadImage;
 import com.chandlersystem.chandler.data.models.pojo.User;
@@ -57,7 +59,7 @@ public interface ChandlerApi {
     Observable<RetrofitResponseListItem<Deal>> getDealNewFeed(@Query("access_token") String accessToken);
 
     @PATCH("api/Requests/{request_id}/{shipper_id}/choose")
-    Observable<RetrofitResponseItem> chooseShipperForRequest(@Path("request_id") String requestId, @Path("shipper_id") String shipperId);
+    Observable<RetrofitResponseItem> chooseShipperForRequest(@Path("request_id") String requestId, @Path("shipper_id") String shipperId, @Query("access_token") String accessToken);
 
     @GET("/api/Requests/new-feeds")
     Observable<RetrofitResponseListItem<Request>> getRequestNewFeed(@Query("access_token") String accessToken);
@@ -114,4 +116,10 @@ public interface ChandlerApi {
 
     @PATCH("api/Members/{user_id}/shipper")
     Observable<RetrofitResponseItem<User>> becomeShipper(@Path("user_id") String userId, @Query("access_token") String accessToken);
+
+    @GET("api/Orders")
+    Observable<RetrofitResponseListItem<Order>> getOrder(@Query("access_token") String accessToken);
+
+    @GET("api/Orders/count")
+    Observable<RetrofitResponseItem<OrderCount>> getOrderCount(@Query("access_token") String accessToken);
 }

@@ -178,17 +178,34 @@
             android:textSize="@dimen/text_size_normal"
             tools:text="https://google.com.vn" />
 
-        <Button
+        <FrameLayout
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/_20sdp"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_below="@id/tv_product_link"
             android:layout_marginBottom="@dimen/spacing_smallest"
             android:layout_marginLeft="@dimen/spacing_small"
-            android:layout_marginRight="@dimen/spacing_small"
-            android:background="@null"
-            android:text="@string/content_bid" />
+            android:layout_marginRight="@dimen/spacing_small">
+
+            <Button
+                android:id="@+id/btn_bid"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_gravity="center"
+                android:background="@null"
+                android:text="@string/content_bid"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/tv_ordered"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@null"
+                android:text="@string/content_ordered"
+                android:visibility="gone" />
+        </FrameLayout>
 
         <include
             android:id="@+id/layout_many_profile"

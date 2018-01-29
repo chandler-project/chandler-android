@@ -3,6 +3,7 @@ package com.chandlersystem.chandler.di.components;
 import com.chandlersystem.chandler.di.modules.ActivityModule;
 import com.chandlersystem.chandler.di.scopes.PerActivity;
 import com.chandlersystem.chandler.ui.become_shipper.BecomeShipperActivity;
+import com.chandlersystem.chandler.ui.cart.CartActivity;
 import com.chandlersystem.chandler.ui.create_deal.CreateDealActivity;
 import com.chandlersystem.chandler.ui.create_request.CreateRequestActivity;
 import com.chandlersystem.chandler.ui.create_request.SelectCategoryFragment;
@@ -33,6 +34,8 @@ import dagger.Component;
 @Component(dependencies = ApplicationComponent.class, modules = ActivityModule.class)
 public interface ActivityComponent {
     void inject(MainActivity mainActivity);
+
+    void inject(CartActivity mainActivity);
 
     void inject(BidFragment bidFragment);
 

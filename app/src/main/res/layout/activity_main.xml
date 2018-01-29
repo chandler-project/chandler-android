@@ -146,25 +146,6 @@
                             android:textColor="@color/colorInactive"
                             android:textSize="@dimen/text_size_small" />
                     </LinearLayout>
-
-                    <TextView
-                        android:id="@+id/tv_notification_badge"
-                        android:layout_width="@dimen/_6sdp"
-                        android:layout_height="@dimen/_6sdp"
-                        android:layout_gravity="top|end"
-                        android:layout_marginEnd="@dimen/_18sdp"
-                        android:layout_marginRight="@dimen/_20sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:background="@drawable/item_badge"
-                        android:elevation="@dimen/spacing_shadow"
-                        android:gravity="center"
-                        android:textAlignment="center"
-                        android:textColor="@color/colorWhite"
-                        android:textSize="@dimen/text_size_smaller"
-                        android:visibility="gone"
-                        tools:targetApi="lollipop"
-                        tools:text="17"
-                        tools:visibility="visible" />
                 </FrameLayout>
 
                 <LinearLayout

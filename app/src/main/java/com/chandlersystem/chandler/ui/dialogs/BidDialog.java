@@ -2,7 +2,6 @@ package com.chandlersystem.chandler.ui.dialogs;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.databinding.DataBindingUtil;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -16,14 +15,12 @@ import android.view.ViewGroup;
 import android.view.Window;
 
 import com.chandlersystem.chandler.R;
+import com.chandlersystem.chandler.data.models.pojo.Request;
 import com.chandlersystem.chandler.data.models.request.BidRequestBody;
-import com.chandlersystem.chandler.databinding.FragmentBidBinding;
 import com.chandlersystem.chandler.databinding.FragmentBidDialogBinding;
-import com.chandlersystem.chandler.utilities.ViewUtil;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 
 import io.reactivex.Observable;
-import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 
@@ -31,7 +28,7 @@ public class BidDialog extends DialogFragment {
     // ApiConstant
     public static final String TAG = BidDialog.class.getSimpleName();
 
-    public static final String ARGUMENT_AMOUNT = "argument-amount";
+    public static final String ARGUMENT_REQUEST = "argument-request";
 
     // DataBinding
     private FragmentBidDialogBinding mBinding;
@@ -41,16 +38,16 @@ public class BidDialog extends DialogFragment {
 
     private final CompositeDisposable mCompositeDisposable = new CompositeDisposable();
 
-    private int mAmount;
+    private Request mRequest;
 
     public interface BidDialogCallback {
-        void onBid(BidRequestBody bidRequestBody);
+        void onBid(String requestId, BidRequestBody bidRequestBody);
     }
 
-    public static BidDialog getInstance(int amount) {
+    public static BidDialog getInstance(Request request) {
         BidDialog alertDialog = new BidDialog();
         Bundle bundle = new Bundle();
-        bundle.putInt(ARGUMENT_AMOUNT, amount);
+        bundle.putParcelable(ARGUMENT_REQUEST, request);
         alertDialog.setArguments(bundle);
         return alertDialog;
     }
@@ -76,7 +73,7 @@ public class BidDialog extends DialogFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mAmount = getArguments().getInt(ARGUMENT_AMOUNT);
+            mRequest = getArguments().getParcelable(ARGUMENT_REQUEST);
         }
     }
 
@@ -111,7 +108,7 @@ public class BidDialog extends DialogFragment {
     }
 
     public void setupViews() {
-        mBinding.etAmount.setText(mAmount + "");
+        mBinding.etAmount.setText(mRequest.getAmount() + "");
         mBinding.layoutButtonBid.btnPrimary.setText(getString(R.string.content_bid_now));
     }
 
@@ -126,7 +123,7 @@ public class BidDialog extends DialogFragment {
             body.setPrice(Float.parseFloat(mBinding.etPrice.getText().toString()));
             body.setSpend(Integer.parseInt(mBinding.etDeliveryTime.getText().toString()));
             body.setSentence(mBinding.etNote.getText().toString());
-            mCallback.onBid(body);
+            mCallback.onBid(mRequest.getId(), body);
             dismiss();
         });
     }

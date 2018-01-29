@@ -100,7 +100,7 @@ public class RequestDetailActivity extends AppCompatActivity implements BidDialo
                 .subscribe(o -> finish(), Throwable::printStackTrace));
 
         mCompositeDisposable.add(buttonBetClicks()
-                .subscribe(o -> DialogUtil.showBidDialog(this, mRequest.getAmount()), Throwable::printStackTrace));
+                .subscribe(o -> DialogUtil.showBidDialog(this, mRequest), Throwable::printStackTrace));
     }
 
     private Observable<Object> buttonBackClicks() {
@@ -124,8 +124,8 @@ public class RequestDetailActivity extends AppCompatActivity implements BidDialo
         mBinding.tabRequest.setupWithViewPager(mBinding.viewpagerRequest);
     }
 
-    private void callBidApi(BidRequestBody bidRequestBody) {
-        mCompositeDisposable.add(mApi.bidRequest(bidRequestBody, mRequest.getId(), UserManager.getUserSync().getAuthorization())
+    private void callBidApi(String requestId, BidRequestBody bidRequestBody) {
+        mCompositeDisposable.add(mApi.bidRequest(bidRequestBody, requestId, UserManager.getUserSync().getAuthorization())
                 .compose(RxUtil.withSchedulers())
                 .subscribe(retrofitResponseListItem -> bidSuccess(retrofitResponseListItem.item), this::bidError));
     }
@@ -141,7 +141,7 @@ public class RequestDetailActivity extends AppCompatActivity implements BidDialo
     }
 
     @Override
-    public void onBid(BidRequestBody bidRequestBody) {
-        callBidApi(bidRequestBody);
+    public void onBid(String requestId, BidRequestBody bidRequestBody) {
+        callBidApi(requestId, bidRequestBody);
     }
 }

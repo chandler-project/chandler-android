@@ -194,7 +194,7 @@ public class DealInfoFragment extends Fragment {
     }
 
     private void setDealDetail() {
-        ViewUtil.setText(mBinding.tvDealDetail, mDeal.getProductDesc());
+        ViewUtil.setTextWithHtml(mBinding.tvDealDetail, mDeal.getProductDesc());
     }
 
     private void setLinkPreview() {

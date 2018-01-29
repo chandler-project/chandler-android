@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -14,7 +15,9 @@ import android.widget.Toast;
 import com.chandlersystem.chandler.ChandlerApplication;
 import com.chandlersystem.chandler.R;
 import com.chandlersystem.chandler.data.api.ChandlerApi;
+import com.chandlersystem.chandler.data.models.pojo.Request;
 import com.chandlersystem.chandler.data.models.pojo.User;
+import com.chandlersystem.chandler.data.models.request.BidRequestBody;
 import com.chandlersystem.chandler.data.models.request.Device;
 import com.chandlersystem.chandler.data.models.response.RetrofitResponseItem;
 import com.chandlersystem.chandler.database.UserManager;
@@ -27,12 +30,15 @@ import com.chandlersystem.chandler.ui.cart.CartActivity;
 import com.chandlersystem.chandler.ui.create_deal.CreateDealActivity;
 import com.chandlersystem.chandler.ui.create_request.CreateRequestActivity;
 import com.chandlersystem.chandler.ui.deal.DealFragment;
+import com.chandlersystem.chandler.ui.dialogs.BidDialog;
 import com.chandlersystem.chandler.ui.main.state.MainState;
 import com.chandlersystem.chandler.ui.notification.NotificationFragment;
 import com.chandlersystem.chandler.ui.product_search.ProductSearchActivity;
 import com.chandlersystem.chandler.ui.profile.ProfileFragment;
 import com.chandlersystem.chandler.ui.requests.RequestsFragment;
+import com.chandlersystem.chandler.utilities.LogUtil;
 import com.chandlersystem.chandler.utilities.RxUtil;
+import com.chandlersystem.chandler.utilities.ViewUtil;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.ArrayList;
@@ -40,11 +46,12 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener,
         ViewPager.OnPageChangeListener, DealFragment.OnFragmentInteractionListener,
-        CreateDealRequestFragment.OnCreateDealRequestInteraction {
+        CreateDealRequestFragment.OnCreateDealRequestInteraction, BidDialog.BidDialogCallback {
     private static final String TAG = MainActivity.class.getCanonicalName();
 
     private ActivityMainBinding mBinding;
@@ -54,6 +61,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FragmentAdapter mFragmentAdapter;
 
     private ActivityComponent mActivityComponent;
+
+    private final CompositeDisposable mCompositeDisposable = new CompositeDisposable();
 
     public ActivityComponent getActivityComponent() {
         if (mActivityComponent == null) {
@@ -79,6 +88,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setupViews();
         handleEvents();
         subscribeNotification();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mCompositeDisposable.add(mApi.getOrderCount(UserManager.getUserSync().getAuthorization())
+                .compose(RxUtil.withSchedulers())
+                .subscribe(o -> showBadge(o.item.getCount()), Throwable::printStackTrace));
+    }
+
+    private void showBadge(int count) {
+        if (count > 0) {
+            ViewUtil.setText(mBinding.toolbar.tvCartCount, count + "");
+        } else {
+            ViewUtil.toggleView(mBinding.toolbar.tvCartCount, false);
+        }
+
     }
 
     private void subscribeNotification() {
@@ -204,5 +230,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent i = new Intent(this, CreateDealActivity.class);
             startActivity(i);
         }
+    }
+
+    private void callBidApi(String requestId, BidRequestBody bidRequestBody) {
+        mCompositeDisposable.add(mApi.bidRequest(bidRequestBody, requestId, UserManager.getUserSync().getAuthorization())
+                .compose(RxUtil.withSchedulers())
+                .subscribe(retrofitResponseListItem -> bidSuccess(retrofitResponseListItem.item), this::bidError));
+    }
+
+    private void bidSuccess(Request item) {
+        Toast.makeText(this, getString(R.string.content_bid_sucess), Toast.LENGTH_SHORT).show();
+    }
+
+    private void bidError(Throwable throwable) {
+        Toast.makeText(this, getString(R.string.content_bid_error), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onBid(String requestId, BidRequestBody bidRequestBody) {
+        callBidApi(requestId, bidRequestBody);
     }
 }

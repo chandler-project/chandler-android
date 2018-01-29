@@ -112,7 +112,7 @@ public class UserProfileActivity extends AppCompatActivity {
     }
 
     private void startUserRequestActivity() {
-        startActivity(UserRequestActivity.getIntent(this, UserManager.getUserSync().getId()));
+        startActivity(UserRequestActivity.getIntent(this, mUserId));
     }
 
     private Observable<Object> yourRequest() {
@@ -120,7 +120,7 @@ public class UserProfileActivity extends AppCompatActivity {
     }
 
     private void startUserDealActivity() {
-        startActivity(UserDealActivity.getInstance(this, UserManager.getUserSync().getId()));
+        startActivity(UserDealActivity.getInstance(this, mUserId));
     }
 
     private Observable<Object> yourDeal() {

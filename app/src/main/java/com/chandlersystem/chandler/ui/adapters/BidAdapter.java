@@ -33,16 +33,19 @@ public class BidAdapter extends RecyclerView.Adapter<BidAdapter.BidHolder> {
 
     private boolean mIsOwner;
 
+    private boolean mIsOrdered;
+
     private final PublishSubject<Bidder> mBidClick = PublishSubject.create();
 
     public PublishSubject<Bidder> getBidClick() {
         return mBidClick;
     }
 
-    public BidAdapter(Context context, List<Bidder> bidList, boolean isOwner) {
+    public BidAdapter(Context context, List<Bidder> bidList, boolean isOwner, boolean isOrdered) {
         this.mContext = context;
         this.mBidList = bidList;
         this.mIsOwner = isOwner;
+        this.mIsOrdered = isOrdered;
     }
 
     @Override
@@ -86,6 +89,7 @@ public class BidAdapter extends RecyclerView.Adapter<BidAdapter.BidHolder> {
         ViewUtil.setText(binding.tvBidPrice, String.valueOf(bidder.getPrice()) + " VND");
 
         ViewUtil.toggleView(binding.btnAccept, mIsOwner);
+        ViewUtil.toggleView(binding.btnAccept, !mIsOrdered);
     }
 
     @Override

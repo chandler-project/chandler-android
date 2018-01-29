@@ -16,10 +16,6 @@
 
     <!--Bottom Navigation-->
     <string name="nav_profile">Profile</string>
-    <string name="nav_quest">Quest</string>
-    <string name="nav_voucher">Voucher</string>
-    <string name="nav_other">Other</string>
-
     <!--Facebook-->
     <string name="FACEBOOK_APP_ID">276217976212159</string>
     <string name="ACCOUNT_KIT_CLIENT_TOKEN">bc8b855832c258bce55cf9512a1b5f81</string>
@@ -228,9 +224,9 @@
     <string name="content_bid_now">Bid</string>
     <string name="content_logout_content">Do you really want to logout?</string>
     <string name="content_logout_title">Log out</string>
-    <string name="content_deal_shipping_time_urgent">Urgent (7 - 15 ngày)</string>
-    <string name="content_deal_shipping_time_standard">Standart (15 - 20 ngày)</string>
-    <string name="content_deal_shipping_time_normal">Bình thuường (20 - 30 ngày)</string>
+    <string name="content_deal_shipping_time_urgent">Cần gấp (7 – 15 ngày)</string>
+    <string name="content_deal_shipping_time_standard">Tiêu chuẩn (15 – 20 ngày)</string>
+    <string name="content_deal_shipping_time_normal">Bình thuường (20 – 30 ngày)</string>
     <string name="content_deal_shipping_time_flexible">Linh hoạt (Giao khi có hàng)</string>
     <string name="content_budget_very_small">Rất Nhỏ (100k - 200k)</string>
     <string name="content_budget_small">Nhỏ (200k - 400k)</string>
@@ -285,4 +281,17 @@
     <string name="content_hot_deal">Hot deals</string>
     <string name="content_requests">Requests</string>
     <string name="content_user_profile">Thông tin người dùng</string>
+    <string name="content_ordered">Đã mua thành công</string>
+    <string name="content_amount">Số lượng:</string>
+    <string name="content_pay">Thanh toán</string>
+    <string name="content_user_information">Thông tin người nhận</string>
+    <string name="content_what_is_your_phone_number">Số điện thoại của bạn</string>
+    <string name="content_what_is_your_address">Địa chỉ nhà của bạn</string>
+    <string name="content_payment_method">Phương thức thanh toán</string>
+    <string name="content_internal_atm">ATM nội địa</string>
+    <string name="content_visa_card">Thẻ VISA/MASTERCARD</string>
+    <string name="content_momo">MoMo</string>
+    <string name="content_please_input_phone_number_and_address">Xin vui lòng thêm số điện thoại và địa chỉ đúng</string>
+    <string name="content_payment_success">Payment successfully</string>
+    <string name="content_payment">Thanh toán</string>
 </resources>

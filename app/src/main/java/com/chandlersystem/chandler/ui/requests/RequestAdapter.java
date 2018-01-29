@@ -32,8 +32,14 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
 
     private final PublishSubject<Request> mRequestClicks = PublishSubject.create();
 
+    private final PublishSubject<Request> mRequestBidClick = PublishSubject.create();
+
     public PublishSubject<Request> getRequestClicks() {
         return mRequestClicks;
+    }
+
+    public PublishSubject<Request> getRequestBidClick() {
+        return mRequestBidClick;
     }
 
     public RequestAdapter(List<Request> mValues, Context mContext) {
@@ -67,6 +73,11 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
         holder.mDisposable.add(RxView.clicks(holder.mBinding.layoutProfile.layoutProfile)
                 .subscribe(o -> {
                     mContext.startActivity(UserProfileActivity.getIntent(mContext, request.getOwner().getId()));
+                }, Throwable::printStackTrace));
+
+        holder.mDisposable.add(RxView.clicks(holder.mBinding.btnBid)
+                .subscribe(o -> {
+                    mRequestBidClick.onNext(request);
                 }, Throwable::printStackTrace));
     }
 
@@ -127,6 +138,11 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
         } else {
             ViewUtil.toggleView(binding.layoutManyProfile.layoutManyProfile, false);
         }
+
+        String requestStatus = request.getStatus();
+        boolean isRequestOrdered = requestStatus.equals("Ordered");
+        ViewUtil.toggleView(binding.btnBid, !isRequestOrdered);
+        ViewUtil.toggleView(binding.tvOrdered, isRequestOrdered);
     }
 
     @Override

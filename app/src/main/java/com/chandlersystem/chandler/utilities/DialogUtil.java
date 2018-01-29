@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
+import com.chandlersystem.chandler.data.models.pojo.Request;
 import com.chandlersystem.chandler.ui.dialogs.BidDialog;
 import com.chandlersystem.chandler.ui.dialogs.BuyDialog;
 
@@ -28,8 +29,8 @@ public class DialogUtil {
         alert.show();
     }
 
-    public static void showBidDialog(Context context, int requestAmount) {
-        BidDialog bidDialog = BidDialog.getInstance(requestAmount);
+    public static void showBidDialog(Context context, Request request) {
+        BidDialog bidDialog = BidDialog.getInstance(request);
         showDialog(context, bidDialog, DIALOG_BID_TAG);
     }
 

@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.chandlersystem.chandler.ChandlerApplication;
 import com.chandlersystem.chandler.R;
@@ -103,7 +104,7 @@ public class BidFragment extends Fragment {
         List<Bidder> bidList = mRequest.getBidders();
         String userId = UserManager.getUserSync().getId();
         String requestOwnerId = mRequest.getOwner().getId();
-        mBidAdapter = new BidAdapter(getContext(), bidList, userId.equals(requestOwnerId));
+        mBidAdapter = new BidAdapter(getContext(), bidList, userId.equals(requestOwnerId), mRequest.getStatus().equals("Ordered"));
         mBinding.recyclerViewBids.setAdapter(mBidAdapter);
         chooseBidder();
     }
@@ -118,11 +119,17 @@ public class BidFragment extends Fragment {
     }
 
     private void chooseBidderApi(Bidder bidder) {
-        mCompositeDisposable.add(mApi.chooseShipperForRequest(mRequest.getId(), bidder.getId())
+        mCompositeDisposable.add(mApi.chooseShipperForRequest(mRequest.getId(), bidder.getId(), UserManager.getUserSync().getAuthorization())
                 .compose(RxUtil.withSchedulers())
                 .subscribe(retrofitResponseItem -> {
-
+                    chooseShipperSuccess();
                 }, Throwable::printStackTrace));
+    }
+
+    private void chooseShipperSuccess() {
+        Toast.makeText(getContext(), R.string.content_ordered, Toast.LENGTH_SHORT).show();
+        mRequest.setStatus("Ordered");
+        setAdapter();
     }
 
     private void setupRecyclerView() {

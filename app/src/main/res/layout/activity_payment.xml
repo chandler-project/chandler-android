@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite"
+            android:orientation="vertical"
+            tools:context="com.chandlersystem.chandler.ui.cart.CartActivity">
+
+            <include
+                android:id="@+id/layout_toolbar"
+                layout="@layout/item_extra_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_small"
+                android:fontFamily="@font/cabin_bold"
+                android:text="@string/content_user_information"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/text_size_normal" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/spacing_small"
+                android:paddingRight="@dimen/spacing_small">
+
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/layout_profile"
+                    android:layout_width="@dimen/size_profile_normal"
+                    android:layout_height="@dimen/size_profile_normal"
+                    app:cardCornerRadius="@dimen/size_profile_radius_normal">
+
+                    <ImageView
+                        android:id="@+id/iv_profile"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_placeholder_avatar" />
+                </android.support.v7.widget.CardView>
+
+                <TextView
+                    android:id="@+id/user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_small"
+                    android:layout_marginRight="@dimen/spacing_small"
+                    android:fontFamily="@font/cabin_regular"
+                    tools:text="Phat phat" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spacing_small"
+                android:layout_marginRight="@dimen/spacing_small"
+                android:layout_marginTop="@dimen/spacing_small">
+
+                <ImageView
+                    android:layout_width="@dimen/_24sdp"
+                    android:layout_height="@dimen/_24sdp"
+                    android:src="@drawable/ic_smartphone_black_24dp" />
+
+                <EditText
+                    android:id="@+id/et_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_small"
+                    android:layout_marginRight="@dimen/spacing_small"
+                    android:layout_marginTop="@dimen/spacing_smallest"
+                    android:background="@null"
+                    android:ems="10"
+                    android:fontFamily="@font/cabin_regular"
+                    android:hint="@string/content_what_is_your_phone_number"
+                    android:inputType="phone"
+                    android:maxLines="1"
+                    android:textColor="@color/colorTextGray"
+                    android:textColorHint="@color/colorTextGray"
+                    android:textSize="@dimen/text_size_big" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spacing_small"
+                android:layout_marginRight="@dimen/spacing_small"
+                android:layout_marginTop="@dimen/spacing_small">
+
+                <ImageView
+                    android:layout_width="@dimen/_24sdp"
+                    android:layout_height="@dimen/_24sdp"
+                    android:src="@drawable/ic_location_on_black_24dp" />
+
+                <EditText
+                    android:id="@+id/et_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_small"
+                    android:layout_marginRight="@dimen/spacing_small"
+                    android:layout_marginTop="@dimen/spacing_smallest"
+                    android:background="@null"
+                    android:ems="10"
+                    android:fontFamily="@font/cabin_regular"
+                    android:hint="@string/content_what_is_your_address"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:textColor="@color/colorTextGray"
+                    android:textColorHint="@color/colorTextGray"
+                    android:textSize="@dimen/text_size_big" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_payment_method"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_small"
+                android:fontFamily="@font/cabin_bold"
+                android:text="@string/content_payment_method"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/text_size_normal" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_small">
+
+                    <RadioButton
+                        android:id="@+id/rb_atm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true" />
+
+                    <RadioButton
+                        android:id="@+id/rb_visa"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false" />
+
+                    <RadioButton
+                        android:id="@+id/rb_momo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false" />
+                </RadioGroup>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp">
+
+                        <TextView
+                            android:id="@+id/tv_atm"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/spacing_small"
+                            android:layout_marginRight="@dimen/spacing_small"
+                            android:background="@null"
+                            android:fontFamily="@font/cabin_regular"
+                            android:text="@string/content_internal_atm"
+                            android:textColor="@color/colorTextGray"
+                            android:textColorHint="@color/colorTextGray"
+                            android:textSize="@dimen/text_size_big" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_visa"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/spacing_small"
+                            android:background="@null"
+                            android:fontFamily="@font/cabin_regular"
+                            android:text="@string/content_visa_card"
+                            android:textColor="@color/colorTextGray"
+                            android:textColorHint="@color/colorTextGray"
+                            android:textSize="@dimen/text_size_big" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_24sdp"
+                            android:layout_marginRight="@dimen/spacing_normal"
+                            android:src="@drawable/ic_icons8_visa" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_momo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/spacing_small"
+                            android:background="@null"
+                            android:fontFamily="@font/cabin_regular"
+                            android:text="@string/content_momo"
+                            android:textColor="@color/colorTextGray"
+                            android:textColorHint="@color/colorTextGray"
+                            android:textSize="@dimen/text_size_big" />
+
+                        <ImageView
+                            android:layout_width="@dimen/_24sdp"
+                            android:layout_height="@dimen/_24sdp"
+                            android:layout_marginLeft="@dimen/spacing_small"
+                            android:layout_marginRight="@dimen/spacing_normal"
+                            android:src="@drawable/momo" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_pay"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_toolbar_height"
+            android:layout_gravity="bottom"
+            android:background="@drawable/item_button_rounded_cyan"
+            android:text="@string/content_pay"
+            android:textColor="@color/colorWhite" />
+    </FrameLayout>
+</layout>

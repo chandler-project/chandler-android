@@ -72,6 +72,16 @@ public class User extends BaseRXModel {
     @Column
     private boolean isShipper;
 
+    @SerializedName("phone")
+    @Expose
+    @Column
+    private String phoneNumber;
+
+    @SerializedName("address")
+    @Expose
+    @Column
+    private String address;
+
     @Column
     private String authorization;
 
@@ -79,6 +89,22 @@ public class User extends BaseRXModel {
     private boolean isFirstLogin;
 
     public User() {
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public int getGender() {

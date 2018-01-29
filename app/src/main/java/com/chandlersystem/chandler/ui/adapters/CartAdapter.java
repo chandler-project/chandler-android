@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.chandlersystem.chandler.R;
 import com.chandlersystem.chandler.data.models.pojo.Deal;
+import com.chandlersystem.chandler.data.models.pojo.Order;
 import com.chandlersystem.chandler.databinding.ItemCartTransactionBinding;
 import com.chandlersystem.chandler.ui.deal_detail.DealDetailActivity;
 import com.chandlersystem.chandler.utilities.ViewUtil;
@@ -25,16 +26,16 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
 
     private Context mContext;
 
-    private List<Deal> mDealList;
+    private List<Order> mDealList;
 
-    private final PublishSubject<String> mDealClick = PublishSubject.create();
+    private final PublishSubject<String> mOrderClicks = PublishSubject.create();
 
 
-    public PublishSubject<String> getDealClick() {
-        return mDealClick;
+    public PublishSubject<String> getOrderClicks() {
+        return mOrderClicks;
     }
 
-    public CartAdapter(Context context, List<Deal> dealList) {
+    public CartAdapter(Context context, List<Order> dealList) {
         this.mContext = context;
         this.mDealList = dealList;
     }
@@ -46,26 +47,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
 
     @Override
     public void onBindViewHolder(CartHolder holder, int position) {
-        Deal deal = mDealList.get(position);
+        Order order = mDealList.get(position);
 
-        setupViews(holder.mBinding, deal);
+        setupViews(holder.mBinding, order);
         handleEvents(holder, position);
     }
 
     private void handleEvents(CartHolder holder, int position) {
         holder.mBinding.ivClose.setOnClickListener(view -> showAlertDialog(holder, position));
-
-        holder.mBinding.plus.setOnClickListener(view -> {
-            int currentAmount = Integer.valueOf(holder.mBinding.amount.getText().toString());
-            holder.mBinding.amount.setText(++currentAmount + "");
-        });
-
-        holder.mBinding.minus.setOnClickListener(view -> {
-            int currentAmount = Integer.valueOf(holder.mBinding.amount.getText().toString());
-            if (currentAmount > 0) {
-                holder.mBinding.amount.setText(--currentAmount + "");
-            }
-        });
 
         if (holder.mDisposable != null && !holder.mDisposable.isDisposed()) {
             holder.mDisposable.dispose();
@@ -73,7 +62,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
 
         holder.mDisposable = RxView.clicks(holder.itemView)
                 .subscribe(o -> {
-                    startDealDetailActivity(mDealList.get(position));
+
                 }, Throwable::printStackTrace);
     }
 
@@ -85,11 +74,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
         mContext.startActivity(DealDetailActivity.getInstance(mContext, deal));
     }
 
-    private void setupViews(ItemCartTransactionBinding binding, Deal deal) {
-        ViewUtil.setText(binding.tvProductName, "This is the product name");
-        ViewUtil.setText(binding.tvNetPrice, "Net price is $20");
-        ViewUtil.setText(binding.tvShippingPrice, "Shipping price is $5- $10");
-        ViewUtil.setText(binding.amount, "1");
+    private void setupViews(ItemCartTransactionBinding binding, Order order) {
+        ViewUtil.setText(binding.tvProductName, order.getTitle());
+        ViewUtil.setText(binding.tvNetPrice, order.getTotal() + " VND");
+        ViewUtil.setText(binding.amount, order.getItem().getAmount() + "");
     }
 
     private void showAlertDialog(CartHolder holder, int position) {
