@@ -15,6 +15,7 @@ import com.chandlersystem.chandler.data.models.pojo.Request;
 import com.chandlersystem.chandler.data.models.pojo.Shipper;
 import com.chandlersystem.chandler.databinding.FragmentRequestItemBinding;
 import com.chandlersystem.chandler.ui.profile.UserProfileActivity;
+import com.chandlersystem.chandler.utilities.TextUtil;
 import com.chandlersystem.chandler.utilities.ValidateUtil;
 import com.chandlersystem.chandler.utilities.ViewUtil;
 import com.jakewharton.rxbinding2.view.RxView;
@@ -97,7 +98,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
         }
         ViewUtil.setText(binding.layoutProfile.tvUserName, owner.getFullName());
         ViewUtil.setText(binding.layoutProfile.tvUserPoint, owner.getPoints() + " " + (owner.getPoints() > 2 ? mContext.getString(R.string.content_points) : mContext.getString(R.string.content_point)));
-        ViewUtil.setText(binding.tvPrice, request.getPrice() + request.getCurrency());
+        ViewUtil.setText(binding.tvPrice, TextUtil.formatCurrency(request.getPrice()) + request.getCurrency());
         ViewUtil.setText(binding.tvShippingPrice, mContext.getString(R.string.content_request) + request.getBudget().getMin() + " - " + request.getBudget().getMax() + request.getCurrency());
         ViewUtil.setText(binding.tvProductTitle, request.getProductName());
         ViewUtil.setText(binding.tvProductDetail, request.getDescription());

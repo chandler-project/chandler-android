@@ -1,0 +1,60 @@
+Báo cáo luận văn
+
+Câu hỏi chú ý:
+1. An toàn và thuận tiện nghĩa là sao?
+An toàn: Hệ thống giữ tiền của khách cho đến khi nào nhận được hàng mới trả tiền cho shipper
+Thuận tiện: Mọi thông tin đều minh bạch, giá tiền tối ưu, bạn không cần lo lắng gì cả, tất cả mọi việc phải làm là chờ ngày shipper đến giao hẹn 
+2. Nếu shipper giao hàng trễ hẹn thì sao?
+- Đầu tiên là shipper sẽ bị xử phạt và ghi nhận lại 
+- Sẽ tiến thành xin lỗi khách hàng, gửi tặng họ voucher (Chưa làm, sẽ làm trong tương lai)
+- Yêu cầu một shipper khác ship món hàng đó 
+
+Thuyết trình: Phat
+
+Mở đầu:
+- Xin chào hội đồng, quý thầy cô và các bạn
+- Sau đây, nhóm em xin báo cáo khóa luận tốt nghiệp về chủ đề: “Mua sắm hàng hóa toàn cầu an toàn và thuận tiện”
+- Nhóm em gồm có Sang và Em (Phát)
+
+1. Đặt vấn đề
+- Trước khi vào bài thuyết trình, em xin đặt một số câu hỏi ạ
++ Quý thầy cô và các bạn đã từng mua hàng trực tuyết, mua hàng bên nước ngoài chưa ạ?
++						xách tay một món hàng nào khi đi du lịch nước ngoài không ạ?
++ 						có biết làm thủ học hoàn thuế để tiết kiệm chi phí khi mua hàng không ạ?
++ Mua sắm như thế nào để an toàn và thuận tiện?
+
+Vậy mục đích của việt mua sắm này là gì, bạn bỏ tiền và mong muốn nhận được sản phẩm đúng với giá trị của nó. 
+
+2. Vậy thì, Chúng ta sẽ trả lời từng câu hỏi này bằng cách tìm hiểu về thị trường của nó. Thị trường của nó lớn đến mức nào????
+- Theo báo cáo của zing và saigontimes, năm 2017, Tổng số tiền mà người việt nam đi du lịch nước ngoài là : 7 - 8 tỉ đô la
+- Trong cùng thời điểm đó, tổng số tiền mà người việt bỏ tiền ra mua sắm hàng hóa từ nước ngoài là từ 4-5 tỉ đô la
+Nếu tính ra, cứ trung bình 1 người sử dụng 50$ đế mua sắm. Trong khi GDP cả nước ta đạt khoảng 2400$. 
+Nếu so sánh một thị trường “hẹp”, thì đây là một con số khổng lồ 
+
+Nhìn vào biểu đồ, ta có thể biết được, những nước sau đây được nguời VN ưu ái nhất
+
+3. Vậy thì vấn đề đang gặp phải là gì?
+Có 2 thứ quan trọng nhất đối với mọi người khi mua sắm
+- Người có mức thu nhập thấp hoặc trung bình: Họ lo về giá cả
+- Người có mức thu nhập tương đối hoặc cao: Họ lo về chất lượng
+Vậy thì thị trường này đã đáp ứng được 2 nhu cầu tối thiểu đó chưa
+Xin trả lời là chưa.
+
+- (Nói đến giá cả): Giá cả không minh bạch, treo đầu dê nhưng bán thịt chó, phải inbox cho người bán. Nếu ai từng mua sắm sẽ xảy ra trường hợp nộp thêm “Thuế nhập cảnh hải quan”  tương đối cao (Có khi lên đến 10%) , tuy nhiên, nếu họ đi thành từng container hoặc tàu lớn, thuế này chỉ đóng một lần, còn nếu là hàng xách tay, sẽ là miễn phí => Bất lợi cho người mua hàng, không có tính cạnh tranh
+- (Nói đến chất lượng) Hàng năm: Tổng số lượng hàng giả nhập từ ngoại quốc vẫn đang lớn hơn con số 20% (Bộ công thuương)
+Ngoài ra còn một số vấn đề khác
+- Hàng hóa: Có một số hàng hóa đặc trưng, chỉ xuất hiện ở nước ABC, làm cho chi phí bị đẩy lên. Hàng hóa hư hỏng
+- Dịch vụ: Chất lượng hậu mãi kém, nhân viên không tôn trọng khách hàng, chất lượng gói gém hàng hóa tệ
+- Thời gian: Trễ đơn hàng, trì hoãn, hủy đơn hàng
+
+4. Những thuương hiệu lớn
+- GrabIO: Một thuương hiệu đến từ Singapore, mô hình hoạt động khá giống mình nhưng phí tương đối cao 
+- Bistip: Giá thành khá cao, khó đáp ứng được nhu cầu 
+- XTAYPro: Một thuương hiệu đến từ việt nam, tuy nhiên chỉ mới thành lập và áp dụng cho một số shop nhỏ 
+
+5. Cách thức hoạt động
+- Khách hàng yêu cầu món hàng có sẵn hoặc tạo yêu cầu
+- Hệ thống xử lý và giữ tiền của khách
+- Shipper tiến hàng ship hàng, nếu đơn hàng được giao thành công, hệ thống tiến hành thanh toán
+
+DEMO: Sang 

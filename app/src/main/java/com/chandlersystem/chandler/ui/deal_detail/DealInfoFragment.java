@@ -25,6 +25,8 @@ import com.chandlersystem.chandler.di.modules.ActivityModule;
 import com.chandlersystem.chandler.ui.adapters.ImagePagerAdapter;
 import com.chandlersystem.chandler.ui.profile.UserProfileActivity;
 import com.chandlersystem.chandler.utilities.RxUtil;
+import com.chandlersystem.chandler.utilities.TextUtil;
+import com.chandlersystem.chandler.utilities.TimeUtil;
 import com.chandlersystem.chandler.utilities.ValidateUtil;
 import com.chandlersystem.chandler.utilities.ViewUtil;
 import com.jakewharton.rxbinding2.view.RxView;
@@ -224,12 +226,12 @@ public class DealInfoFragment extends Fragment {
     }
 
     private void setEndDealDate() {
-        ViewUtil.setText(mBinding.tvEndDate, mDeal.getShippingTime());
+        ViewUtil.setText(mBinding.tvEndDate, getString(R.string.content_expire_on) + TimeUtil.convert(TimeUtil.FORMAT_WORLD_WIDE, TimeUtil.FORMAT_DATE_VN, mDeal.getShippingTime()));
     }
 
     private void setPrice() {
-        ViewUtil.setText(mBinding.tvShippingPrice, getString(R.string.content_shipping_price) + mDeal.getShippingPrice() + mDeal.getCurrency());
-        ViewUtil.setText(mBinding.tvPrice, mDeal.getPrice() + mDeal.getCurrency());
+        ViewUtil.setText(mBinding.tvShippingPrice, getString(R.string.content_shipping_price) + TextUtil.formatCurrency(mDeal.getShippingPrice()) + mDeal.getCurrency());
+        ViewUtil.setText(mBinding.tvPrice, getString(R.string.content_deal_price) + TextUtil.formatCurrency(mDeal.getPrice()) + mDeal.getCurrency());
     }
 
     private void setProfile() {

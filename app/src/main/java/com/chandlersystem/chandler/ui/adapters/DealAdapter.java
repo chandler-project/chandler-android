@@ -21,6 +21,8 @@ import com.chandlersystem.chandler.databinding.ItemVoteBinding;
 import com.chandlersystem.chandler.ui.deal.CategoryDetailActivity;
 import com.chandlersystem.chandler.ui.profile.UserProfileActivity;
 import com.chandlersystem.chandler.utilities.RxUtil;
+import com.chandlersystem.chandler.utilities.TextUtil;
+import com.chandlersystem.chandler.utilities.TimeUtil;
 import com.chandlersystem.chandler.utilities.ValidateUtil;
 import com.chandlersystem.chandler.utilities.ViewUtil;
 import com.jakewharton.rxbinding2.view.RxView;
@@ -253,9 +255,9 @@ public class DealAdapter extends RecyclerView.Adapter {
 
         ViewUtil.setText(binding.layoutProfile.tvUserName, shipper.getFullName());
         ViewUtil.setText(binding.layoutProfile.tvUserPoint, shipper.getPoints() + " " + (shipper.getPoints() > 2 ? mContext.getString(R.string.content_points) : mContext.getString(R.string.content_point)));
-        ViewUtil.setText(binding.tvEndDate, deal.getShippingTime());
-        ViewUtil.setText(binding.tvPrice, deal.getPrice() + deal.getCurrency());
-        ViewUtil.setText(binding.tvShippingPrice, mContext.getString(R.string.content_shipping_price) + deal.getShippingPrice() + deal.getCurrency());
+        ViewUtil.setText(binding.tvEndDate, mContext.getString(R.string.content_expire_on) + TimeUtil.convert(TimeUtil.FORMAT_WORLD_WIDE, TimeUtil.FORMAT_DATE_VN, deal.getShippingTime()));
+        ViewUtil.setText(binding.tvPrice, mContext.getString(R.string.content_deal_price) + TextUtil.formatCurrency(deal.getPrice()) + deal.getCurrency());
+        ViewUtil.setText(binding.tvShippingPrice, mContext.getString(R.string.content_shipping_price) + TextUtil.formatCurrency(deal.getShippingPrice()) + deal.getCurrency());
         ViewUtil.setText(binding.tvProductTitle, deal.getProductName());
         ViewUtil.setText(binding.tvProductDetail, deal.getProductDesc());
         ViewUtil.setText(binding.layoutCategoryName.tvCategoryName, deal.getCategory().getName());
@@ -328,8 +330,8 @@ public class DealAdapter extends RecyclerView.Adapter {
 
         ViewUtil.setText(binding.layoutProfile.tvUserName, shipper.getFullName());
         ViewUtil.setText(binding.layoutProfile.tvUserPoint, shipper.getPoints() + (shipper.getPoints() > 2 ? mContext.getString(R.string.content_points) : mContext.getString(R.string.content_point)));
-        ViewUtil.setText(binding.tvEndDate, deal.getShippingTime());
-        ViewUtil.setText(binding.tvPrice, deal.getPrice() + deal.getCurrency());
+        ViewUtil.setText(binding.tvEndDate, mContext.getString(R.string.content_expire_on) + TimeUtil.convert(TimeUtil.FORMAT_WORLD_WIDE, TimeUtil.FORMAT_DATE_VN, deal.getShippingTime()));
+        ViewUtil.setText(binding.tvPrice, mContext.getString(R.string.content_deal_price) + TextUtil.formatCurrency(deal.getPrice()) + deal.getCurrency());
         ViewUtil.setText(binding.tvProductTitle, deal.getProductName());
         ViewUtil.setText(binding.tvProductDetail, deal.getProductDesc());
     }

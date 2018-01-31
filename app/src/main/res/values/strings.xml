@@ -224,7 +224,7 @@
     <string name="content_bid_now">Bid</string>
     <string name="content_logout_content">Do you really want to logout?</string>
     <string name="content_logout_title">Log out</string>
-    <string name="content_deal_shipping_time_urgent">Cần gấp (7 – 15 ngày)</string>
+    <string name="content_deal_shipping_time_urgent">Nhanh chóng (7 – 15 ngày)</string>
     <string name="content_deal_shipping_time_standard">Tiêu chuẩn (15 – 20 ngày)</string>
     <string name="content_deal_shipping_time_normal">Bình thuường (20 – 30 ngày)</string>
     <string name="content_deal_shipping_time_flexible">Linh hoạt (Giao khi có hàng)</string>
@@ -294,4 +294,5 @@
     <string name="content_please_input_phone_number_and_address">Xin vui lòng thêm số điện thoại và địa chỉ đúng</string>
     <string name="content_payment_success">Payment successfully</string>
     <string name="content_payment">Thanh toán</string>
+    <string name="content_deal_price">Giá sp:</string>
 </resources>

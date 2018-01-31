@@ -14,6 +14,7 @@
     <string name="nav_profile">"Tài khoản"</string>
 
     <!-- Content -->
+    <string name="content_expire_on">Expires on</string>
     <string name="content_log_out">"Đăng xuất"</string>
     <string name="content_ok">"OK"</string>
     <string name="content_more"><![CDATA[More >]]></string>
@@ -59,7 +60,7 @@
     <string name="content_bid_now">Đặt giá</string>
     <string name="content_logout_content">Bạn có muốn đăng xuất?</string>
     <string name="content_logout_title">Đăng xuất</string>
-    <string name="content_deal_shipping_time_urgent">Cần gấp (7 – 15 ngày)</string>
+    <string name="content_deal_shipping_time_urgent">Nhanh chóng (7 – 15 ngày)</string>
     <string name="content_deal_shipping_time_standard">Tiêu chuẩn (15 – 20 ngày)</string>
     <string name="content_deal_shipping_time_normal">Bình thuường (20 – 30 ngày)</string>
     <string name="content_deal_shipping_time_flexible">Linh hoạt (Giao khi có hàng)</string>
@@ -125,4 +126,5 @@
     <string name="content_please_input_phone_number_and_address">Xin vui lòng thêm số điện thoại và địa chỉ đúng</string>
     <string name="content_payment_success">Payment successfully</string>
     <string name="content_payment">Thanh toán</string>
+    <string name="content_deal_price">Giá sp:</string>
 </resources>

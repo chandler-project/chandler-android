@@ -22,4 +22,9 @@ public class TextUtil {
         DecimalFormat df = new DecimalFormat("#,###");
         return df.format(new BigDecimal(number));
     }
+
+    public static String formatCurrency(double number) {
+        DecimalFormat df = new DecimalFormat("#,###");
+        return df.format(new BigDecimal(number));
+    }
 }
