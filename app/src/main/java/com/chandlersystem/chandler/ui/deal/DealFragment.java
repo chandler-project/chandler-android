@@ -167,12 +167,12 @@ public class DealFragment extends Fragment {
             return;
         }
 
-        mFeaturedDealImgUrl.add("http://lorempixel.com/400/200/sports/1/");
-        mFeaturedDealImgUrl.add("http://lorempixel.com/400/200/sports/2/");
-        mFeaturedDealImgUrl.add("http://lorempixel.com/400/200/sports/3/");
-        mFeaturedDealImgUrl.add("http://lorempixel.com/400/200/sports/4/");
-        mFeaturedDealImgUrl.add("http://lorempixel.com/400/200/sports/5/");
-        mFeaturedDealImgUrl.add("http://lorempixel.com/400/200/sports/6/");
+        mFeaturedDealImgUrl.add("https://www.sony.net/top/2017/img/icon/top-og.jpg");
+        mFeaturedDealImgUrl.add("https://cdn.thesolesupplier.co.uk/2017/08/NIKE-Logo.jpg");
+        mFeaturedDealImgUrl.add("http://cdn.samsung.com/etc/designs/smg/global/imgs/logo-square-letter.png");
+        mFeaturedDealImgUrl.add("https://www.ceoutlook.com/wp-content/uploads/2017/09/apple-logo.gif");
+        mFeaturedDealImgUrl.add("http://www.hcmwatch.com/wp-content/uploads/2017/03/DW-Classic-Petite-Melrose-Rose-Gold-DW00100163-1.jpg");
+        mFeaturedDealImgUrl.add("https://i.ytimg.com/vi/RGrtY9DbjcA/hqdefault.jpg");
         mImagePagerAdapter = new ImagePagerAdapter(getContext(), mFeaturedDealImgUrl);
         mBinding.viewpagerSlideShow.setAdapter(mImagePagerAdapter);
         mBinding.viewpagerSlideShow.setOffscreenPageLimit(3);

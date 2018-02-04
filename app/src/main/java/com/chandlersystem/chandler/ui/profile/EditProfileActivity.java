@@ -329,7 +329,7 @@ public class EditProfileActivity extends AppCompatActivity {
         }
 
         if (ValidateUtil.checkString(user.getAddress())) {
-            mBinding.etPhoneNumber.setText(user.getAddress());
+            mBinding.etAddress.setText(user.getAddress());
         }
 
         if (ValidateUtil.checkString(user.getAvatar())) {
