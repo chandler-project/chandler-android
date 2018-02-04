@@ -13,6 +13,7 @@ import com.chandlersystem.chandler.data.models.pojo.Deal;
 import com.chandlersystem.chandler.data.models.pojo.Order;
 import com.chandlersystem.chandler.databinding.ItemCartTransactionBinding;
 import com.chandlersystem.chandler.ui.deal_detail.DealDetailActivity;
+import com.chandlersystem.chandler.utilities.TextUtil;
 import com.chandlersystem.chandler.utilities.ViewUtil;
 import com.jakewharton.rxbinding2.view.RxView;
 
@@ -26,18 +27,26 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
 
     private Context mContext;
 
-    private List<Order> mDealList;
+    private List<Order> mOrderList;
+
+    private String userId;
 
     private final PublishSubject<String> mOrderClicks = PublishSubject.create();
 
+    private final PublishSubject<Order> mDisclaimClicks = PublishSubject.create();
+
+    public PublishSubject<Order> getDisclaimClicks() {
+        return mDisclaimClicks;
+    }
 
     public PublishSubject<String> getOrderClicks() {
         return mOrderClicks;
     }
 
-    public CartAdapter(Context context, List<Order> dealList) {
-        this.mContext = context;
-        this.mDealList = dealList;
+    public CartAdapter(Context mContext, List<Order> mOrderList, String userId) {
+        this.mContext = mContext;
+        this.mOrderList = mOrderList;
+        this.userId = userId;
     }
 
     @Override
@@ -47,14 +56,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
 
     @Override
     public void onBindViewHolder(CartHolder holder, int position) {
-        Order order = mDealList.get(position);
+        Order order = mOrderList.get(position);
 
         setupViews(holder.mBinding, order);
         handleEvents(holder, position);
     }
 
     private void handleEvents(CartHolder holder, int position) {
-        holder.mBinding.ivClose.setOnClickListener(view -> showAlertDialog(holder, position));
+        holder.mBinding.ivClose.setOnClickListener(view -> showAlertDialog(holder));
 
         if (holder.mDisposable != null && !holder.mDisposable.isDisposed()) {
             holder.mDisposable.dispose();
@@ -76,11 +85,41 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
 
     private void setupViews(ItemCartTransactionBinding binding, Order order) {
         ViewUtil.setText(binding.tvProductName, order.getTitle());
-        ViewUtil.setText(binding.tvNetPrice, order.getTotal() + " VND");
+        String total = TextUtil.formatCurrency((order.getProductPrice() + order.getShippingPrice()) * order.getItem().getAmount());
+        ViewUtil.setText(binding.tvNetPrice, total + " VND");
         ViewUtil.setText(binding.amount, order.getItem().getAmount() + "");
+        binding.tvStatus.setText(getStatus(userId.equals(order.getShipper().getId()), order.getStatus()));
     }
 
-    private void showAlertDialog(CartHolder holder, int position) {
+    private String getStatus(boolean isShipper, String status) {
+        if (status.equals("pending")) {
+            return "Chờ thanh toán";
+        } else if (status.equals("paid")) {
+            if (isShipper) {
+                return "Đã thanh toán";
+            }
+            return "Chờ xác nhận";
+        } else if (status.equals("accepted")) {
+            if (isShipper) {
+                return "Đã xác nhận";
+            }
+            return "Chờ giao hàng";
+        } else if (status.equals("rejected")) {
+            if (isShipper) {
+                return "Đã từ chối";
+            }
+            return "Đã bị từ chối";
+        } else if (status.equals("delivered")) {
+            if (isShipper) {
+                return "Chờ xác nhận";
+            }
+            return "Đã giao hàng";
+        }
+
+        return isShipper ? "Đã giao hàng" : "Đã nhận hàng";
+    }
+
+    private void showAlertDialog(CartHolder holder) {
         if (mContext == null) {
             return;
         }
@@ -94,21 +133,23 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
                 .setCancelable(false)
                 .setMessage(content)
                 .setPositiveButton(buttonYes, (dialogInterface, i) -> {
+                    int position = holder.getAdapterPosition();
+                    mDisclaimClicks.onNext(mOrderList.get(position));
                     dialogInterface.dismiss();
-                    removeAt(holder.getAdapterPosition());
+                    removeAt(position);
                 })
                 .setNegativeButton(buttonNo, (dialogInterface, i) -> dialogInterface.dismiss());
         builder.show();
     }
 
     private void removeAt(int position) {
-        mDealList.remove(position);
+        mOrderList.remove(position);
         notifyItemRemoved(position);
     }
 
     @Override
     public int getItemCount() {
-        return mDealList.size();
+        return mOrderList.size();
     }
 
     static class CartHolder extends RecyclerView.ViewHolder {

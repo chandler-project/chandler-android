@@ -199,6 +199,8 @@ public class EditProfileActivity extends AppCompatActivity {
 
         String newName = mBinding.etName.getText().toString();
         String newBio = mBinding.etDescription.getText().toString();
+        String newAddress = mBinding.etAddress.getText().toString();
+        String newPhoneNumber = mBinding.etPhoneNumber.getText().toString();
 
         EditProfileBody body = new EditProfileBody();
         if (ValidateUtil.checkString(newName)) {
@@ -207,6 +209,14 @@ public class EditProfileActivity extends AppCompatActivity {
 
         if (ValidateUtil.checkString(newBio)) {
             body.setBio(newBio);
+        }
+
+        if (ValidateUtil.checkString(newPhoneNumber)) {
+            body.setPhoneNumber(newPhoneNumber);
+        }
+
+        if (ValidateUtil.checkString(newAddress)) {
+            body.setAddress(newAddress);
         }
 
         mCompositeDisposable.add(mApi.editProfile(body, currentUser.getId(), currentUser.getAuthorization())
@@ -312,6 +322,14 @@ public class EditProfileActivity extends AppCompatActivity {
 
         if (ValidateUtil.checkString(user.getBio())) {
             mBinding.etDescription.setText(user.getBio());
+        }
+
+        if (ValidateUtil.checkString(user.getPhoneNumber())) {
+            mBinding.etPhoneNumber.setText(user.getPhoneNumber());
+        }
+
+        if (ValidateUtil.checkString(user.getAddress())) {
+            mBinding.etPhoneNumber.setText(user.getAddress());
         }
 
         if (ValidateUtil.checkString(user.getAvatar())) {

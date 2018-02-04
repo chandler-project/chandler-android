@@ -2,60 +2,60 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <FrameLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_smaller"
+        android:layout_marginBottom="@dimen/spacing_small"
+        android:layout_marginLeft="@dimen/spacing_smaller"
+        android:layout_marginRight="@dimen/spacing_smaller"
         android:background="@color/colorWhite"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?attr/selectableItemBackground">
 
-        <LinearLayout
+        <include
+            android:id="@+id/layout_profile"
+            layout="@layout/item_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_margin="@dimen/spacing_smaller" />
 
-            <TextView
-                android:id="@+id/content"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/spacing_smaller"
-                android:layout_marginRight="@dimen/spacing_smaller"
-                android:layout_marginTop="@dimen/spacing_smaller"
-                android:fontFamily="@font/cabin_regular"
-                android:maxLines="3"
-                android:text="@string/lorem"
-                android:textAppearance="?attr/textAppearanceListItem"
-                android:textColor="@color/colorTextPrimary" />
+        <TextView
+            android:id="@+id/content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_smaller"
+            android:layout_marginRight="@dimen/spacing_smaller"
+            android:layout_marginTop="@dimen/spacing_smallest"
+            android:fontFamily="@font/cabin_regular"
+            android:maxLines="3"
+            android:text="@string/lorem"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textColor="@color/colorTextPrimary" />
 
-            <TextView
-                android:id="@+id/tv_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/spacing_smaller"
-                android:layout_marginRight="@dimen/spacing_smaller"
-                android:layout_marginTop="@dimen/spacing_smallest"
-                android:fontFamily="@font/cabin_medium"
-                android:text="JUN 27, 2017"
-                android:textAllCaps="true"
-                android:textAppearance="?attr/textAppearanceListItem"
-                android:textColor="@color/colorInactive"
-                android:textSize="@dimen/text_size_normal" />
-
-            <include
-                android:id="@+id/layout_profile"
-                layout="@layout/item_profile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/spacing_smaller" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_smaller"
+            android:layout_marginRight="@dimen/spacing_smaller"
+            android:layout_marginTop="@dimen/spacing_smallest"
+            android:fontFamily="@font/cabin_medium"
+            android:text="JUN 27, 2017"
+            android:textAllCaps="true"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textColor="@color/colorInactive"
+            android:textSize="@dimen/text_size_normal" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5px"
             android:layout_gravity="bottom"
+            android:layout_marginBottom="@dimen/spacing_small"
             android:layout_marginTop="@dimen/spacing_small"
             android:background="@color/colorBlack50" />
-    </FrameLayout>
+
+
+    </LinearLayout>
 </layout>

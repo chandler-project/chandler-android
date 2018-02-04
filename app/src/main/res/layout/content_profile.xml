@@ -35,7 +35,7 @@
                     android:src="@drawable/ic_placeholder_avatar" />
             </android.support.v7.widget.CardView>
 
-            <RelativeLayout
+            <LinearLayout
                 android:id="@+id/layout_user_infor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -57,7 +57,6 @@
                     android:id="@+id/btn_point"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/_24sdp"
-                    android:layout_below="@id/tv_name"
                     android:layout_marginTop="@dimen/spacing_smallest"
                     android:background="@drawable/item_button_rounded_yellow"
                     android:foreground="?attr/selectableItemBackground"
@@ -65,58 +64,41 @@
                     android:textAllCaps="false" />
 
                 <TextView
-                    android:id="@+id/description"
+                    android:id="@+id/tv_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/btn_point"
                     android:layout_marginEnd="@dimen/spacing_smaller"
                     android:layout_marginRight="@dimen/spacing_smaller"
                     android:layout_marginTop="@dimen/spacing_smaller"
                     android:fontFamily="@font/cabin_regular"
-                    android:lines="2"
-                    android:singleLine="false"
                     android:text="24 years old, HCM City, Join at Jan 27, 2016, I know nothing - Snow"
-                    android:textColor="@color/colorBlack10"
+                    android:textColor="@color/colorTextGray"
                     android:textSize="@dimen/text_size_normal" />
 
-                <LinearLayout
-                    android:id="@+id/layout_achivement"
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/tv_address"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/description"
-                    android:orientation="horizontal"
-                    android:visibility="gone">
+                    android:layout_marginEnd="@dimen/spacing_smaller"
+                    android:layout_marginRight="@dimen/spacing_smaller"
+                    android:layout_marginTop="@dimen/spacing_smaller"
+                    android:fontFamily="@font/cabin_regular"
+                    android:text="This is address"
+                    android:textColor="@color/colorTextGray"
+                    android:textSize="@dimen/text_size_normal" />
 
-                    <TextView
-                        android:id="@+id/tv_achievement_detail"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/spacing_small"
-                        android:layout_marginRight="@dimen/spacing_small"
-                        android:layout_marginTop="@dimen/spacing_smaller"
-                        android:fontFamily="@font/cabin_regular"
-                        android:maxLines="1"
-                        android:singleLine="true"
-                        android:text="2 hot deals"
-                        android:textAllCaps="true"
-                        android:textColor="@color/colorTextPrimary"
-                        android:textSize="@dimen/_10sdp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/spacing_small"
-                        android:layout_marginRight="@dimen/spacing_small"
-                        android:layout_marginTop="@dimen/spacing_smaller"
-                        android:fontFamily="@font/cabin_regular"
-                        android:maxLines="1"
-                        android:singleLine="true"
-                        android:text="2 request"
-                        android:textAllCaps="true"
-                        android:textColor="@color/colorTextPrimary"
-                        android:textSize="@dimen/_10sdp" />
-                </LinearLayout>
-            </RelativeLayout>
+                <TextView
+                    android:id="@+id/tv_phone_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/spacing_smaller"
+                    android:layout_marginRight="@dimen/spacing_smaller"
+                    android:layout_marginTop="@dimen/spacing_smaller"
+                    android:fontFamily="@font/cabin_regular"
+                    android:text="01636909876"
+                    android:textColor="@color/colorTextGray"
+                    android:textSize="@dimen/text_size_normal" />
+            </LinearLayout>
         </LinearLayout>
 
         <ScrollView

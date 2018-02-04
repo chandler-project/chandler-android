@@ -116,10 +116,28 @@
                 tools:text="$200" />
 
             <TextView
-                android:id="@+id/tv_end_date"
+                android:id="@+id/tv_deadline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_shipping_price"
+                android:layout_marginLeft="@dimen/spacing_small"
+                android:layout_marginRight="@dimen/spacing_small"
+                android:layout_marginTop="@dimen/spacing_smallest"
+                android:background="@drawable/item_button_rounded_red"
+                android:fontFamily="@font/cabin_regular"
+                android:paddingBottom="@dimen/spacing_smallest"
+                android:paddingLeft="@dimen/spacing_small"
+                android:paddingRight="@dimen/spacing_small"
+                android:paddingTop="@dimen/spacing_smallest"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/text_size_normal"
+                tools:text="End at 27/02/1995" />
+
+            <TextView
+                android:id="@+id/tv_shipping_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_deadline"
                 android:layout_marginLeft="@dimen/spacing_small"
                 android:layout_marginRight="@dimen/spacing_small"
                 android:layout_marginTop="@dimen/spacing_smallest"
@@ -138,7 +156,7 @@
                 layout="@layout/item_vote"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tv_end_date"
+                android:layout_below="@id/tv_shipping_time"
                 android:layout_marginLeft="@dimen/spacing_small"
                 android:layout_marginTop="@dimen/spacing_small" />
 

@@ -226,7 +226,8 @@ public class DealInfoFragment extends Fragment {
     }
 
     private void setEndDealDate() {
-        ViewUtil.setText(mBinding.tvEndDate, getString(R.string.content_expire_on) + TimeUtil.convert(TimeUtil.FORMAT_WORLD_WIDE, TimeUtil.FORMAT_DATE_VN, mDeal.getShippingTime()));
+        ViewUtil.setText(mBinding.tvDeadline, getString(R.string.content_expire_on) + TimeUtil.convert(TimeUtil.FORMAT_WORLD_WIDE, TimeUtil.FORMAT_DATE_VN, mDeal.getDeadline()));
+        ViewUtil.setText(mBinding.tvShippingTime, getString(R.string.content_shipping_time) + mDeal.getShippingTime());
     }
 
     private void setPrice() {

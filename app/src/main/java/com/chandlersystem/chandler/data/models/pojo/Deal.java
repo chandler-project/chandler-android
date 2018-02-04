@@ -29,6 +29,9 @@ public class Deal implements Parcelable {
     @SerializedName("shippingTime")
     @Expose
     private String shippingTime;
+    @SerializedName("deadline")
+    @Expose
+    private String deadline;
     @SerializedName("productDesc")
     @Expose
     private String productDesc;
@@ -89,6 +92,7 @@ public class Deal implements Parcelable {
         shippingPrice = in.readDouble();
         currency = in.readString();
         shippingTime = in.readString();
+        deadline = in.readString();
         productDesc = in.readString();
         productPics = in.createStringArrayList();
         upVoters = in.createStringArrayList();
@@ -117,6 +121,14 @@ public class Deal implements Parcelable {
             return new Deal[size];
         }
     };
+
+    public String getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(String deadline) {
+        this.deadline = deadline;
+    }
 
     public boolean isUpvoted() {
         return isUpvoted;
@@ -315,6 +327,7 @@ public class Deal implements Parcelable {
         dest.writeDouble(shippingPrice);
         dest.writeString(currency);
         dest.writeString(shippingTime);
+        dest.writeString(deadline);
         dest.writeString(productDesc);
         dest.writeStringList(productPics);
         dest.writeStringList(upVoters);

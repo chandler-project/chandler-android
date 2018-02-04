@@ -16,8 +16,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chandlersystem.chandler.R;
+import com.chandlersystem.chandler.RxBus;
 import com.chandlersystem.chandler.custom_views.LinearItemDecoration;
 import com.chandlersystem.chandler.data.api.ChandlerApi;
+import com.chandlersystem.chandler.data.events.BuyDealUpdate;
+import com.chandlersystem.chandler.data.events.CreateDealSuccess;
 import com.chandlersystem.chandler.data.models.pojo.Category;
 import com.chandlersystem.chandler.data.models.pojo.Deal;
 import com.chandlersystem.chandler.data.models.response.RetrofitResponseItem;
@@ -179,6 +182,10 @@ public class DealFragment extends Fragment {
     private void handleEvents() {
         swipeToRefreshEvent();
         appbarCollapse();
+        mCompositeDisposable.add(RxBus.getInstance()
+                .register(CreateDealSuccess.class, createDealSuccess -> callApi(), Throwable::printStackTrace));
+        mCompositeDisposable.add(RxBus.getInstance()
+                .register(BuyDealUpdate.class, createDealSuccess -> callApi(), Throwable::printStackTrace));
     }
 
     private void callApi() {
@@ -214,11 +221,10 @@ public class DealFragment extends Fragment {
 
     private void clickUpvote() {
         mCompositeDisposable.add(mDealAdapter.getUpvotes().subscribe(deal -> {
-            mCompositeDisposable.add(
-                    mApi.upVote(deal.getId(), UserManager.getUserSync().getAuthorization())
-                            .compose(RxUtil.withSchedulers())
-                            .subscribe(retrofitResponseItem -> {
-                            }, Throwable::printStackTrace));
+            mCompositeDisposable.add(mApi.upVote(deal.getId(), UserManager.getUserSync().getAuthorization())
+                    .compose(RxUtil.withSchedulers())
+                    .subscribe(retrofitResponseItem -> {
+                    }, Throwable::printStackTrace));
         }, Throwable::printStackTrace));
     }
 

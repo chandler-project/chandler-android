@@ -255,11 +255,11 @@ public class DealAdapter extends RecyclerView.Adapter {
 
         ViewUtil.setText(binding.layoutProfile.tvUserName, shipper.getFullName());
         ViewUtil.setText(binding.layoutProfile.tvUserPoint, shipper.getPoints() + " " + (shipper.getPoints() > 2 ? mContext.getString(R.string.content_points) : mContext.getString(R.string.content_point)));
-        ViewUtil.setText(binding.tvEndDate, mContext.getString(R.string.content_expire_on) + TimeUtil.convert(TimeUtil.FORMAT_WORLD_WIDE, TimeUtil.FORMAT_DATE_VN, deal.getShippingTime()));
+        ViewUtil.setText(binding.tvEndDate, mContext.getString(R.string.content_expire_on) + TimeUtil.convert(TimeUtil.FORMAT_WORLD_WIDE, TimeUtil.FORMAT_DATE_VN, deal.getDeadline()));
         ViewUtil.setText(binding.tvPrice, mContext.getString(R.string.content_deal_price) + TextUtil.formatCurrency(deal.getPrice()) + deal.getCurrency());
         ViewUtil.setText(binding.tvShippingPrice, mContext.getString(R.string.content_shipping_price) + TextUtil.formatCurrency(deal.getShippingPrice()) + deal.getCurrency());
         ViewUtil.setText(binding.tvProductTitle, deal.getProductName());
-        ViewUtil.setText(binding.tvProductDetail, deal.getProductDesc());
+        ViewUtil.setTextWithHtml(binding.tvProductDetail, deal.getProductDesc());
         ViewUtil.setText(binding.layoutCategoryName.tvCategoryName, deal.getCategory().getName());
 
         List<Owner> requesterList = deal.getRequesters();
@@ -330,10 +330,10 @@ public class DealAdapter extends RecyclerView.Adapter {
 
         ViewUtil.setText(binding.layoutProfile.tvUserName, shipper.getFullName());
         ViewUtil.setText(binding.layoutProfile.tvUserPoint, shipper.getPoints() + (shipper.getPoints() > 2 ? mContext.getString(R.string.content_points) : mContext.getString(R.string.content_point)));
-        ViewUtil.setText(binding.tvEndDate, mContext.getString(R.string.content_expire_on) + TimeUtil.convert(TimeUtil.FORMAT_WORLD_WIDE, TimeUtil.FORMAT_DATE_VN, deal.getShippingTime()));
+        ViewUtil.setText(binding.tvEndDate, mContext.getString(R.string.content_expire_on) + TimeUtil.convert(TimeUtil.FORMAT_WORLD_WIDE, TimeUtil.FORMAT_DATE_VN, deal.getDeadline()));
         ViewUtil.setText(binding.tvPrice, mContext.getString(R.string.content_deal_price) + TextUtil.formatCurrency(deal.getPrice()) + deal.getCurrency());
         ViewUtil.setText(binding.tvProductTitle, deal.getProductName());
-        ViewUtil.setText(binding.tvProductDetail, deal.getProductDesc());
+        ViewUtil.setTextWithHtml(binding.tvProductDetail, deal.getProductDesc());
     }
 
     @Override

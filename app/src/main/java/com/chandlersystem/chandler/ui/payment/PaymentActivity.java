@@ -10,15 +10,26 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.chandlersystem.chandler.ChandlerApplication;
 import com.chandlersystem.chandler.R;
 import com.chandlersystem.chandler.configs.ApiConstant;
+import com.chandlersystem.chandler.data.api.ChandlerApi;
 import com.chandlersystem.chandler.data.models.pojo.User;
+import com.chandlersystem.chandler.data.models.request.PaymentAllBody;
+import com.chandlersystem.chandler.data.models.request.PaymentBody;
 import com.chandlersystem.chandler.database.UserManager;
 import com.chandlersystem.chandler.databinding.ActivityPaymentBinding;
+import com.chandlersystem.chandler.di.components.ActivityComponent;
+import com.chandlersystem.chandler.di.components.DaggerActivityComponent;
+import com.chandlersystem.chandler.di.modules.ActivityModule;
+import com.chandlersystem.chandler.utilities.DialogUtil;
+import com.chandlersystem.chandler.utilities.RxUtil;
 import com.chandlersystem.chandler.utilities.ValidateUtil;
 import com.chandlersystem.chandler.utilities.ViewUtil;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
+
+import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
@@ -27,6 +38,9 @@ public class PaymentActivity extends AppCompatActivity {
     private ActivityPaymentBinding binding;
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
+
+    @Inject
+    ChandlerApi mApi;
 
     @Override
     protected void onDestroy() {
@@ -38,6 +52,15 @@ public class PaymentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_payment);
+        ActivityComponent mActivityComponent = DaggerActivityComponent
+                .builder()
+                .activityModule(new ActivityModule(this))
+                .applicationComponent(ChandlerApplication
+                        .getApplicationComponent(this))
+                .build();
+
+        mActivityComponent.inject(this);
+
         setupToolbar();
         showUserInformation();
         handleEvents();
@@ -58,12 +81,29 @@ public class PaymentActivity extends AppCompatActivity {
 
         compositeDisposable.add(RxView.clicks(binding.btnPay)
                 .subscribe(o -> {
-                    Toast.makeText(this, R.string.content_payment_success, Toast.LENGTH_SHORT).show();
-                    finish();
+                    callApiPayment();
                 }, Throwable::printStackTrace));
 
         compositeDisposable.add(RxView.clicks(binding.layoutToolbar.ivBack)
                 .subscribe(o -> finish(), Throwable::printStackTrace));
+    }
+
+    private void callApiPayment() {
+        PaymentAllBody paymentAllBody = new PaymentAllBody();
+        paymentAllBody.setAddress(binding.etAddress.getText().toString());
+        paymentAllBody.setPhoneNumber(binding.etPhone.getText().toString());
+        PaymentBody body = new PaymentBody();
+        body.setPayment(paymentAllBody);
+        compositeDisposable.add(mApi.payment(body, UserManager.getUserSync().getAuthorization())
+                .compose(RxUtil.withSchedulers())
+                .subscribe(retrofitResponseItem -> {
+                    paymentSuccess();
+                }, throwable -> DialogUtil.showErrorDialog(this, throwable)));
+    }
+
+    private void paymentSuccess() {
+        finish();
+        Toast.makeText(this, getString(R.string.content_payment_success), Toast.LENGTH_SHORT).show();
     }
 
     private void showError() {

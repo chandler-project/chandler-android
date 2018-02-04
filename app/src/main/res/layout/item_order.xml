@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:id="@+id/layout_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_small"
+        android:paddingLeft="@dimen/spacing_small">
+
+        <TextView
+            android:id="@+id/tv_product_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_small"
+            android:layout_marginRight="@dimen/spacing_largest"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:ellipsize="end"
+            android:fontFamily="@font/cabin_regular"
+            android:maxLines="2"
+            android:textColor="@color/colorTextPrimary"
+            android:textSize="@dimen/text_size_larger"
+            tools:text="This is title name" />
+
+        <TextView
+            android:id="@+id/tv_net_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_small"
+            android:layout_marginRight="@dimen/spacing_small"
+            android:fontFamily="@font/cabin_regular"
+            android:singleLine="true"
+            android:textColor="@color/colorTextGray"
+            android:textSize="@dimen/text_size_big"
+            tools:text="Net price: 250$" />
+
+        <LinearLayout
+            android:id="@+id/layout_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_small"
+            android:layout_marginStart="@dimen/spacing_small"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/minus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/content_amount" />
+
+            <TextView
+                android:id="@+id/amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spacing_smallest"
+                android:layout_marginRight="@dimen/spacing_small"
+                android:fontFamily="@font/cabin_regular"
+                android:textSize="@dimen/text_size_large"
+                tools:text="0" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_shipper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_small"
+            android:layout_marginStart="@dimen/spacing_small"
+            android:fontFamily="@font/cabin_regular"
+            android:text="@string/content_shipper"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_size_large"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_receiver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_small"
+            android:layout_marginStart="@dimen/spacing_small"
+            android:fontFamily="@font/cabin_regular"
+            android:text="@string/content_receiver"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_size_large"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_small"
+            android:layout_marginStart="@dimen/spacing_small"
+            android:fontFamily="@font/cabin_regular"
+            android:textColor="@color/colorGreen"
+            android:textSize="@dimen/text_size_large"
+            tools:text="Dang cho thanh toan" />
+
+        <LinearLayout
+            android:id="@+id/layout_deliver_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/btn_accept_delivery"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_toolbar_height"
+                android:layout_gravity="bottom"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:text="@string/content_accept_deliver"
+                android:textColor="@color/colorWhite" />
+
+            <Button
+                android:id="@+id/btn_reject_delivery"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_toolbar_height"
+                android:layout_gravity="bottom"
+                android:layout_weight="1"
+                android:background="@color/colorRed"
+                android:text="@string/content_reject_delivery"
+                android:textColor="@color/colorWhite" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_delivered_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/btn_delivered"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_toolbar_height"
+                android:layout_gravity="bottom"
+                android:background="@color/colorPrimary"
+                android:text="@string/content_delivered"
+                android:textColor="@color/colorWhite" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_receive_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/btn_accept_receive"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_toolbar_height"
+                android:layout_gravity="bottom"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:text="@string/content_accept_receive"
+                android:textColor="@color/colorWhite" />
+
+            <Button
+                android:id="@+id/btn_reject_receive"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_toolbar_height"
+                android:layout_gravity="bottom"
+                android:layout_weight="1"
+                android:background="@color/colorRed"
+                android:text="@string/content_reject_receive"
+                android:textColor="@color/colorWhite" />
+        </LinearLayout>
+    </LinearLayout>
+</layout>

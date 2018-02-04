@@ -17,8 +17,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chandlersystem.chandler.R;
+import com.chandlersystem.chandler.RxBus;
 import com.chandlersystem.chandler.custom_views.LinearItemDecoration;
 import com.chandlersystem.chandler.data.api.ChandlerApi;
+import com.chandlersystem.chandler.data.events.BidRequestUpdate;
+import com.chandlersystem.chandler.data.events.BuyDealUpdate;
+import com.chandlersystem.chandler.data.events.CreateDealSuccess;
 import com.chandlersystem.chandler.data.models.pojo.Request;
 import com.chandlersystem.chandler.data.models.request.BidRequestBody;
 import com.chandlersystem.chandler.data.models.response.RetrofitResponseListItem;
@@ -119,6 +123,13 @@ public class RequestsFragment extends Fragment {
                     mBinding.layoutSwipe.setRefreshing(false);
                     callApiGetRequest();
                 }, Throwable::printStackTrace));
+
+        mCompositeDisposable.add(RxBus.getInstance()
+                .register(CreateDealSuccess.class, createDealSuccess -> callApiGetRequest(),
+                        Throwable::printStackTrace));
+
+        mCompositeDisposable.add(RxBus.getInstance()
+                .register(BidRequestUpdate.class, createDealSuccess -> callApiGetRequest(), Throwable::printStackTrace));
     }
 
     private void callApiGetRequest() {

@@ -295,4 +295,20 @@
     <string name="content_payment_success">Payment successfully</string>
     <string name="content_payment">Thanh toán</string>
     <string name="content_deal_price">Giá sp:</string>
+    <string name="content_select_deadline">Sản phẩm hết hạn vào</string>
+    <string name="content_shipping_time">Thời gian cần</string>
+    <string name="content_your_address">Địa chỉ của bạn</string>
+    <string name="content_your_phone_number">Số điện thoại của bạn</string>
+    <string name="content_send">Gửi</string>
+    <string name="content_remove_success">Xóa thành công</string>
+    <string name="content_accept_deliver">Đồng ý giao hàng</string>
+    <string name="content_reject_delivery">Từ chối giao hàng</string>
+    <string name="content_accept_receive">Đồng ý nhận hàng</string>
+    <string name="content_reject_receive">Từ chối nhận hàng</string>
+    <string name="content_delivered">Đã giao hàng</string>
+    <string name="content_shipper">NGƯỜI GIAO HÀNG</string>
+    <string name="content_receiver">NGƯỜI NHẬN HÀNG</string>
+    <string name="content_reason">Lý do từ chối đơn hàng</string>
+    <string name="content_my_reason">Lý do của tôi là</string>
+    <string name="content_confirm">Xác nhận</string>
 </resources>

@@ -13,7 +13,9 @@ import android.widget.Toast;
 
 import com.chandlersystem.chandler.ChandlerApplication;
 import com.chandlersystem.chandler.R;
+import com.chandlersystem.chandler.RxBus;
 import com.chandlersystem.chandler.data.api.ChandlerApi;
+import com.chandlersystem.chandler.data.events.BidRequestUpdate;
 import com.chandlersystem.chandler.data.models.pojo.Request;
 import com.chandlersystem.chandler.data.models.request.BidRequestBody;
 import com.chandlersystem.chandler.database.UserManager;
@@ -113,8 +115,6 @@ public class RequestDetailActivity extends AppCompatActivity implements BidDialo
 
     private void setupToolbar() {
         mBinding.layoutToolbar.tvTitle.setText(mRequest.getProductName());
-        //ViewUtil.setText(mBinding.layoutToolbar.tvSubTitle, request.getBidder);
-        mBinding.layoutToolbar.ivCart.setVisibility(View.GONE);
     }
 
     private void setupViewPagerAndTabLayout() {
@@ -127,13 +127,15 @@ public class RequestDetailActivity extends AppCompatActivity implements BidDialo
     private void callBidApi(String requestId, BidRequestBody bidRequestBody) {
         mCompositeDisposable.add(mApi.bidRequest(bidRequestBody, requestId, UserManager.getUserSync().getAuthorization())
                 .compose(RxUtil.withSchedulers())
-                .subscribe(retrofitResponseListItem -> bidSuccess(retrofitResponseListItem.item), this::bidError));
+                .map(requestRetrofitResponseItem -> requestRetrofitResponseItem.item)
+                .subscribe(this::bidSuccess, this::bidError));
     }
 
     private void bidSuccess(Request item) {
         Toast.makeText(this, getString(R.string.content_bid_sucess), Toast.LENGTH_SHORT).show();
         mRequest = item;
-        init();
+        RxBus.getInstance().post(new BidRequestUpdate(item.getBidders()));
+        mBinding.viewpagerRequest.setCurrentItem(1);
     }
 
     private void bidError(Throwable throwable) {

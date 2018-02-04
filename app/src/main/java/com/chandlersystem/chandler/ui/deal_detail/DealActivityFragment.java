@@ -10,10 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.chandlersystem.chandler.ChandlerApplication;
 import com.chandlersystem.chandler.R;
+import com.chandlersystem.chandler.RxBus;
 import com.chandlersystem.chandler.custom_views.LinearItemDecoration;
+import com.chandlersystem.chandler.data.events.BuyDealUpdate;
 import com.chandlersystem.chandler.data.models.pojo.Deal;
+import com.chandlersystem.chandler.data.models.pojo.Owner;
 import com.chandlersystem.chandler.databinding.FragmentDealActivityBinding;
 import com.chandlersystem.chandler.ui.adapters.UserActivityAdapter;
 import com.chandlersystem.chandler.utilities.ViewUtil;
@@ -21,9 +23,15 @@ import com.chandlersystem.chandler.utilities.ViewUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.disposables.CompositeDisposable;
+
 public class DealActivityFragment extends Fragment {
     private FragmentDealActivityBinding mBinding;
     private UserActivityAdapter mUserActivityAdapter;
+
+    private List<Owner> requeters;
+
+    private final CompositeDisposable mCompositeDisposable = new CompositeDisposable();
 
     private Deal mDeal;
 
@@ -59,11 +67,23 @@ public class DealActivityFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         mDeal = getArguments().getParcelable(ARGUMENT_DEAL);
         setupRecyclerView();
+        handleEvent();
+    }
+
+    private void handleEvent() {
+        mCompositeDisposable.add(RxBus.getInstance()
+                .register(BuyDealUpdate.class, buyDealUpdate -> {
+                    requeters.clear();
+                    requeters.addAll(buyDealUpdate.requesters);
+                    mUserActivityAdapter.notifyDataSetChanged();
+                }, Throwable::printStackTrace));
     }
 
     private void setupRecyclerView() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        mUserActivityAdapter = new UserActivityAdapter(getContext(), mDeal.getRequesters());
+        requeters = new ArrayList<>();
+        requeters.addAll(mDeal.getRequesters());
+        mUserActivityAdapter = new UserActivityAdapter(getContext(), requeters);
         mBinding.recyclerViewActivities.setLayoutManager(layoutManager);
         mBinding.recyclerViewActivities.setNestedScrollingEnabled(true);
         mBinding.recyclerViewActivities.setHasFixedSize(true);

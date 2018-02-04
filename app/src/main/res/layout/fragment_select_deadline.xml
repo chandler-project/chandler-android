@@ -1,0 +1,29 @@
+<layout>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autoLink="web"
+            android:fontFamily="@font/cabin_bold"
+            android:maxLines="2"
+            android:padding="@dimen/spacing_small"
+            android:textColor="@color/colorTextPrimary"
+            android:textColorLink="@color/colorPrimary"
+            android:textSize="@dimen/text_size_larger"
+            tools:text="Please choose...." />
+
+        <DatePicker
+            android:id="@+id/date_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+    </FrameLayout>
+</layout>

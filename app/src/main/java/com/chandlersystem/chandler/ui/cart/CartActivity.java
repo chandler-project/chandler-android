@@ -3,7 +3,6 @@ package com.chandlersystem.chandler.ui.cart;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,7 +11,6 @@ import android.widget.Toast;
 import com.chandlersystem.chandler.ChandlerApplication;
 import com.chandlersystem.chandler.R;
 import com.chandlersystem.chandler.data.api.ChandlerApi;
-import com.chandlersystem.chandler.data.models.pojo.Deal;
 import com.chandlersystem.chandler.data.models.pojo.Order;
 import com.chandlersystem.chandler.database.UserManager;
 import com.chandlersystem.chandler.databinding.ActivityCartBinding;
@@ -22,9 +20,11 @@ import com.chandlersystem.chandler.di.modules.ActivityModule;
 import com.chandlersystem.chandler.ui.adapters.CartAdapter;
 import com.chandlersystem.chandler.ui.payment.PaymentActivity;
 import com.chandlersystem.chandler.utilities.RxUtil;
+import com.chandlersystem.chandler.utilities.TextUtil;
 import com.jakewharton.rxbinding2.view.RxView;
 
-import java.util.ArrayList;
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -40,6 +40,8 @@ public class CartActivity extends AppCompatActivity {
     private CartAdapter mAdapter;
 
     private List<Order> mOrderList;
+
+    private double mTotalAmount;
 
     @Inject
     ChandlerApi mApi;
@@ -68,7 +70,7 @@ public class CartActivity extends AppCompatActivity {
     }
 
     private void getOrderApi() {
-        mCompositeDisposable.add(mApi.getOrder(UserManager.getUserSync().getAuthorization())
+        mCompositeDisposable.add(mApi.getPendingOrder(UserManager.getUserSync().getAuthorization())
                 .compose(RxUtil.withSchedulers())
                 .subscribe(retrofitResponseListItem -> setAdapter(retrofitResponseListItem.items), Throwable::printStackTrace));
     }
@@ -114,8 +116,45 @@ public class CartActivity extends AppCompatActivity {
 
     private void setAdapter(List<Order> orderList) {
         mOrderList = orderList;
-        mAdapter = new CartAdapter(this, mOrderList);
+        mAdapter = new CartAdapter(this, mOrderList, UserManager.getUserSync().getId());
         mBinding.rvCart.setAdapter(mAdapter);
+
+        setTotalAmount();
+        removeOrderClicks();
+    }
+
+    private void setTotalAmount() {
+        final String paymentText = getString(R.string.content_buy_now) + " | " + TextUtil.formatCurrency(getTotal()) + "VND";
+        mBinding.btnBuy.setText(paymentText);
+    }
+
+    private double getTotal() {
+        if (mOrderList == null) {
+            return 0f;
+        }
+
+        double result = 0f;
+        for (Order order : mOrderList) {
+            result += ((order.getShippingPrice() + order.getProductPrice()) * order.getItem().getAmount());
+        }
+
+        return result;
+    }
+
+    private void removeOrderClicks() {
+        mCompositeDisposable.add(mAdapter.getDisclaimClicks().subscribe(this::callRemoveOrderApi,
+                Throwable::printStackTrace));
+    }
+
+    private void callRemoveOrderApi(Order order) {
+        mApi.removeOrder(order.getId(), UserManager.getUserSync().getAuthorization())
+                .compose(RxUtil.withSchedulers())
+                .subscribe(retrofitResponseItem -> removeSuccess(), Throwable::printStackTrace);
+    }
+
+    private void removeSuccess() {
+        setTotalAmount();
+        Toast.makeText(this, getString(R.string.content_remove_success), Toast.LENGTH_SHORT).show();
     }
 
     private void setupToolbar() {

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -19,7 +18,6 @@ import com.chandlersystem.chandler.data.models.pojo.Request;
 import com.chandlersystem.chandler.data.models.pojo.User;
 import com.chandlersystem.chandler.data.models.request.BidRequestBody;
 import com.chandlersystem.chandler.data.models.request.Device;
-import com.chandlersystem.chandler.data.models.response.RetrofitResponseItem;
 import com.chandlersystem.chandler.database.UserManager;
 import com.chandlersystem.chandler.databinding.ActivityMainBinding;
 import com.chandlersystem.chandler.di.components.ActivityComponent;
@@ -36,7 +34,6 @@ import com.chandlersystem.chandler.ui.notification.NotificationFragment;
 import com.chandlersystem.chandler.ui.product_search.ProductSearchActivity;
 import com.chandlersystem.chandler.ui.profile.ProfileFragment;
 import com.chandlersystem.chandler.ui.requests.RequestsFragment;
-import com.chandlersystem.chandler.utilities.LogUtil;
 import com.chandlersystem.chandler.utilities.RxUtil;
 import com.chandlersystem.chandler.utilities.ViewUtil;
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -47,7 +44,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Consumer;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener,
         ViewPager.OnPageChangeListener, DealFragment.OnFragmentInteractionListener,
@@ -93,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
-        mCompositeDisposable.add(mApi.getOrderCount(UserManager.getUserSync().getAuthorization())
+        mCompositeDisposable.add(mApi.getPendingOrderCount(UserManager.getUserSync().getAuthorization())
                 .compose(RxUtil.withSchedulers())
                 .subscribe(o -> showBadge(o.item.getCount()), Throwable::printStackTrace));
     }
@@ -101,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void showBadge(int count) {
         if (count > 0) {
             ViewUtil.setText(mBinding.toolbar.tvCartCount, count + "");
+            ViewUtil.toggleView(mBinding.toolbar.tvCartCount, true);
         } else {
             ViewUtil.toggleView(mBinding.toolbar.tvCartCount, false);
         }

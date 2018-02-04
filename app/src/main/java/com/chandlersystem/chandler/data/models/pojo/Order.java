@@ -31,9 +31,39 @@ public class Order implements Parcelable {
     @Expose
     private String id;
 
-    @SerializedName("total")
+    @SerializedName("productPrice")
     @Expose
-    private long total;
+    private double productPrice;
+
+    @SerializedName("shippingPrice")
+    @Expose
+    private double shippingPrice;
+
+    @SerializedName("spend")
+    @Expose
+    private int spend;
+
+    @SerializedName("reason")
+    @Expose
+    private String reason;
+
+    @SerializedName("requestId")
+    @Expose
+    private String requestId;
+
+    @SerializedName("dealId")
+    @Expose
+    private String dealId;
+
+    @SerializedName("phoneNumber")
+    @Expose
+    private String phoneNumber;
+
+    @SerializedName("address")
+    @Expose
+    private String address;
+
+    private int buttonId;
 
     public Order() {
     }
@@ -45,7 +75,14 @@ public class Order implements Parcelable {
         status = in.readString();
         item = in.readParcelable(Item.class.getClassLoader());
         id = in.readString();
-        total = in.readLong();
+        productPrice = in.readDouble();
+        shippingPrice = in.readDouble();
+        spend = in.readInt();
+        reason = in.readString();
+        requestId = in.readString();
+        dealId = in.readString();
+        phoneNumber = in.readString();
+        address = in.readString();
     }
 
     public static final Creator<Order> CREATOR = new Creator<Order>() {
@@ -59,6 +96,14 @@ public class Order implements Parcelable {
             return new Order[size];
         }
     };
+
+    public int getButtonId() {
+        return buttonId;
+    }
+
+    public void setButtonId(int buttonId) {
+        this.buttonId = buttonId;
+    }
 
     public Owner getOwner() {
         return owner;
@@ -108,12 +153,68 @@ public class Order implements Parcelable {
         this.id = id;
     }
 
-    public long getTotal() {
-        return total;
+    public double getProductPrice() {
+        return productPrice;
     }
 
-    public void setTotal(long total) {
-        this.total = total;
+    public void setProductPrice(double productPrice) {
+        this.productPrice = productPrice;
+    }
+
+    public double getShippingPrice() {
+        return shippingPrice;
+    }
+
+    public void setShippingPrice(double shippingPrice) {
+        this.shippingPrice = shippingPrice;
+    }
+
+    public int getSpend() {
+        return spend;
+    }
+
+    public void setSpend(int spend) {
+        this.spend = spend;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+
+    public String getRequestId() {
+        return requestId;
+    }
+
+    public void setRequestId(String requestId) {
+        this.requestId = requestId;
+    }
+
+    public String getDealId() {
+        return dealId;
+    }
+
+    public void setDealId(String dealId) {
+        this.dealId = dealId;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     @Override
@@ -129,6 +230,13 @@ public class Order implements Parcelable {
         dest.writeString(status);
         dest.writeParcelable(item, flags);
         dest.writeString(id);
-        dest.writeLong(total);
+        dest.writeDouble(productPrice);
+        dest.writeDouble(shippingPrice);
+        dest.writeInt(spend);
+        dest.writeString(reason);
+        dest.writeString(requestId);
+        dest.writeString(dealId);
+        dest.writeString(phoneNumber);
+        dest.writeString(address);
     }
 }

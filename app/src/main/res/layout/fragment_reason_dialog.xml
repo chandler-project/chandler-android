@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_small"
+        android:background="@color/colorWhite"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_small">
+
+        <TextView
+            android:id="@+id/tv_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/spacing_small"
+            android:layout_marginRight="@dimen/spacing_small"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:fontFamily="@font/cabin_regular"
+            android:text="@string/content_reason"
+            android:textColor="@color/colorTextPrimary"
+            android:textSize="@dimen/text_size_large" />
+
+        <EditText
+            android:id="@+id/et_reason"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_smallest"
+            android:background="@drawable/item_button_rounded_stroke"
+            android:ems="10"
+            android:fontFamily="@font/cabin_regular"
+            android:gravity="top|left"
+            android:hint="@string/content_my_reason"
+            android:inputType="textMultiLine"
+            android:lines="6"
+            android:maxLines="6"
+            android:minLines="6"
+            android:padding="@dimen/spacing_small"
+            android:scrollbars="vertical"
+            android:textColorHint="@color/colorTextGray"
+            android:textSize="@dimen/text_size_big" />
+
+        <Button
+            android:id="@+id/btn_primary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:background="@color/colorPrimary"
+            android:fontFamily="@font/cabin_regular"
+            android:text="@string/content_confirm"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/text_size_big" />
+    </LinearLayout>
+</layout>

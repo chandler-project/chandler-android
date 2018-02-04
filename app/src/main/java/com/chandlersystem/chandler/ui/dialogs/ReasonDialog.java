@@ -2,7 +2,6 @@ package com.chandlersystem.chandler.ui.dialogs;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.databinding.DataBindingUtil;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -15,36 +14,35 @@ import android.view.ViewGroup;
 import android.view.Window;
 
 import com.chandlersystem.chandler.R;
-import com.chandlersystem.chandler.databinding.FragmentBidDialogBinding;
 import com.chandlersystem.chandler.databinding.FragmentBuyDialogBinding;
+import com.chandlersystem.chandler.databinding.FragmentReasonDialogBinding;
 
-public class BuyDialog extends DialogFragment {
+public class ReasonDialog extends DialogFragment {
     // ApiConstant
-    public static final String TAG = BuyDialog.class.getSimpleName();
+    public static final String TAG = ReasonDialog.class.getSimpleName();
 
     // DataBinding
-    private FragmentBuyDialogBinding mBinding;
+    private FragmentReasonDialogBinding mBinding;
 
     // Callback event
-    private BuyDialogCallback mCallback;
+    private ReasonDialogCallback mCallback;
 
-    public interface BuyDialogCallback {
-        void onBuyDialogResponse(int amount);
+    public interface ReasonDialogCallback {
+        void onReasonDialogCallback(String reason);
     }
 
-    public static BuyDialog getInstance() {
-        BuyDialog buyDialog = new BuyDialog();
-        return buyDialog;
+    public static ReasonDialog getInstance() {
+        return new ReasonDialog();
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof BuyDialogCallback) {
-            mCallback = (BuyDialogCallback) context;
+        if (context instanceof ReasonDialogCallback) {
+            mCallback = (ReasonDialogCallback) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnAlertDialogInteraction");
+                    + " must implement ReasonDialogCallback");
         }
     }
 
@@ -73,7 +71,7 @@ public class BuyDialog extends DialogFragment {
         // Inflate the layout for this fragment
         mBinding = DataBindingUtil.inflate(
                 LayoutInflater.from(getContext()),
-                R.layout.fragment_buy_dialog,
+                R.layout.fragment_reason_dialog,
                 container,
                 false
         );
@@ -90,12 +88,11 @@ public class BuyDialog extends DialogFragment {
     }
 
     public void setupViews() {
-        mBinding.layoutButtonBid.btnPrimary.setText(getString(R.string.content_buy_now));
     }
 
     private void handleEvents() {
-        mBinding.layoutButtonBid.btnPrimary.setOnClickListener(v -> {
-            mCallback.onBuyDialogResponse(Integer.parseInt(mBinding.etAmount.getText().toString()));
+        mBinding.btnPrimary.setOnClickListener(v -> {
+            mCallback.onReasonDialogCallback(mBinding.etReason.getText().toString());
             dismiss();
         });
     }

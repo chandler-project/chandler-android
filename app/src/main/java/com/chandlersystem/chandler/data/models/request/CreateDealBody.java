@@ -10,20 +10,10 @@ public class CreateDealBody {
     private String currency;
     private String shippingTime;
     private String productDesc;
+    private String deadline;
     private List<String> productPics;
 
     public CreateDealBody() {
-    }
-
-    public CreateDealBody(String productName, String reference, float price, float shippingPrice, String currency, String shippingTime, String productDesc, List<String> productPics) {
-        this.productName = productName;
-        this.reference = reference;
-        this.price = price;
-        this.shippingPrice = shippingPrice;
-        this.currency = currency;
-        this.shippingTime = shippingTime;
-        this.productDesc = productDesc;
-        this.productPics = productPics;
     }
 
     public String getProductName() {
@@ -88,5 +78,13 @@ public class CreateDealBody {
 
     public void setProductPics(List<String> productPics) {
         this.productPics = productPics;
+    }
+
+    public String getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(String deadline) {
+        this.deadline = deadline;
     }
 }

@@ -16,7 +16,9 @@ import android.widget.Toast;
 
 import com.chandlersystem.chandler.ChandlerApplication;
 import com.chandlersystem.chandler.R;
+import com.chandlersystem.chandler.RxBus;
 import com.chandlersystem.chandler.data.api.ChandlerApi;
+import com.chandlersystem.chandler.data.events.CreateDealSuccess;
 import com.chandlersystem.chandler.data.models.pojo.Category;
 import com.chandlersystem.chandler.data.models.pojo.FileUpload;
 import com.chandlersystem.chandler.data.models.pojo.UploadImage;
@@ -31,6 +33,7 @@ import com.chandlersystem.chandler.ui.adapters.DealPagerAdapter;
 import com.chandlersystem.chandler.ui.create_request.SelectCategoryFragment;
 import com.chandlersystem.chandler.ui.create_request.SelectDateFragment;
 import com.chandlersystem.chandler.ui.create_request.CompleteCreateDealFragment;
+import com.chandlersystem.chandler.ui.create_request.SelectDeadlineFragment;
 import com.chandlersystem.chandler.ui.create_request.SelectPriceFragment;
 import com.chandlersystem.chandler.utilities.DialogUtil;
 import com.chandlersystem.chandler.utilities.RxUtil;
@@ -53,7 +56,8 @@ public class CreateDealActivity extends AppCompatActivity implements ViewPager.O
         CompleteCreateDealFragment.CompleteCreateDealListener,
         SelectCategoryFragment.SelectCategoryListener,
         SelectDateFragment.SelectDateListener,
-        SelectPriceFragment.SelectPriceListener {
+        SelectPriceFragment.SelectPriceListener,
+        SelectDeadlineFragment.SelectDeadlineListener {
     private static final int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 0;
 
     private ActivityCreateDealBinding mBinding;
@@ -63,8 +67,9 @@ public class CreateDealActivity extends AppCompatActivity implements ViewPager.O
     private DealPagerAdapter mDealPagerAdapter;
 
     private Category mCategory;
-    private String mDate;
+    private String mShippingTime;
     private String mShippingPrice;
+    private String mDeadline;
 
     @Inject
     ChandlerApi mApi;
@@ -155,7 +160,7 @@ public class CreateDealActivity extends AppCompatActivity implements ViewPager.O
 
     @Override
     public void onDateSelected(String date) {
-        mDate = date;
+        mShippingTime = date;
         goToNextPage();
     }
 
@@ -165,6 +170,11 @@ public class CreateDealActivity extends AppCompatActivity implements ViewPager.O
         goToNextPage();
     }
 
+    @Override
+    public void onDeadlineSelected(String date) {
+        mDeadline = date;
+        goToNextPage();
+    }
 
     @Override
     protected void onResume() {
@@ -271,7 +281,9 @@ public class CreateDealActivity extends AppCompatActivity implements ViewPager.O
 
         request.setProductPics(urlList);
         request.setShippingPrice(Float.valueOf(mShippingPrice));
-        request.setShippingTime(mDate);
+        // wrong API implementation, ignore in this time, ask API to swap data
+        request.setShippingTime(mShippingTime);
+        request.setDeadline(mDeadline);
         request.setCurrency("VND");
 
         mCompositeDisposable.add(mApi.createDeal(request, mCategory.getId(), UserManager.getUserSync().getAuthorization())
@@ -283,6 +295,7 @@ public class CreateDealActivity extends AppCompatActivity implements ViewPager.O
 
     private void onCreateDealSuccessfully() {
         Toast.makeText(CreateDealActivity.this, getString(R.string.content_create_new_deal_successfully), Toast.LENGTH_SHORT).show();
+        RxBus.getInstance().post(new CreateDealSuccess());
         finish();
     }
 

@@ -10,7 +10,9 @@ import android.widget.Toast;
 
 import com.chandlersystem.chandler.ChandlerApplication;
 import com.chandlersystem.chandler.R;
+import com.chandlersystem.chandler.RxBus;
 import com.chandlersystem.chandler.data.api.ChandlerApi;
+import com.chandlersystem.chandler.data.events.BuyDealUpdate;
 import com.chandlersystem.chandler.data.models.pojo.Deal;
 import com.chandlersystem.chandler.database.UserManager;
 import com.chandlersystem.chandler.databinding.ActivityDealDetailBinding;
@@ -91,13 +93,15 @@ public class DealDetailActivity extends AppCompatActivity implements BuyDialogCa
     private void buyDeal(int amount) {
         mCompositeDisposable.add(mApi.buyDeal(mDeal.getId(), UserManager.getUserSync().getAuthorization(), amount)
                 .compose(RxUtil.withSchedulers())
-                .subscribe(retrofitResponseItem -> buySuccess(retrofitResponseItem.item), this::buyError));
+                .map(dealRetrofitResponseItem -> dealRetrofitResponseItem.item)
+                .subscribe(this::buySuccess, this::buyError));
     }
 
     private void buySuccess(Deal deal) {
         Toast.makeText(this, getString(R.string.content_buy_success), Toast.LENGTH_SHORT).show();
         mDeal = deal;
-        init();
+        mBinding.viewpagerProduct.setCurrentItem(1);
+        RxBus.getInstance().post(new BuyDealUpdate(deal.getRequesters()));
     }
 
     private void buyError(Throwable throwable) {

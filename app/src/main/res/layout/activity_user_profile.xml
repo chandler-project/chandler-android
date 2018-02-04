@@ -39,7 +39,7 @@
                     android:src="@drawable/ic_placeholder_avatar" />
             </android.support.v7.widget.CardView>
 
-            <RelativeLayout
+            <LinearLayout
                 android:id="@+id/layout_user_infor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -61,7 +61,6 @@
                     android:id="@+id/btn_point"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/_24sdp"
-                    android:layout_below="@id/tv_name"
                     android:layout_marginTop="@dimen/spacing_smallest"
                     android:background="@drawable/item_button_rounded_yellow"
                     android:foreground="?attr/selectableItemBackground"
@@ -69,58 +68,41 @@
                     android:textAllCaps="false" />
 
                 <TextView
-                    android:id="@+id/description"
+                    android:id="@+id/tv_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/btn_point"
                     android:layout_marginEnd="@dimen/spacing_smaller"
                     android:layout_marginRight="@dimen/spacing_smaller"
                     android:layout_marginTop="@dimen/spacing_smaller"
                     android:fontFamily="@font/cabin_regular"
-                    android:lines="2"
-                    android:singleLine="false"
                     android:text="24 years old, HCM City, Join at Jan 27, 2016, I know nothing - Snow"
-                    android:textColor="@color/colorBlack10"
+                    android:textColor="@color/colorTextGray"
                     android:textSize="@dimen/text_size_normal" />
 
-                <LinearLayout
-                    android:id="@+id/layout_achivement"
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/tv_address"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/description"
-                    android:orientation="horizontal"
-                    android:visibility="gone">
+                    android:layout_marginEnd="@dimen/spacing_smaller"
+                    android:layout_marginRight="@dimen/spacing_smaller"
+                    android:layout_marginTop="@dimen/spacing_smaller"
+                    android:fontFamily="@font/cabin_regular"
+                    android:text="This is address"
+                    android:textColor="@color/colorTextGray"
+                    android:textSize="@dimen/text_size_normal" />
 
-                    <TextView
-                        android:id="@+id/tv_achievement_detail"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/spacing_small"
-                        android:layout_marginRight="@dimen/spacing_small"
-                        android:layout_marginTop="@dimen/spacing_smaller"
-                        android:fontFamily="@font/cabin_regular"
-                        android:maxLines="1"
-                        android:singleLine="true"
-                        android:text="2 hot deals"
-                        android:textAllCaps="true"
-                        android:textColor="@color/colorTextPrimary"
-                        android:textSize="@dimen/_10sdp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/spacing_small"
-                        android:layout_marginRight="@dimen/spacing_small"
-                        android:layout_marginTop="@dimen/spacing_smaller"
-                        android:fontFamily="@font/cabin_regular"
-                        android:maxLines="1"
-                        android:singleLine="true"
-                        android:text="2 request"
-                        android:textAllCaps="true"
-                        android:textColor="@color/colorTextPrimary"
-                        android:textSize="@dimen/_10sdp" />
-                </LinearLayout>
-            </RelativeLayout>
+                <TextView
+                    android:id="@+id/tv_phone_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/spacing_smaller"
+                    android:layout_marginRight="@dimen/spacing_smaller"
+                    android:layout_marginTop="@dimen/spacing_smaller"
+                    android:fontFamily="@font/cabin_regular"
+                    android:text="01636909876"
+                    android:textColor="@color/colorTextGray"
+                    android:textSize="@dimen/text_size_normal" />
+            </LinearLayout>
         </LinearLayout>
 
         <ScrollView
@@ -132,46 +114,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-
-                <RelativeLayout
-                    android:id="@+id/layout_feedback"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorWhite">
-
-                    <TextView
-                        android:id="@+id/tv_feedback"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/spacing_small"
-                        android:layout_marginRight="@dimen/spacing_small"
-                        android:layout_marginTop="@dimen/spacing_normal"
-                        android:fontFamily="@font/cabin_regular"
-                        android:text="@string/content_feedback"
-                        android:textColor="@color/colorTextGray"
-                        android:textSize="@dimen/text_size_large" />
-
-                    <ImageView
-                        android:layout_width="@dimen/ico_size_normal"
-                        android:layout_height="@dimen/ico_size_normal"
-                        android:layout_alignBottom="@id/tv_feedback"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_gravity="end|center_vertical"
-                        android:layout_marginLeft="@dimen/spacing_small"
-                        android:layout_marginRight="@dimen/spacing_small"
-                        android:baselineAlignBottom="true"
-                        android:src="@drawable/ic_right" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5px"
-                        android:layout_below="@id/tv_feedback"
-                        android:layout_marginLeft="@dimen/spacing_small"
-                        android:layout_marginRight="@dimen/spacing_small"
-                        android:layout_marginTop="@dimen/spacing_normal"
-                        android:background="@color/colorBlack10" />
-                </RelativeLayout>
 
                 <RelativeLayout
                     android:id="@+id/layout_your_hot_deal"
@@ -252,6 +194,67 @@
                         android:layout_marginTop="@dimen/spacing_normal"
                         android:background="@color/colorBlack10" />
                 </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_small"
+                    android:layout_marginRight="@dimen/spacing_small"
+                    android:layout_marginTop="@dimen/spacing"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/et_feedback"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/cabin_bold"
+                        android:hint="@string/content_your_feedback"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/text_size_large" />
+
+                    <Button
+                        android:id="@+id/btn_send_feedback"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_32sdp"
+                        android:background="@color/colorPrimary"
+                        android:text="@string/content_send"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="@dimen/text_size_normal" />
+                </LinearLayout>
+
+                <TextView
+
+                    android:id="@+id/tv_feedback"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_small"
+                    android:layout_marginRight="@dimen/spacing_small"
+                    android:layout_marginTop="@dimen/spacing_normal"
+                    android:fontFamily="@font/cabin_regular"
+                    android:text="@string/content_feedback"
+                    android:textColor="@color/colorTextPrimary"
+                    android:textSize="@dimen/text_size_larger" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.chandlersystem.chandler.RecyclerViewWithEmptyState
+                        android:id="@+id/recyclerView_feedback"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+                    <include
+                        android:id="@+id/layout_empty"
+                        layout="@layout/item_empty"
+                        android:visibility="gone" />
+                </FrameLayout>
 
             </LinearLayout>
         </ScrollView>

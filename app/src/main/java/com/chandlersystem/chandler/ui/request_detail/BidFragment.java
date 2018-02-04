@@ -14,8 +14,10 @@ import android.widget.Toast;
 
 import com.chandlersystem.chandler.ChandlerApplication;
 import com.chandlersystem.chandler.R;
+import com.chandlersystem.chandler.RxBus;
 import com.chandlersystem.chandler.custom_views.LinearItemDecoration;
 import com.chandlersystem.chandler.data.api.ChandlerApi;
+import com.chandlersystem.chandler.data.events.BidRequestUpdate;
 import com.chandlersystem.chandler.data.models.pojo.Bidder;
 import com.chandlersystem.chandler.data.models.pojo.Request;
 import com.chandlersystem.chandler.database.UserManager;
@@ -43,6 +45,8 @@ public class BidFragment extends Fragment {
     private static final String ARGUMENT_REQUEST = "argument-request";
 
     private Request mRequest;
+
+    private List<Bidder> mBidders;
 
     @Inject
     ChandlerApi mApi;
@@ -98,13 +102,24 @@ public class BidFragment extends Fragment {
         mRequest = getArguments().getParcelable(ARGUMENT_REQUEST);
         setupRecyclerView();
         setAdapter();
+        handleEvents();
+    }
+
+    private void handleEvents() {
+        mCompositeDisposable.add(RxBus.getInstance()
+                .register(BidRequestUpdate.class, bidRequestUpdate -> {
+                    mBidders.clear();
+                    mBidders.addAll(bidRequestUpdate.bidders);
+                    mBidAdapter.notifyDataSetChanged();
+                }, Throwable::printStackTrace));
     }
 
     private void setAdapter() {
-        List<Bidder> bidList = mRequest.getBidders();
+        mBidders = new ArrayList<>();
+        mBidders.addAll(mRequest.getBidders());
         String userId = UserManager.getUserSync().getId();
         String requestOwnerId = mRequest.getOwner().getId();
-        mBidAdapter = new BidAdapter(getContext(), bidList, userId.equals(requestOwnerId), mRequest.getStatus().equals("Ordered"));
+        mBidAdapter = new BidAdapter(getContext(), mBidders, userId.equals(requestOwnerId), mRequest.getStatus().equals("Ordered"));
         mBinding.recyclerViewBids.setAdapter(mBidAdapter);
         chooseBidder();
     }

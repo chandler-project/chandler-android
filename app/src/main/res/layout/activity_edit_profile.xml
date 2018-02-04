@@ -99,6 +99,59 @@
                     android:textSize="@dimen/text_size_largest"
                     tools:hint="John Snow" />
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:background="@null"
+                    android:fontFamily="@font/cabin_medium"
+                    android:gravity="top"
+                    android:text="@string/content_your_address"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/text_size_normal" />
+
+                <EditText
+                    android:id="@+id/et_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/spacing_smaller"
+                    android:layout_marginRight="@dimen/spacing_smaller"
+                    android:layout_marginTop="@dimen/spacing_smaller"
+                    android:background="@null"
+                    android:fontFamily="@font/cabin_bold"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/text_size_largest"
+                    tools:hint="TX22 Q12 TPHCM" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:background="@null"
+                    android:fontFamily="@font/cabin_medium"
+                    android:gravity="top"
+                    android:text="@string/content_your_phone_number"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/text_size_normal" />
+
+                <EditText
+                    android:id="@+id/et_phone_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/spacing_smaller"
+                    android:layout_marginRight="@dimen/spacing_smaller"
+                    android:layout_marginTop="@dimen/spacing_smaller"
+                    android:background="@null"
+                    android:fontFamily="@font/cabin_bold"
+                    android:inputType="phone"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/text_size_largest"
+                    tools:hint="01636909876" />
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5px"

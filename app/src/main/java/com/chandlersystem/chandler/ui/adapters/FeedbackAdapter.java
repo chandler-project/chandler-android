@@ -20,12 +20,12 @@ import java.util.List;
 
 public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.ViewHolder> {
 
-    private final List<Feedback> mValues;
+    private final List<Feedback> mFeedbacks;
 
     private Context mContext;
 
-    public FeedbackAdapter(List<Feedback> mValues, Context mContext) {
-        this.mValues = mValues;
+    public FeedbackAdapter(List<Feedback> mFeedbacks, Context mContext) {
+        this.mFeedbacks = mFeedbacks;
         this.mContext = mContext;
     }
 
@@ -38,7 +38,7 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        Feedback feedback = mValues.get(position);
+        Feedback feedback = mFeedbacks.get(position);
 
         Owner owner = feedback.getOwner();
         if (ValidateUtil.checkString(owner.getAvatar())) {
@@ -59,7 +59,12 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return mValues.size();
+        return mFeedbacks.size();
+    }
+
+    public void addItem(Feedback feedback) {
+        mFeedbacks.add(feedback);
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

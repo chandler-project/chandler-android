@@ -2,6 +2,7 @@ package com.chandlersystem.chandler.di.components;
 
 import com.chandlersystem.chandler.di.modules.ActivityModule;
 import com.chandlersystem.chandler.di.scopes.PerActivity;
+import com.chandlersystem.chandler.ui.order.OrderActivity;
 import com.chandlersystem.chandler.ui.become_shipper.BecomeShipperActivity;
 import com.chandlersystem.chandler.ui.cart.CartActivity;
 import com.chandlersystem.chandler.ui.create_deal.CreateDealActivity;
@@ -15,6 +16,7 @@ import com.chandlersystem.chandler.ui.deal_detail.DealInfoFragment;
 import com.chandlersystem.chandler.ui.feedback.FeedbackActivity;
 import com.chandlersystem.chandler.ui.login.LoginActivity;
 import com.chandlersystem.chandler.ui.main.MainActivity;
+import com.chandlersystem.chandler.ui.payment.PaymentActivity;
 import com.chandlersystem.chandler.ui.profile.EditProfileActivity;
 import com.chandlersystem.chandler.ui.profile.ProfileFragment;
 import com.chandlersystem.chandler.ui.profile.UserProfileActivity;
@@ -34,6 +36,10 @@ import dagger.Component;
 @Component(dependencies = ApplicationComponent.class, modules = ActivityModule.class)
 public interface ActivityComponent {
     void inject(MainActivity mainActivity);
+
+    void inject(OrderActivity mainActivity);
+
+    void inject(PaymentActivity mainActivity);
 
     void inject(CartActivity mainActivity);
 

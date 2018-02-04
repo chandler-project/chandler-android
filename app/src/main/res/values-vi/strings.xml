@@ -14,7 +14,10 @@
     <string name="nav_profile">"Tài khoản"</string>
 
     <!-- Content -->
-    <string name="content_expire_on">Expires on</string>
+    <string name="content_expire_on">Hết hạn</string>
+    <string name="content_your_name">Tên của bạn</string>
+    <string name="content_your_feedback">Phản hồi của bạn</string>
+    <string name="content_feedback">Phản hồi</string>
     <string name="content_log_out">"Đăng xuất"</string>
     <string name="content_ok">"OK"</string>
     <string name="content_more"><![CDATA[More >]]></string>
@@ -39,7 +42,8 @@
     <string name="content_product_description">Chi tiết sản phẩm</string>
     <string name="content_tell_something_about_the_product">Giới thiệu về sản phẩm</string>
     <string name="content_add_image">Thêm hình</string>
-    <string name="content_product_price">Hình ảnh sản phẩm (*)</string>
+    <string name="content_product_price">Giá gốc sản phẩm (*)</string>
+    <string name="share_some_pictures_about_the_product">Thêm một vài hình ảnh</string>
     <string name="content_what_is_the_product_price">Giá gốc của sản phẩm</string>
     <string name="content_which_city_do_you_live">Bạn đang sống ở thành phố nào ?</string>
     <string name="content_create_new_request">Tạo yêu cầu mua hàng</string>
@@ -48,6 +52,8 @@
     <string name="content_edit_avatar">Thay đổi avatar</string>
     <string name="content_your_bio">Giới thiệu bản thân</string>
     <string name="content_edit_profile">Chỉnh sửa thông tin</string>
+    <string name="content_buy_now">Mua ngay</string>
+    <string name="content_request_amount">Số lượng yêu cầu</string>
     <string name="content_save">Lưu</string>
     <string name="content_check_your_cart">Kiểm tra giỏ hàng trước khi thanh toán</string>
     <string name="content_your_cart">Giỏ hàng của bạn</string>
@@ -99,7 +105,7 @@
     <string name="content_what_is_your_comment">Bạn nghĩ gì về deal này ?</string>
     <string name="content_add_image_for_comment">Thêm hình</string>
     <string name="content_button_comment">Đăng bình luận</string>
-    <string name="content_estimate_full_price">Giá tổng</string>
+    <string name="content_estimate_full_price">Giá cho 1 sản phẩm</string>
     <string name="content_price_per_product_hint">20</string>
     <string name="content_delivery_time">Thời gian ship hàng</string>
     <string name="content_post_comment_success">Đăng comment thành công</string>
@@ -124,7 +130,23 @@
     <string name="content_visa_card">Thẻ VISA/MASTERCARD</string>
     <string name="content_momo">MoMo</string>
     <string name="content_please_input_phone_number_and_address">Xin vui lòng thêm số điện thoại và địa chỉ đúng</string>
-    <string name="content_payment_success">Payment successfully</string>
+    <string name="content_payment_success">Thanh toán thành công</string>
     <string name="content_payment">Thanh toán</string>
     <string name="content_deal_price">Giá sp:</string>
+    <string name="content_select_deadline">Sản phẩm hết hạn vào</string>
+    <string name="content_shipping_time">Thời gian cần</string>
+    <string name="content_your_address">Địa chỉ của bạn</string>
+    <string name="content_your_phone_number">Số điện thoại của bạn</string>
+    <string name="content_send">Gửi</string>
+    <string name="content_remove_success">Xóa thành công</string>
+    <string name="content_accept_deliver">Đồng ý giao hàng</string>
+    <string name="content_reject_delivery">Từ chối giao hàng</string>
+    <string name="content_accept_receive">Đồng ý nhận hàng</string>
+    <string name="content_reject_receive">Từ chối nhận hàng</string>
+    <string name="content_delivered">Đã giao hàng</string>
+    <string name="content_shipper">NGƯỜI GIAO HÀNG</string>
+    <string name="content_receiver">NGƯỜI NHẬN HÀNG</string>
+    <string name="content_reason">Lý do từ chối đơn hàng</string>
+    <string name="content_my_reason">Lý do của tôi là</string>
+    <string name="content_confirm">Xác nhận</string>
 </resources>

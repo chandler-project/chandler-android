@@ -72,7 +72,7 @@ public class User extends BaseRXModel {
     @Column
     private boolean isShipper;
 
-    @SerializedName("phone")
+    @SerializedName("phoneNumber")
     @Expose
     @Column
     private String phoneNumber;
@@ -234,6 +234,8 @@ public class User extends BaseRXModel {
                 ", isNewAccount=" + isNewAccount +
                 ", lastLogin='" + lastLogin + '\'' +
                 ", isShipper=" + isShipper +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", address='" + address + '\'' +
                 ", authorization='" + authorization + '\'' +
                 ", isFirstLogin=" + isFirstLogin +
                 '}';

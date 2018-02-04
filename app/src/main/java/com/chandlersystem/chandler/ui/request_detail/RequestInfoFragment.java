@@ -80,7 +80,7 @@ public class RequestInfoFragment extends Fragment {
     }
 
     private void setDealDetail() {
-        ViewUtil.setText(mBinding.tvDealDetail, mRequest.getDescription());
+        ViewUtil.setTextWithHtml(mBinding.tvDealDetail, mRequest.getDescription());
     }
 
     private void setLinkPreview() {

@@ -13,30 +13,14 @@ public class Item implements Parcelable {
 
     @SerializedName("amount")
     @Expose
-    private String amount;
+    private int amount;
 
     public Item() {
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAmount() {
-        return amount;
-    }
-
-    public void setAmount(String amount) {
-        this.amount = amount;
-    }
-
     protected Item(Parcel in) {
         name = in.readString();
-        amount = in.readString();
+        amount = in.readInt();
     }
 
     public static final Creator<Item> CREATOR = new Creator<Item>() {
@@ -51,6 +35,22 @@ public class Item implements Parcelable {
         }
     };
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -59,6 +59,6 @@ public class Item implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);
-        dest.writeString(amount);
+        dest.writeInt(amount);
     }
 }

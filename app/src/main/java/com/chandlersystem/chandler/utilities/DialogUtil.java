@@ -11,10 +11,12 @@ import android.support.v7.app.AppCompatActivity;
 import com.chandlersystem.chandler.data.models.pojo.Request;
 import com.chandlersystem.chandler.ui.dialogs.BidDialog;
 import com.chandlersystem.chandler.ui.dialogs.BuyDialog;
+import com.chandlersystem.chandler.ui.dialogs.ReasonDialog;
 
 public class DialogUtil {
     private static final String DIALOG_BID_TAG = "dialog-tag-bid";
     private static final String DIALOG_BUY_TAG = "dialog-tag-buy";
+    private static final String DIALOG_REASON_TAG = "dialog-tag-reason";
 
     private DialogUtil() {
         // Private constructor for class which full of constants
@@ -37,6 +39,11 @@ public class DialogUtil {
     public static void showBuyDialog(Context context) {
         BuyDialog buyDialog = BuyDialog.getInstance();
         showDialog(context, buyDialog, DIALOG_BUY_TAG);
+    }
+
+    public static void showReasonDialog(Context context) {
+        ReasonDialog reasonDialog = ReasonDialog.getInstance();
+        showDialog(context, reasonDialog, DIALOG_REASON_TAG);
     }
 
     public static void showDialog(Context context, DialogFragment dialog, String tag) {

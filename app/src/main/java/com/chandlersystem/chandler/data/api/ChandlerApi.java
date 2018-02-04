@@ -16,7 +16,10 @@ import com.chandlersystem.chandler.data.models.request.CreateRequestBody;
 import com.chandlersystem.chandler.data.models.request.DealRequest;
 import com.chandlersystem.chandler.data.models.request.Device;
 import com.chandlersystem.chandler.data.models.request.EditProfileBody;
+import com.chandlersystem.chandler.data.models.request.FeedbackBody;
 import com.chandlersystem.chandler.data.models.request.LoginRequest;
+import com.chandlersystem.chandler.data.models.request.OrderBody;
+import com.chandlersystem.chandler.data.models.request.PaymentBody;
 import com.chandlersystem.chandler.data.models.request.SelectCategoryRequest;
 import com.chandlersystem.chandler.data.models.response.AuthenticationRespone;
 import com.chandlersystem.chandler.data.models.response.RetrofitResponseItem;
@@ -25,6 +28,7 @@ import com.chandlersystem.chandler.data.models.response.RetrofitResponseListItem
 import java.util.List;
 
 import io.reactivex.Observable;
+import io.reactivex.disposables.Disposable;
 import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -82,8 +86,11 @@ public interface ChandlerApi {
     @PATCH("/api/Requests/{request_id}/bid")
     Observable<RetrofitResponseItem<Request>> bidRequest(@Body BidRequestBody bidRequestBody, @Path("request_id") String requestId, @Query("access_token") String accessToken);
 
-    @GET("/api/Members/{member_id}/feedback")
-    Observable<RetrofitResponseListItem<Feedback>> getFeedback(@Path("member_id") String memberId, @Query("access_token") String accessToken);
+    @GET("/api/Members/{member_id}/feedbacks")
+    Observable<RetrofitResponseListItem<Feedback>> getFeedback(@Path("member_id") String memberId);
+
+    @POST("/api/Members/{member_id}/feedback")
+    Observable<RetrofitResponseItem<Feedback>> sendFeedback(@Body FeedbackBody feedbackBody, @Path("member_id") String memberId, @Query("access_token") String accessToken);
 
     @GET("/api/Members/{member_id}/requests")
     Observable<RetrofitResponseListItem<Request>> getRequestList(@Path("member_id") String userId);
@@ -117,9 +124,33 @@ public interface ChandlerApi {
     @PATCH("api/Members/{user_id}/shipper")
     Observable<RetrofitResponseItem<User>> becomeShipper(@Path("user_id") String userId, @Query("access_token") String accessToken);
 
-    @GET("api/Orders")
-    Observable<RetrofitResponseListItem<Order>> getOrder(@Query("access_token") String accessToken);
+    @GET("api/Orders/pendings")
+    Observable<RetrofitResponseListItem<Order>> getPendingOrder(@Query("access_token") String accessToken);
 
-    @GET("api/Orders/count")
-    Observable<RetrofitResponseItem<OrderCount>> getOrderCount(@Query("access_token") String accessToken);
+    @GET("api/Orders")
+    Observable<RetrofitResponseListItem<Order>> getOrder(@Query("access_token") String accessToken, @Query("filter") String filter);
+
+    @GET("api/Orders/pendings/count")
+    Observable<RetrofitResponseItem<OrderCount>> getPendingOrderCount(@Query("access_token") String accessToken);
+
+    @PATCH("api/Orders/{order_id}/disclaimer")
+    Observable<RetrofitResponseItem> removeOrder(@Path("order_id") String orderId, @Query("access_token") String accessToken);
+
+    @PATCH("api/Orders/pay")
+    Observable<RetrofitResponseItem> payment(@Body PaymentBody body, @Query("access_token") String accessToken);
+
+    @PATCH("api/Orders/{order_id}/accepted")
+    Observable<RetrofitResponseItem<Order>> acceptDelivery(@Path("order_id") String orderId, @Query("access_token") String accessToken);
+
+    @PATCH("api/Orders/{order_id}/rejected")
+    Observable<RetrofitResponseItem<Order>> rejectDelivery(@Body String body, @Path("order_id") String orderId, @Query("access_token") String accessToken);
+
+    @PATCH("api/Orders/{order_id}/delivered")
+    Observable<RetrofitResponseItem<Order>> deliveredOrder(@Path("order_id") String orderId, @Query("access_token") String accessToken);
+
+    @PATCH("api/Orders/{order_id}/confirmed")
+    Observable<RetrofitResponseItem<Order>> confirmedOrder(@Path("order_id") String orderId, @Query("access_token") String accessToken);
+
+    @PATCH("api/Orders/{order_id}/denied")
+    Observable<RetrofitResponseItem<Order>> deniedOrder(@Body String body, @Path("order_id") String orderId, @Query("access_token") String accessToken);
 }

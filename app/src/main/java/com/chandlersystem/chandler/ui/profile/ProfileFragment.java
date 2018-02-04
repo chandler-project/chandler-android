@@ -1,7 +1,6 @@
 package com.chandlersystem.chandler.ui.profile;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.chandlersystem.chandler.GlideApp;
 import com.chandlersystem.chandler.R;
 import com.chandlersystem.chandler.configs.ApiConstant;
 import com.chandlersystem.chandler.data.api.ChandlerApi;
@@ -23,13 +21,13 @@ import com.chandlersystem.chandler.database.DatabaseHelper;
 import com.chandlersystem.chandler.database.UserManager;
 import com.chandlersystem.chandler.database.UserObservation;
 import com.chandlersystem.chandler.databinding.FragmentProfileBinding;
+import com.chandlersystem.chandler.ui.order.OrderActivity;
 import com.chandlersystem.chandler.ui.become_shipper.BecomeShipperActivity;
 import com.chandlersystem.chandler.ui.feedback.FeedbackActivity;
 import com.chandlersystem.chandler.ui.login.LoginActivity;
 import com.chandlersystem.chandler.ui.main.MainActivity;
 import com.chandlersystem.chandler.ui.user_deal.UserDealActivity;
 import com.chandlersystem.chandler.ui.user_request.UserRequestActivity;
-import com.chandlersystem.chandler.utilities.CircleTransform;
 import com.chandlersystem.chandler.utilities.LogUtil;
 import com.chandlersystem.chandler.utilities.RxUtil;
 import com.chandlersystem.chandler.utilities.ViewUtil;
@@ -42,7 +40,6 @@ import javax.inject.Inject;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
 
 public class ProfileFragment extends Fragment {
     private static final String TAG = ProfileFragment.class.getCanonicalName();
@@ -103,7 +100,9 @@ public class ProfileFragment extends Fragment {
     private void showCustomerInfor(User user) {
         ViewUtil.setText(mBinding.layoutContent.tvName, user.getFullName());
         ViewUtil.showImage(getContext(), ApiConstant.BASE_URL_VER1 + user.getAvatar(), mBinding.layoutContent.ivProfile);
-        mBinding.layoutContent.description.setText(user.getBio());
+        ViewUtil.setText(mBinding.layoutContent.tvDescription, user.getBio());
+        ViewUtil.setText(mBinding.layoutContent.tvAddress, user.getAddress());
+        ViewUtil.setText(mBinding.layoutContent.tvPhoneNumber, user.getPhoneNumber());
         ViewUtil.setText(mBinding.layoutContent.btnPoint, user.getPoints() + " " + (user.getPoints() > 2 ? getString(R.string.content_points) : getString(R.string.content_point)));
     }
 
@@ -128,6 +127,12 @@ public class ProfileFragment extends Fragment {
         mCompositeDisposable.add(yourRequest().subscribe(o -> startUserRequestActivity(), Throwable::printStackTrace));
 
         mCompositeDisposable.add(yourFeedback().subscribe(o -> startFeedbackActivity(), Throwable::printStackTrace));
+
+        mCompositeDisposable.add(getOrder().subscribe(o -> startOrderActivity(), Throwable::printStackTrace));
+    }
+
+    private void startOrderActivity() {
+        startActivity(OrderActivity.getInstance(getContext()));
     }
 
     private void startFeedbackActivity() {
@@ -160,6 +165,10 @@ public class ProfileFragment extends Fragment {
 
     private Observable<Object> becomeShipper() {
         return RxView.clicks(mBinding.layoutContent.layoutBecomeShipper);
+    }
+
+    private Observable<Object> getOrder() {
+        return RxView.clicks(mBinding.layoutContent.layoutYourOrder);
     }
 
     private void showLogoutDialog() {

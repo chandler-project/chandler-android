@@ -16,7 +16,10 @@ import android.widget.Toast;
 
 import com.chandlersystem.chandler.ChandlerApplication;
 import com.chandlersystem.chandler.R;
+import com.chandlersystem.chandler.RxBus;
 import com.chandlersystem.chandler.data.api.ChandlerApi;
+import com.chandlersystem.chandler.data.events.CreateDealSuccess;
+import com.chandlersystem.chandler.data.events.CreateRequestSuccess;
 import com.chandlersystem.chandler.data.models.pojo.Category;
 import com.chandlersystem.chandler.data.models.pojo.FileUpload;
 import com.chandlersystem.chandler.data.models.pojo.UploadImage;
@@ -296,6 +299,7 @@ public class CreateRequestActivity extends AppCompatActivity implements ViewPage
 
     private void onCreateDealSuccessfully() {
         Toast.makeText(CreateRequestActivity.this, getString(R.string.content_create_new_request_successfully), Toast.LENGTH_SHORT).show();
+        RxBus.getInstance().post(new CreateDealSuccess());
         finish();
     }
 

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite"
+            android:orientation="vertical"
+            tools:context="com.chandlersystem.chandler.ui.cart.CartActivity">
+
+            <include
+                android:id="@+id/layout_toolbar"
+                layout="@layout/item_extra_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp" />
+
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/layout_swipe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_cart"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:listitem="@layout/item_cart_transaction" />
+
+            </android.support.v4.widget.SwipeRefreshLayout>
+        </LinearLayout>
+    </FrameLayout>
+</layout>

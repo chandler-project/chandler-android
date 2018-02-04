@@ -14,9 +14,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/spacing_small"
-            android:layout_marginRight="@dimen/spacing_small"
+            android:layout_marginRight="@dimen/spacing_largest"
             android:layout_marginTop="@dimen/spacing_normal"
+            android:ellipsize="end"
             android:fontFamily="@font/cabin_regular"
+            android:maxLines="2"
             android:textColor="@color/colorTextPrimary"
             android:textSize="@dimen/text_size_larger"
             tools:text="This is title name" />
@@ -41,6 +43,7 @@
             android:layout_alignBottom="@id/tv_product_name"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
             android:layout_gravity="end|center_vertical"
             android:layout_marginLeft="@dimen/spacing_small"
             android:layout_marginRight="@dimen/spacing_small"
@@ -48,15 +51,6 @@
             android:padding="@dimen/spacing_smallest"
             android:src="@drawable/ic_close"
             android:textSize="@dimen/text_size_normal" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5px"
-            android:layout_below="@id/layout_amount"
-            android:layout_marginLeft="@dimen/spacing_small"
-            android:layout_marginRight="@dimen/spacing_small"
-            android:layout_marginTop="@dimen/spacing_normal"
-            android:background="@color/colorBlack50" />
 
         <LinearLayout
             android:id="@+id/layout_amount"
@@ -83,5 +77,26 @@
                 android:textSize="@dimen/text_size_large"
                 tools:text="0" />
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout_amount"
+            android:layout_marginLeft="@dimen/spacing_small"
+            android:layout_marginStart="@dimen/spacing_small"
+            android:fontFamily="@font/cabin_regular"
+            android:textColor="@color/colorGreen"
+            android:textSize="@dimen/text_size_large"
+            tools:text="Dang cho thanh toan" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5px"
+            android:layout_below="@id/tv_status"
+            android:layout_marginLeft="@dimen/spacing_small"
+            android:layout_marginRight="@dimen/spacing_small"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:background="@color/colorBlack50" />
     </RelativeLayout>
 </layout>
