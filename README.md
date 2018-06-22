@@ -49,12 +49,12 @@ Yes, there are a lot features need to be supported:
 
 ### Why is this app important to me?
 - I found it really really difficult to buy something on Amazon, Massdrop, Ebay ...
-. Price: Does it the best rate that I could get?
-. Tax 
-. Money transfer
-. Payment 
-. Delivery time?
-. Papers
+  - Price: Does it the best rate that I could get?
+  - Tax 
+  - Money transfer
+  - Payment 
+  - Delivery time?
+  - Papers
 
 
 
